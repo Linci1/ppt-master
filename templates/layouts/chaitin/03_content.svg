@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="contentGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6BFF85" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+    <linearGradient id="headerGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6BFF85" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#05070A"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="1280" height="4" fill="url(#contentGrad)"/>
+
+  <!-- Header accent line -->
+  <rect x="56" y="54" width="96" height="4" rx="2" fill="url(#headerGrad)" />
+
+  <!-- Page Title -->
+  <text x="56" y="100" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="34" font-weight="700">{{PAGE_TITLE}}</text>
+
+  <!-- Subtitle/description if provided -->
+  {{PAGE_SUBTITLE}}
+
+  <!-- Title underline -->
+  <rect x="56" y="126" width="1168" height="1" fill="#213042" />
+
+  <!-- Content Area - Executor renders here -->
+  <g id="content-area">
+    {{CONTENT_AREA}}
+  </g>
+
+  <!-- Bottom accent bar -->
+  <rect x="60" y="640" width="200" height="3" rx="1.5" fill="url(#contentGrad)"/>
+
+  <!-- Chaitin logo - bottom left -->
+  <image href="assets/chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Page number -->
+  <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>
+</svg>

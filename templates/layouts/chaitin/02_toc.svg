@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="tocGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#6BFF85" />
+      <stop offset="100%" stop-color="#22D3EE" />
+    </linearGradient>
+  </defs>
+
+  <!-- Dark background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#05070A"/>
+
+  <!-- Top accent line -->
+  <rect x="0" y="0" width="1280" height="4" fill="url(#tocGrad)"/>
+
+  <!-- Title area -->
+  <text x="60" y="80" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="700" font-size="38">{{TITLE}}</text>
+  <rect x="60" y="100" width="60" height="3" rx="1.5" fill="url(#tocGrad)"/>
+
+  <!-- Horizontal divider -->
+  <rect x="60" y="130" width="1160" height="1" fill="#213042"/>
+
+  <!-- 2x2 Grid Layout -->
+  <!-- Row 1 -->
+  <!-- Item 01 - Top Left -->
+  <text x="80" y="220" fill="#6BFF85" font-family="DIN Alternate, Arial, sans-serif" font-size="72" font-weight="700">01</text>
+  <text x="80" y="270" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="600" font-size="24">{{ITEM_01_TITLE}}</text>
+  <text x="80" y="305" fill="#7A8596" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="14">{{ITEM_01_SUBTITLE}}</text>
+
+  <!-- Item 02 - Top Right -->
+  <text x="680" y="220" fill="#6BFF85" font-family="DIN Alternate, Arial, sans-serif" font-size="72" font-weight="700">02</text>
+  <text x="680" y="270" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="600" font-size="24">{{ITEM_02_TITLE}}</text>
+  <text x="680" y="305" fill="#7A8596" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="14">{{ITEM_02_SUBTITLE}}</text>
+
+  <!-- Vertical divider -->
+  <rect x="640" y="170" width="1" height="180" fill="#213042"/>
+
+  <!-- Row 2 -->
+  <!-- Item 03 - Bottom Left -->
+  <text x="80" y="430" fill="#6BFF85" font-family="DIN Alternate, Arial, sans-serif" font-size="72" font-weight="700">03</text>
+  <text x="80" y="480" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="600" font-size="24">{{ITEM_03_TITLE}}</text>
+  <text x="80" y="515" fill="#7A8596" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="14">{{ITEM_03_SUBTITLE}}</text>
+
+  <!-- Item 04 - Bottom Right -->
+  <text x="680" y="430" fill="#6BFF85" font-family="DIN Alternate, Arial, sans-serif" font-size="72" font-weight="700">04</text>
+  <text x="680" y="480" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="600" font-size="24">{{ITEM_04_TITLE}}</text>
+  <text x="680" y="515" fill="#7A8596" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="14">{{ITEM_04_SUBTITLE}}</text>
+
+  <!-- Horizontal divider between rows -->
+  <rect x="60" y="370" width="1160" height="1" fill="#213042"/>
+
+  <!-- Bottom accent bar -->
+  <rect x="60" y="640" width="200" height="3" rx="1.5" fill="url(#tocGrad)"/>
+
+  <!-- Chaitin logo - bottom left -->
+  <image href="assets/chaitin_logo.png" x="60" y="590" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Page number -->
+  <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>
+</svg>
