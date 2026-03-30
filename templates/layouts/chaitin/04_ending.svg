@@ -12,7 +12,7 @@
   </defs>
 
   <!-- Background image -->
-  <image href="assets/bg_ending.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <image href="bg_ending.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
 
   <!-- Dark overlay -->
   <rect x="0" y="0" width="1280" height="720" fill="#05070A" fill-opacity="0.6"/>
@@ -39,7 +39,7 @@
   <rect x="60" y="695" width="200" height="3" rx="1.5" fill="url(#thanksLine)" />
 
   <!-- Chaitin logo - bottom left -->
-  <image href="assets/chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <image href="chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- Page number -->
   <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>

@@ -7,7 +7,7 @@
   </defs>
 
   <!-- Background image -->
-  <image href="assets/bg_chapter.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <image href="bg_chapter.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
 
   <!-- Dark overlay -->
   <rect x="0" y="0" width="1280" height="720" fill="#05070A" fill-opacity="0.8"/>
@@ -31,7 +31,7 @@
   <text x="80" y="550" fill="#B4BDC9" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="16">{{CHAPTER_SUBTITLE}}</text>
 
   <!-- Chaitin logo - bottom left -->
-  <image href="assets/chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <image href="chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- Page indicator -->
   <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>

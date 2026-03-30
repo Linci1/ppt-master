@@ -37,7 +37,7 @@
   <rect x="60" y="640" width="200" height="3" rx="1.5" fill="url(#contentGrad)"/>
 
   <!-- Chaitin logo - bottom left -->
-  <image href="assets/chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <image href="chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
 
   <!-- Page number -->
   <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>

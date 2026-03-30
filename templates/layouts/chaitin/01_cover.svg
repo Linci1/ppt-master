@@ -7,7 +7,7 @@
   </defs>
 
   <!-- Background image -->
-  <image href="assets/bg_cover.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+  <image href="bg_cover.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
 
   <!-- Dark overlay for text readability -->
   <rect x="0" y="0" width="1280" height="720" fill="#05070A" fill-opacity="0.3"/>
@@ -30,5 +30,5 @@
   <text x="1110" y="520" fill="#F5F7FA" font-family="DIN Alternate, Arial, sans-serif" font-size="16">{{DATE}}</text>
 
   <!-- Chaitin logo - bottom left -->
-  <image href="assets/chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <image href="chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
 </svg>
