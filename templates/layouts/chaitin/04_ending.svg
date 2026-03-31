@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="endGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#05070A" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#05070A" stop-opacity="0.7" />
+    </linearGradient>
+    <linearGradient id="thanksLine" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6BFF85" />
+      <stop offset="50%" stop-color="#22D3EE" />
+      <stop offset="100%" stop-color="#A7F35A" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background image -->
+  <image href="bg_ending.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice"/>
+
+  <!-- Dark overlay -->
+  <rect x="0" y="0" width="1280" height="720" fill="#05070A" fill-opacity="0.6"/>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#endGrad)" />
+
+  <!-- Thank you text -->
+  <text x="640" y="300" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="700" font-size="80" text-anchor="middle">{{THANK_YOU}}</text>
+
+  <!-- English subtitle -->
+  <text x="640" y="370" fill="#B4BDC9" font-family="DIN Alternate, Arial, sans-serif" font-size="28" text-anchor="middle" letter-spacing="4">{{ENGLISH_TEXT}}</text>
+
+  <!-- Decorative line -->
+  <rect x="490" y="400" width="300" height="4" rx="2" fill="url(#thanksLine)" />
+
+  <!-- Project info -->
+  <text x="640" y="470" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="20" text-anchor="middle">{{PROJECT_NAME}}</text>
+  <text x="640" y="505" fill="#B4BDC9" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="16" text-anchor="middle">{{PROJECT_SUBTITLE}}</text>
+
+  <!-- Date -->
+  <text x="640" y="560" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14" text-anchor="middle">{{DATE}}</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="690" width="1280" height="30" fill="#05070A" fill-opacity="0.8"/>
+  <rect x="60" y="695" width="200" height="3" rx="1.5" fill="url(#thanksLine)" />
+
+  <!-- Chaitin logo - bottom left -->
+  <image href="chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+
+  <!-- Page number -->
+  <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>
+</svg>
