@@ -12,6 +12,7 @@ Usage:
 """
 
 import sys
+import re
 from collections import defaultdict
 from pathlib import Path
 
@@ -41,8 +42,127 @@ class BatchValidator:
             'has_warnings': 0,
             'missing_readme': 0,
             'missing_spec': 0,
-            'svg_issues': 0
+            'svg_issues': 0,
+            'naming_issues': 0,
+            'notes_issues': 0
         }
+
+    # ============================================================
+    # SVG Naming Convention Check
+    # ============================================================
+    def validate_svg_naming(self, project_path: str) -> tuple[bool, list[str], list[str]]:
+        """
+        Validate SVG file naming convention (e.g., 01_xxx.svg)
+
+        Returns:
+            (is_valid, errors, warnings)
+        """
+        errors = []
+        warnings = []
+        project = Path(project_path)
+
+        svg_dir = project / 'svg_output'
+        if not svg_dir.exists():
+            return True, [], []  # No SVG dir, skip check
+
+        svg_files = list(svg_dir.glob('*.svg'))
+        if not svg_files:
+            warnings.append("No SVG files found in svg_output/")
+            return True, [], warnings
+
+        naming_pattern = re.compile(r'^\d{2,}_[^\s\/\\]+\.svg$')
+        chinese_pattern = re.compile(r'^[\u4e00-\u9fff]')
+
+        invalid_names = []
+        for svg_file in svg_files:
+            name = svg_file.name
+            if not naming_pattern.match(name):
+                # Check if it's Chinese naming (also valid)
+                if chinese_pattern.match(name) and name.endswith('.svg'):
+                    continue  # Chinese naming is valid
+                invalid_names.append(name)
+
+        if invalid_names:
+            errors.append(
+                f"SVG naming convention violation: {len(invalid_names)} file(s) don't match pattern 'NN_name.svg'. "
+                f"Examples: {', '.join(invalid_names[:2])}"
+            )
+
+        return len(errors) == 0, errors, warnings
+
+    # ============================================================
+    # Speaker Notes Check
+    # ============================================================
+    def validate_speaker_notes(self, project_path: str) -> tuple[bool, list[str], list[str]]:
+        """
+        Validate speaker notes for common issues
+
+        Returns:
+            (is_valid, errors, warnings)
+        """
+        errors = []
+        warnings = []
+        project = Path(project_path)
+
+        notes_dir = project / 'notes'
+        if not notes_dir.exists():
+            warnings.append("No notes/ directory found")
+            return True, [], warnings
+
+        # Check for total.md
+        total_md = notes_dir / 'total.md'
+        if not total_md.exists():
+            errors.append("Missing notes/total.md")
+            return False, errors, warnings
+
+        try:
+            content = total_md.read_text(encoding='utf-8')
+
+            # Check for required markers
+            required_markers = ['[Transition]', '[Pause]']
+            found_markers = []
+            for marker in required_markers:
+                if marker in content:
+                    found_markers.append(marker)
+
+            missing_markers = set(required_markers) - set(found_markers)
+            if missing_markers:
+                warnings.append(
+                    f"Missing speaker note markers: {', '.join(missing_markers)}. "
+                    "Consider adding for better presentation flow."
+                )
+
+            # Check for language consistency (mixed Chinese/English markers)
+            lines_with_brackets = [line for line in content.split('\n') if '[' in line and ']' in line]
+            mixed_lang_count = 0
+            for line in lines_with_brackets:
+                has_chinese_markers = bool(re.search(r'[\u4e00-\u9fff]', line))
+                has_english_markers = bool(re.search(r'\[(Transition|Pause|Interactive|Data)\]', line))
+                if has_chinese_markers and has_english_markers:
+                    mixed_lang_count += 1
+
+            if mixed_lang_count > 3:
+                warnings.append(
+                    f"Potential language inconsistency: {mixed_lang_count} lines have mixed Chinese/English markers"
+                )
+
+            # Check for page count
+            page_headers = re.findall(r'^# \d+_', content, re.MULTILINE)
+            if page_headers:
+                # Estimate total duration from notes
+                duration_matches = re.findall(r'时长：(\d+)分钟', content)
+                if duration_matches:
+                    total_minutes = sum(int(d) for d in duration_matches)
+                    if total_minutes > 30:
+                        warnings.append(
+                            f"Total estimated duration ({total_minutes} min) exceeds 30 min. "
+                            "Consider trimming content."
+                        )
+
+        except Exception as e:
+            warnings.append(f"Could not read notes/total.md: {e}")
+
+        return len(errors) == 0, errors, warnings
 
     def validate_directory(self, directory: str, recursive: bool = False) -> list[dict[str, object]]:
         """
@@ -102,6 +222,20 @@ class BatchValidator:
                          f for f in info['svg_files']]
             svg_warnings = validate_svg_viewbox(svg_files, info['format'])
 
+        # Validate SVG naming convention
+        naming_valid, naming_errors, naming_warnings = self.validate_svg_naming(project_path)
+        if naming_errors:
+            errors.extend(naming_errors)
+        if naming_warnings:
+            svg_warnings.extend(naming_warnings)
+
+        # Validate speaker notes
+        notes_valid, notes_errors, notes_warnings = self.validate_speaker_notes(project_path)
+        if notes_errors:
+            errors.extend(notes_errors)
+        if notes_warnings:
+            svg_warnings.extend(notes_warnings)
+
         # Aggregate results
         result = {
             'path': project_path,
@@ -135,6 +269,10 @@ class BatchValidator:
             self.summary['missing_spec'] += 1
         if svg_warnings:
             self.summary['svg_issues'] += 1
+        if naming_errors:
+            self.summary['naming_issues'] += 1
+        if notes_errors:
+            self.summary['notes_issues'] += 1
 
         # Print result
         print(f"{status} {info['name']}")
@@ -177,6 +315,8 @@ class BatchValidator:
         print(f"  Missing README.md: {self.summary['missing_readme']} project(s)")
         print(f"  Missing design spec: {self.summary['missing_spec']} project(s)")
         print(f"  SVG format issues: {self.summary['svg_issues']} project(s)")
+        print(f"  SVG naming issues: {self.summary['naming_issues']} project(s)")
+        print(f"  Speaker notes issues: {self.summary['notes_issues']} project(s)")
 
         # Group statistics by format
         format_stats = defaultdict(int)
