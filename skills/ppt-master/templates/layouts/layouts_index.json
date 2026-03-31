@@ -1,16 +1,17 @@
 {
   "meta": {
-    "total": 20,
+    "total": 21,
     "defaultViewBox": "0 0 1280 720",
     "formats": ["ppt169"],
     "standardFiles": ["design_spec.md", "01_cover.svg", "02_toc.svg", "02_chapter.svg", "03_content.svg", "04_ending.svg"],
     "standardPageTypes": ["cover", "toc", "chapter", "content", "ending"],
-    "updated": "2026-03-22"
+    "updated": "2026-03-22",
+    "default_recommendation": "chaitin"
   },
   "categories": {
     "brand": {
       "label": "Brand Style Templates",
-      "layouts": ["google_style", "mckinsey", "anthropic", "中汽研_常规", "中汽研_商务", "中汽研_现代", "中国电建_常规", "中国电建_现代", "招商银行"]
+      "layouts": ["chaitin", "google_style", "mckinsey", "anthropic", "中汽研_常规", "中汽研_商务", "中汽研_现代", "中国电建_常规", "中国电建_现代", "招商银行"]
     },
     "general": {
       "label": "General Style Templates",
@@ -30,10 +31,11 @@
     }
   },
   "quickLookup": {
-    "strategy": ["exhibit", "mckinsey"],
-    "board": ["exhibit", "mckinsey", "招商银行"],
-    "general_business": ["科技蓝商务", "smart_red", "exhibit"],
-    "technology": ["anthropic", "google_style", "smart_red", "ai_ops"],
+    "default": ["chaitin"],
+    "strategy": ["chaitin", "exhibit", "mckinsey"],
+    "board": ["chaitin", "exhibit", "mckinsey", "招商银行"],
+    "general_business": ["chaitin", "科技蓝商务", "smart_red", "exhibit"],
+    "technology": ["chaitin", "anthropic", "google_style", "smart_red", "ai_ops"],
     "government": ["government_red", "government_blue", "ai_ops"],
     "academic": ["academic_defense", "重庆大学"],
     "medical": ["medical_university"],
@@ -41,7 +43,21 @@
     "finance": ["招商银行", "exhibit", "mckinsey"],
     "certification": ["中汽研_常规", "中汽研_商务", "中汽研_现代"],
     "energy": ["中国电建_常规", "中国电建_现代"],
-    "creative": ["pixel_retro", "smart_red"]
+    "creative": ["pixel_retro", "smart_red"],
+    "enterprise": ["chaitin", "科技蓝商务", "smart_red"],
+    "tech": ["chaitin", "anthropic", "google_style", "ai_ops"],
+    "presentation": ["chaitin", "exhibit", "mckinsey"],
+    "internal": ["chaitin", "科技蓝商务", "smart_red"],
+    "长亭": ["chaitin"],
+    "chaitin": ["chaitin"],
+    "security": ["chaitin"],
+    "培训": ["chaitin"],
+    "复盘": ["chaitin"],
+    "汇报": ["chaitin"],
+    "项目复盘": ["chaitin"],
+    "工程师复盘": ["chaitin"],
+    "企业内部": ["chaitin"],
+    "技术分享": ["chaitin"]
   },
   "layouts": {
     "academic_defense": {
@@ -191,6 +207,14 @@
       "themeMode": "Academic blue primary + mountain-city layered imagery",
       "assets": ["重庆大学logo.png", "重庆大学logo2.png"],
       "keywords": ["Chongqing University", "Academic", "Defense", "University"]
+    },
+    "chaitin": {
+      "label": "长亭品牌模板",
+      "summary": "长亭科技官方品牌模板，适用于企业内训、产品发布、技术分享等场景",
+      "tone": "科技黑 + 品牌绿 + 青色，专业现代，结论先行",
+      "themeMode": "Dark theme (深色背景 + 品牌绿/青色装饰 + 大号章节编号)",
+      "assets": ["chaitin_logo.png"],
+      "keywords": ["长亭", "Chaitin", "品牌", "培训", "技术分享", "企业内训", "复盘", "汇报", "项目复盘", "工程师复盘", "企业内部汇报"]
     }
   }
 }

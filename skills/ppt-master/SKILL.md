@@ -143,8 +143,13 @@ After the user confirms option A, copy template files to the project directory:
 ```bash
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.svg <project_path>/templates/
 cp ${SKILL_DIR}/templates/layouts/<template_name>/design_spec.md <project_path>/templates/
-cp ${SKILL_DIR}/templates/layouts/<template_name>/*.png <project_path>/images/ 2>/dev/null || true
-cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2>/dev/null || true
+# Copy template resource files (some templates use assets/ subdirectory, others have files directly in template folder)
+cp ${SKILL_DIR}/templates/layouts/<template_name>/*.png <project_path>/templates/ 2>/dev/null || true
+cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/templates/ 2>/dev/null || true
+cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpeg <project_path>/templates/ 2>/dev/null || true
+if [ -d "${SKILL_DIR}/templates/layouts/<template_name>/assets" ]; then
+  cp -r ${SKILL_DIR}/templates/layouts/<template_name>/assets/ <project_path>/templates/
+fi
 ```
 
 After the user confirms option B, proceed directly to Step 4.
