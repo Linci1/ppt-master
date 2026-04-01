@@ -1,3 +1,7 @@
+## 置顶说明
+
+ppt-master不是我的项目，转载自https://github.com/hugohe3/ppt-master，我只是在此基础上加了一些个人使用的模板，我不是作者，不是作者，不是作者！
+
 # ppt-master 使用指南
 
 > AI-driven PPT 生成工具，支持将文档转换为高质量演示文稿
@@ -143,6 +147,3 @@ A: 安装 pandoc：`brew install pandoc`（macOS）
 
 ---
 
-## 技术支持
-
-有问题请联系长亭科技生态运营团队。
