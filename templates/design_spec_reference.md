@@ -146,6 +146,24 @@
 | Double-row card height | 265-295px each | [fill in] |
 | Three-column card width | 360-380px each | [fill in] |
 
+### Safe-area and Separation Rules
+
+| Rule | Recommended Range | Current Project |
+| ---- | ----------------- | --------------- |
+| Header/body divider to first content block gap | 20-36px | [fill in] |
+| Takeaway strip height | 48-76px | [fill in] |
+| Takeaway strip to body module minimum gap | 18-32px | [fill in] |
+| Body-page content start baseline (same family) | Stable within +/-12px | [fill in] |
+| Footer protected zone top | 560-580px | [fill in] |
+
+### Cross-page Consistency Rules
+
+- **TOC structure policy**: [All cards have subtitle / No cards have subtitle / Mixed by explicit design reason]
+- **Content-page subtitle policy**: [Always show / Only for chapter-style pages / Not used]
+- **Takeaway strip policy**: [Which page families use a takeaway strip and what gap rule they follow]
+- **Same-family baseline rule**: [How much top-start variance is acceptable among similar content pages]
+- **Per-card density rule**: [Max bullet count / max lines / max text levels]
+
 ---
 
 ## VI. Icon Usage Specification
@@ -260,10 +278,25 @@ Generate corresponding speaker note files for each page, saved to the `notes/` d
 - [ ] Content fits page capacity
 - [ ] Layout mode selected correctly
 - [ ] Colors used semantically
+- [ ] Safe-area and separation rules are defined for the chosen page families
+- [ ] TOC and same-family consistency rules are explicitly defined
+- [ ] Page-level density budget is clear before generation
+
+### In-generation (page-by-page review gate)
+
+- [ ] Text segmentation is natural and easy to scan in Chinese
+- [ ] Text is not too close to edges and does not feel crowded
+- [ ] Card text is unlikely to overflow or look cramped
+- [ ] Logo, page number, and bottom decorations do not conflict with body content
+- [ ] Takeaway / summary band is clearly separated from the lower body modules
+- [ ] Information density fits presentation reading speed
+- [ ] Overloaded pages are trimmed or relaid out before moving to the next page
+- [ ] The current page still matches the agreed same-family structure
 
 ### Post-generation
 
 - [ ] viewBox = `{canvas_info['viewbox']}`
+- [ ] `svg_quality_checker.py` warnings reviewed and cleared (readability / edge pressure / overflow / takeaway separation / TOC consistency)
 - [ ] No `<foreignObject>` elements
 - [ ] All text readable (>=14px)
 - [ ] Content within safe area
@@ -271,6 +304,8 @@ Generate corresponding speaker note files for each page, saved to the `notes/` d
 - [ ] Same elements maintain consistent style
 - [ ] Colors conform to spec
 - [ ] CRAP four-principle check passed
+- [ ] Deck-level consistency audit completed across TOC and same-family content pages
+- [ ] Exported PPT review completed; any issues found were repaired in source SVG and re-exported
 
 ---
 

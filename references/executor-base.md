@@ -1,6 +1,6 @@
 # Executor Common Guidelines
 
-> Style-specific content is in the corresponding `executor-{style}.md`. Technical constraints are in shared-standards.md.
+> Style-specific content is in the corresponding `executor-{style}.md`. Technical constraints are in shared-standards.md. In-process page review discipline is in `executor-visual-review.md`.
 
 ---
 
@@ -47,11 +47,52 @@ Must output confirmation including: canvas dimensions, body font size, color sch
 - **Follow template structure**: If templates exist, inherit the template's visual framework
 - **Main-agent ownership**: SVG generation must be performed by the current main agent, not delegated to sub-agents, because each page depends on shared upstream context and cross-page visual continuity
 - **Generation rhythm**: First lock the global design context, then generate pages sequentially one by one in the same continuous context; grouped page batches (for example, 5 pages at a time) are not allowed
+- **Per-page review gate**: After generating each page draft, immediately review it before continuing. Do not postpone readability/layout review until the end of the deck
 - **Phased batch generation** (recommended):
   1. **Visual Construction Phase**: Generate all SVG pages continuously in sequential page order, ensuring high consistency in design style and layout coordinates (Visual Consistency)
   2. **Logic Construction Phase**: After all SVGs are finalized, batch-generate speaker notes to ensure narrative coherence (Narrative Continuity)
 - **Technical specifications**: See [shared-standards.md](shared-standards.md) for SVG technical constraints and PPT compatibility rules
 - **Visual depth**: Use filter shadows, glow effects, gradient fills, dashed strokes, and gradient overlays from shared-standards.md to create layered depth — flat pages without elevation or emphasis look unfinished
+
+### 3.1 In-process Visual Review Gate (Mandatory)
+
+After each page draft is generated, the Executor **must** check the current page against `executor-visual-review.md` before moving on.
+
+Minimum review items:
+
+- Chinese text segmentation and reading rhythm
+- Whether text is too close to card edges or canvas edges
+- Whether card content is likely to overflow or already looks cramped
+- Whether the Chaitin logo, page number, or footer decoration visually conflicts with body content
+- Whether takeaway strips / summary bands are clearly separated from lower body modules
+- Whether information density is suitable for a presentation page
+- Whether the page should be trimmed or relaid out instead of keeping all drafted content
+- Whether the page still matches the same-family structure already established elsewhere in the deck
+
+**Important**:
+
+- These checks are part of the generation path itself, not a post-hoc QA pass
+- If a page fails review, fix that page immediately in the same context
+- Speaker notes generation may begin only after all pages have passed this gate
+- During the audit stage, run `svg_quality_checker.py`; its heuristic warnings should be used to catch Chinese readability, edge-pressure, card-overflow, takeaway/body separation, and TOC consistency risks before export
+
+### 3.2 Deck-level Consistency Audit (Mandatory)
+
+After all page drafts have passed the per-page gate, but before the deck is considered ready for export, the Executor **must** perform a cross-page audit across the whole deck.
+
+Minimum deck-level checks:
+
+- TOC structure is consistent across all directory cards
+- Same-family pages use one stable structure instead of drifting page by page
+- Body-page starting baselines and spacing logic do not visibly jump between adjacent pages
+- Pages that share takeaway strips also share a clean separation rule between upper and lower layers
+- Pages with excessive density are identified for trimming, splitting, or relayout before export
+
+**Important**:
+
+- This is a deck review, not a single-page review
+- A page may individually pass yet still fail this cross-page audit
+- Speaker notes generation may begin only after both the per-page gate and the deck-level consistency audit are complete
 
 ### SVG File Naming Convention
 
@@ -131,7 +172,7 @@ Apply corresponding fonts for different text roles based on the font plan in the
 
 ### Task 1. Generate Complete Speaker Notes Document
 
-After **all SVG pages are generated and finalized**, enter the "Logic Construction Phase" and generate the complete speaker notes document in `notes/total.md`.
+After **all SVG pages are generated, visually reviewed, deck-audited, and finalized**, enter the "Logic Construction Phase" and generate the complete speaker notes document in `notes/total.md`.
 
 **Why not generate page-by-page?** Batch-writing notes allows planning transitions like a script, ensuring coherent presentation logic.
 
@@ -181,7 +222,7 @@ Automatically split `notes/total.md` into individual speaker note files in the `
 
 ## 9. Next Steps After Completion
 
-> **Auto-continuation**: After Visual Construction Phase (all SVG pages) and Logic Construction Phase (all notes) are complete, the Executor proceeds directly to the post-processing pipeline.
+> **Auto-continuation**: After Visual Construction Phase (all SVG pages, each having passed the in-process visual review gate and deck-level consistency audit) and Logic Construction Phase (all notes) are complete, the Executor proceeds directly to the post-processing pipeline.
 
 **Post-processing & Export** (see [shared-standards.md](shared-standards.md)):
 
@@ -192,7 +233,16 @@ python3 scripts/total_md_split.py <project_path>
 # 2. SVG post-processing (auto-embed icons, images, etc.)
 python3 scripts/finalize_svg.py <project_path>
 
-# 3. Export PPTX
+# 3. SVG audit
+python3 scripts/svg_quality_checker.py <project_path> --format <format>
+
+# 4. Export PPTX
 python3 scripts/svg_to_pptx.py <project_path> -s final
 # Default: generates native shapes (.pptx) + SVG reference (_svg.pptx)
 ```
+
+After export, the Executor must also run the **Exported PPT Review Gate** defined in `references/exported-ppt-review.md`:
+
+- Review the actual exported PPT appearance, not just the SVG source
+- If exported PPT review reveals issues, fix the source SVG files in `svg_output/`
+- Re-run post-processing, SVG audit, export, and exported-PPT review until the deck passes

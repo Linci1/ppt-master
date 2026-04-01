@@ -227,28 +227,35 @@ Read `references/image-generator.md`
 Read the role definition based on the selected style:
 ```
 Read references/executor-base.md          # REQUIRED: common guidelines
+Read references/executor-visual-review.md # REQUIRED: page-by-page visual review gate
 Read references/executor-general.md       # General flexible style
 Read references/executor-consultant.md    # Consulting style
 Read references/executor-consultant-top.md # Top consulting style (MBB level)
 ```
 
-> Only need to read executor-base + one style file.
+> Must read executor-base + executor-visual-review + one style file.
 
 **Design Parameter Confirmation (Mandatory)**: Before generating the first SVG, the Executor MUST review and output key design parameters from the Design Specification (canvas dimensions, color scheme, font plan, body font size) to ensure spec adherence. See executor-base.md Section 2 for details.
 
 > ⚠️ **Main-agent only rule**: SVG generation in Step 6 MUST remain with the current main agent because page design depends on full upstream context (source content, design spec, template mapping, image decisions, and cross-page consistency). Do NOT delegate any slide SVG generation to sub-agents.
 > ⚠️ **Generation rhythm rule**: After confirming the global design parameters, the Executor MUST generate pages sequentially, one page at a time, while staying in the same continuous main-agent context. Do NOT split Step 6 into grouped page batches such as 5 pages per batch.
+> ⚠️ **Per-page review gate (MANDATORY)**: After each page draft is generated, the Executor MUST immediately perform the visual review defined in `references/executor-visual-review.md` before proceeding to the next page. Review items include: Chinese text segmentation/readability, edge pressure/crowding, card overflow risk, footer/Logo/page-number conflict, takeaway/body layer separation, information density fit, trimming/relayout need, and same-family consistency. These checks MUST happen **during page generation**, not as a final cleanup pass after all pages are done.
 
 **Visual Construction Phase**:
 - Generate SVG pages sequentially, one page at a time, in one continuous pass → `<project_path>/svg_output/`
+- For each page: `Generate draft → Run immediate visual review → Fix if needed → Mark page passed → Proceed to next page`
+- After all pages pass the page gate: run one deck-level consistency audit before continuing
+  - Mandatory deck checks: TOC structure consistency, same-family page consistency, takeaway/body separation consistency, density outliers, and layout rhythm drift across similar content pages
 
 **Logic Construction Phase**:
-- Generate speaker notes → `<project_path>/notes/total.md`
+- Only after **all pages have passed the per-page visual review gate and the deck-level consistency audit**, generate speaker notes → `<project_path>/notes/total.md`
 
 **✅ Checkpoint — Confirm all SVGs and notes are fully generated. Proceed directly to Step 7 post-processing**:
 ```markdown
 ## ✅ Executor Phase Complete
 - [x] All SVGs generated to svg_output/
+- [x] Every page passed in-process visual review
+- [x] Deck-level consistency audit completed
 - [x] Speaker notes generated at notes/total.md
 ```
 
@@ -256,10 +263,15 @@ Read references/executor-consultant-top.md # Top consulting style (MBB level)
 
 ### Step 7: Post-processing & Export
 
-🚧 **GATE**: Step 6 complete; all SVGs generated to `svg_output/`; speaker notes `notes/total.md` generated.
+🚧 **GATE**: Step 6 complete; all SVGs generated to `svg_output/`; every page has passed the in-process visual review gate; the deck-level consistency audit is complete; speaker notes `notes/total.md` generated.
 
-> ⚠️ The following three sub-steps MUST be **executed individually one at a time**. Each command must complete and be confirmed successful before running the next.
-> ❌ **NEVER** put all three commands in a single code block or single shell invocation.
+Read the exported-deck review definition:
+```
+Read references/exported-ppt-review.md
+```
+
+> ⚠️ The following sub-steps MUST be **executed individually one at a time**. Each command or review must complete and be confirmed successful before running the next.
+> ❌ **NEVER** bundle them into a single shell invocation and treat the deck as final without the review gates.
 
 **Step 7.1** — Split speaker notes:
 ```bash
@@ -271,7 +283,12 @@ python3 ${SKILL_DIR}/scripts/total_md_split.py <project_path>
 python3 ${SKILL_DIR}/scripts/finalize_svg.py <project_path>
 ```
 
-**Step 7.3** — Export PPTX (embeds speaker notes by default):
+**Step 7.3** — SVG audit (must review warnings, not just errors):
+```bash
+python3 ${SKILL_DIR}/scripts/svg_quality_checker.py <project_path> --format <format>
+```
+
+**Step 7.4** — Export PPTX (embeds speaker notes by default):
 ```bash
 python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
 # Default: generates two files — native shapes (.pptx) + SVG reference (_svg.pptx)
@@ -279,9 +296,30 @@ python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s final
 # Use --only legacy  to only generate SVG image version
 ```
 
+**Step 7.5** — Exported PPT review gate (MANDATORY):
+
+- Review the **actual exported PPT appearance**, not only the SVG files
+- Mandatory review items:
+  - text segmentation / readability in the exported deck
+  - text too close to edges / crowded feeling
+  - card text clipping or visual overflow
+  - takeaway/body collision or upper-lower module fighting
+  - Logo / page number / footer decoration conflicts
+  - information density suitability
+  - TOC structure consistency
+  - same-family layout consistency across the deck
+- Use `references/exported-ppt-review.md` as the checklist
+
+**Step 7.6** — Repair loop if any issue is found:
+
+- Fix the source SVG page(s) in `svg_output/`
+- Re-run Step 7.2 → Step 7.5 until both the SVG audit and the exported-PPT review pass
+- The deck is **NOT** considered final until this loop is clean
+
 > ❌ **NEVER** use `cp` as a substitute for `finalize_svg.py` — it performs multiple critical processing steps
 > ❌ **NEVER** export directly from `svg_output/` — MUST use `-s final` to export from `svg_final/`
 > ❌ **NEVER** add extra flags like `--only`
+> ❌ **NEVER** treat the first exported PPT as final delivery without completing Step 7.5 and, if needed, Step 7.6
 
 ---
 
