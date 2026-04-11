@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="result-case" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="648" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">{{PAGE_TITLE}}</text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="headline-metric,evidence-attached-case-chain,evidence-rail,closure-band" data-advanced-pattern="evidence_attached_case_chain" data-content-max-bottom="620" data-content-safe-box="60,125,1160,495">
+    <rect x="60" y="129" width="184" height="34" fill="#0563C1" fill-opacity="0.10" rx="17" data-slot="case-guide-band" />
+    <text x="152" y="151" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">{{PAGE_GUIDE_LABEL}}</text>
+
+    <g id="headline-zone" data-slot="proof-headline" data-structure-role="result-headline">
+      <rect x="60" y="182" width="760" height="82" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="84" y="210" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#94A3B8" data-slot="client-context">{{CLIENT_CONTEXT}}</text>
+      <text x="84" y="239" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="22" font-weight="bold" fill="#0563C1" data-slot="result-headline">{{RESULT_HEADLINE}}</text>
+      <rect x="84" y="247" width="146" height="3" fill="#ED7D31" rx="2" />
+      <text x="84" y="258" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#7C8AA0" data-slot="headline-subline">{{HEADLINE_SUBLINE}}</text>
+    </g>
+
+    <g id="metric-zone" data-slot="metric-spotlight" data-structure-role="proof-metric">
+      <rect x="840" y="182" width="380" height="82" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="1030" y="205" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#C55A11">关键结果指标</text>
+      <text x="1030" y="232" text-anchor="middle" font-family="Arial" font-size="32" font-weight="bold" fill="#ED7D31" data-slot="key-metric">{{KEY_METRIC}}</text>
+      <text x="1030" y="252" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#7C8AA0" data-slot="key-metric-label">{{KEY_METRIC_LABEL}}</text>
+    </g>
+
+    <g id="case-chain-zone" data-slot="evidence-case-chain" data-structure-role="attack-case-chain">
+      <rect x="60" y="286" width="820" height="256" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="86" y="319" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">入口 - 动作 - 放大 - 结果</text>
+      <line x1="86" y1="329" x2="850" y2="329" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="96" y="344" width="178" height="24" fill="#0563C1" fill-opacity="0.08" rx="12" data-slot="challenge-chip-1" />
+      <rect x="304" y="344" width="178" height="24" fill="#4472C4" fill-opacity="0.08" rx="12" data-slot="challenge-chip-2" />
+      <rect x="512" y="344" width="178" height="24" fill="#ED7D31" fill-opacity="0.10" rx="12" data-slot="challenge-chip-3" />
+      <text x="185" y="360" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#0563C1">{{CHALLENGE_1}}</text>
+      <text x="393" y="360" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#4472C4">{{CHALLENGE_2}}</text>
+      <text x="601" y="360" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#ED7D31">{{CHALLENGE_3}}</text>
+
+      <rect x="96" y="392" width="152" height="84" fill="#0563C1" fill-opacity="0.08" rx="14" data-slot="chain-node-entry" />
+      <rect x="288" y="392" width="152" height="84" fill="#4472C4" fill-opacity="0.08" rx="14" data-slot="chain-node-action" />
+      <rect x="480" y="392" width="152" height="84" fill="#ED7D31" fill-opacity="0.08" rx="14" data-slot="chain-node-amplify" />
+      <rect x="672" y="392" width="152" height="84" fill="#ED7D31" fill-opacity="0.14" rx="14" data-slot="chain-node-result" />
+
+      <text x="172" y="415" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#0563C1">入口节点</text>
+      <text x="364" y="415" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#4472C4">关键动作</text>
+      <text x="556" y="415" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#C55A11">放大条件</text>
+      <text x="748" y="415" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#C55A11">控制结果</text>
+
+      <text x="172" y="450" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">{{ACTION_1}}</text>
+      <text x="364" y="450" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#4472C4">{{ACTION_2}}</text>
+      <text x="556" y="450" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#C55A11">{{ACTION_3}}</text>
+      <text x="748" y="450" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#C55A11">{{RESULT_1}}</text>
+
+      <line x1="248" y1="434" x2="288" y2="434" stroke="#9FB7D9" stroke-width="3" stroke-dasharray="8 6" />
+      <line x1="440" y1="434" x2="480" y2="434" stroke="#9FB7D9" stroke-width="3" stroke-dasharray="8 6" />
+      <line x1="632" y1="434" x2="672" y2="434" stroke="#F0B37E" stroke-width="3" stroke-dasharray="8 6" />
+      <polygon points="302,434 290,427 290,441" fill="#4472C4" />
+      <polygon points="494,434 482,427 482,441" fill="#ED7D31" />
+      <polygon points="686,434 674,427 674,441" fill="#ED7D31" />
+
+      <rect x="266" y="494" width="196" height="26" fill="#4472C4" fill-opacity="0.08" rx="13" data-slot="evidence-tag-1" />
+      <rect x="458" y="494" width="196" height="26" fill="#ED7D31" fill-opacity="0.10" rx="13" data-slot="evidence-tag-2" />
+      <text x="364" y="511" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#4472C4">{{EVIDENCE_HINT_1}}</text>
+      <text x="556" y="511" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#C55A11">{{EVIDENCE_HINT_2}}</text>
+
+      <line x1="364" y1="476" x2="364" y2="494" stroke="#9FB7D9" stroke-width="2" stroke-dasharray="6 5" />
+      <line x1="556" y1="476" x2="556" y2="494" stroke="#F0B37E" stroke-width="2" stroke-dasharray="6 5" />
+    </g>
+
+    <g id="evidence-rail-zone" data-slot="chain-evidence-rail" data-structure-role="evidence-rail">
+      <rect x="900" y="286" width="320" height="256" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="924" y="319" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#0563C1">证据附着 / 收束</text>
+      <line x1="924" y1="329" x2="1190" y2="329" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="924" y="346" width="272" height="52" fill="#0563C1" fill-opacity="0.07" rx="12" data-slot="chain-proof-card-1" />
+      <text x="946" y="365" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#0563C1">直接证据</text>
+      <text x="946" y="386" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{RESULT_2}}</text>
+
+      <rect x="924" y="410" width="272" height="52" fill="#4472C4" fill-opacity="0.07" rx="12" data-slot="chain-proof-card-2" />
+      <text x="946" y="429" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#4472C4">结果证据</text>
+      <text x="946" y="450" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{RESULT_3}}</text>
+
+      <rect x="924" y="474" width="272" height="52" fill="#ED7D31" fill-opacity="0.12" rx="12" data-slot="chain-proof-card-3" />
+      <text x="946" y="493" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#C55A11">管理判断</text>
+      <text x="946" y="514" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{RESULT_JUDGMENT}}</text>
+    </g>
+
+    <g id="closure-band-zone" data-slot="chain-closure-band" data-structure-role="closure-band">
+      <rect x="60" y="560" width="1160" height="58" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <rect x="82" y="574" width="340" height="30" fill="#0563C1" fill-opacity="0.08" rx="15" />
+      <rect x="470" y="574" width="340" height="30" fill="#4472C4" fill-opacity="0.08" rx="15" />
+      <rect x="858" y="574" width="340" height="30" fill="#ED7D31" fill-opacity="0.12" rx="15" />
+      <text x="252" y="593" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#0563C1">{{CLOSURE_1}}</text>
+      <text x="640" y="593" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#4472C4">{{CLOSURE_2}}</text>
+      <text x="1028" y="593" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#C55A11">{{CLOSURE_3}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,648,1280,72">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

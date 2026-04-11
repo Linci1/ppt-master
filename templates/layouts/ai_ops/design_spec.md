@@ -1,87 +1,87 @@
-# ai_ops - Enterprise Digital Intelligence Design Specification
+# 企业数字智能模板 - 设计规格
 
-> Suitable for telecom operator AI operations architecture, digital transformation proposals, smart infrastructure reports, IT system overview diagrams, and other high-information-density scenarios.
+> 适用于运营商 AI 运维架构、IT 系统总览、数字化转型方案等高信息密度场景。
 
-> **Style Reference**: See `reference_style.svg` (Telecom Operator AI Operations Architecture Overview), which demonstrates the core visual language of this template.
+> **风格参考**：参见 `reference_style.svg`（运营商 AI 运维架构总览），该文件展示了本模板的核心视觉语言。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property           | Description                                                                    |
+| 属性 | 说明                                                                    |
 | ------------------ | ------------------------------------------------------------------------------ |
-| **Template Name**  | ai_ops (Enterprise Digital Intelligence)                                       |
-| **Use Cases**      | Telecom AI operations architecture, IT system overviews, digital transformation proposals, smart infrastructure reports |
-| **Design Tone**    | Information-dense, structured, modular zoning, telecom/enterprise style        |
-| **Theme Mode**     | Light theme (white background + red-blue dual-color accents + warm gray panels) |
-| **Info Density**   | High density — a single page can accommodate 6-10 information modules, matching telecom reporting conventions |
+| **模板名称** | ai_ops（企业数字智能模板） |
+| **适用场景** | 运营商 AI 运维架构、IT 系统总览、数字化转型方案、智慧基础设施汇报 |
+| **设计调性** | 信息密度高、结构清晰、模块化布局、运营商/政企风格 |
+| **主题模式** | 浅色主题（白底 + 红蓝强调 + 暖灰面板） |
+| **信息密度** | 高密度——单页可容纳 6-10 个信息模块，符合运营商常见汇报习惯 |
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property           | Value                            |
+| 属性 | 值                            |
 | ------------------ | -------------------------------- |
-| **Format**         | Standard 16:9                    |
-| **Dimensions**     | 1280 × 720 px                   |
+| **格式**         | 标准 16:9                    |
+| **尺寸**     | 1280 × 720 px                   |
 | **viewBox**        | `0 0 1280 720`                  |
-| **Page Margins**   | Left/right 30-50px, top 20px, bottom 40px |
-| **Content Safe Area** | x: 30-1250, y: 80-680        |
-| **Title Area**     | y: 20-80                        |
-| **Grid Baseline**  | 20px (high-density layouts require a finer grid) |
+| **页面边距**   | Left/right 30-50px, top 20px, bottom 40px |
+| **内容安全区** | x: 30-1250, y: 80-680        |
+| **标题区**     | y: 20-80                        |
+| **网格基线** | 20px（高密度布局需要更细的网格） |
 
-> **Note**: Margins are narrower than standard templates (30px vs 60px) to accommodate the high-information-density reporting style common in telecom presentations.
+> **说明**：本模板的边距比标准模板更窄（30px 对比 60px），以适配运营商场景常见的高信息密度汇报风格。
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors
+### 主色
 
-| Role               | Value       | Notes                                        |
+| 角色               | 数值       | 说明                                        |
 | ------------------ | ----------- | -------------------------------------------- |
 | **Primary Red**    | `#C00000`   | Brand identity, title vertical bar, number badges, target bars |
 | **Accent Blue**    | `#2E75B6`   | Scenario labels, category headers, bottom accent bars |
 | **Light Blue**     | `#5B9BD5`   | Feature module cards, sub-item labels        |
 
-### Functional Colors
+### 功能色
 
-| Role               | Value       | Usage                              |
+| 角色               | 数值       | 用途                              |
 | ------------------ | ----------- | ---------------------------------- |
-| **Warm Gray BG**   | `#FDF3EB`   | Overview panel, open platform panel background |
+| **Warm Gray BG**   | `#FDF3EB`   | Overview panel, open platform panel 背景 |
 | **Warm Orange Border** | `#F8CBAD` | Panel borders, decorative dividers |
-| **Light Gray BG**  | `#F2F2F2`   | Subtitle bar, metric card background |
+| **Light Gray BG**  | `#F2F2F2`   | 副标题 bar, metric card 背景 |
 | **Card Gray BG**   | `#E7E6E6`   | Sub-module cards, capability base cards |
 | **Card Border**    | `#D9D9D9`   | Card strokes                       |
 
-### Text Colors
+### 文字颜色
 
-| Role               | Value       | Usage                          |
+| 角色               | 数值       | 用途                          |
 | ------------------ | ----------- | ------------------------------ |
-| **Body Black**     | `#000000`   | Titles, standard body text     |
-| **White Text**     | `#FFFFFF`   | Text on dark color blocks      |
-| **Secondary Text** | `#666666`   | Subtitles, annotations         |
-| **Light Secondary**| `#999999`   | Page numbers, source citations |
+| **正文黑**     | `#000000`   | 标题, standard body text     |
+| **White Text**     | `#FFFFFF`   | 深色块上的文字      |
+| **Secondary Text** | `#666666`   | 副标题、注释         |
+| **Light Secondary**| `#999999`   | 页码、来源标注 |
 | **Data Emphasis**  | `#C00000`   | KPI values, key metrics        |
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Font Stack**: `"Microsoft YaHei", "微软雅黑", "SimHei", Arial, sans-serif`
+**字体栈**： `"Microsoft YaHei", "微软雅黑", "SimHei", Arial, sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level    | Usage                  | Size    | Weight  |
+| Level    | 用途                  | Size    | Weight  |
 | -------- | ---------------------- | ------- | ------- |
-| H1       | Cover main title       | 36-48px | Bold    |
-| H2       | Page title             | 32-36px | Bold    |
-| H3       | Module title/subtitle  | 18-20px | Bold    |
-| P        | Body content           | 14-16px | Regular |
-| Caption  | Supplementary/footnotes | 12-14px | Regular |
-| Data     | KPI values/metric emphasis | 24-36px | Bold |
+| H1       | 封面主标题       | 36-48px | 粗体    |
+| H2       | 页面标题             | 32-36px | 粗体    |
+| H3       | 模块标题/副标题  | 18-20px | 粗体    |
+| P        | 正文内容           | 14-16px | 常规 |
+| Caption  | 补充说明/脚注 | 12-14px | 常规 |
+| Data     | KPI 数值/指标强调 | 24-36px | 粗体 |
 
 > **Note**: Body font size is smaller than usual (14-16px vs standard 18-20px) to accommodate high information density per page.
 
@@ -89,7 +89,7 @@
 
 ## V. Core Design Principles
 
-### Telecom High-Density Information Style
+### 运营商高信息密度风格
 
 This template emulates the visual language of telecom technical reports. The core characteristics are "**modular zoning + high information density + red-blue dual-color hierarchy**".
 
@@ -97,12 +97,12 @@ This template emulates the visual language of telecom technical reports. The cor
 2. **Number Badges**: Red square badges (30×30px with white numbers) identify key initiatives/capability numbers (e.g., numbers 1-5 in "Five Key Initiatives").
 3. **Dashed Zone Frames**: `stroke-dasharray="5 5"` dashed rectangles group content modules, creating a structured, modular visual effect — a common "zone frame" in telecom reports.
 4. **Blue Label Bars**: `#2E75B6` blue-filled rectangles (full-width or fixed-width) serve as scenario/category headers carrying scenario names.
-5. **Warm Gray Overview Panels**: Panels with `#FDF3EB` background + `#F8CBAD` border carry overviews, summaries, and open platform entries.
+5. **Warm Gray Overview Panels**: Panels with `#FDF3EB` 背景 + `#F8CBAD` border carry overviews, summaries, and open platform entries.
 6. **Metric Card Groups**: White cards with `#F2F2F2` borders, closely arranged to display KPI metrics; values highlighted in `#C00000` red.
 7. **Light Blue Sub-modules**: `#5B9BD5` filled small rectangular cards displaying specific feature items (e.g., "AI One-Click Troubleshooting Assistant").
-8. **Gray Capability Base Cards**: Cards with `#E7E6E6` / `#F2F2F2` background for displaying foundational capabilities/platform components.
+8. **Gray Capability Base Cards**: Cards with `#E7E6E6` / `#F2F2F2` 背景 for displaying foundational capabilities/platform components.
 
-### Advanced Features
+### 进阶特性
 
 1. **Triangle Decorations**: The top area may use light semi-transparent triangles (`fill-opacity="0.3"`) as visual guides.
 2. **Star/Icon Accents**: Simple polygon stars near key achievements enhance visual impact.
@@ -111,24 +111,24 @@ This template emulates the visual language of telecom technical reports. The cor
 
 ---
 
-## VI. Page Structure
+## 六、页面结构
 
-### General Layout
+### 通用布局
 
-| Area               | Position/Height  | Description                                          |
+| Area               | Position/Height  | 说明                                          |
 | ------------------ | ---------------- | ---------------------------------------------------- |
-| **Title Area**     | y=20-80          | Red vertical bar + title text + optional subtitle overview bar |
-| **Overview Bar**   | y=80-140         | Full-width `#F2F2F2` background bar carrying the page's core summary |
-| **Content Area**   | y=140-670        | Main content area (densely packed multi-module layout) |
-| **Footer**         | y=680-720        | Red narrow bar with page number + chapter name + source citation |
+| **标题区**     | y=20-80          | Red vertical bar + title text + optional subtitle overview bar |
+| **Overview Bar**   | y=80-140         | Full-width `#F2F2F2` 背景 bar carrying the page's core summary |
+| **内容区**   | y=140-670        | 主要内容区 (densely packed multi-module layout) |
+| **页脚**         | y=680-720        | Red narrow bar with page number + chapter name + source citation |
 
-### Navigation Bar Design
+### 导航条设计
 
-- **Title Vertical Bar**: Red rectangle `#C00000`, 10×40px, positioned left of the title text
-- **Title Text**: 10px from the vertical bar, 36px font size, `#C00000` or `#000000`
+- **标题 Vertical Bar**: Red rectangle `#C00000`, 10×40px, positioned left of the title text
+- **标题 Text**: 10px from the vertical bar, 36px font size, `#C00000` or `#000000`
 - **Overview Bar**: Full-width light gray rectangle (h=60px), centered 16px body text carrying the page overview/introduction
 
-### Decorative Elements
+### 装饰元素
 
 - **Number Badges**: 30×30px red squares + white numbers (centered)
 - **Blue Labels**: Fixed-width blue rectangles + white text (e.g., "Fault Boundary Identification")
@@ -138,54 +138,54 @@ This template emulates the visual language of telecom technical reports. The cor
 
 ---
 
-## VII. Page Types
+## 七、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
 - **Background**: White `#FFFFFF`
 - **Left Decoration**: Full-height red-blue dual-color vertical bar (red upper half + blue lower half), width 60px
-- **Title Area**: Centered large title `{{TITLE}}` (red), with subtitle `{{SUBTITLE}}` inside a light gray overview bar below
+- **标题 Area**: Centered large title `{{TITLE}}` (red), with subtitle `{{SUBTITLE}}` inside a light gray overview bar below
 - **Middle Decoration**: Number badges (1-5) + blue scenario labels showcasing core capabilities/scenarios
-- **Bottom Info**: Speaker `{{AUTHOR}}` + date `{{DATE}}`
+- **Bottom 信息**: Speaker `{{AUTHOR}}` + date `{{DATE}}`
 - **Bottom Decoration**: Warm gray narrow bar + blue full-width bottom bar
 
 ### 2. Chapter Page (02_chapter.svg)
 
 - **Background**: White `#FFFFFF`
-- **Left/Right Decoration**: Left red vertical bar + right blue vertical bar (echoing the cover dual-color scheme)
+- **左右 Decoration**: Left red vertical bar + right blue vertical bar (echoing the cover dual-color scheme)
 - **Center**: Red number badge (80×80px large) `{{CHAPTER_NUM}}` + watermark number (160px light gray)
-- **Title**: Centered `{{CHAPTER_TITLE}}` (48px Bold)
+- **标题**： Centered `{{CHAPTER_TITLE}}` (48px 粗体)
 - **Decorative Line**: Red-blue dual lines (thick red line + thin blue line)
-- **Description**: `{{CHAPTER_DESC}}` in gray text
+- **说明**: `{{CHAPTER_DESC}}` in gray text
 
-### 3. Content Page (03_content.svg)
+### 3. 内容 Page (03_content.svg)
 
 - **Top**: 4px red top bar + white title bar (80px height)
-- **Title Identifier**: Red vertical bar (8×40px) + 32px Bold title `{{PAGE_TITLE}}`
-- **Content Area**: Dashed frame (`stroke-dasharray="5 5"`) marking content area `{{CONTENT_AREA}}`
-- **Footer**: Light gray bottom bar, left red vertical bar + chapter name `{{SECTION_NAME}}`, right red square page number `{{PAGE_NUM}}`
-- **Source Citation**: Footer centered `{{SOURCE}}`
+- **标题 Identifier**: Red vertical bar (8×40px) + 32px 粗体 title `{{PAGE_TITLE}}`
+- **内容 Area**: Dashed frame (`stroke-dasharray="5 5"`) marking content area `{{CONTENT_AREA}}`
+- **页脚**: Light gray bottom bar, left red vertical bar + chapter name `{{SECTION_NAME}}`, right red square page number `{{PAGE_NUM}}`
+- **Source Citation**: 页脚居中 `{{SOURCE}}`
 - **TOC**: Use canonical indexed placeholders such as `{{TOC_ITEM_1_TITLE}}`
 
 ### 4. Ending Page (04_ending.svg)
 
-- **Layout**: Mirrors the cover — left red-blue dual-color vertical bar, bottom blue bar
+- **布局**： Mirrors the cover — left red-blue dual-color vertical bar, bottom blue bar
 - **Central Panel**: Warm gray panel (`#FDF3EB` + `#F8CBAD` border) carrying the thank-you message
-- **Content**: `{{THANK_YOU}}` (red 64px Bold) + `{{ENDING_SUBTITLE}}` (blue 22px)
-- **Contact Info**: `{{CONTACT_INFO}}` + `{{COPYRIGHT}}`
+- **内容**: `{{THANK_YOU}}` (red 64px 粗体) + `{{ENDING_SUBTITLE}}` (blue 22px)
+- **Contact 信息**: `{{CONTACT_INFO}}` + `{{COPYRIGHT}}`
 - **Bottom Decoration**: Number badges + blue labels, echoing the cover
 
 ---
 
-## VIII. Layout Patterns
+## VIII. 版式模式
 
-| Pattern                        | Applicable Scenarios                              |
+| 模式 | 适用场景 |
 | ------------------------------ | ------------------------------------------------- |
 | **Architecture Overview**      | AI operations overview, system architecture panorama |
 | **Metrics Dashboard**          | KPI display, performance reports, data dashboards |
 | **Multi-Module Zoning**        | Capability lists, scenario matrices, domain displays |
-| **Process/Timeline**           | Implementation roadmap, deployment plan, evolution path |
-| **Top-Bottom Split**           | Objectives+results (top), scenarios+capabilities (bottom) |
+| **Process/时间轴**           | 实施路线图、部署计划、演进路径 |
+| **上下分栏**           | Objectives+results (top), scenarios+capabilities (bottom) |
 | **Left-Right Split (3:7)**     | Left navigation labels + right content area       |
 | **Card Matrix (2x3/3x3)**     | Capability modules, team assignments, project lists |
 | **Table**                      | Metric comparisons, progress tracking             |
@@ -196,12 +196,12 @@ This template emulates the visual language of telecom technical reports. The cor
 
 ## IX. Common Components
 
-### Title Vertical Bar Decoration
+### 标题 Vertical Bar Decoration
 
 ```xml
 <!-- Red vertical bar + title -->
 <rect x="30" y="20" width="10" height="40" fill="#C00000" />
-<text x="50" y="55" font-family="Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" fill="#C00000">Page Title</text>
+<text x="50" y="55" font-family="Microsoft YaHei, sans-serif" font-size="36" font-weight="bold" fill="#C00000">Page 标题</text>
 ```
 
 ### Number Badge
@@ -270,40 +270,40 @@ This template emulates the visual language of telecom technical reports. The cor
 
 ## X. Spacing Specification
 
-| Element                        | Value     |
+| Element                        | 数值     |
 | ------------------------------ | --------- |
-| Page left/right margins        | 30-50px   |
-| Page top/bottom margins        | 20-40px   |
-| Title area height              | 60px      |
+| 页面左右边距        | 30-50px   |
+| 页面上下边距        | 20-40px   |
+| 标题 area height              | 60px      |
 | Overview bar height            | 60px      |
-| Title to overview bar spacing  | 0px       |
+| 标题与摘要条间距  | 0px       |
 | Overview bar to content spacing | 10-20px  |
 | Module spacing                 | 10-20px   |
 | Card spacing                   | 10px      |
 | Card inner padding             | 15-20px   |
 | Badge to label spacing         | 5-10px    |
-| Footer height                  | 40px      |
+| 页脚 height                  | 40px      |
 
 > **Compact Principle**: The telecom style pursues maximum information per page; spacing is generally 30-50% smaller than standard templates.
 
 ---
 
-## XI. SVG Technical Constraints
+## 十一、SVG 技术约束
 
 ### Mandatory Rules
 
 1. viewBox: `0 0 1280 720`
-2. Use `<rect>` elements for backgrounds
+2. 背景统一使用 `<rect>` 元素
 3. Use `<tspan>` for text wrapping (**`<foreignObject>` is strictly prohibited**)
 4. Use `fill-opacity` / `stroke-opacity` for transparency; `rgba()` is prohibited
 5. Prohibited: `clipPath`, `mask`, `<style>`, `class`, `foreignObject` (`id` inside `<defs>` is allowed)
 6. Prohibited: `textPath`, `animate*`, `script`, `marker`/`marker-end`
 7. Prohibited: `<symbol>+<use>`, `<iframe>`, `@font-face`
-8. Prohibited: `<g opacity="...">` (group opacity) — set opacity on each child element individually
+8. Prohibited: `<g opacity="...">` (分组透明度) — set opacity on each child element individually
 9. Use `<polygon>` triangles instead of `<marker>` for arrows
 10. Use only system fonts and inline styles
 
-### PPT Compatibility Rules
+### PPT 兼容性规则
 
 - Use overlay layers instead of image opacity
 - Define gradients using `<linearGradient>` inside `<defs>`
@@ -311,24 +311,24 @@ This template emulates the visual language of telecom technical reports. The cor
 
 ---
 
-## XII. Placeholder Specification
+## 十二、占位符说明
 
 The template uses `{{PLACEHOLDER}}` format placeholders:
 
-| Placeholder         | Description              | Applicable Template |
+| 占位符 | 说明 | 适用模板 |
 | ------------------- | ------------------------ | ------------------- |
-| `{{TITLE}}`         | Main title               | Cover               |
-| `{{SUBTITLE}}`      | Subtitle/overview        | Cover               |
+| `{{TITLE}}`         | 主标题               | Cover               |
+| `{{SUBTITLE}}`      | 副标题/overview        | Cover               |
 | `{{AUTHOR}}`        | Speaker/organization     | Cover               |
 | `{{DATE}}`          | Date                     | Cover               |
 | `{{CHAPTER_NUM}}`   | Chapter number           | Chapter page        |
-| `{{CHAPTER_TITLE}}` | Chapter title            | Chapter page        |
-| `{{CHAPTER_DESC}}`  | Chapter description      | Chapter page        |
-| `{{PAGE_TITLE}}`    | Page title               | Content page        |
-| `{{CONTENT_AREA}}`  | Content area identifier  | Content page        |
-| `{{SECTION_NAME}}`  | Section name (footer)    | Content page        |
-| `{{SOURCE}}`        | Data source (footer)     | Content page        |
-| `{{PAGE_NUM}}`      | Page number              | Content/ending page |
+| `{{CHAPTER_TITLE}}` | 章节标题            | Chapter page        |
+| `{{CHAPTER_DESC}}`  | 章节说明      | Chapter page        |
+| `{{PAGE_TITLE}}`    | 页面标题               | 内容 page        |
+| `{{CONTENT_AREA}}`  | 内容区 identifier  | 内容 page        |
+| `{{SECTION_NAME}}`  | 章节名称 (footer)    | 内容 page        |
+| `{{SOURCE}}`        | Data source (footer)     | 内容 page        |
+| `{{PAGE_NUM}}`      | 页码              | 内容/ending page |
 | `{{THANK_YOU}}`     | Thank-you message        | Ending page         |
 | `{{ENDING_SUBTITLE}}` | Slogan/tagline         | Ending page         |
 | `{{CONTACT_INFO}}`  | Contact information      | Ending page         |
@@ -336,7 +336,7 @@ The template uses `{{PLACEHOLDER}}` format placeholders:
 
 ---
 
-## XIII. Usage Notes
+## 十三、使用说明
 
 1. Copy this template directory to the project `templates/` directory
 2. Review `reference_style.svg` to understand the core visual style
@@ -350,7 +350,7 @@ The template uses `{{PLACEHOLDER}}` format placeholders:
 ## XIV. Design Highlights
 
 - **Telecom DNA**: Derived from real telecom AI operations architecture reports, naturally suited for telecom/enterprise presentation styles
-- **High Information Density**: A single page can accommodate a complete architecture view (objectives → results → scenarios → orchestration → foundational capabilities)
+- **High 信息 Density**: A single page can accommodate a complete architecture view (objectives → results → scenarios → orchestration → foundational capabilities)
 - **Red-Blue Dual-Color Hierarchy**: Red = core/emphasis/objectives, Blue = scenarios/modules/capabilities — clear visual hierarchy
 - **Number Badge System**: Red square numbers throughout create a "N Key Initiatives" visual narrative
 - **Three-Level Nested Zoning**: Dashed outer frame → category labels → feature cards for structured expression of complex architectures

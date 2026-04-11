@@ -4,6 +4,39 @@
 
 ---
 
+## 0. Project-level Planning Inputs (Mandatory Pre-read)
+
+Before generating the first SVG page, the Executor must check whether the project contains the following planning artifacts:
+
+- `project_brief.md`
+- `notes/template_domain_recommendation.md`
+- `notes/storyline.md`
+- `notes/page_outline.md`
+
+If they exist, they are **mandatory execution inputs**.
+
+Required behavior:
+
+- `project_brief.md`: use it to lock audience, goal, priorities, tone, and constraints
+- `notes/template_domain_recommendation.md`: use it to confirm template/domain intent before page generation
+- `notes/storyline.md`: use it to preserve chapter rhythm and cross-page progression
+- `notes/page_outline.md`: use it as the page-level source of truth for intent, proof target, and role
+
+The Executor must not treat these files as optional inspiration. They define the planned deck logic that SVG execution must implement.
+
+### Page-level binding rule
+
+For every non-fixed page, before generating the page draft, the Executor should be able to answer:
+
+- Which entry in `notes/page_outline.md` this page corresponds to
+- What the page intent is
+- What the proof goal is
+- Whether the page is meant to be simple or complex
+
+If that mapping cannot be established, the Executor should pause and repair the planning layer before continuing.
+
+---
+
 ## 1. Template Adherence Rules
 
 If template files exist in the project's `templates/` directory, the template structure must be followed:
@@ -27,6 +60,7 @@ Before generating each page, you must explicitly output which template (or "free
 
 - **Content pages**: Templates only define header and footer; the content area is freely laid out by the Executor
 - **No template**: Generate entirely per the Design Specification & Content Outline
+- **Template-local QA profiles**: If `templates/qa_profile.md` or the template Design Spec defines fixed skeleton / protected zones, those rules override improvisation. Keep logo/footer/TOC scaffold and other protected elements stable; place creativity inside the allowed content area.
 
 ---
 
@@ -45,6 +79,8 @@ Must output confirmation including: canvas dimensions, body font size, color sch
 - **Proximity principle**: Place related elements close together to form visual groups; increase spacing between unrelated groups to reinforce logical structure
 - **Absolute spec adherence**: Strictly follow the color, layout, canvas format, and typography parameters in the spec
 - **Follow template structure**: If templates exist, inherit the template's visual framework
+- **Follow planning structure**: If `notes/page_outline.md` exists, page generation must follow its page intent / proof goal / role definition instead of improvising a new deck structure on the fly
+- **Flexible within fixed skeleton**: Preserve template-stable elements such as logo, footer accents, TOC scaffold, protected masks, and fixed anchor coordinates. Use flexibility for cards, charts, image treatment, emphasis hierarchy, and narrative framing inside the content area
 - **Main-agent ownership**: SVG generation must be performed by the current main agent, not delegated to sub-agents, because each page depends on shared upstream context and cross-page visual continuity
 - **Generation rhythm**: First lock the global design context, then generate pages sequentially one by one in the same continuous context; grouped page batches (for example, 5 pages at a time) are not allowed
 - **Per-page review gate**: After generating each page draft, immediately review it before continuing. Do not postpone readability/layout review until the end of the deck
@@ -57,6 +93,14 @@ Must output confirmation including: canvas dimensions, body font size, color sch
 ### 3.1 In-process Visual Review Gate (Mandatory)
 
 After each page draft is generated, the Executor **must** check the current page against `executor-visual-review.md` before moving on.
+
+In addition, check whether the page still matches its corresponding `notes/page_outline.md` entry:
+
+- page role
+- page intent
+- proof goal
+- expected density / complexity level
+- whether the chosen structure still matches the planned page type
 
 Minimum review items:
 
@@ -122,6 +166,16 @@ Four approaches: **A: Emoji** (`<text>🚀</text>`) | **B: AI-generated** (SVG b
 > ⚠️ **Icon validation rule**: If the Design Specification includes an icon inventory list, Executor may **only** use icons from that approved list. Using icon names not in the index is FORBIDDEN — verify against `templates/icons/icons_index.json` if uncertain.
 
 Full index: `templates/icons/README.md`
+
+**Template-local icons — Image reference method**:
+
+Some templates bundle their own icons in `images/icons/` (e.g., security_service template). These icons are **NOT** in the global icon library and are NOT accessed via `<use data-icon>`. Instead, use the `<image>` tag:
+
+```xml
+<image href="../images/icons/icon_shield.svg" x="100" y="200" width="48" height="48"/>
+```
+
+> ⚠️ **Template icon rule**: If the project's `design_spec.md` includes Section X「Template Local Assets」or similar template-specific icon documentation, Executor **must** use `<image>` tags with paths like `../images/icons/{name}.svg`. Do NOT use `<use data-icon>` for template-local icons — they are not registered in the global icon index.
 
 ---
 

@@ -1,103 +1,103 @@
-# Anthropic Style Template - Design Specification
+# Anthropic 风格模板 - 设计规格
 
-> Suitable for AI/LLM tech talks, developer conferences, technical training, product launches, and similar scenarios.
+> 适用于 AI/LLM 技术分享、开发者大会、技术培训与产品发布。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property       | Description                                            |
+| 属性 | 说明                                            |
 | -------------- | ------------------------------------------------------ |
-| **Template Name** | anthropic (Anthropic Style Template)                |
-| **Use Cases**  | AI tech talks, developer conferences, technical training, product launches |
-| **Design Tone** | Tech-forward, professional, modern, conclusion-first |
-| **Theme Mode** | Mixed theme (dark cover/chapter + light content pages) |
+| **模板名称** | anthropic（Anthropic 风格模板） |
+| **适用场景** | AI/LLM 技术分享、开发者大会、技术培训、产品发布 |
+| **设计调性** | 科技前沿、专业现代、结论先行 |
+| **主题模式** | 混合主题（深色封面/章节页 + 浅色内容页） |
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property       | Value                         |
+| 属性 | 值                         |
 | -------------- | ----------------------------- |
-| **Format**     | Standard 16:9                 |
-| **Dimensions** | 1280 × 720 px                |
+| **格式**     | 标准 16:9                 |
+| **尺寸** | 1280 × 720 px                |
 | **viewBox**    | `0 0 1280 720`                |
-| **Safe Margins** | 60px (left/right), 50px (top/bottom) |
-| **Content Area** | x: 60-1220, y: 100-670     |
-| **Title Area** | y: 50-100                     |
-| **Grid Base**  | 40px                          |
+| **安全边距** | 60px (左右), 50px (上下) |
+| **内容区** | x: 60-1220, y: 100-670     |
+| **标题区** | y: 50-100                     |
+| **网格基线**  | 40px                          |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors
+### 主色
 
-| Role             | Value       | Notes                            |
+| 角色             | 数值       | 说明                            |
 | ---------------- | ----------- | -------------------------------- |
 | **Anthropic Orange** | `#D97757` | Brand identity, title emphasis, key data |
-| **Deep Space Gray** | `#1A1A2E` | Cover background, body text, chart base |
+| **Deep Space Gray** | `#1A1A2E` | 封面背景, body text, chart base |
 | **Tech Blue**    | `#4A90D9`   | Flowcharts, links, interactive elements |
 | **Mint Green**   | `#10B981`   | Recommended options, positive indicators, success states |
 | **Coral Red**    | `#EF4444`   | Risks, cautions, warnings        |
 
-### Neutral Colors
+### 中性色
 
-| Role           | Value       | Usage                  |
+| 角色           | 数值       | 用途                  |
 | -------------- | ----------- | ---------------------- |
-| **Cloud White** | `#F8FAFC`  | Card background        |
-| **Border Gray** | `#E2E8F0`  | Card borders, dividers |
+| **Cloud White** | `#F8FAFC`  | 卡片背景        |
+| **Border Gray** | `#E2E8F0`  | 卡片边框, dividers |
 | **Slate Gray** | `#64748B`   | Secondary text, chart labels |
-| **Pure White** | `#FFFFFF`   | Page background        |
+| **Pure White** | `#FFFFFF`   | 页面背景        |
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Font Stack**: `Arial, "Helvetica Neue", "Segoe UI", sans-serif`
+**字体栈**： `Arial, "Helvetica Neue", "Segoe UI", sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level    | Usage            | Size   | Weight  |
+| Level    | 用途            | Size   | Weight  |
 | -------- | ---------------- | ------ | ------- |
-| H1       | Cover main title | 56px   | Bold    |
-| H2       | Page title       | 32-36px| Bold    |
-| H3       | Subtitle/section | 24-28px| Semibold|
-| H4       | Card title       | 20-22px| Bold    |
-| P        | Body content     | 16-18px| Regular |
-| Data     | Highlighted data | 40-48px| Bold    |
+| H1       | 封面主标题 | 56px   | 粗体    |
+| H2       | 页面标题       | 32-36px| 粗体    |
+| H3       | 副标题/章节 | 24-28px| 半粗体|
+| H4       | 卡片标题       | 20-22px| 粗体    |
+| P        | 正文内容     | 16-18px| 常规 |
+| Data     | 高亮数据 | 40-48px| 粗体    |
 | Label    | Label text       | 14px   | 500     |
-| Sub      | Chart labels/footnotes | 12-14px | Regular |
+| Sub      | 图表标签/脚注 | 12-14px | 常规 |
 
 ---
 
 ## V. Core Design Principles
 
-### Top-Tier Consulting Style
+### 顶级咨询风格
 
 1. **Conclusion First (Pyramid Principle)**: Each page title is the core takeaway
 2. **Data Contextualization**: Comparisons, trends, benchmarks — never present data in isolation
 3. **SCQA Framework**: Situation → Complication → Question → Answer
 4. **MECE Principle**: Mutually Exclusive, Collectively Exhaustive
-5. **Professional Whitespace**: Content ratio < 65%, let information "breathe"
+5. **Professional Whitespace**: 内容 ratio < 65%, let information "breathe"
 
 ---
 
-## VI. Page Structure
+## 六、页面结构
 
-### General Layout
+### 通用布局
 
-| Area           | Position/Height | Description                            |
+| Area           | Position/Height | 说明                            |
 | -------------- | --------------- | -------------------------------------- |
 | **Top**        | y=0, h=6-8px    | Anthropic Orange decorative bar        |
-| **Label**      | y=50-70         | Page type label (uppercase, orange)    |
-| **Title Area** | y=80-140        | Page title (core takeaway)             |
-| **Content Area** | y=160-620     | Main content area                      |
-| **Footer**     | y=680           | Page number (centered)                 |
+| **Label**      | y=50-70         | 页面类型标签 (uppercase, orange)    |
+| **标题区** | y=80-140        | 页面标题 (core takeaway)             |
+| **内容区** | y=160-620     | 主要内容区                      |
+| **页脚**     | y=680           | 页码 (centered)                 |
 
-### Decorative Elements
+### 装饰元素
 
 - **Top Orange Bar**: Anthropic Orange (`#D97757`), height 6px
 - **Left Gradient Bar**: Orange gradient (`#D97757` → `#E8956F`)
@@ -107,11 +107,11 @@
 
 ---
 
-## VII. Page Types
+## 七、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
-- Dark gradient background (`#1A1A2E` → `#16213E` → `#0F0F1A`)
+- 深色渐变背景 (`#1A1A2E` → `#16213E` → `#0F0F1A`)
 - Grid decoration lines (white, 3% opacity)
 - Orange and blue glow effects
 - Neural network-style connection lines and nodes
@@ -119,32 +119,32 @@
 - Orange decorative short line
 - Bottom date and source info
 
-### 2. Table of Contents Page (02_toc.svg)
+### 2. 目录页 (02_toc.svg)
 
-- White background
+- 白色背景
 - Left orange gradient decorative bar (8px)
 - Orange circular numbers + chapter titles
 - Right-side complexity progression illustration
 
-### 3. Chapter Page (02_chapter.svg)
+### 3. 章节页 (02_chapter.svg)
 
-- Dark gradient background
+- 深色渐变背景
 - Grid decoration
 - Centered large chapter title
 - Orange decorative line
 
-### 4. Content Page (03_content.svg)
+### 4. 内容页 (03_content.svg)
 
-- White background
+- 白色背景
 - Top orange decorative bar
-- Page type label (orange uppercase)
-- Title as core takeaway
+- 页面类型标签 (orange uppercase)
+- 标题 as core takeaway
 - Three-column card layout (colored top borders)
-- Footer with centered page number
+- 带居中页码的页脚
 
-### 5. Ending Page (04_ending.svg)
+### 5. 结束页 (04_ending.svg)
 
-- Dark gradient background
+- 深色渐变背景
 - Neural network decoration
 - Centered thank-you message
 - Contact information
@@ -172,7 +172,7 @@
 <text x="90" y="207" font-size="18" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1</text>
 ```
 
-### Icon Background Circle
+### 图标背景圆
 
 ```xml
 <circle cx="130" cy="250" r="35" fill="#10B981" fill-opacity="0.1"/>
@@ -182,62 +182,62 @@
 
 ## IX. Spacing Guidelines
 
-| Element          | Value  |
+| Element          | 数值  |
 | ---------------- | ------ |
 | Safe margin      | 60px   |
 | Card gap         | 30-40px|
-| Card border radius | 8-12px |
+| 卡片圆角 | 8-12px |
 | Card padding     | 30px   |
 | Grid base        | 40px   |
 
 ---
 
-## X. SVG Technical Constraints
+## 十、SVG 技术约束
 
 ### Mandatory Rules
 
 1. viewBox: `0 0 1280 720`
-2. Use `<rect>` elements for backgrounds
+2. 背景统一使用 `<rect>` 元素
 3. Use `<tspan>` for text wrapping (**strictly no** `<foreignObject>`)
 4. Use `fill-opacity` / `stroke-opacity` for transparency
 5. Prohibited: `clipPath`, `mask`, `<style>`, `class`, `foreignObject`
 6. Prohibited: `textPath`, `animate*`, `script`
 7. Define gradients using `<defs>`
 
-### PPT Compatibility Rules
+### PPT 兼容性规则
 
-- No `<g opacity="...">` (group opacity)
+- No `<g opacity="...">` (分组透明度)
 - Inline styles only
 
 ---
 
-## XI. Placeholder Specification
+## 十一、占位符说明
 
-| Placeholder        | Description        |
+| 占位符 | 说明 |
 | ------------------ | ------------------ |
-| `{{TITLE}}`        | Main title         |
-| `{{SUBTITLE}}`     | Subtitle           |
-| `{{COVER_QUOTE}}`  | Cover quote        |
-| `{{SOURCE}}`       | Source info        |
+| `{{TITLE}}`        | 主标题         |
+| `{{SUBTITLE}}`     | 副标题           |
+| `{{COVER_QUOTE}}`  | 封面引语        |
+| `{{SOURCE}}`       | 来源信息        |
 | `{{DATE}}`         | Date               |
-| `{{PAGE_TITLE}}`   | Page title (core takeaway) |
-| `{{PAGE_LABEL}}`   | Page type label    |
+| `{{PAGE_TITLE}}`   | 页面标题 (core takeaway) |
+| `{{PAGE_LABEL}}`   | 页面类型标签    |
 | `{{CONTENT_AREA}}` | Flexible content anchor |
 | `{{CHAPTER_NUM}}`  | Chapter number     |
-| `{{CHAPTER_TITLE}}`| Chapter title      |
-| `{{PAGE_NUM}}`     | Page number        |
+| `{{CHAPTER_TITLE}}`| 章节标题      |
+| `{{PAGE_NUM}}`     | 页码        |
 | `{{TOTAL_PAGES}}`  | Total pages        |
-| `{{TOC_ITEM_N_TITLE}}` | TOC item title |
-| `{{TOC_ITEM_N_DESC}}`  | TOC item description |
+| `{{TOC_ITEM_N_TITLE}}` | 目录项标题 |
+| `{{TOC_ITEM_N_DESC}}`  | 目录项说明 |
 | `{{THANK_YOU}}`    | Thank-you message  |
 | `{{CONTACT_INFO}}` | Primary contact info |
 
 ---
 
-## XII. Usage Instructions
+## 十二、使用说明
 
 1. Copy the template to the project directory
 2. Select the appropriate page template based on content needs
-3. **Title is the core takeaway** — ensure each page has a clear conclusion
+3. **标题 is the core takeaway** — ensure each page has a clear conclusion
 4. Use three accent colors to differentiate content types (green = recommended, blue = process, orange = emphasis)
-5. Generate the final SVG through the Executor role
+5. 由 Executor 角色生成最终 SVG

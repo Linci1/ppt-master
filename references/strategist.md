@@ -12,6 +12,41 @@ As a top-tier AI presentation strategist, receive source documents, perform cont
 
 ---
 
+## 0. Project-level Inputs (Mandatory Pre-read)
+
+Before starting the Eight Confirmations, the Strategist must first check whether the project already contains Agent bootstrap artifacts.
+
+If the following files exist, they are **mandatory upstream inputs**, not optional references:
+
+- `project_brief.md`
+- `notes/template_domain_recommendation.md`
+- `notes/storyline.md`
+- `notes/page_outline.md`
+
+Required behavior:
+
+1. Read `project_brief.md` first to understand audience, goal, priorities, template intent, and delivery constraints
+2. Read `notes/template_domain_recommendation.md` to understand suggested template and domain pack
+3. Read `notes/storyline.md` to understand the deck-level narrative arc
+4. Read `notes/page_outline.md` to understand page-by-page intent, proof target, and candidate page roles
+
+If these files exist but are ignored, the Strategist is considered out of process.
+
+If the task is a new PPT project and these files do **not** exist yet, the agent should go back and complete the Agent bootstrap stage before writing the final Design Specification.
+
+### Mandatory incorporation into `design_spec`
+
+When these upstream files exist, the Strategist must explicitly absorb them into the Design Specification:
+
+- `project_brief.md` -> audience, goal, tone, priorities, constraints
+- `notes/template_domain_recommendation.md` -> template choice rationale and domain-pack alignment
+- `notes/storyline.md` -> chapter rhythm and cross-page progression
+- `notes/page_outline.md` -> page intent, proof targets, and fallback page-type reasoning
+
+This means the Design Specification is no longer built only from source documents and templates; it must also reflect the planning layer already produced by the Agent.
+
+---
+
 ## Canvas Format Quick Reference
 
 ### Presentations
@@ -319,6 +354,26 @@ The Strategist should make professional judgments on the template basis generate
 4. Content structure is extensible (12-chapter framework can be expanded or reduced)
 5. Spacing / border radius details adjusted by Executor based on content density
 
+### 5.1 Template-specific page-intent gate (`security_service`)
+
+When the selected template is `security_service`, body-page selection must follow a stricter gate:
+
+1. Define **what this page proves**, not just what it contains
+2. Match the page to `templates/layouts/layouts_index.json` → `layouts.security_service.advancedPageStrategy`
+3. Prefer the primary template family of the matched advanced pattern
+4. Use a secondary template only when the primary template clearly cannot carry the content
+5. Use `03_content.svg` or `11_list.svg` only as an explicit fallback, never as the default shortcut
+
+For every non-fixed body page in Section IX Content Outline (cover / TOC / chapter / ending pages are exempt), the Strategist must explicitly record:
+
+- `Page Intent`
+- `Proof Goal`
+- `Advanced Pattern`
+- `Preferred Template`
+- `Fallback Reason` (mandatory when `Preferred Template` is `03_content.svg` or `11_list.svg`)
+
+If these fields are missing, the design spec is considered incomplete for `security_service`, and Executor should not start SVG generation yet.
+
 ---
 
 ## 6. Workflow & Deliverables
@@ -343,7 +398,7 @@ The Strategist should make professional judgments on the template basis generate
 | VI. Icon Usage Spec | Source description, placeholder syntax, recommended icon list |
 | VII. Chart Reference List | Chart type, reference template path, used-in pages, purpose |
 | VIII. Image Resource List | Filename, dimensions, ratio, purpose, status, generation description |
-| IX. Content Outline | Grouped by chapter; each page includes layout, title, content points, chart type (if applicable) |
+| IX. Content Outline | Grouped by chapter; each page includes layout, title, content points, chart type (if applicable); when a template requires it, also include page-intent metadata such as proof goal / advanced pattern / preferred template |
 | X. Speaker Notes Requirements | File naming rules, content structure description |
 | XI. Technical Constraints Reminder | SVG generation rules, PPT compatibility rules |
 | XII. Design Checklist | Pre-generation / post-generation check items |
@@ -353,6 +408,7 @@ The Strategist should make professional judgments on the template basis generate
 1. Read reference template: `templates/design_spec_reference.md`
 2. Generate complete spec from scratch based on analysis
 3. Save to: `projects/<project_name>.../design_spec.md`
+4. If `project_brief.md` / `notes/storyline.md` / `notes/page_outline.md` exist, explicitly align the Design Spec with those files instead of silently replacing their logic
 
 ---
 

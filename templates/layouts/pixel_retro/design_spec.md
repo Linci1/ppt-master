@@ -1,62 +1,62 @@
-# Pixel Retro Style Template - Design Specification
+# 像素复古模板 - 设计规格
 
-> Suitable for tech talks, programming tutorials, game-related presentations, geek-style content showcases, and similar scenarios.
+> 适用于技术分享、复古游戏主题与极客风内容。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property       | Description                                                |
+| 属性 | 说明                                                |
 | -------------- | ---------------------------------------------------------- |
-| **Template Name** | pixel_retro (Pixel Retro Template)                      |
-| **Use Cases**  | Tech talks, programming tutorials, game introductions, geek-style showcases |
-| **Design Tone** | Retro gaming, neon cyberpunk, geek tech, 8-bit style      |
-| **Theme Mode** | Dark theme (deep space black background + neon accents)    |
+| **模板名称** | pixel_retro（像素复古模板） |
+| **适用场景** | 技术分享、复古游戏主题、极客风展示 |
+| **设计调性** | 复古游戏、霓虹赛博、极客科技、8 位风格 |
+| **主题模式** | 深色主题（深空黑底 + 霓虹强调） |
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property       | Value                         |
+| 属性 | 值                         |
 | -------------- | ----------------------------- |
-| **Format**     | Standard 16:9                 |
-| **Dimensions** | 1280 × 720 px                |
+| **格式**     | 标准 16:9                 |
+| **尺寸** | 1280 × 720 px                |
 | **viewBox**    | `0 0 1280 720`                |
-| **Page Margins** | Left/Right 60px, Top 50px, Bottom 40px |
-| **Safe Area**  | x: 60-1220, y: 50-680         |
+| **页面边距** | 左右 60px, Top 50px, Bottom 40px |
+| **安全区**  | x: 60-1220, y: 50-680         |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Background Colors
+### 背景色
 
-| Role           | Value       | Notes                            |
+| 角色           | 数值       | 说明                            |
 | -------------- | ----------- | -------------------------------- |
-| **Deep Space Black** | `#0D1117` | Main background color          |
-| **Starry Night Blue** | `#161B22` | Card/block background         |
+| **Deep Space Black** | `#0D1117` | Main 背景 color          |
+| **Starry Night Blue** | `#161B22` | Card/block 背景         |
 | **Dark Border** | `#30363D`  | Borders/dividers                 |
 
-### Accent Colors (Neon Series)
+### 强调色（霓虹系列）
 
-| Role           | Value       | Usage                            |
+| 角色           | 数值       | 用途                            |
 | -------------- | ----------- | -------------------------------- |
 | **Neon Green** | `#39FF14`   | Primary accent, success, save points, Git |
 | **Cyber Pink** | `#FF2E97`   | Secondary accent, warnings, contrast, GitHub |
 | **Electric Blue** | `#00D4FF` | Tertiary accent, links, info, flows |
 | **Gold Yellow** | `#FFD700`  | Quaternary accent, history, timelines, highlights |
 
-### Auxiliary Colors
+### 辅助色
 
-| Role           | Value       | Usage                            |
+| 角色           | 数值       | 用途                            |
 | -------------- | ----------- | -------------------------------- |
 | **Dark Green** | `#238636`   | Muted version of success state   |
 | **Dark Pink**  | `#8B2252`   | Muted pink                       |
 | **Dark Blue**  | `#1F6FEB`   | Muted blue                       |
 
-### Text Colors
+### 文字颜色
 
-| Role           | Value       | Usage                  |
+| 角色           | 数值       | 用途                  |
 | -------------- | ----------- | ---------------------- |
 | **Moonlight White** | `#E6EDF3` | Primary text         |
 | **Mist Gray**  | `#8B949E`   | Secondary descriptive text |
@@ -64,65 +64,65 @@
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Title Font**: `"Consolas", "Monaco", "Courier New", monospace` - Pixel/code aesthetic
+**标题 Font**: `"Consolas", "Monaco", "Courier New", monospace` - Pixel/code aesthetic
 
-**Body Font**: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif`
+**正文字体**: `-apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif`
 
 **Code Font**: `"Cascadia Code", "Fira Code", "Consolas", monospace`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level | Usage              | Size | Weight  |
+| Level | 用途              | Size | Weight  |
 | ----- | ------------------ | ---- | ------- |
-| H1    | Cover main title   | 52px | Bold    |
-| H2    | Page heading       | 36px | Bold    |
-| H3    | Section title/Subtitle | 22px | 600  |
-| P     | Body content       | 18px | Regular |
-| High  | Highlighted data   | 48px | Bold    |
-| Sub   | Supplementary text | 14px | Regular |
-| Code  | Code text          | 16px | Regular |
+| H1    | 封面主标题   | 52px | 粗体    |
+| H2    | 页面标题       | 36px | 粗体    |
+| H3    | 分节标题/副标题 | 22px | 600  |
+| P     | 正文内容       | 18px | 常规 |
+| High  | 高亮数据   | 48px | 粗体    |
+| Sub   | 补充文字 | 14px | 常规 |
+| Code  | 代码文字          | 16px | 常规 |
 
 ---
 
-## V. Page Structure
+## 五、页面结构
 
-### General Layout
+### 通用布局
 
-| Area       | Position/Height | Description                            |
+| Area       | Position/Height | 说明                            |
 | ---------- | --------------- | -------------------------------------- |
 | **Top**    | y=0, h=4-6px    | Neon green decoration line (dual-line effect) |
-| **Title Area** | y=50, h=70px | Page title + English subtitle         |
-| **Content Area** | y=130, h=510px | Main content area                  |
-| **Footer** | y=680, h=40px   | Page number, decoration line, progress indicator |
+| **标题区** | y=50, h=70px | 页面标题 + 英文副标题         |
+| **内容区** | y=130, h=510px | 主要内容区                  |
+| **页脚** | y=680, h=40px   | 页码, decoration line, progress indicator |
 
-### Decorative Elements
+### 装饰元素
 
 - **Top Decoration Line**: Neon green dual lines (main line 4px + auxiliary line 2px)
 - **Bottom Decoration Line**: Neon green dual lines (auxiliary line 4px + main line 4px)
 - **Pixel Blocks**: Corner decorations with decreasing opacity (100% → 60% → 30%)
-- **Scanline Grid**: Optional low-opacity background grid lines
+- **Scanline Grid**: Optional low-opacity 背景 grid lines
 
 ---
 
-## VI. Page Types
+## 六、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
-- Deep space black background
+- Deep space black 背景
 - Top/bottom neon decoration lines
 - Pixel-style console graphic (optional)
-- Main title (neon green glow effect)
-- Subtitle (moonlight white)
+- 主标题 (neon green glow effect)
+- 副标题 (moonlight white)
 - Function button group (horizontal layout)
 - Bottom prompt text (e.g., "PRESS START")
 
-### 2. Table of Contents (02_toc.svg)
+### 2. 目录页 (02_toc.svg)
 
-- Deep space black background
+- Deep space black 背景
 - Standard top decoration
 - Chapter list (with importance labels)
   - Red: Essential / Must-learn
@@ -130,28 +130,28 @@
   - Green: Optional
 - Pixel-style list design
 
-### 3. Chapter Page (02_chapter.svg)
+### 3. 章节页 (02_chapter.svg)
 
-- Deep space black background
+- Deep space black 背景
 - Full-screen neon effect
 - Large chapter number (glow effect)
-- Chapter title + English subtitle
+- 章节标题 + 英文副标题
 - Pixel-style decorative frame
 
-### 4. Content Page (03_content.svg)
+### 4. 内容页 (03_content.svg)
 
-- Deep space black background
+- Deep space black 背景
 - Standard top decoration
-- Page title (neon green + glow)
-- English subtitle (mist gray)
+- 页面标题 (neon green + glow)
+- 英文副标题 (mist gray)
 - **Fully open content area** (y=140 to y=670, width 1160px)
-- Bottom page number
+- 底部页码
 
 > **Design Principle**: The content page template only provides the page frame (title area + footer). The content area is freely designed by the Executor based on actual content. Available layouts include but are not limited to: cards, progress bars, tables, timelines, comparison charts, etc.
 
-### 5. Ending Page (04_ending.svg)
+### 5. 结束页 (04_ending.svg)
 
-- Deep space black background
+- Deep space black 背景
 - Neon glow main title
 - Summary card group
 - "GAME SAVED" visual effect
@@ -159,29 +159,29 @@
 
 ---
 
-## VII. Layout Modes
+## 七、布局模式
 
-| Mode               | Use Cases                      |
+| 模式 | 适用场景 |
 | ------------------ | ------------------------------ |
-| **Single Column Centered** | Cover, closing, key points |
-| **Two Columns (5:5)** | Comparative display (e.g., Git vs GitHub) |
+| **单列居中** | 封面、结束页、关键观点 |
+| **双栏（5:5）** | 对比展示 (e.g., Git vs GitHub) |
 | **Dual-Column Cards** | Feature lists, trait comparisons |
-| **Three-Column Cards** | Key takeaways, project lists |
+| **三列卡片** | Key takeaways, project lists |
 | **Progress Bar Display** | Data statistics, usage rates |
-| **Timeline**       | History, processes, workflows  |
+| **时间轴**       | 历史、流程、工作流  |
 
 ---
 
 ## VIII. Spacing Guidelines
 
-| Element          | Value  |
+| Element          | 数值  |
 | ---------------- | ------ |
 | Card spacing     | 20-30px |
-| Content block spacing | 30px |
+| 内容 block spacing | 30px |
 | Card padding     | 20-24px |
-| Card border radius | 0px (blocky feel) or 4px |
+| 卡片圆角 | 0px (blocky feel) or 4px |
 | Border width     | 2-3px  |
-| Icon-to-text gap | 12px   |
+| 图标与文字间距 | 12px   |
 
 ---
 
@@ -233,55 +233,55 @@ Apply glow filters to key text/elements:
 
 ---
 
-## X. SVG Technical Constraints
+## 十、SVG 技术约束
 
 ### Mandatory Rules
 
 1. viewBox: `0 0 1280 720`
-2. Use `<rect>` elements for backgrounds
+2. 背景统一使用 `<rect>` 元素
 3. Use `<tspan>` for text wrapping (no `<foreignObject>`)
 4. Use `fill-opacity` / `stroke-opacity` for transparency; `rgba()` is prohibited
 5. Prohibited: `clipPath`, `mask`, `<style>`, `class`, `foreignObject`
 6. Prohibited: `textPath`, `animate*`, `script`, `marker`/`marker-end`
 7. Use `<polygon>` triangles instead of `<marker>` for arrows
 
-### PPT Compatibility Rules
+### PPT 兼容性规则
 
-- No `<g opacity="...">` (group opacity); set opacity on each child element individually
+- No `<g opacity="...">` (分组透明度); set opacity on each child element individually
 - Use overlay layers instead of image opacity
 - Use inline styles only; external CSS and `@font-face` are prohibited
 - `filter` effects serve as enhancements (allowed) and do not affect baseline display
 
 ---
 
-## XI. Placeholder Specification
+## 十一、占位符说明
 
 Templates use `{{PLACEHOLDER}}` format placeholders. Common placeholders:
 
-| Placeholder        | Description        |
+| 占位符 | 说明 |
 | ------------------ | ------------------ |
-| `{{TITLE}}`        | Main title         |
-| `{{SUBTITLE}}`     | Subtitle           |
+| `{{TITLE}}`        | 主标题         |
+| `{{SUBTITLE}}`     | 副标题           |
 | `{{AUTHOR}}`       | Author/Organization |
-| `{{PAGE_TITLE}}`   | Page title         |
-| `{{PAGE_TITLE_EN}}`| Page title (English) |
-| `{{CONTENT_AREA}}` | Flexible content area |
+| `{{PAGE_TITLE}}`   | 页面标题         |
+| `{{PAGE_TITLE_EN}}`| 页面标题 (English) |
+| `{{CONTENT_AREA}}` | 可灵活编排的内容区 |
 | `{{CHAPTER_NUM}}`  | Chapter number     |
-| `{{PAGE_NUM}}`     | Page number        |
+| `{{PAGE_NUM}}`     | 页码        |
 | `{{TOTAL_PAGES}}`  | Total page count   |
 | `{{VERSION}}`      | Version number     |
-| `{{TOC_ITEM_N_TITLE}}` | TOC item title |
+| `{{TOC_ITEM_N_TITLE}}` | 目录项标题 |
 | `{{THANK_YOU}}`    | Thank-you message  |
 | `{{CONTACT_INFO}}` | Primary contact info |
 
 ---
 
-## XII. Usage Instructions
+## 十二、使用说明
 
 1. Copy the template to the project `templates/` directory
 2. Select the appropriate page template based on content requirements
 3. Mark content to be replaced using placeholders
-4. Generate the final SVG through the Executor role
+4. 由 Executor 角色生成最终 SVG
 5. Define glow effects using `filter` (within `<defs>`)
 6. Maintain consistency of the neon color scheme
 
@@ -291,8 +291,8 @@ Templates use `{{PLACEHOLDER}}` format placeholders. Common placeholders:
 
 ```
 Background Layer:
-  Main background    #0D1117  Deep Space Black
-  Card background    #161B22  Starry Night Blue
+  Main 背景    #0D1117  Deep Space Black
+  卡片背景    #161B22  Starry Night Blue
   Borders            #30363D  Dark Border
 
 Accent Colors (use in order):

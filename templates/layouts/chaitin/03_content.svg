@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-template="chaitin" data-page-family="content" data-fixed-skeleton="header,footer,logo" data-footer-protected-top="580" data-logo-safe-zone="40,580,180,60" data-brand-required="true" data-brand-assets="chaitin_logo.png">
   <defs>
     <linearGradient id="contentGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#6BFF85" />
@@ -10,35 +10,46 @@
     </linearGradient>
   </defs>
 
-  <!-- Dark background -->
-  <rect x="0" y="0" width="1280" height="720" fill="#05070A"/>
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <!-- Dark background -->
+    <rect x="0" y="0" width="1280" height="720" fill="#05070A"/>
 
-  <!-- Top accent bar -->
-  <rect x="0" y="0" width="1280" height="4" fill="url(#contentGrad)"/>
+    <!-- Top accent bar -->
+    <rect x="0" y="0" width="1280" height="4" fill="url(#contentGrad)"/>
+  </g>
 
-  <!-- Header accent line -->
-  <rect x="56" y="54" width="96" height="4" rx="2" fill="url(#headerGrad)" />
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="56,54,1168,72">
+    <!-- Header accent line -->
+    <rect x="56" y="54" width="96" height="4" rx="2" fill="url(#headerGrad)" />
 
-  <!-- Page Title -->
-  <text x="56" y="100" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="34" font-weight="700">{{PAGE_TITLE}}</text>
+    <!-- Page Title -->
+    <text x="56" y="100" fill="#F5F7FA" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="34" font-weight="700">{{PAGE_TITLE}}</text>
 
-  <!-- Subtitle/description if provided -->
-  {{PAGE_SUBTITLE}}
+    <!-- Subtitle/description if provided -->
+    {{PAGE_SUBTITLE}}
 
-  <!-- Title underline -->
-  <rect x="56" y="126" width="1168" height="1" fill="#213042" />
+    <!-- Title underline -->
+    <rect x="56" y="126" width="1168" height="1" fill="#213042" />
+  </g>
 
   <!-- Content Area - Executor renders here -->
-  <g id="content-area">
+  <g id="content-area" data-role="flexible-body" data-layout-modes="cards,timeline,comparison,image-text,diagram,matrix" data-content-max-bottom="552" data-content-safe-box="56,146,1168,406">
+    <rect x="56" y="146" width="1168" height="406" fill="none" stroke="none" data-template-guide="content-safe-box"/>
     {{CONTENT_AREA}}
   </g>
 
-  <!-- Bottom accent bar -->
-  <rect x="60" y="640" width="200" height="3" rx="1.5" fill="url(#contentGrad)"/>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="40,580,1180,120">
+    <!-- Bottom accent bar -->
+    <rect x="60" y="640" width="200" height="3" rx="1.5" fill="url(#contentGrad)"/>
 
-  <!-- Chaitin logo - bottom left -->
-  <image href="chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+    <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="40,580,180,60" data-brand-asset="chaitin_logo.png" data-brand-variant="brand-green">
+      <!-- Chaitin logo - bottom left -->
+      <image href="chaitin_logo.png" x="60" y="600" width="120" height="32" preserveAspectRatio="xMidYMid meet" data-brand-asset="chaitin_logo.png"/>
+    </g>
 
-  <!-- Page number -->
-  <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>
+    <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="1160,668,60,24">
+      <!-- Page number -->
+      <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>
+    </g>
+  </g>
 </svg>

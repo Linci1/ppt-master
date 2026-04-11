@@ -26,6 +26,236 @@
 
 ---
 
+## 🤖 Agent 总控模式
+
+`ppt-master` 现在不仅可以“把文档转成 PPT”，还可以按总控 Agent 的方式运行：
+
+- `learn`：吸收历史优秀 PPT 案例，进入案例库
+- `plan`：先做需求澄清与 brief 收敛
+- `produce`：生成进入正式执行前的生产包与复杂页建模骨架
+- `execute`：补齐项目级 `design_spec.md` 首稿并生成执行交接文件
+- `run`：自动串起 `produce + execute + auto-repair + Strategist/Executor 调度入口`
+- `improve`：把本次项目的问题沉淀成规则更新建议
+
+现在推荐优先使用统一入口脚本：
+
+```bash
+python3 scripts/ppt_agent.py new <project_name> --industry <industry> --scenario <scenario> --audience <audience> --goal <goal> --format ppt169 --source <file_or_url>
+```
+
+它会自动把“新建项目 + `/plan` 产物生成 + 可选源材料导入”串起来，更接近真实的 PPT Agent 使用方式。
+
+如果信息还不完整，也可以只给部分内容先启动：
+
+```bash
+python3 scripts/ppt_agent.py new <project_name> --industry <industry>
+```
+
+这时系统不会硬进入生成，而是先在项目内写出：
+
+- `notes/plan_answers.json`
+- `notes/plan_questions.md`
+- `notes/plan_readiness.md`
+- `notes/plan_agent_state.json`
+- `notes/plan_next_turn.md`
+- `notes/plan_rounds.json`
+- `notes/plan_dialogue.md`
+- `notes/plan_session_status.md`
+
+帮助 Agent 以“每轮最多 3 个高价值问题”的方式继续追问，把 `/plan` 做完整后再进入 brief / storyline。
+
+现在这层 `/plan` 还会自动做一层领域识别：
+
+- 命中安服 / 攻防演练 / 能力证明类场景时，会偏向 `长亭安服`
+- 命中长亭品牌表达 / 培训分享 / 通用专题时，会偏向 `长亭通用墨绿色`
+- 并在 `plan_next_turn.md` 里自动生成更贴近该场景的追问，而不是只给通用问卷
+
+当 `/plan` 产物已经出来后，可以进一步执行：
+
+```bash
+python3 scripts/ppt_agent.py produce <project_path>
+```
+
+它会在 `notes/` 下补出：
+
+- `production_readiness.md`
+- `production_packet.md`
+- `strategist_packet.md`
+- `complex_page_models.md`
+- `design_spec_scaffold.md`
+- `design_spec_draft.md`
+
+用来判断当前项目是否已经适合进入 Strategist / Executor 正式生成，并顺手补出 Strategist 执行包、`design_spec` 草案 / 初稿以及复杂页预建模骨架。
+
+接着建议再执行：
+
+```bash
+python3 scripts/ppt_agent.py execute <project_path>
+```
+
+它会继续补出：
+
+- `design_spec.md`
+- `notes/execution_readiness.md`
+- `notes/execution_runbook.md`
+
+并自动运行：
+
+- `design_spec_validator.py`
+- `check_complex_page_model.py`
+
+这样从 `/plan` 到正式 SVG 执行之间，就有了一层明确的执行交接闸门。
+
+如果希望直接得到面向 Strategist / Executor 的调度入口，再执行：
+
+```bash
+python3 scripts/ppt_agent.py run <project_path>
+```
+
+它会自动附带一轮执行层 auto-repair，并补出：
+
+- `notes/strategist_handoff.md`
+- `notes/executor_handoff.md`
+- `notes/agent_run_status.md`
+- `notes/svg_execution_queue.md`
+- `notes/svg_generation_status.md`
+- `notes/svg_execution_state.json`
+- `notes/page_execution_contracts.json`
+- `notes/svg_current_task.md`
+- `notes/svg_current_prompt.md`
+- `notes/svg_current_context_pack.md`
+- `notes/svg_execution_log.md`
+- `notes/svg_postprocess_plan.md`
+- `notes/page_briefs/`
+
+其中：
+
+- `svg_current_task.md`：当前该做哪一页
+- `svg_current_prompt.md`：当前页简版执行 prompt
+- `svg_current_context_pack.md`：当前页完整上下文包
+- `svg_execution_state.json`：机器可读执行状态
+- `page_execution_contracts.json`：逐页冻结后的执行合同，包含页面通道、默认自动修复轮数、是否允许首轮前页型预处理
+
+当前执行合同会把页面分成三类 QA 层级：
+
+- `brand_skeleton`：固定页，只重点校验品牌骨架 / 安全区 / 标题组
+- `layout_and_density`：普通正文页，先跑文本适配与布局密度检查，再按需进入更重校验
+- `complex_full`：复杂页，保留完整复杂语义 QA
+
+推荐先阅读：
+
+- [Agent 总控工作流](./workflows/ppt-agent.md)
+- [`/plan` 提问清单](./references/plan-question-bank.md)
+- [Project Brief 模板](./references/project-brief-template.md)
+- [案例库](./case_library/README.md)
+- [行业包](./domain_packs/README.md)
+
+### 新的推荐链路
+
+```text
+历史案例 -> ppt_agent.py learn -> 案例入库 -> 案例蒸馏
+新建 PPT -> ppt_agent.py new -> /plan 澄清 -> project_brief / 模板推荐 / storyline / page_outline -> produce -> execute -> run -> 正式生成 -> QA -> improve 复盘
+```
+
+这样系统不再只是“一次性生成器”，而是会持续吸收案例、持续积累规则，并把正式 SVG 生成前的执行编排包也准备好的 Agent。
+
+## 当前 Agent 标准流程
+
+如果你现在把 `ppt-master` 当成一个 PPT Agent 来用，推荐按下面这条链路走：
+
+1. `new` / `plan`：先立项，并把行业、场景、受众、目标、展示重点、模板要求收集完整
+2. `/plan` 补充：系统产出 `notes/plan_questions.md`、`notes/plan_readiness.md`，你补齐缺的信息
+3. brief 收敛：系统生成 `project_brief.md`、模板推荐、行业包推荐、`storyline.md`、`page_outline.md`
+4. `produce`：生成生产包、复杂页建模骨架、`design_spec` 草案
+5. `execute`：生成项目根目录 `design_spec.md`，并做执行前校验与可选 auto-repair
+6. `run`：生成 Strategist / Executor 的执行交接包、逐页 brief、SVG 执行队列
+7. 正式生成：按 `SKILL.md` 主链路继续执行 Strategist -> Image_Generator -> Executor -> QA -> Export
+8. `improve`：把本次项目暴露的问题回写为规则更新建议
+
+可以把它理解成三层：
+
+- 规划层：`new / plan / produce`
+- 执行准备层：`execute / run`
+- 正式出稿层：Strategist / Executor / QA / Export
+
+### 你在哪些步骤需要给指令
+
+| 阶段 | 系统在做什么 | 你是否需要补充指令 |
+|------|--------------|-------------------|
+| `new` / `plan` | 建项目、做 `/plan` 收集 | **需要**。给行业、场景、受众、目标、重点、模板倾向 |
+| `/plan` 追问 | 生成问题清单与 readiness | **需要**。补齐缺失信息，避免后续内容跑偏 |
+| brief / 推荐 | 输出模板、行业包、故事线建议 | **建议**。确认模板、页数、侧重点、是否要高级复杂页 |
+| `produce` | 生成生产包与复杂页骨架 | 一般不需要，除非你要改故事线或复杂页策略 |
+| `execute` | 生成 `design_spec.md` 并校验 | 一般不需要，除非你要锁定页型或保护某些品牌元素 |
+| `run` | 生成执行交接包与逐页 brief | 一般不需要，除非你要人工审一次执行计划 |
+| 正式生成 | SVG / PPT 正式产出 | **建议**。如果要强调“更复杂”或“更克制”，最好在这之前明确 |
+| `improve` | 复盘问题并沉淀规则 | **建议**。把你发现的问题直接喂回系统，便于长期变稳 |
+
+### 当前建议的实际使用方式
+
+最短路径：
+
+```bash
+python3 scripts/ppt_agent.py new <项目名> --industry <行业> --scenario <场景> --audience <受众> --goal <目标> --source <源文件>
+python3 scripts/ppt_agent.py produce <项目路径>
+python3 scripts/ppt_agent.py execute <项目路径> --refresh-design-spec --auto-repair
+python3 scripts/ppt_agent.py run <项目路径> --refresh-design-spec
+```
+
+如果第一次信息不全，推荐这样用：
+
+```bash
+python3 scripts/ppt_agent.py new <项目名> --industry <行业>
+```
+
+然后先去补：
+
+- `notes/plan_questions.md`
+- `notes/plan_readiness.md`
+- `notes/plan_next_turn.md`
+
+补齐后，再继续 `produce -> execute -> run`。
+
+如果你是吸收案例而不是做新稿，则走：
+
+```bash
+python3 scripts/ppt_agent.py learn <pptx_file> --domain <domain> --copy-source --distill
+```
+
+如果你已经生成过一版，准备做问题复盘，则走：
+
+```bash
+python3 scripts/ppt_agent.py improve <project_path> --findings <findings_file>
+python3 scripts/ppt_agent.py improve <project_path>
+```
+
+不额外提供 `findings` 时，也会自动吸收 `qa_manifest.json` 和 `notes/page_execution/*.json` 中的执行轨迹与自动修复记录。
+
+## 当前和最初预期相比，还有哪些差距
+
+现在的 `ppt-master` 已经具备 Agent 骨架，但还不是“全自动闭环 Agent”，更准确地说是“前后链路比较完整的半自动 Agent”。
+
+已经补上的部分：
+
+- 有 `learn / plan / produce / execute / run / improve` 六模式，不再只是一次性生成器
+- 有 `/plan` 收集、brief、模板推荐、故事线、页纲、复杂页骨架
+- 有执行前 `design_spec.md`、复杂页校验、auto-repair、执行交接包
+- 有案例吸收、行业包沉淀、项目复盘回写的入口
+
+还没完全补齐的部分：
+
+- `/plan` 仍以结构化产物为主，离“全对话式、自动多轮追问”的体验还有一段距离
+- `run` 已经把执行包准备好，但“正式 SVG 生成进度”还没有完全脚本化成一个实时状态机
+- 成品层的软性问题（措辞逻辑、复杂图文耦合、信息密度取舍）虽然已有规则，但还没有做到百分百自动兜底
+
+所以当前最合适的定位是：
+
+- 它已经是一个可用的 PPT Agent
+- 但在“最后一段正式出稿闭环”上，仍保留了一层人工确认与主代理执行
+- 这也是为什么现在推荐你把它当作“先规划、再执行、再复盘”的生产 Agent 来用，而不是完全黑盒的一键生成器
+
+---
+
 ## 🎴 精选示例
 
 > **示例库**: [`examples/`](./examples/) · **15 个项目** · **229 页**
@@ -49,11 +279,15 @@
 ## 🏗️ 系统架构
 
 ```
+用户任务
+    ↓
+[Agent 模式识别] → learn / plan / produce / execute / run / improve
+    ↓
+[Plan 收敛] → ppt_agent.py new/plan → build_project_brief.py / select_template_and_domain.py / build_storyline.py
+    ↓
 用户输入 (PDF/DOCX/URL/Markdown)
     ↓
 [源内容转换] → pdf_to_md.py / doc_to_md.py / web_to_md.py
-    ↓
-[创建项目] → project_manager.py init <项目名> --format <格式>
     ↓
 [模板选项] A) 使用已有模板 B) 不使用模板
     ↓
@@ -80,16 +314,19 @@
 | 文档 | 说明 |
 |------|------|
 | 🧭 [AGENTS.md](./AGENTS.md) | 仓库级入口概览（适用于通用 AI 代理） |
-| 📖 [SKILL.md](./skills/ppt-master/SKILL.md) | `ppt-master` 核心流程与规则源 |
-| 📐 [画布格式](./skills/ppt-master/references/canvas-formats.md) | PPT、小红书、朋友圈等 10+ 种格式 |
-| 🖼️ [图片嵌入指南](./skills/ppt-master/references/svg-image-embedding.md) | SVG 图片嵌入最佳实践 |
-| 📊 [图表模板库](./skills/ppt-master/templates/charts/) | 13 种标准化图表模板 |
-| 🛠️ [工具集](./skills/ppt-master/scripts/README.md) | 脚本索引与高频命令 |
-| ↳ [转换文档](./skills/ppt-master/scripts/docs/conversion.md) | PDF / DOCX / 网页转 Markdown |
-| ↳ [项目文档](./skills/ppt-master/scripts/docs/project.md) | 项目初始化、校验与索引 |
-| ↳ [SVG 流水线文档](./skills/ppt-master/scripts/docs/svg-pipeline.md) | 后处理、校验、备注与 PPTX 导出 |
-| ↳ [图片文档](./skills/ppt-master/scripts/docs/image.md) | 图片生成与图片分析工具 |
-| ↳ [排障文档](./skills/ppt-master/scripts/docs/troubleshooting.md) | 校验、预览、导出与依赖问题 |
+| 🤖 [Agent 工作流](./workflows/ppt-agent.md) | `learn / plan / produce / execute / run / improve` 总控链路 |
+| 📖 [SKILL.md](./SKILL.md) | `ppt-master` 核心流程与规则源 |
+| 📐 [画布格式](./references/canvas-formats.md) | PPT、小红书、朋友圈等 10+ 种格式 |
+| 🗂️ [案例库](./case_library/README.md) | 历史 PPT 案例的入库与蒸馏结果 |
+| 🧠 [行业包](./domain_packs/README.md) | 行业表达、术语、页型与 QA 规则 |
+| 🖼️ [图片嵌入指南](./references/svg-image-embedding.md) | SVG 图片嵌入最佳实践 |
+| 📊 [图表模板库](./templates/charts/) | 标准化图表模板 |
+| 🛠️ [工具集](./scripts/README.md) | 脚本索引与高频命令 |
+| ↳ [转换文档](./scripts/docs/conversion.md) | PDF / DOCX / 网页转 Markdown |
+| ↳ [项目文档](./scripts/docs/project.md) | 项目初始化、校验与索引 |
+| ↳ [SVG 流水线文档](./scripts/docs/svg-pipeline.md) | 后处理、校验、备注与 PPTX 导出 |
+| ↳ [图片文档](./scripts/docs/image.md) | 图片生成与图片分析工具 |
+| ↳ [排障文档](./scripts/docs/troubleshooting.md) | 校验、预览、导出与依赖问题 |
 | 💼 [示例索引](./examples/README.md) | 15 个项目、229 页 SVG 示例 |
 
 ---
@@ -160,21 +397,26 @@ pip install -r requirements.txt
 
 在 AI 编辑器中打开聊天面板，直接描述你想创作的内容：
 
-```
+```text
 用户：我有一份关于 Q3 季度业绩的报告，需要制作成 PPT
 
-AI：好的，先确认是否使用模板；确认后我会继续八项确认并生成设计规范。
-   [模板选项] [建议] B) 不使用模板；如需使用模板，我会先参考 templates/layouts/layouts_index.json 给出推荐
-   [Strategist] 1. 画布格式：[建议] PPT 16:9
-   [Strategist] 2. 页数范围：[建议] 8-10 页
-   ...
+AI：好的，我先进入 /plan，确认行业、受众、目标、重点、模板偏好和交付约束。
+   然后我会通过 ppt_agent.py new / plan 生成 project_brief、推荐模板与行业包，再进入正式的 Strategist / Executor 流程。
+```
+
+如果你给的是历史优秀 PPT 素材，也可以这样开始：
+
+```text
+用户：这是 2 份我认可的历史安服案例 PPT，先学习下它们的结构和复杂页表达
+
+AI：好的，我先进入 learn 模式，通过 ppt_agent.py learn 把它们入库到 case_library，再提炼可复用的案例模式、行业规则和模板建议。
 ```
 
 > 💡 **模型推荐**：Claude Opus 效果最佳，但大部分主流模型（如 Kimi 2.5、MiniMax 2.7 等，可通过 Codebuddy IDE 使用）目前均能生成不错的内容，仅在细节排版效果上可能存在差距。因目前某些 IDE (如 Antigravity) 的 Opus 极不稳定，请优先使用其他稳定的 AI 客户端进行创作。
 
 > 📝 **导出后编辑**：默认导出的 PPTX（`.pptx`）包含**原生 PowerPoint 形状**，文字、图形和颜色可直接编辑，无需额外操作。同时还会生成一份 SVG 参考版（`_svg.pptx`），该版本需在 PowerPoint 中选中内容后右键选择 **"转换为形状"** (Convert to Shape) 方可编辑。需要 **Office 2016** 或更高版本。
 
-> 💡 **AI 迷失上下文？** 可提示 AI 优先阅读 `skills/ppt-master/SKILL.md`；如需一个仓库级入口概览，再参考 `AGENTS.md`
+> 💡 **AI 迷失上下文？** 可提示 AI 先阅读 `workflows/ppt-agent.md` 与 `SKILL.md`；如需一个仓库级入口概览，再参考 `AGENTS.md`
 
 ### 5. AI 生图配置（可选）
 
@@ -284,11 +526,26 @@ ppt-master/
 ## 🛠️ 常用命令
 
 ```bash
-# 初始化项目
-python3 skills/ppt-master/scripts/project_manager.py init <项目名> --format ppt169
+# 新建项目并完成 /plan
+python3 skills/ppt-master/scripts/ppt_agent.py new <项目名> --industry <行业> --scenario <场景> --audience <受众> --goal <目标> --format ppt169 --source <源文件或URL>
 
-# 将源材料归档到项目目录
-python3 skills/ppt-master/scripts/project_manager.py import-sources <项目路径> <源文件或URL...>
+# 对已有项目补充 /plan 或导入材料
+python3 skills/ppt-master/scripts/ppt_agent.py plan <项目路径> --industry <行业> --scenario <场景> --audience <受众> --goal <目标> --source <源文件或URL>
+
+# 检查是否可以进入正式生成
+python3 skills/ppt-master/scripts/ppt_agent.py produce <项目路径>
+
+# 生成项目级 design_spec 首稿并输出执行交接文件
+python3 skills/ppt-master/scripts/ppt_agent.py execute <项目路径>
+
+# 串起执行层 auto-repair 与 Strategist / Executor 调度入口
+python3 skills/ppt-master/scripts/ppt_agent.py run <项目路径>
+
+# 学习历史案例
+python3 skills/ppt-master/scripts/ppt_agent.py learn <案例PPTX> --domain <行业包> --copy-source --distill
+
+# 查看项目状态
+python3 skills/ppt-master/scripts/ppt_agent.py status <项目路径>
 
 # PDF 转 Markdown
 python3 skills/ppt-master/scripts/pdf_to_md.py <PDF文件>
@@ -306,7 +563,7 @@ python3 skills/ppt-master/scripts/svg_to_pptx.py <项目路径> -s final
 
 ```
 
-> 📖 脚本文档建议先看 [脚本使用指南](./skills/ppt-master/scripts/README.md)，再按主题进入 [转换](./skills/ppt-master/scripts/docs/conversion.md)、[项目](./skills/ppt-master/scripts/docs/project.md)、[SVG 流水线](./skills/ppt-master/scripts/docs/svg-pipeline.md)、[图片](./skills/ppt-master/scripts/docs/image.md)、[排障](./skills/ppt-master/scripts/docs/troubleshooting.md)
+> 📖 脚本文档建议先看 [脚本使用指南](./scripts/README.md)，再按主题进入 [转换](./scripts/docs/conversion.md)、[项目](./scripts/docs/project.md)、[SVG 流水线](./scripts/docs/svg-pipeline.md)、[图片](./scripts/docs/image.md)、[排障](./scripts/docs/troubleshooting.md)
 
 ---
 

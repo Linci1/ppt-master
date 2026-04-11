@@ -1,84 +1,84 @@
-# smart_red - Smart Red-Orange Business Style Design Specification
+# 智慧红橙商务模板 - 设计规格
 
-> Suitable for tech company introductions, education industry solutions, smart campus proposals, and similar scenarios. Modern and energetic style.
+> 适用于科技公司介绍、教育解决方案与活力型商务展示。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property       | Description                                                |
+| 属性 | 说明                                                |
 | -------------- | ---------------------------------------------------------- |
-| **Template Name** | smart_red (Smart Red-Orange Business Style)              |
-| **Use Cases**  | Company introductions, product launches, solution presentations, education industry courseware |
-| **Design Tone** | Modern, energetic, professional, geometric                |
-| **Theme Mode** | Hybrid theme (dark/colorful cover + light content pages)   |
+| **模板名称** | smart_red（智慧红橙商务模板） |
+| **适用场景** | 科技公司介绍、教育解决方案、商务展示 |
+| **设计调性** | 现代鲜明、专业有活力、几何感强 |
+| **主题模式** | 混合主题（深色/彩色封面 + 浅色内容页） |
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property       | Value                         |
+| 属性 | 值                         |
 | -------------- | ----------------------------- |
-| **Format**     | Standard 16:9                 |
-| **Dimensions** | 1280 × 720 px                |
+| **格式**     | 标准 16:9                 |
+| **尺寸** | 1280 × 720 px                |
 | **viewBox**    | `0 0 1280 720`                |
-| **Safe Margins** | 60px (left/right), 50px (top/bottom) |
-| **Content Area** | x: 60-1220, y: 100-670      |
-| **Title Area** | y: 50-100                     |
+| **安全边距** | 60px (左右), 50px (上下) |
+| **内容区** | x: 60-1220, y: 100-670      |
+| **标题区** | y: 50-100                     |
 | **Grid Baseline** | 40px                       |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors
+### 主色
 
-| Role             | Value       | Notes                            |
+| 角色             | 数值       | 说明                            |
 | ---------------- | ----------- | -------------------------------- |
 | **Primary Red**  | `#DE3545`   | Brand identity, title decoration, geometric cutouts |
 | **Auxiliary Orange** | `#F0964D` | Geometric accents, gradient pairing |
-| **Dark Background** | `#333333` | Cover background, geometric cutouts, dark footer |
+| **Dark Background** | `#333333` | 封面背景, geometric cutouts, dark footer |
 
-### Neutral Colors
+### 中性色
 
-| Role           | Value       | Usage                  |
+| 角色           | 数值       | 用途                  |
 | -------------- | ----------- | ---------------------- |
-| **Light Gray Background** | `#F5F5F7` | Page background  |
+| **Light Gray Background** | `#F5F5F7` | 页面背景  |
 | **Border Gray** | `#E0E0E0`  | Section dividers, card borders |
-| **Body Black** | `#333333`   | Standard color for titles and body text |
-| **Description Gray** | `#666666` | Subtitles, annotation text |
-| **Pure White** | `#FFFFFF`   | Card background        |
+| **正文黑** | `#333333`   | Standard color for titles and body text |
+| **说明 Gray** | `#666666` | 副标题, annotation text |
+| **Pure White** | `#FFFFFF`   | 卡片背景        |
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Font Stack**: `Arial, "Helvetica Neue", "Microsoft YaHei", sans-serif`
+**字体栈**： `Arial, "Helvetica Neue", "Microsoft YaHei", sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level    | Usage              | Size    | Weight  |
+| Level    | 用途              | Size    | Weight  |
 | -------- | ------------------ | ------- | ------- |
-| H1       | Cover main title   | 60-80px | Bold    |
-| H2       | Page title         | 32-40px | Bold    |
-| H3       | Subsection/Card title | 24-28px | Bold |
-| P        | Body content       | 18-20px | Regular |
-| Caption  | Supplementary text | 14-16px | Regular |
+| H1       | 封面主标题   | 60-80px | 粗体    |
+| H2       | 页面标题         | 32-40px | 粗体    |
+| H3       | 小节/卡片标题 | 24-28px | 粗体 |
+| P        | 正文内容       | 18-20px | 常规 |
+| Caption  | 补充文字 | 14-16px | 常规 |
 
 ---
 
 ## V. Core Design Principles
 
-### Geometric Business Style
+### 几何商务风格
 
 1. **Geometric Cutouts**: Cover, table of contents, and transition pages use large triangular cutout designs.
 2. **Red-Black Contrast**: Red primary color paired with dark gray blocks creates a professional and impactful visual.
-3. **Card-Based Layout**: Content pages use white cards to hold content, with light gray backgrounds for added depth.
+3. **Card-Based 布局**: 内容 pages use white cards to hold content, with light gray 背景 for added depth.
 4. **Whitespace**: Maintain adequate whitespace to avoid information overload.
 
-### Advanced Refinement Features (v2.0)
+### 进阶打磨特性（v2.0）
 
 1. **Multi-Layer Geometric Overlay**: Main triangles paired with semi-transparent smaller triangles for visual depth.
 2. **Shadow Effects**: Text shadows, card shadows, and circle shadows for a 3D feel.
@@ -89,17 +89,17 @@
 
 ---
 
-## VI. Page Structure
+## 六、页面结构
 
-### General Layout
+### 通用布局
 
-| Area       | Position/Height | Description                            |
+| Area       | Position/Height | 说明                            |
 | ---------- | --------------- | -------------------------------------- |
-| **Top**    | y=0-80          | Navigation bar / Title area            |
-| **Content Area** | y=100-660 | Main content area (cards/diagrams)     |
-| **Footer** | y=680           | Page number and copyright information  |
+| **Top**    | y=0-80          | Navigation bar / 标题 area            |
+| **内容区** | y=100-660 | 主要内容区 (cards/diagrams)     |
+| **页脚** | y=680           | 页码 and copyright information  |
 
-### Decorative Design
+### 装饰设计
 
 - **Triangular Cutouts**: Core visual element of cover and back pages.
 - **Sidebar**: Left-side red polygonal panel unique to the table of contents page.
@@ -107,41 +107,41 @@
 
 ---
 
-## VII. Page Types
+## 七、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
-- **Background**: Light gray background `#F5F5F7`
+- **Background**: Light gray 背景 `#F5F5F7`
 - **Top-Left**: Red large triangular cutout (0,0 -> 350,0 -> 0,350)
 - **Bottom-Left**: Dark gray triangular cutout (0,720 -> 300,720 -> 0,420)
 - **Bottom-Right**: Red large triangular cutout (1280,720 -> 1280,320 -> 880,720)
-- **Title Area**: Main title `{{TITLE}}` and subtitle `{{SUBTITLE}}` displayed center-right
-- **Info Area**: Presenter `{{AUTHOR}}` and date `{{DATE}}` displayed at bottom
+- **标题 Area**: 主标题 `{{TITLE}}` and subtitle `{{SUBTITLE}}` displayed center-right
+- **信息 Area**: Presenter `{{AUTHOR}}` and date `{{DATE}}` displayed at bottom
 
-### 2. Table of Contents (02_toc.svg)
+### 2. 目录页 (02_toc.svg)
 
-- **Background**: Light gray background `#F5F5F7`
-- **Left Side**: Full-height red polygonal panel + large "Contents" text
-- **Right Side**: Content list area
+- **Background**: Light gray 背景 `#F5F5F7`
+- **Left Side**: Full-height red polygonal panel + large "内容s" text
+- **Right Side**: 内容 list area
 - **TOC Items**: Vertically arranged with circular number indices (01, 02...)
 
-### 3. Chapter Page (02_chapter.svg)
+### 3. 章节页 (02_chapter.svg)
 
 - **Decoration**: Red triangles echoing the cover (top-left / bottom-right)
 - **Center**: Large chapter number `{{CHAPTER_NUM}}` + chapter title `{{CHAPTER_TITLE}}`
 - **Style**: Clean and impactful, vivid colors
 
-### 4. Content Page (03_content.svg)
+### 4. 内容页 (03_content.svg)
 
 - **Top**: White navigation bar + top-right red cutout decoration + title dual-triangle decoration
-- **Background**: Light gray background `#F5F5F7`
-- **Title**: Page title `{{PAGE_TITLE}}` displayed left-aligned
-- **Content**: `{{CONTENT_AREA}}` uses white card style (rounded corners + border)
-- **Footer**: Includes copyright information and page number
+- **Background**: Light gray 背景 `#F5F5F7`
+- **标题**： 页面标题 `{{PAGE_TITLE}}` displayed left-aligned
+- **内容**: `{{CONTENT_AREA}}` uses white card style (rounded corners + border)
+- **页脚**: Includes copyright information and page number
 
-### 5. Ending Page (04_ending.svg)
+### 5. 结束页 (04_ending.svg)
 
-- **Layout**: Triangular layout fully echoing the cover (top-left red, bottom-left gray, bottom-right red)
+- **布局**： Triangular layout fully echoing the cover (top-left red, bottom-left gray, bottom-right red)
 - **Center**: Thank-you message displayed
 - **Bottom**: Whitespace reserved for contact information
 
@@ -165,12 +165,12 @@
 
 ---
 
-## IX. SVG Technical Constraints
+## 九、SVG 技术约束
 
 ### Mandatory Rules
 
 1. viewBox: `0 0 1280 720`
-2. Use `<rect>` elements for backgrounds
+2. 背景统一使用 `<rect>` 元素
 3. Use `<tspan>` for text wrapping (**strictly no** `<foreignObject>`)
 4. Use `fill-opacity` / `stroke-opacity` for transparency
 5. Prohibited: `clipPath`, `mask`, `<style>`, `class`, `foreignObject`
@@ -179,28 +179,28 @@
 
 ---
 
-## X. Placeholder Specification
+## 十、占位符规范
 
-| Placeholder        | Description        |
+| 占位符 | 说明 |
 | ------------------ | ------------------ |
-| `{{TITLE}}`        | Main title         |
-| `{{SUBTITLE}}`     | Subtitle           |
+| `{{TITLE}}`        | 主标题         |
+| `{{SUBTITLE}}`     | 副标题           |
 | `{{AUTHOR}}`       | Presenter/Author   |
 | `{{DATE}}`         | Date               |
-| `{{PAGE_TITLE}}`   | Page title         |
-| `{{CONTENT_AREA}}` | Content area identifier |
+| `{{PAGE_TITLE}}`   | 页面标题         |
+| `{{CONTENT_AREA}}` | 内容区 identifier |
 | `{{CHAPTER_NUM}}`  | Chapter number     |
-| `{{CHAPTER_TITLE}}`| Chapter title      |
-| `{{PAGE_NUM}}`     | Page number        |
-| `{{TOC_ITEM_1_TITLE}}` | TOC item title |
+| `{{CHAPTER_TITLE}}`| 章节标题      |
+| `{{PAGE_NUM}}`     | 页码        |
+| `{{TOC_ITEM_1_TITLE}}` | 目录项标题 |
 | `{{THANK_YOU}}`    | Thank-you message  |
-| `{{ENDING_SUBTITLE}}` | Ending subtitle |
+| `{{ENDING_SUBTITLE}}` | 结束页副标题 |
 | `{{CONTACT_INFO}}` | Primary contact info |
 | `{{CLOSING_MESSAGE}}`| Closing message  |
 
 ---
 
-## XI. Usage Instructions
+## 十一、使用说明
 
 1. Copy this directory to the project directory.
 2. Select the appropriate page template based on content requirements.

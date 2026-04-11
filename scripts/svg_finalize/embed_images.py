@@ -17,6 +17,7 @@ import base64
 import re
 import sys
 import argparse
+from pathlib import Path
 
 
 def get_mime_type(filename: str, file_bytes: bytes | None = None) -> str:
@@ -53,6 +54,28 @@ def get_file_size_str(size_bytes: int) -> str:
     else:
         return f"{size_bytes / (1024 * 1024):.1f} MB"
 
+
+def resolve_image_path(svg_path: str, img_path: str) -> str:
+    """Resolve image paths from svg_output/svg_final back to the project root."""
+    if os.path.isabs(img_path):
+        return img_path
+
+    svg_dir = Path(os.path.abspath(svg_path)).parent
+    decoded = Path(img_path)
+
+    candidates = [
+        svg_dir / decoded,
+    ]
+
+    if svg_dir.name in {'svg_output', 'svg_final'}:
+        candidates.append(svg_dir.parent / decoded)
+
+    for candidate in candidates:
+        if candidate.exists():
+            return str(candidate)
+
+    return str(candidates[0])
+
 def embed_images_in_svg(svg_path: str, dry_run: bool = False) -> tuple[int, int]:
     """
     Convert externally referenced images in an SVG file to Base64 inline format.
@@ -64,8 +87,6 @@ def embed_images_in_svg(svg_path: str, dry_run: bool = False) -> tuple[int, int]
     Returns:
         tuple: (number of images processed, file size after embedding)
     """
-    svg_dir = os.path.dirname(os.path.abspath(svg_path))
-    
     with open(svg_path, 'r', encoding='utf-8') as f:
         content = f.read()
     
@@ -86,10 +107,7 @@ def embed_images_in_svg(svg_path: str, dry_run: bool = False) -> tuple[int, int]
         img_path_decoded = html.unescape(img_path)
         
         # Handle relative paths
-        if not os.path.isabs(img_path_decoded):
-            full_path = os.path.join(svg_dir, img_path_decoded)
-        else:
-            full_path = img_path_decoded
+        full_path = resolve_image_path(svg_path, img_path_decoded)
         
         if not os.path.exists(full_path):
             print(f"  [WARN] Image not found: {img_path}")

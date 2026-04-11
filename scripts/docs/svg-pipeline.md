@@ -7,9 +7,14 @@ These tools cover post-processing, SVG validation, speaker notes, and PPTX expor
 Run these steps in order:
 
 ```bash
+python3 scripts/check_svg_text_fit.py <project_path>/svg_output
 python3 scripts/total_md_split.py <project_path>
 python3 scripts/finalize_svg.py <project_path>
+python3 scripts/check_svg_text_fit.py <project_path>/svg_final
+python3 scripts/render_svg_pages.py <project_path> -s final
 python3 scripts/svg_to_pptx.py <project_path> -s final
+python3 scripts/check_pptx_fonts.py <project_path>
+python3 scripts/write_qa_manifest.py <project_path> --format ppt169
 ```
 
 ## `finalize_svg.py`
@@ -49,6 +54,8 @@ Behavior:
 - Default output: native editable PPTX + SVG reference PPTX
 - Recommended source directory: `svg_final/`
 - Speaker notes are embedded automatically unless `--no-notes` is used
+- Before export, the command refreshes `<project>/qa_manifest.json` and runs a hard pre-export QA gate
+- If the selected SVG source still has blocking issues, export is refused and no final PPTX is written
 
 Dependency:
 
@@ -89,6 +96,53 @@ Checks include:
 - banned elements
 - width/height consistency
 - line-break structure
+- template-aware brand presence / approved-logo checks
+- blocking layout warnings for fixed-skeleton templates
+
+## `check_svg_text_fit.py`
+
+Check whether text is likely to overflow, collide inside cards, or whether large contained images become unreadably small.
+
+```bash
+python3 scripts/check_svg_text_fit.py <project_path>/svg_output
+python3 scripts/check_svg_text_fit.py <project_path>/svg_final
+python3 scripts/check_svg_text_fit.py path/to/page.svg
+```
+
+Use this as a hard gate before export. Fix all reported issues first.
+
+## `render_svg_pages.py`
+
+Render SVG pages to PNG previews for visual QA.
+
+```bash
+python3 scripts/render_svg_pages.py <project_path> -s final
+python3 scripts/render_svg_pages.py <project_path>/svg_final --pages 02_目录.svg 05_问题汇总.svg
+```
+
+Use this to inspect TOC pages, dense content pages, image-heavy pages, and any template high-risk pages.
+
+## `check_pptx_fonts.py`
+
+Inspect the exported native PPTX for likely CJK font substitution or mixed-font runs.
+
+```bash
+python3 scripts/check_pptx_fonts.py <project_path>
+python3 scripts/check_pptx_fonts.py path/to/output.pptx
+```
+
+## `write_qa_manifest.py`
+
+Write a JSON manifest that records SVG checks, render coverage, and PPTX font-check status.
+
+```bash
+python3 scripts/write_qa_manifest.py <project_path> --format ppt169
+python3 scripts/write_qa_manifest.py <project_path> --format ppt169 --visual-pages 02_目录.svg 05_密集内容页.svg
+```
+
+Notes:
+- `svg_to_pptx.py` now refreshes `qa_manifest.json` automatically before export
+- `write_qa_manifest.py` remains the explicit report command when you want a full QA snapshot or post-export font check
 
 ## `svg_position_calculator.py`
 

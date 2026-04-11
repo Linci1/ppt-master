@@ -4,13 +4,19 @@ from __future__ import annotations
 
 import sys
 import argparse
+import json
 from datetime import datetime
 from pathlib import Path
 
 from .pptx_dimensions import CANVAS_FORMATS, get_project_info
 from .pptx_discovery import find_svg_files, find_notes_files
-from .pptx_builder import create_pptx_with_native_svg
 from .pptx_slide_xml import TRANSITIONS
+
+TOOLS_DIR = Path(__file__).resolve().parent.parent
+if str(TOOLS_DIR) not in sys.path:
+    sys.path.insert(0, str(TOOLS_DIR))
+
+from write_qa_manifest import build_manifest, build_pre_export_gate
 
 
 def main() -> None:
@@ -110,6 +116,64 @@ Speaker notes (enabled by default):
     if not svg_files:
         print("Error: No SVG files found")
         sys.exit(1)
+
+    is_project_root = project_path.is_dir() and (
+        (project_path / "svg_output").exists()
+        or (project_path / "svg_final").exists()
+        or (project_path / "design_spec.md").exists()
+    )
+    if is_project_root:
+        design_spec_path = project_path / "design_spec.md"
+        target_dir = project_path / source_dir_name
+        if not target_dir.exists():
+            target_dir = project_path
+
+        manifest = build_manifest(
+            project_path,
+            expected_format=canvas_format,
+            include_pptx=False,
+        )
+        pre_export_gate = build_pre_export_gate(
+            project_path,
+            target_dir=target_dir,
+            source_dir_name=source_dir_name,
+            expected_format=canvas_format,
+            design_spec_path=design_spec_path if design_spec_path.exists() else None,
+        )
+        manifest["pre_export_gate"] = pre_export_gate
+        manifest_path = project_path / "qa_manifest.json"
+        manifest_path.write_text(json.dumps(manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+        if not pre_export_gate.get("ok", False):
+            print("[BLOCK] Pre-export QA gate failed. PPT export has been stopped.")
+            print(f"  - QA manifest refreshed: {manifest_path}")
+            print(f"  - SVG source: {source_dir_name}")
+            for reason in pre_export_gate.get("blocking_reasons", []):
+                print(f"  - {reason}")
+
+            issue_codes = pre_export_gate.get("issue_codes", {}) or {}
+            if issue_codes:
+                print("  - Issue codes:")
+                for code, count in sorted(issue_codes.items()):
+                    print(f"    - {code}: {count}")
+
+            issues_preview = pre_export_gate.get("issues_preview", []) or []
+            if issues_preview:
+                print("  - QA preview:")
+                for issue in issues_preview[:5]:
+                    file_name = issue.get("file", "")
+                    message = issue.get("message", "")
+                    print(f"    - {file_name}: {message}")
+
+            fit_preview = pre_export_gate.get("fit_issues_preview", []) or []
+            if fit_preview:
+                print("  - Text-fit preview:")
+                for issue in fit_preview[:5]:
+                    print(f"    - {issue}")
+
+            sys.exit(1)
+
+    from .pptx_builder import create_pptx_with_native_svg
 
     # Determine which versions to generate
     only_mode = args.only

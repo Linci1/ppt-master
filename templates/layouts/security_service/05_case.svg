@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="case-study" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="648" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">{{PAGE_TITLE}}</text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="case-collaboration,dual-lane,evidence-note" data-advanced-pattern="swimlane_collaboration" data-content-max-bottom="632" data-content-safe-box="60,125,1160,505">
+    <rect x="60" y="129" width="156" height="34" fill="#0563C1" fill-opacity="0.10" rx="17" data-slot="case-guide-band" />
+    <text x="138" y="151" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">{{PAGE_GUIDE_LABEL}}</text>
+
+    <g id="background-zone" data-slot="case-background-input" data-structure-role="case-input">
+      <rect x="60" y="185" width="236" height="330" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <rect x="60" y="185" width="236" height="12" fill="#0563C1" rx="14" />
+      <text x="84" y="218" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#7FA7DB">输入条件</text>
+      <text x="84" y="244" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="20" font-weight="bold" fill="#0563C1">背景挑战</text>
+      <text x="84" y="286" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A" data-slot="case-background">{{CASE_BACKGROUND}}</text>
+    </g>
+
+    <g id="collaboration-zone" data-slot="case-collaboration-lanes" data-structure-role="dual-lane-collaboration">
+      <rect x="326" y="185" width="526" height="330" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="352" y="218" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">协同实施主线</text>
+      <line x1="352" y1="228" x2="824" y2="228" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="352" y="248" width="474" height="112" fill="#4472C4" fill-opacity="0.08" rx="12" data-slot="collaboration-lane-a" />
+      <rect x="352" y="248" width="6" height="112" fill="#4472C4" rx="6" />
+      <text x="376" y="278" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#4472C4">方案主线 / 客户侧</text>
+      <text x="376" y="316" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A" data-slot="case-solution">{{CASE_SOLUTION}}</text>
+
+      <line x1="402" y1="372" x2="790" y2="372" stroke="#C8D8EE" stroke-width="2" stroke-dasharray="8 6" />
+      <circle cx="402" cy="372" r="7" fill="#0563C1" />
+      <circle cx="790" cy="372" r="7" fill="#0563C1" />
+
+      <rect x="352" y="388" width="474" height="112" fill="#5B9BD5" fill-opacity="0.10" rx="12" data-slot="collaboration-lane-b" />
+      <rect x="352" y="388" width="6" height="112" fill="#5B9BD5" rx="6" />
+      <text x="376" y="418" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#5B9BD5">实施动作 / 长亭侧</text>
+      <text x="376" y="456" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A" data-slot="case-process">{{CASE_PROCESS}}</text>
+    </g>
+
+    <g id="result-zone" data-slot="case-result-output" data-structure-role="delivery-output">
+      <rect x="882" y="185" width="338" height="330" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <rect x="882" y="185" width="338" height="12" fill="#ED7D31" rx="14" />
+      <text x="906" y="218" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#D49763">输出结果</text>
+      <text x="906" y="244" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="20" font-weight="bold" fill="#ED7D31">结果价值</text>
+      <rect x="906" y="270" width="278" height="188" fill="#ED7D31" fill-opacity="0.08" rx="12" data-slot="case-results-card" />
+      <text x="928" y="306" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A" data-slot="case-results">{{CASE_RESULTS}}</text>
+      <rect x="906" y="472" width="278" height="28" fill="#ED7D31" fill-opacity="0.12" rx="14" />
+      <text x="1045" y="491" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#C55A11">交付 / 收束 / 价值证明</text>
+    </g>
+
+    <g id="connector-zone" data-slot="case-flow-connectors" data-structure-role="input-action-output-flow">
+      <line x1="296" y1="350" x2="326" y2="350" stroke="#9FB7D9" stroke-width="3" />
+      <circle cx="311" cy="350" r="6" fill="#0563C1" />
+      <line x1="852" y1="350" x2="882" y2="350" stroke="#F0B37E" stroke-width="3" />
+      <circle cx="867" cy="350" r="6" fill="#ED7D31" />
+    </g>
+
+    <g id="evidence-zone" data-slot="case-evidence" data-structure-role="supporting-evidence">
+      <rect x="60" y="535" width="498" height="95" fill="#F9FAFB" rx="10" />
+      <text x="84" y="560" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#94A3B8">结构图 / 证据区</text>
+      <text x="309" y="588" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#CBD5E1" data-slot="case-image">{{CASE_IMAGE}}</text>
+    </g>
+
+    <g id="client-zone" data-slot="case-client-context" data-structure-role="scene-positioning">
+      <rect x="580" y="535" width="640" height="95" fill="#FFFFFF" fill-opacity="0.92" rx="10" />
+      <text x="604" y="560" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#ED7D31">客户 / 场景定位</text>
+      <text x="604" y="594" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A" data-slot="case-client">{{CASE_CLIENT}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,648,1280,72">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

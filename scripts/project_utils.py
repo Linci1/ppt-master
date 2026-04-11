@@ -75,6 +75,13 @@ CANVAS_FORMAT_ALIASES = {
     '小红书': 'xiaohongshu',
 }
 
+DESIGN_SPEC_FILES = [
+    'design_spec.md',
+    '设计规范与内容大纲.md',
+    'design_specification.md',
+    '设计规范.md',
+]
+
 
 def normalize_canvas_format(format_key: str) -> str:
     """Normalize canvas format key name (supports common aliases)."""
@@ -183,8 +190,7 @@ def get_project_info(project_path: str) -> Dict:
     info['has_readme'] = (project_path / 'README.md').exists()
 
     # Check design specification files (multiple possible names)
-    spec_files = ['设计规范与内容大纲.md', 'design_specification.md', '设计规范.md']
-    for spec_file in spec_files:
+    for spec_file in DESIGN_SPEC_FILES:
         if (project_path / spec_file).exists():
             info['has_spec'] = True
             info['spec_file'] = spec_file
@@ -256,8 +262,7 @@ def validate_project_structure(project_path: str, verbose: bool = False) -> Tupl
         errors.append(msg)
 
     # Check design specification file
-    spec_files = ['设计规范与内容大纲.md', 'design_specification.md', '设计规范.md']
-    has_spec = any((project_path / f).exists() for f in spec_files)
+    has_spec = any((project_path / f).exists() for f in DESIGN_SPEC_FILES)
     if not has_spec:
         msg = "Missing design specification file (suggested filename: design_specification.md)"
         if use_helper and verbose:
@@ -372,8 +377,7 @@ def find_all_projects(base_dir: str) -> List[Path]:
         if item.is_dir() and not item.name.startswith('.'):
             # Check if it's a valid project directory (contains svg_output or design spec)
             has_svg_output = (item / 'svg_output').exists()
-            has_spec = any((item / f).exists() for f in
-                           ['设计规范与内容大纲.md', 'design_specification.md', '设计规范.md'])
+            has_spec = any((item / f).exists() for f in DESIGN_SPEC_FILES)
 
             if has_svg_output or has_spec:
                 projects.append(item)

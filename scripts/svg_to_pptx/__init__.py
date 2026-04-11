@@ -8,7 +8,12 @@ Public API:
 
 from .pptx_cli import main
 from .drawingml_converter import convert_svg_to_slide_shapes
-from .pptx_builder import create_pptx_with_native_svg
+
+
+def create_pptx_with_native_svg(*args, **kwargs):
+    from .pptx_builder import create_pptx_with_native_svg as _impl
+
+    return _impl(*args, **kwargs)
 
 __all__ = [
     'main',

@@ -159,6 +159,7 @@ Before moving to the next page, the Executor should internally complete this che
 
 ```markdown
 [Page Review]
+- Brand asset / placement: pass / fix
 - Text segmentation: pass / fix
 - Edge pressure: pass / fix
 - Card overflow risk: pass / fix
@@ -185,6 +186,7 @@ Those tools catch **technical breakage**. This file catches **presentation reada
 
 Current `svg_quality_checker.py` also provides heuristic audit warnings for:
 
+- Brand presence / approved-logo misuse
 - Chinese readability / awkward line breaks
 - Text too close to card or canvas edges
 - Card text likely to look cramped or overflow

@@ -83,7 +83,7 @@ ppt-master/
 │   ├── finalize_svg.py       # SVG 后处理
 │   └── ...
 ├── templates/         # 模板库
-│   ├── layouts/       # 页面布局（含长亭品牌）
+│   ├── layouts/       # 页面布局（含长亭通用墨绿色、长亭安服）
 │   ├── charts/        # 图表模板
 │   └── icons/         # 图标库
 ├── references/       # 角色定义文档
@@ -97,7 +97,7 @@ ppt-master/
 
 ## 模板说明
 
-### 长亭品牌模板
+### 长亭通用墨绿色
 位于 `templates/layouts/chaitin/`
 
 | 文件 | 说明 |

@@ -1,62 +1,62 @@
-# Psychology Healing Template (Psychology Attachment Style) - Design Specification
+# 心理疗愈模板 - 设计规格
 
-> Suitable for psychology, psychotherapy, counseling training, and academic sharing in professional settings.
+> 适用于心理治疗培训、咨询课程与关系主题讲解。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property         | Description                                                  |
+| Property         | 说明                                                  |
 | ---------------- | ------------------------------------------------------------ |
-| **Template Name**| psychology_attachment (Psychology Healing Template)           |
-| **Use Cases**    | Psychotherapy training, academic lectures, counseling case analysis, professional sharing |
-| **Design Tone**  | Professional, warm, healing, trustworthy                     |
-| **Theme Mode**   | Light theme (cloud white background + blue-green gradient accent + multi-color semantic colors) |
+| **模板名称** | psychology_attachment（心理疗愈模板） |
+| **适用场景** | 心理治疗培训、咨询课程、关系主题讲解 |
+| **设计调性** | 专业温和、疗愈可信、关系感强 |
+| **主题模式** | 浅色主题（云白底 + 蓝绿渐变 + 多语义色） |
 
-### Core Visual Metaphor
+### 核心视觉隐喻
 
 The design adopts "**Secure Base**" as the core visual metaphor:
 
 - **Structural Stability**: Page layout resembles a secure attachment relationship with clear boundaries and predictable patterns
-- **Clear Hierarchy**: Information levels mirror the organization of the attachment system — from biological instinct to higher-order reflection
+- **Clear Hierarchy**: 信息 levels mirror the organization of the attachment system — from biological instinct to higher-order reflection
 - **Warm Professionalism**: Colors convey both professional authority and healing warmth
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property           | Value                           |
+| 属性 | 值                           |
 | ------------------ | ------------------------------- |
-| **Format**         | Standard 16:9                   |
-| **Dimensions**     | 1280 × 720 px                  |
+| **格式**         | 标准 16:9                   |
+| **尺寸**     | 1280 × 720 px                  |
 | **viewBox**        | `0 0 1280 720`                 |
-| **Page Margins**   | Left/right 40px, top 60px, bottom 40px |
-| **Content Safe Area** | x: 40-1240, y: 60-680       |
+| **页面边距**   | Left/right 40px, top 60px, bottom 40px |
+| **内容安全区** | x: 40-1240, y: 60-680       |
 
-### Page Zones
+### 页面分区
 
-| Zone             | Y-Range   | Height | Usage                      |
+| Zone             | Y-Range   | Height | 用途                      |
 | ---------------- | --------- | ------ | -------------------------- |
-| Top Title Area   | 60-120    | 60px   | Page title, chapter labels |
-| Main Content     | 130-640   | 510px  | Core content display       |
-| Bottom Info Area | 650-680   | 30px   | Page number, chapter nav   |
+| Top 标题 Area   | 60-120    | 60px   | 页面标题, chapter labels |
+| Main 内容     | 130-640   | 510px  | Core content display       |
+| Bottom 信息 Area | 650-680   | 30px   | 页码, chapter nav   |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors
+### 主色
 
-| Semantic Role     | Color Name    | HEX       | RGB         | Usage                              |
+| Semantic Role     | Color Name    | HEX       | RGB         | 用途                              |
 | ----------------- | ------------- | --------- | ----------- | ---------------------------------- |
-| **Dominant**      | Secure Blue   | `#2E5C8E` | 46,92,142   | Titles, key frameworks, secure attachment |
-| **Background**    | Cloud White   | `#F8FAFC` | 248,250,252 | Page background                    |
+| **Dominant**      | Secure Blue   | `#2E5C8E` | 46,92,142   | 标题, key frameworks, secure attachment |
+| **Background**    | Cloud White   | `#F8FAFC` | 248,250,252 | 页面背景                    |
 | **Accent A**      | Warm Orange   | `#E07843` | 224,120,67  | Activation, emotion, anxious type  |
 | **Accent B**      | Healing Green | `#3D8B7A` | 61,139,122  | Growth, integration, secure type   |
 | **Accent C**      | Cool Gray-Blue| `#64748B` | 100,116,139 | Avoidant type, dismissive type     |
 | **Warning**       | Trauma Red    | `#B54545` | 181,69,69   | Disorganized type, unresolved trauma |
 
-### Attachment Type Color Assignments
+### 依恋类型配色分配
 
 | Attachment Type              | Primary   | Secondary | Symbolism              |
 | ---------------------------- | --------- | --------- | ---------------------- |
@@ -65,50 +65,50 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 | Anxious-Ambivalent / Preoccupied | `#E07843` | `#FED7AA` | Anxiety, amplification |
 | Disorganized / Unresolved    | `#B54545` | `#FECACA` | Trauma, fragmentation  |
 
-### Text Colors
+### 文字颜色
 
-| Role              | Value     | Usage                              |
+| 角色              | 数值     | 用途                              |
 | ----------------- | --------- | ---------------------------------- |
-| **Main Title**    | `#1E293B` | Dark ink blue, cover/page titles   |
-| **Subtitle**      | `#2E5C8E` | Secure blue, emphasized subtitles  |
-| **Body Text**     | `#374151` | Dark gray, body content            |
+| **Main 标题**    | `#1E293B` | Dark ink blue, 封面/页面标题   |
+| **副标题**      | `#2E5C8E` | Secure blue, emphasized subtitles  |
+| **正文文字**     | `#374151` | Dark gray, body content            |
 | **Helper Text**   | `#6B7280` | Medium gray, annotations           |
 | **Secondary Text**| `#64748B` | Gray-blue, page numbers etc.       |
-| **White Text**    | `#FFFFFF` | Text on dark backgrounds           |
-| **Light Text**    | `#E5E7EB` | Secondary text on dark backgrounds |
-| **English Gray**  | `#94A3B8` | English subtitles                  |
+| **White Text**    | `#FFFFFF` | 深色背景上的文字           |
+| **Light Text**    | `#E5E7EB` | Secondary text on dark 背景 |
+| **English Gray**  | `#94A3B8` | 英文副标题                  |
 
 ### Gradients
 
-| Name             | Start     | Middle    | End       | Usage                  |
+| Name             | Start     | Middle    | End       | 用途                  |
 | ---------------- | --------- | --------- | --------- | ---------------------- |
 | Cover Gradient   | `#1E3A5F` | `#2E5C8E` | `#3D8B7A` | Cover/chapter page BG  |
-| Ending Gradient  | `#1E3A5F` | `#2E5C8E` | `#3D8B7A` | Ending page background |
+| Ending Gradient  | `#1E3A5F` | `#2E5C8E` | `#3D8B7A` | Ending 页面背景 |
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
 **Chinese Font Stack**: `"PingFang SC", "Microsoft YaHei", system-ui, -apple-system, sans-serif`
 
 **English Font Stack**: `system-ui, -apple-system, sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level | Usage            | Size | Weight   | Line Height |
+| Level | 用途            | Size | Weight   | 行高 |
 | ----- | ---------------- | ---- | -------- | ----------- |
-| H1    | Cover main title | 52px | Bold     | 1.2         |
-| H2    | Page main title  | 32px | Bold     | 1.3         |
-| H3    | Section subtitle | 24px | SemiBold | 1.3         |
-| H4    | Card title       | 20px | SemiBold | 1.4         |
-| Body  | Body content     | 18px | Regular  | 1.5         |
-| Small | Annotations      | 14px | Regular  | 1.4         |
+| H1    | 封面主标题 | 52px | 粗体     | 1.2         |
+| H2    | 页面主标题  | 32px | 粗体     | 1.3         |
+| H3    | Section subtitle | 24px | 半粗体 | 1.3         |
+| H4    | 卡片标题       | 20px | 半粗体 | 1.4         |
+| Body  | 正文内容     | 18px | 常规  | 1.5         |
+| Small | Annotations      | 14px | 常规  | 1.4         |
 
-### Spacing System
+### 间距系统
 
-| Usage              | Value                     |
+| 用途              | 数值                     |
 | ------------------ | ------------------------- |
 | Base unit          | 8px                       |
 | Element spacing    | 16px / 24px / 32px / 48px |
@@ -118,44 +118,44 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 
 ---
 
-## V. Page Structure
+## 五、页面结构
 
-### General Layout
+### 通用布局
 
-| Area              | Position/Height | Description                          |
+| Area              | Position/Height | 说明                          |
 | ----------------- | --------------- | ------------------------------------ |
 | **Left Accent**   | x=0, w=8px      | Dominant color vertical bar (content pages) |
-| **Top**           | y=60-120        | Page title + English subtitle        |
+| **Top**           | y=60-120        | 页面标题 + 英文副标题        |
 | **Divider**       | y=125-130       | Decorative divider line              |
-| **Content Area**  | y=130-640       | Main content area (510px height)     |
-| **Footer**        | y=650-700       | Page number, chapter info            |
+| **内容区**  | y=130-640       | 主要内容区 (510px height)     |
+| **页脚**        | y=650-700       | 页码, chapter info            |
 
-### Decorative Design
+### 装饰设计
 
 - **Left Accent Bar**: Dominant color (`#2E5C8E`), width 8px, spanning the full page height
 - **Divider Line**: Light gray (`#E5E7EB`), width 1-2px
-- **Circle Decorations**: Low-opacity circles for chapter page/cover backgrounds
+- **Circle Decorations**: Low-opacity circles for chapter page/cover 背景
 
 ---
 
-## VI. Page Types
+## 六、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
 - **Background**: Blue-green gradient (`#1E3A5F` → `#2E5C8E` → `#3D8B7A`)
-- **Decoration**: Optional background image (opacity=0.25)
-- **Title Area**: Centered, main title 52px + subtitle 28px
-- **English Title**: Light gray, 24px
+- **Decoration**: Optional 背景 image (opacity=0.25)
+- **标题 Area**: Centered, main title 52px + subtitle 28px
+- **English 标题**: Light gray, 24px
 - **Decorative Line**: Warm orange thin line, 200px wide
-- **Bottom**: Quote card (semi-transparent background + healing green left border)
+- **Bottom**: Quote card (semi-transparent 背景 + healing green left border)
 - **Tags**: Keyword tags (semi-transparent capsules)
 - **Page Number**: Bottom-right, 14px
 
-### 2. Table of Contents (02_toc.svg)
+### 2. 目录页 (02_toc.svg)
 
 - **Background**: Cloud white (`#F8FAFC`)
 - **Left Accent**: Dominant color 8px vertical bar
-- **Title**: "Contents Overview"
+- **标题**： "内容s Overview"
 - **Left Side**: Five-chapter list (colored number blocks + title + description)
   - Chapter 1: Dominant blue `#2E5C8E`
   - Chapter 2: Healing green `#3D8B7A`
@@ -165,48 +165,48 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 - **Right Side**: Learning objectives card
 - **Center**: Dashed divider
 
-### 3. Chapter Page (02_chapter.svg)
+### 3. 章节页 (02_chapter.svg)
 
 - **Background**: Blue-green gradient
 - **Decoration**: Multiple low-opacity concentric circles, diagonal line accents
 - **Large Number**: 120px, semi-transparent white, centered
 - **Chapter Label**: Capsule shape "CHAPTER X"
-- **Title**: 48px white bold
-- **Subtitle**: 24px light gray English
+- **标题**： 48px white bold
+- **副标题**: 24px light gray English
 - **Decorative Line**: Warm orange thin line, 200px
 - **Quote**: Semi-transparent quote card
 - **Keywords**: Bottom tag group
 - **Page Number**: Bottom-right
 
-### 4. Content Page (03_content.svg)
+### 4. 内容页 (03_content.svg)
 
 - **Background**: Cloud white
 - **Left Accent**: Dominant blue 8px vertical bar
-- **Title Area**: Main title 28px + English subtitle 16px
+- **标题 Area**: 主标题 28px + 英文副标题 16px
 - **Divider**: Decorative line below title
-- **Content Area**: Flexible layout (three-column / left-right split / single column)
+- **内容 Area**: Flexible layout (three-column / left-right split / single column)
 - **Card Styles**:
-  - White background + light gray border
+  - 白色背景 + light gray border
   - Border radius 12-16px
   - Colored top bar / colored left border
-- **Bottom Tip**: Light gray background tip bar (optional)
+- **Bottom Tip**: Light gray 背景 tip bar (optional)
 - **Page Number**: Bottom-right
 
-### 5. Ending Page (04_ending.svg)
+### 5. 结束页 (04_ending.svg)
 
 - **Background**: Blue-green gradient
 - **Decoration**: Network connection graph (dots + lines)
-- **Title**: Main title 56px + subtitle 28px
+- **标题**： 主标题 56px + subtitle 28px
 - **English**: Light gray English title
 - **Decorative Line**: Warm orange thin line, 300px
-- **Info Area**: Semi-transparent info card
+- **信息 Area**: Semi-transparent info card
 - **Bottom**: Copyright information
 
 ---
 
-## VII. Layout Patterns
+## VII. 版式模式
 
-### 7.1 Three-Column Side-by-Side (Comparison/Findings)
+### 7.1 三列并排布局（对比 / 发现）
 
 ```
 [Card 1: 360px] [Gap: 40px] [Card 2: 360px] [Gap: 40px] [Card 3: 360px]
@@ -299,15 +299,15 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 
 ---
 
-## IX. Icon Usage
+## 九、图标使用
 
-### Placeholder Format
+### 占位符格式
 
 ```xml
 <use data-icon="icon-name" x="X" y="Y" width="32" height="32" fill="COLOR"/>
 ```
 
-### Common Icon Mappings
+### 常用图标映射
 
 | Concept              | Icons                     |
 | -------------------- | ------------------------- |
@@ -322,7 +322,7 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 
 ---
 
-## X. SVG Technical Constraints
+## 十、SVG 技术约束
 
 ### viewBox Specification
 
@@ -341,7 +341,7 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 | **Animation/Interaction** | `<animate*>`, `<set>`, `on*`    |
 | **Markers/Arrows** | `marker`, `marker-end`                  |
 
-### PPT Compatibility Rules
+### PPT 兼容性规则
 
 | Prohibited                         | Correct Alternative                                    |
 | ---------------------------------- | ------------------------------------------------------ |
@@ -351,37 +351,37 @@ The design adopts "**Secure Base**" as the core visual metaphor:
 
 ---
 
-## XI. Placeholder Specification
+## 十一、占位符说明
 
-| Placeholder          | Usage                |
+| 占位符 | 用途 |
 | -------------------- | -------------------- |
-| `{{TITLE}}`          | Main title           |
-| `{{SUBTITLE}}`       | Subtitle             |
+| `{{TITLE}}`          | 主标题           |
+| `{{SUBTITLE}}`       | 副标题             |
 | `{{TITLE_EN}}`       | English title        |
-| `{{PAGE_TITLE}}`     | Content page title   |
-| `{{CONTENT_AREA}}`   | Flexible content area |
+| `{{PAGE_TITLE}}`     | 内容 page title   |
+| `{{CONTENT_AREA}}`   | 可灵活编排的内容区 |
 | `{{CHAPTER_NUM}}`    | Chapter number       |
-| `{{CHAPTER_TITLE}}`  | Chapter title        |
+| `{{CHAPTER_TITLE}}`  | 章节标题        |
 | `{{CHAPTER_EN}}`     | Chapter English title |
 | `{{QUOTE}}`          | Quote content        |
 | `{{QUOTE_AUTHOR}}`   | Quote author         |
-| `{{PAGE_NUM}}`       | Page number          |
-| `{{COVER_BG_IMAGE}}` | Cover background image path |
-| `{{TOC_ITEM_N_TITLE}}` | TOC item title     |
-| `{{TOC_ITEM_N_DESC}}`  | TOC item description |
+| `{{PAGE_NUM}}`       | 页码          |
+| `{{COVER_BG_IMAGE}}` | 封面背景 image path |
+| `{{TOC_ITEM_N_TITLE}}` | 目录项标题     |
+| `{{TOC_ITEM_N_DESC}}`  | 目录项说明 |
 | `{{THANK_YOU}}`      | Thank-you message    |
 | `{{CONTACT_INFO}}`   | Primary contact info |
 
 ---
 
-## XII. Usage Notes
+## 十二、使用说明
 
 ### Template Usage Steps
 
 1. **Copy Template**: Copy template files to the project `templates/` directory
 2. **Replace Placeholders**: Replace `{{}}` placeholders with actual content
 3. **Adjust Colors**: Fine-tune the color scheme based on the theme
-4. **Generate Content**: Use the Executor role to generate specific pages
+4. **Generate 内容**: Use the Executor role to generate specific pages
 5. **Post-process**: Run `finalize_svg.py` to complete image embedding
 
 ### Applicable Topics

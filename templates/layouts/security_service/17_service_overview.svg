@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="service-overview" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="650" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">{{PAGE_TITLE}}</text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="layered-system-map,central-engine,domain-stack,outcome-rail,driver-base" data-advanced-pattern="layered_system_map" data-content-max-bottom="638" data-content-safe-box="60,125,1160,510">
+    <rect x="60" y="125" width="1160" height="42" fill="#0563C1" fill-opacity="0.08" rx="8" data-slot="overview-lead-band" />
+    <text x="84" y="151" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" fill="#0563C1" data-slot="overview-lead">{{OVERVIEW_LEAD}}</text>
+
+    <g id="platform-zone" data-slot="platform-core" data-structure-role="central-engine">
+      <rect x="60" y="190" width="288" height="330" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <rect x="60" y="190" width="288" height="12" fill="#0563C1" rx="14" />
+      <text x="84" y="224" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" font-weight="bold" fill="#5B9BD5">中央引擎 / 平台底座</text>
+      <text x="84" y="258" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="21" font-weight="bold" fill="#0563C1" data-slot="platform-name">{{PLATFORM_NAME}}</text>
+      <text x="84" y="304" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A" data-slot="platform-description">{{PLATFORM_DESC}}</text>
+      <rect x="84" y="392" width="112" height="72" fill="#0563C1" fill-opacity="0.08" rx="12" />
+      <text x="140" y="421" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#0563C1">统一编排</text>
+      <text x="140" y="446" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">能力调度</text>
+      <rect x="208" y="392" width="112" height="72" fill="#ED7D31" fill-opacity="0.10" rx="12" />
+      <text x="264" y="421" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#ED7D31">持续沉淀</text>
+      <text x="264" y="446" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">经验复用</text>
+    </g>
+
+    <g id="domain-zone" data-slot="domain-stack" data-structure-role="primary-domains">
+      <rect x="378" y="190" width="482" height="330" fill="#FFFFFF" fill-opacity="0.92" rx="14" />
+      <text x="404" y="224" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">一级服务域</text>
+      <line x1="404" y1="234" x2="832" y2="234" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="404" y="248" width="428" height="74" fill="#0563C1" fill-opacity="0.08" rx="12" data-slot="domain-a-card" />
+      <rect x="404" y="248" width="6" height="74" fill="#0563C1" rx="6" />
+      <text x="428" y="277" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#0563C1" data-slot="domain-a-title">{{DOMAIN_ATTACK_TITLE}}</text>
+      <text x="428" y="304" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A" data-slot="domain-a-description">{{DOMAIN_ATTACK_DESC}}</text>
+
+      <rect x="404" y="336" width="428" height="74" fill="#4472C4" fill-opacity="0.08" rx="12" data-slot="domain-b-card" />
+      <rect x="404" y="336" width="6" height="74" fill="#4472C4" rx="6" />
+      <text x="428" y="365" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#4472C4" data-slot="domain-b-title">{{DOMAIN_DEFENSE_TITLE}}</text>
+      <text x="428" y="392" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A" data-slot="domain-b-description">{{DOMAIN_DEFENSE_DESC}}</text>
+
+      <rect x="404" y="424" width="428" height="74" fill="#ED7D31" fill-opacity="0.10" rx="12" data-slot="domain-c-card" />
+      <rect x="404" y="424" width="6" height="74" fill="#ED7D31" rx="6" />
+      <text x="428" y="453" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#ED7D31" data-slot="domain-c-title">{{DOMAIN_TRAINING_TITLE}}</text>
+      <text x="428" y="480" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A" data-slot="domain-c-description">{{DOMAIN_TRAINING_DESC}}</text>
+    </g>
+
+    <g id="connector-zone" data-slot="relationship-connectors" data-structure-role="flow-connector">
+      <line x1="348" y1="355" x2="378" y2="355" stroke="#9FB7D9" stroke-width="3" />
+      <circle cx="363" cy="355" r="6" fill="#0563C1" />
+      <line x1="860" y1="355" x2="890" y2="355" stroke="#F0B37E" stroke-width="3" />
+      <circle cx="875" cy="355" r="6" fill="#ED7D31" />
+    </g>
+
+    <g id="value-zone" data-slot="value-output" data-structure-role="result-rail">
+      <rect x="890" y="190" width="330" height="330" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="916" y="224" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#ED7D31">结果输出</text>
+      <line x1="916" y1="234" x2="1190" y2="234" stroke="#F6D3B6" stroke-width="1.5" />
+
+      <rect x="916" y="254" width="272" height="62" fill="#ED7D31" fill-opacity="0.10" rx="10" data-slot="value-card-1" />
+      <text x="938" y="291" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#ED7D31" data-slot="value-1">{{VALUE_1}}</text>
+
+      <rect x="916" y="332" width="272" height="62" fill="#0563C1" fill-opacity="0.08" rx="10" data-slot="value-card-2" />
+      <text x="938" y="369" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#0563C1" data-slot="value-2">{{VALUE_2}}</text>
+
+      <rect x="916" y="410" width="272" height="62" fill="#5B9BD5" fill-opacity="0.10" rx="10" data-slot="value-card-3" />
+      <text x="938" y="447" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A" data-slot="value-3">{{VALUE_3}}</text>
+    </g>
+
+    <g id="driver-zone" data-slot="driver-base" data-structure-role="bottom-driver-strip">
+      <rect x="60" y="545" width="1160" height="90" fill="#FFFFFF" fill-opacity="0.92" rx="14" />
+      <text x="84" y="578" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#0563C1" data-slot="driver-title">{{DRIVER_TITLE}}</text>
+
+      <rect x="84" y="590" width="520" height="28" fill="#0563C1" fill-opacity="0.07" rx="14" data-slot="driver-card-1" />
+      <circle cx="100" cy="604" r="5" fill="#0563C1" />
+      <text x="116" y="609" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A" data-slot="driver-point-1">{{DRIVER_POINT_1}}</text>
+
+      <rect x="618" y="590" width="520" height="28" fill="#ED7D31" fill-opacity="0.08" rx="14" data-slot="driver-card-2" />
+      <circle cx="634" cy="604" r="5" fill="#ED7D31" />
+      <text x="650" y="609" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A" data-slot="driver-point-2">{{DRIVER_POINT_2}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,650,1280,70">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

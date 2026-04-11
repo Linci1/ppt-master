@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="table" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="648" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">{{PAGE_TITLE}}</text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="priority-strip,governance-control-matrix,closure-belt,decision-rail" data-advanced-pattern="governance_control_matrix" data-content-max-bottom="620" data-content-safe-box="60,125,1160,495">
+    <rect x="60" y="129" width="204" height="34" fill="#0563C1" fill-opacity="0.10" rx="17" data-slot="table-guide-band" />
+    <text x="162" y="151" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">治理优先级矩阵</text>
+
+    <g id="priority-zone" data-slot="priority-strip" data-structure-role="priority-judgment-strip">
+      <rect x="60" y="182" width="830" height="84" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="86" y="207" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#94A3B8">优先级判断</text>
+
+      <rect x="86" y="216" width="238" height="34" fill="#ED7D31" fill-opacity="0.14" rx="12" data-slot="priority-card-1" />
+      <rect x="356" y="216" width="238" height="34" fill="#4472C4" fill-opacity="0.08" rx="12" data-slot="priority-card-2" />
+      <rect x="626" y="216" width="238" height="34" fill="#0563C1" fill-opacity="0.08" rx="12" data-slot="priority-card-3" />
+      <text x="205" y="238" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#C55A11">{{PRIORITY_1}}</text>
+      <text x="475" y="238" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#4472C4">{{PRIORITY_2}}</text>
+      <text x="745" y="238" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#0563C1">{{PRIORITY_3}}</text>
+    </g>
+
+    <g id="matrix-zone" data-slot="control-matrix" data-structure-role="governance-matrix">
+      <rect x="60" y="286" width="830" height="250" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="86" y="319" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">域 - 状态 - 动作 - 验证矩阵</text>
+      <line x1="86" y1="329" x2="860" y2="329" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="86" y="344" width="72" height="30" fill="#ED7D31" fill-opacity="0.14" rx="12" />
+      <rect x="170" y="344" width="138" height="30" fill="#0563C1" fill-opacity="0.10" rx="12" />
+      <rect x="320" y="344" width="132" height="30" fill="#4472C4" fill-opacity="0.10" rx="12" />
+      <rect x="464" y="344" width="176" height="30" fill="#5B9BD5" fill-opacity="0.10" rx="12" />
+      <rect x="652" y="344" width="208" height="30" fill="#ED7D31" fill-opacity="0.12" rx="12" />
+      <text x="122" y="364" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#C55A11">优先级</text>
+      <text x="239" y="364" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#0563C1">治理域</text>
+      <text x="386" y="364" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#4472C4">当前状态</text>
+      <text x="552" y="364" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#5B9BD5">关键动作</text>
+      <text x="756" y="364" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" font-weight="bold" fill="#C55A11">验证 / 闭环</text>
+
+      <rect x="86" y="388" width="774" height="28" fill="#F9FAFB" rx="8" />
+      <rect x="86" y="422" width="774" height="28" fill="#FFFFFF" rx="8" />
+      <rect x="86" y="456" width="774" height="28" fill="#F9FAFB" rx="8" />
+      <rect x="86" y="490" width="774" height="28" fill="#FFFFFF" rx="8" />
+
+      <text x="98" y="406" font-family="Arial" font-size="11" font-weight="bold" fill="#ED7D31">{{TABLE_ROW_1_COL_1}}</text>
+      <text x="182" y="406" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_1_COL_2}}</text>
+      <text x="332" y="406" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#0563C1">{{TABLE_ROW_1_COL_3}}</text>
+      <text x="476" y="406" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_1_COL_4}}</text>
+      <text x="664" y="406" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#7C8AA0">{{TABLE_ROW_1_COL_5}}</text>
+
+      <text x="98" y="440" font-family="Arial" font-size="11" font-weight="bold" fill="#ED7D31">{{TABLE_ROW_2_COL_1}}</text>
+      <text x="182" y="440" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_2_COL_2}}</text>
+      <text x="332" y="440" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#0563C1">{{TABLE_ROW_2_COL_3}}</text>
+      <text x="476" y="440" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_2_COL_4}}</text>
+      <text x="664" y="440" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#7C8AA0">{{TABLE_ROW_2_COL_5}}</text>
+
+      <text x="98" y="474" font-family="Arial" font-size="11" font-weight="bold" fill="#4472C4">{{TABLE_ROW_3_COL_1}}</text>
+      <text x="182" y="474" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_3_COL_2}}</text>
+      <text x="332" y="474" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#0563C1">{{TABLE_ROW_3_COL_3}}</text>
+      <text x="476" y="474" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_3_COL_4}}</text>
+      <text x="664" y="474" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#7C8AA0">{{TABLE_ROW_3_COL_5}}</text>
+
+      <text x="98" y="508" font-family="Arial" font-size="11" font-weight="bold" fill="#0563C1">{{TABLE_ROW_4_COL_1}}</text>
+      <text x="182" y="508" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_4_COL_2}}</text>
+      <text x="332" y="508" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#0563C1">{{TABLE_ROW_4_COL_3}}</text>
+      <text x="476" y="508" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#44546A">{{TABLE_ROW_4_COL_4}}</text>
+      <text x="664" y="508" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="11" fill="#7C8AA0">{{TABLE_ROW_4_COL_5}}</text>
+    </g>
+
+    <g id="closure-zone" data-slot="governance-closure-belt" data-structure-role="closure-belt">
+      <rect x="60" y="552" width="830" height="58" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <rect x="84" y="566" width="248" height="30" fill="#0563C1" fill-opacity="0.08" rx="15" />
+      <rect x="351" y="566" width="248" height="30" fill="#4472C4" fill-opacity="0.08" rx="15" />
+      <rect x="618" y="566" width="248" height="30" fill="#ED7D31" fill-opacity="0.12" rx="15" />
+      <text x="208" y="585" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#0563C1">{{CLOSURE_STEP_1}}</text>
+      <text x="475" y="585" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#4472C4">{{CLOSURE_STEP_2}}</text>
+      <text x="742" y="585" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#C55A11">{{CLOSURE_STEP_3}}</text>
+    </g>
+
+    <g id="decision-rail-zone" data-slot="governance-decision-rail" data-structure-role="decision-rail">
+      <rect x="910" y="182" width="310" height="428" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="934" y="216" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#0563C1">管理决策栏</text>
+      <line x1="934" y1="226" x2="1190" y2="226" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="934" y="244" width="262" height="64" fill="#ED7D31" fill-opacity="0.12" rx="12" data-slot="decision-card-1" />
+      <text x="956" y="264" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#C55A11">管理判断</text>
+      <text x="956" y="289" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{TABLE_INSIGHT_1}}</text>
+
+      <rect x="934" y="322" width="262" height="64" fill="#0563C1" fill-opacity="0.07" rx="12" data-slot="decision-card-2" />
+      <text x="956" y="342" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#0563C1">关键约束</text>
+      <text x="956" y="367" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{TABLE_INSIGHT_2}}</text>
+
+      <rect x="934" y="400" width="262" height="64" fill="#4472C4" fill-opacity="0.07" rx="12" data-slot="decision-card-3" />
+      <text x="956" y="420" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" font-weight="bold" fill="#4472C4">完成标准</text>
+      <text x="956" y="445" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{TABLE_INSIGHT_3}}</text>
+
+      <rect x="934" y="478" width="262" height="46" fill="#F7FAFE" rx="12" data-slot="decision-card-4" />
+      <text x="956" y="506" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A">{{TABLE_HIGHLIGHT}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,648,1280,72">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

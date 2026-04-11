@@ -31,6 +31,9 @@ env/
 # 不要提交大型测试输出文件
 examples/**/*.pptx
 examples/**/_svg.pptx
+.codex/
+projects/*
+!projects/README.md
 
 # Logs
 *.log

@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="hero-image" data-fixed-skeleton="background,brand,footer" data-footer-protected-top="620" data-logo-safe-zone="1088,632,164,54" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="{{FULL_IMAGE}}" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="720" fill="#000000" fill-opacity="0.4" />
+    <rect x="0" y="0" width="1280" height="6" fill="#ED7D31" />
+    <rect x="0" y="6" width="8" height="714" fill="#FFFFFF" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-content-max-bottom="560" data-content-safe-box="220,220,840,340">
+    <text x="640" y="280" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="52" font-weight="bold" fill="#FFFFFF">
+    {{FULL_TITLE}}
+  </text>
+    <rect x="540" y="310" width="200" height="4" fill="#ED7D31" />
+    <text x="640" y="370" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="24" fill="#FFFFFF" fill-opacity="0.9">
+    {{FULL_SUBTITLE}}
+  </text>
+    <text x="300" y="450" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" fill="#FFFFFF" fill-opacity="0.85">{{FULL_POINT_1}}</text>
+    <text x="300" y="490" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" fill="#FFFFFF" fill-opacity="0.85">{{FULL_POINT_2}}</text>
+    <text x="300" y="530" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" fill="#FFFFFF" fill-opacity="0.85">{{FULL_POINT_3}}</text>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1088,632,164,54" data-brand-asset="images/logo_bottom_right.png" data-brand-variant="brand-white-bottom">
+    <image href="images/logo_bottom_right.png" x="1100" y="640" width="140" height="40" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_bottom_right.png" />
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,700,1280,20">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

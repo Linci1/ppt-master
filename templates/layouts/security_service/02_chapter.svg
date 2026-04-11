@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="chapter" data-fixed-skeleton="background,footer,page-number,brand" data-footer-protected-top="620" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/background.jpeg" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF" fill-opacity="0.15" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-content-max-bottom="480" data-content-safe-box="120,180,1040,320">
+    <text x="140" y="420" font-family="Arial" font-size="220" font-weight="bold" fill="#FFFFFF" fill-opacity="0.3">
+    {{CHAPTER_NUM}}
+  </text>
+    <text x="640" y="360" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="48" font-weight="bold" fill="#FFFFFF">
+    {{CHAPTER_TITLE}}
+  </text>
+    <rect x="540" y="385" width="200" height="4" fill="#ED7D31" />
+    <text x="640" y="440" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="18" fill="#FFFFFF" fill-opacity="0.9">
+    {{CHAPTER_DESC}}
+  </text>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_top_right.png" data-brand-variant="brand-white-top">
+    <image href="images/logo_top_right.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_top_right.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#FFFFFF" fill-opacity="0.7">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,700,1280,20">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

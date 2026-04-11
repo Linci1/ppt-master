@@ -1,208 +1,1101 @@
 {
   "meta": {
-    "total": 21,
+    "total": 22,
     "defaultViewBox": "0 0 1280 720",
-    "formats": ["ppt169"],
-    "standardFiles": ["design_spec.md", "01_cover.svg", "02_toc.svg", "02_chapter.svg", "03_content.svg", "04_ending.svg"],
-    "standardPageTypes": ["cover", "toc", "chapter", "content", "ending"],
-    "updated": "2026-03-22"
+    "formats": [
+      "ppt169"
+    ],
+    "standardFiles": [
+      "design_spec.md",
+      "01_cover.svg",
+      "02_toc.svg",
+      "02_chapter.svg",
+      "03_content.svg",
+      "04_ending.svg"
+    ],
+    "standardPageTypes": [
+      "cover",
+      "toc",
+      "chapter",
+      "content",
+      "ending"
+    ],
+    "updated": "2026-04-02"
   },
   "categories": {
     "brand": {
       "label": "Brand Style Templates",
-      "layouts": ["google_style", "mckinsey", "anthropic", "中汽研_常规", "中汽研_商务", "中汽研_现代", "中国电建_常规", "中国电建_现代", "招商银行", "chaitin"]
+      "layouts": [
+        "google_style",
+        "mckinsey",
+        "anthropic",
+        "中汽研_常规",
+        "中汽研_商务",
+        "中汽研_现代",
+        "中国电建_常规",
+        "中国电建_现代",
+        "招商银行",
+        "chaitin"
+      ]
     },
     "general": {
       "label": "General Style Templates",
-      "layouts": ["exhibit", "科技蓝商务", "smart_red"]
+      "layouts": [
+        "exhibit",
+        "科技蓝商务",
+        "smart_red"
+      ]
     },
     "scenario": {
       "label": "Scenario-Specific Templates",
-      "layouts": ["academic_defense", "psychology_attachment", "medical_university", "重庆大学"]
+      "layouts": [
+        "academic_defense",
+        "psychology_attachment",
+        "medical_university",
+        "重庆大学",
+        "security_service"
+      ]
     },
     "government": {
       "label": "Government/Enterprise Templates",
-      "layouts": ["government_red", "government_blue", "ai_ops"]
+      "layouts": [
+        "government_red",
+        "government_blue",
+        "ai_ops"
+      ]
     },
     "special": {
       "label": "Special Style Templates",
-      "layouts": ["pixel_retro"]
+      "layouts": [
+        "pixel_retro"
+      ]
     }
   },
   "quickLookup": {
-    "strategy": ["exhibit", "mckinsey"],
-    "board": ["exhibit", "mckinsey", "招商银行"],
-    "general_business": ["科技蓝商务", "smart_red", "exhibit"],
-    "technology": ["anthropic", "google_style", "smart_red", "ai_ops"],
-    "government": ["government_red", "government_blue", "ai_ops"],
-    "academic": ["academic_defense", "重庆大学"],
-    "medical": ["medical_university"],
-    "psychology": ["psychology_attachment"],
-    "finance": ["招商银行", "exhibit", "mckinsey"],
-    "certification": ["中汽研_常规", "中汽研_商务", "中汽研_现代"],
-    "energy": ["中国电建_常规", "中国电建_现代"],
-    "creative": ["pixel_retro", "smart_red"],
-    "长亭": ["chaitin"],
-    "chaitin": ["chaitin"],
-    "security": ["chaitin"],
-    "培训": ["chaitin"]
+    "strategy": [
+      "exhibit",
+      "mckinsey"
+    ],
+    "board": [
+      "exhibit",
+      "mckinsey",
+      "招商银行"
+    ],
+    "general_business": [
+      "科技蓝商务",
+      "smart_red",
+      "exhibit"
+    ],
+    "technology": [
+      "anthropic",
+      "google_style",
+      "smart_red",
+      "ai_ops"
+    ],
+    "government": [
+      "government_red",
+      "government_blue",
+      "ai_ops"
+    ],
+    "academic": [
+      "academic_defense",
+      "重庆大学"
+    ],
+    "medical": [
+      "medical_university"
+    ],
+    "psychology": [
+      "psychology_attachment"
+    ],
+    "finance": [
+      "招商银行",
+      "exhibit",
+      "mckinsey"
+    ],
+    "certification": [
+      "中汽研_常规",
+      "中汽研_商务",
+      "中汽研_现代"
+    ],
+    "energy": [
+      "中国电建_常规",
+      "中国电建_现代"
+    ],
+    "creative": [
+      "pixel_retro",
+      "smart_red"
+    ],
+    "长亭": [
+      "chaitin"
+    ],
+    "chaitin": [
+      "chaitin"
+    ],
+    "security": [
+      "chaitin",
+      "security_service"
+    ],
+    "培训": [
+      "chaitin"
+    ],
+    "攻防": [
+      "security_service"
+    ],
+    "护网": [
+      "security_service"
+    ],
+    "安全服务": [
+      "security_service"
+    ]
   },
   "layouts": {
     "academic_defense": {
-      "label": "Academic Defense Template",
-      "summary": "A standard template for academic defenses, research presentations, and project proposals",
-      "tone": "Professional, rigorous, research-oriented, clear hierarchy",
-      "themeMode": "Light theme (white background + dark blue title bar)",
-      "keywords": ["Academic", "Defense", "Research", "Standard"]
+      "label": "学术答辩模板",
+      "summary": "适用于学术答辩、科研汇报与项目申报的标准模板",
+      "tone": "专业严谨、研究导向、层次清晰",
+      "themeMode": "浅色主题（白底 + 深蓝标题栏）",
+      "keywords": [
+        "Academic",
+        "Defense",
+        "Research",
+        "Standard"
+      ]
     },
     "ai_ops": {
-      "label": "Enterprise Digital Intelligence Template",
-      "summary": "For high-density scenarios such as telecom AI operations architecture, IT system overview, and digital transformation plans",
-      "tone": "Information-dense, structured, modular layout, telecom/government-enterprise style",
-      "themeMode": "Light theme (white background + red/blue accents + warm gray panels)",
-      "assets": ["reference_style.svg"],
-      "keywords": ["Telecom", "AI operations", "Digital intelligence", "High density", "Architecture view"]
+      "label": "企业数字智能模板",
+      "summary": "适用于运营商 AI 运维架构、IT 系统总览、数字化转型方案等高信息密度场景",
+      "tone": "信息密度高、结构清晰、模块化布局、运营商/政企风格",
+      "themeMode": "浅色主题（白底 + 红蓝强调 + 暖灰面板）",
+      "assets": [
+        "reference_style.svg"
+      ],
+      "keywords": [
+        "Telecom",
+        "AI operations",
+        "Digital intelligence",
+        "High density",
+        "Architecture view"
+      ]
     },
     "anthropic": {
-      "label": "Anthropic Style Template",
-      "summary": "A tech-oriented template for AI/LLM knowledge sharing and product launches",
-      "tone": "Tech-forward, professional, modern, conclusion-first",
-      "themeMode": "Hybrid theme (dark cover/chapter + light content pages)",
-      "keywords": ["AI", "LLM", "Developer", "Technology"]
+      "label": "Anthropic 风格模板",
+      "summary": "适用于 AI/LLM 技术分享、开发者大会、技术培训与产品发布",
+      "tone": "科技前沿、专业现代、结论先行",
+      "themeMode": "混合主题（深色封面/章节页 + 浅色内容页）",
+      "keywords": [
+        "AI",
+        "LLM",
+        "Developer",
+        "Technology"
+      ]
     },
     "exhibit": {
-      "label": "Exhibit Style Template",
-      "summary": "Conclusion-first layout with Exhibit takeaway bars for data-driven strategic reports and executive presentations",
-      "tone": "Premium, refined, authoritative, data-driven, conclusion-first",
-      "themeMode": "Dark theme (dark background + gradient accent + gold highlights)",
-      "keywords": ["Exhibit", "Board", "Executive", "Strategy", "Conclusion-first"]
+      "label": "Exhibit 风格模板",
+      "summary": "适用于数据驱动型战略汇报与高管演示，采用结论先行与 takeaway 条结构",
+      "tone": "高级精致、权威克制、数据驱动、结论先行",
+      "themeMode": "深色主题（深底 + 渐变强调 + 金色高亮）",
+      "keywords": [
+        "Exhibit",
+        "Board",
+        "Executive",
+        "Strategy",
+        "Conclusion-first"
+      ]
     },
     "google_style": {
-      "label": "Google Style Template",
-      "summary": "A Google-branded template for annual reports and technical sharing",
-      "tone": "Professional, modern, clean and restrained, data-driven, ample whitespace",
-      "themeMode": "Light theme (white/light gray background + Google brand color accents)",
-      "keywords": ["Google", "Brand style", "Technical sharing", "Annual report"]
+      "label": "Google 风格模板",
+      "summary": "适用于年报、技术分享、项目展示与数据演示",
+      "tone": "专业现代、干净克制、数据驱动、留白充足",
+      "themeMode": "浅色主题（白/浅灰底 + Google 品牌色强调）",
+      "keywords": [
+        "Google",
+        "Brand style",
+        "Technical sharing",
+        "Annual report"
+      ]
     },
     "government_blue": {
-      "label": "Government Blue Template",
-      "summary": "A blue government-themed template for smart governance and digital transformation reports",
-      "tone": "Grand, tech-forward, modernized, professional government style",
-      "themeMode": "Light theme (white background + blue gradient decorations)",
-      "keywords": ["Government affairs", "Government blue", "Smart city", "Digitalization"]
+      "label": "政务蓝模板",
+      "summary": "适用于智慧治理、开放政务与数字化转型类汇报",
+      "tone": "大气科技、现代政务、专业理性",
+      "themeMode": "浅色主题（白底 + 蓝色渐变装饰）",
+      "keywords": [
+        "Government affairs",
+        "Government blue",
+        "Smart city",
+        "Digitalization"
+      ]
     },
     "government_red": {
-      "label": "Government Red Template",
-      "summary": "A red government-themed template for government reports and party-building scenarios",
-      "tone": "Authoritative, solemn, professional, modernized government style",
-      "themeMode": "Light theme (white background + government red/blue accents)",
-      "keywords": ["Government affairs", "Party building", "Government red", "Authoritative"]
+      "label": "政务红模板",
+      "summary": "适用于政务工作汇报与党建类场景",
+      "tone": "权威庄重、专业规范、现代政务风格",
+      "themeMode": "浅色主题（白底 + 政务红蓝强调）",
+      "keywords": [
+        "Government affairs",
+        "Party building",
+        "Government red",
+        "Authoritative"
+      ]
     },
     "mckinsey": {
-      "label": "McKinsey Style Template",
-      "summary": "A McKinsey-style template for strategic consulting and investment analysis",
-      "tone": "Data-driven, structured thinking, professional whitespace, minimalist premium",
-      "themeMode": "Light theme (white background + McKinsey Blue accent)",
-      "keywords": ["McKinsey", "Consulting", "Structured", "Executive presentation"]
+      "label": "麦肯锡风格模板",
+      "summary": "适用于战略咨询、投资分析与高层决策汇报",
+      "tone": "数据驱动、结构化思考、留白专业、极简高级",
+      "themeMode": "浅色主题（白底 + 麦肯锡蓝强调）",
+      "keywords": [
+        "McKinsey",
+        "Consulting",
+        "Structured",
+        "Executive presentation"
+      ]
     },
     "medical_university": {
-      "label": "Hospital/Medical University Template",
-      "summary": "A professional template for medical reports, case discussions, and research presentations",
-      "tone": "Professional, rigorous, life-affirming, tech-forward, trustworthy",
-      "themeMode": "Light theme (white background + medical blue title bar + life green accents)",
-      "keywords": ["Medical", "Hospital", "Case study", "Research"]
+      "label": "医院/医学院模板",
+      "summary": "适用于医学汇报、病例讨论与科研展示",
+      "tone": "专业严谨、生命关怀、科技感强、可信赖",
+      "themeMode": "浅色主题（白底 + 医学蓝标题栏 + 生命绿强调）",
+      "keywords": [
+        "Medical",
+        "Hospital",
+        "Case study",
+        "Research"
+      ]
     },
     "pixel_retro": {
-      "label": "Pixel Retro Template",
-      "summary": "A pixel-art template for tech sharing and gaming-themed content",
-      "tone": "Retro gaming, neon cyber, geek tech, 8-bit style",
-      "themeMode": "Dark theme (deep space black background + neon accents)",
-      "keywords": ["Pixel art", "Retro gaming", "Cyberpunk", "Technology"]
+      "label": "像素复古模板",
+      "summary": "适用于技术分享、复古游戏主题与极客风内容",
+      "tone": "复古游戏、霓虹赛博、极客科技、8 位风格",
+      "themeMode": "深色主题（深空黑底 + 霓虹强调）",
+      "keywords": [
+        "Pixel art",
+        "Retro gaming",
+        "Cyberpunk",
+        "Technology"
+      ]
     },
     "psychology_attachment": {
-      "label": "Psychology Healing Template",
-      "summary": "A warm and professional template for psychotherapy training and counseling lectures",
-      "tone": "Professional, warm, healing, trustworthy",
-      "themeMode": "Light theme (cloud white background + blue-green gradient accent + colorful semantic colors)",
-      "keywords": ["Psychology", "Healing", "Counseling", "Warm"]
+      "label": "心理疗愈模板",
+      "summary": "适用于心理治疗培训、咨询课程与关系主题讲解",
+      "tone": "专业温和、疗愈可信、关系感强",
+      "themeMode": "浅色主题（云白底 + 蓝绿渐变 + 多语义色）",
+      "keywords": [
+        "Psychology",
+        "Healing",
+        "Counseling",
+        "Warm"
+      ]
     },
     "smart_red": {
-      "label": "Smart Red-Orange Business Template",
-      "summary": "A vibrant business template for tech company introductions and education solutions",
-      "tone": "Modern, vibrant, professional, geometric",
-      "themeMode": "Hybrid theme (dark/colorful cover + light content pages)",
-      "keywords": ["Red-orange business", "Tech enterprise", "Education", "Vibrant"]
+      "label": "智慧红橙商务模板",
+      "summary": "适用于科技公司介绍、教育解决方案与活力型商务展示",
+      "tone": "现代鲜明、专业有活力、几何感强",
+      "themeMode": "混合主题（深色/彩色封面 + 浅色内容页）",
+      "keywords": [
+        "Red-orange business",
+        "Tech enterprise",
+        "Education",
+        "Vibrant"
+      ]
     },
     "中国电建_常规": {
-      "label": "PowerChina Standard Template",
-      "summary": "A solid brand template for engineering construction and state-owned enterprise reports",
-      "tone": "Professional, steady, international, state-owned enterprise style",
-      "themeMode": "Light theme (white background + PowerChina blue accent)",
-      "assets": ["中国水务logo.png", "华东院logo.png", "水电三局logo.png", "电建logo.png"],
-      "keywords": ["PowerChina", "State-owned enterprise", "Engineering", "Energy"]
+      "label": "中国电建常规模板",
+      "summary": "适用于工程建设、电力能源与国央企汇报",
+      "tone": "专业稳重、国际化、国企工程风格",
+      "themeMode": "浅色主题（白底 + 电建蓝强调）",
+      "assets": [
+        "中国水务logo.png",
+        "华东院logo.png",
+        "水电三局logo.png",
+        "电建logo.png"
+      ],
+      "keywords": [
+        "PowerChina",
+        "State-owned enterprise",
+        "Engineering",
+        "Energy"
+      ]
     },
     "中国电建_现代": {
-      "label": "PowerChina Modern Template",
-      "summary": "A modern engineering template for major projects and international business presentations",
-      "tone": "Grand narrative, modern precision, digital technology, international vision",
-      "themeMode": "Deep blue tech gradient + precision grid texture",
-      "assets": ["中国水务logo.png", "华东院logo.png", "水电三局logo.png", "电建logo.png"],
-      "keywords": ["PowerChina", "International engineering", "Modern engineering", "Technology"]
+      "label": "中国电建现代模板",
+      "summary": "适用于重大工程、国际业务展示与科技创新发布",
+      "tone": "宏大叙事、现代精工、数字科技、国际视野",
+      "themeMode": "深蓝科技渐变主题（精密网格纹理）",
+      "assets": [
+        "中国水务logo.png",
+        "华东院logo.png",
+        "水电三局logo.png",
+        "电建logo.png"
+      ],
+      "keywords": [
+        "PowerChina",
+        "International engineering",
+        "Modern engineering",
+        "Technology"
+      ]
     },
     "中汽研_商务": {
-      "label": "CATARC Business Template",
-      "summary": "A CATARC brand template for certification showcase and high-end business presentations",
-      "tone": "Modern tech, authoritative professional, composed and grand",
-      "themeMode": "Deep blue tech gradient + clean white content pages",
-      "assets": ["右上角 logo.png", "大型 logo.png"],
-      "keywords": ["CATARC", "Certification", "Business", "Technology"]
+      "label": "中汽研商务模板",
+      "summary": "适用于认证展示、高端商务汇报与技术交流",
+      "tone": "现代科技、权威专业、沉稳大气",
+      "themeMode": "深蓝科技渐变主题（白色内容页）",
+      "assets": [
+        "右上角 logo.png",
+        "大型 logo.png"
+      ],
+      "keywords": [
+        "CATARC",
+        "Certification",
+        "Business",
+        "Technology"
+      ]
     },
     "中汽研_常规": {
-      "label": "CATARC Standard Template",
-      "summary": "A standard CATARC template for certification and testing scenarios",
-      "tone": "Professional, authoritative, trustworthy, consulting style",
-      "themeMode": "Light theme (white background + dark blue accent)",
-      "assets": ["右上角 logo.png", "大型 logo.png"],
-      "keywords": ["CATARC", "Certification", "Testing", "Authoritative"]
+      "label": "中汽研常规模板",
+      "summary": "适用于认证、检测与评测类展示",
+      "tone": "专业权威、可信稳重、咨询风格",
+      "themeMode": "浅色主题（白底 + 深蓝强调）",
+      "assets": [
+        "右上角 logo.png",
+        "大型 logo.png"
+      ],
+      "keywords": [
+        "CATARC",
+        "Certification",
+        "Testing",
+        "Authoritative"
+      ]
     },
     "中汽研_现代": {
-      "label": "CATARC Modern Template",
-      "summary": "A futuristic tech template for cutting-edge technology showcase and premium launches",
-      "tone": "Futuristic, tech-forward, deep, refined",
-      "themeMode": "Immersive dark cover/transition pages + clean light gray content pages",
-      "assets": ["右上角 logo.png", "大型 logo.png"],
-      "keywords": ["CATARC", "Future tech", "Cutting-edge technology", "Launch event"]
+      "label": "中汽研现代模板",
+      "summary": "适用于前沿科技展示、高端发布与未来感内容表达",
+      "tone": "未来科技、前卫深邃、精致高级",
+      "themeMode": "沉浸式深色封面/过渡页 + 浅灰内容页",
+      "assets": [
+        "右上角 logo.png",
+        "大型 logo.png"
+      ],
+      "keywords": [
+        "CATARC",
+        "Future tech",
+        "Cutting-edge technology",
+        "Launch event"
+      ]
     },
     "招商银行": {
-      "label": "China Merchants Bank Template",
-      "summary": "A brand template for premium financial institution reports and annual presentations",
-      "tone": "Minimalist luxury, refined, multi-layered, modern finance",
-      "themeMode": "Light theme (textured background + CMB red/gold fine decorations)",
-      "assets": ["招商银行公司金融.png"],
-      "keywords": ["China Merchants Bank", "Finance", "Premium report", "Annual report"]
+      "label": "招商银行模板",
+      "summary": "适用于高端金融机构汇报、年报与 VIP 服务展示",
+      "tone": "极简奢雅、精致层次、现代金融感",
+      "themeMode": "浅色主题（纹理底 + 招行红金精细装饰）",
+      "assets": [
+        "招商银行公司金融.png"
+      ],
+      "keywords": [
+        "China Merchants Bank",
+        "Finance",
+        "Premium report",
+        "Annual report"
+      ]
     },
     "科技蓝商务": {
-      "label": "Tech Blue Business Template",
-      "summary": "A tech-business template for corporate reports and solution proposals",
-      "tone": "Tech-forward, business, professional, clean",
-      "themeMode": "Hybrid theme (dark blue/tech blue cover + light content pages)",
-      "keywords": ["Tech blue", "Business", "Solution proposal", "Corporate report"]
+      "label": "科技蓝商务模板",
+      "summary": "适用于企业汇报、产品发布与解决方案提案",
+      "tone": "科技商务、专业干净、表达清晰",
+      "themeMode": "混合主题（深蓝/科技蓝封面 + 浅色内容页）",
+      "keywords": [
+        "Tech blue",
+        "Business",
+        "Solution proposal",
+        "Corporate report"
+      ]
     },
     "重庆大学": {
-      "label": "Chongqing University Template",
-      "summary": "A university-exclusive template for academic defenses and research presentations",
-      "tone": "Academically composed, mountain-city essence, modern minimalist",
-      "themeMode": "Academic blue primary + mountain-city layered imagery",
-      "assets": ["重庆大学logo.png", "重庆大学logo2.png"],
-      "keywords": ["Chongqing University", "Academic", "Defense", "University"]
+      "label": "重庆大学模板",
+      "summary": "适用于学术答辩、研究展示与校园学术交流",
+      "tone": "学术沉稳、山城气质、现代简洁",
+      "themeMode": "学术蓝主调（山城层叠意象）",
+      "assets": [
+        "重庆大学logo.png",
+        "重庆大学logo2.png"
+      ],
+      "keywords": [
+        "Chongqing University",
+        "Academic",
+        "Defense",
+        "University"
+      ]
     },
     "chaitin": {
-      "label": "长亭品牌模板",
-      "summary": "长亭科技官方品牌模板，适用于企业内训、产品发布、技术分享等场景",
+      "label": "长亭通用墨绿色",
+      "summary": "长亭科技通用墨绿色品牌模板，适用于企业内训、产品发布、技术分享等场景",
       "tone": "科技黑 + 品牌绿 + 青色，专业现代，结论先行",
-      "themeMode": "Dark theme (深色背景 + 品牌绿/青色装饰 + 大号章节编号)",
-      "assets": ["chaitin_logo.png"],
-      "keywords": ["长亭", "Chaitin", "品牌", "培训", "技术分享", "企业内训"]
+      "themeMode": "深色主题（深色背景 + 品牌绿/青色装饰 + 大号章节编号）",
+      "assets": [
+        "chaitin_logo.png"
+      ],
+      "brandPolicy": {
+        "required": true,
+        "requiredFamilies": [
+          "cover",
+          "toc",
+          "chapter",
+          "content",
+          "ending"
+        ],
+        "approvedAssets": [
+          "chaitin_logo.png"
+        ],
+        "note": "长亭通用墨绿色模板必须保留左下品牌区；只能使用批准的长亭 Logo 资产，不得缺失或替换。"
+      },
+      "stabilityProfile": {
+        "tier": "validated",
+        "fixedSkeleton": true,
+        "qaFocus": [
+          "toc_consistency",
+          "footer_logo_conflict",
+          "dense_content",
+          "takeaway_separation"
+        ],
+        "note": "保留模板骨架与品牌区，正文内容区允许灵活编排"
+      },
+      "contentStrategy": {
+        "narrativeMode": "general_brand_deck",
+        "pageIntent": "优先解决“这页要讲清楚什么”，可围绕概览、方法、结构、对比、案例、数据、建议灵活组织",
+        "titleStyle": "允许主题型或轻结论型标题，但必须具体，不能空泛",
+        "bodyStyle": [
+          "优先结构化短句、卡片标题、总结条",
+          "允许适度解释性语句，不强制所有页都证据化",
+          "强调结论层、模块层、支撑句层的清晰分层"
+        ],
+        "diagramPreference": [
+          "takeaway",
+          "cards",
+          "timeline",
+          "comparison",
+          "matrix",
+          "image_text"
+        ],
+        "imagePreference": [
+          "模板品牌背景",
+          "用户提供素材",
+          "AI 概念图或场景图"
+        ],
+        "layoutPolicy": "品牌骨架固定，正文内容区按内容密度与表达意图灵活变化，但同章节内要保持版式家族稳定"
+      },
+      "keywords": [
+        "长亭",
+        "Chaitin",
+        "品牌",
+        "培训",
+        "技术分享",
+        "企业内训"
+      ]
+    },
+    "security_service": {
+      "label": "长亭安服",
+      "summary": "对齐长亭安服历史主打胶片的轻主题模板，适用于安服解决方案、攻防复盘、安全运营与能力证明型演示",
+      "tone": "专业技术、证据导向、结论先行、蓝橙强调",
+      "themeMode": "浅色主题（白底 + 蓝橙强调 + 结构化证据型版式）",
+      "assets": [
+        "images/logo_green.png",
+        "images/logo_bottom_right.png",
+        "images/logo_top_right.png"
+      ],
+      "keywords": [
+        "长亭安服",
+        "网络安全",
+        "安全服务",
+        "攻防演习",
+        "护网",
+        "安全运营",
+        "渗透测试",
+        "能力证明",
+        "Security",
+        "HW"
+      ],
+      "brandPolicy": {
+        "required": true,
+        "requiredFamilies": [
+          "cover",
+          "toc",
+          "chapter",
+          "content",
+          "ending",
+          "case-study",
+          "tactics",
+          "data",
+          "product",
+          "comparison",
+          "timeline",
+          "list",
+          "grid",
+          "highlight",
+          "hero-image",
+          "section",
+          "table",
+          "service-overview",
+          "domain-map",
+          "result-case"
+        ],
+        "approvedAssets": [
+          "images/logo_green.png",
+          "images/logo_bottom_right.png",
+          "images/logo_top_right.png"
+        ],
+        "note": "长亭安服模板必须保留品牌 Logo；浅底页优先使用绿色版，深色/背景图页使用白色版，禁止缺失或混用其他资产。"
+      },
+      "stabilityProfile": {
+        "tier": "validated",
+        "fixedSkeleton": true,
+        "qaFocus": [
+          "title_conclusion_style",
+          "history_deck_alignment",
+          "footer_logo_conflict",
+          "dense_content",
+          "case_result_structure",
+          "proof_wall_integrity"
+        ],
+        "note": "保持长亭安服历史胶片骨架与品牌表达，正文内容区允许灵活编排"
+      },
+      "contentStrategy": {
+        "narrativeMode": "service_proof_deck",
+        "pageIntent": "优先解决“这页要证明什么”，围绕体系、分域能力、案例结果、可信背书组织正文",
+        "titleStyle": "标题优先结论先行、结果导向，避免中性主题词",
+        "bodyStyle": [
+          "优先短句、标签、数据点，不写长段说明",
+          "案例页应呈现挑战/动作/结果或背景/动作/成效证明链",
+          "背书页优先证据墙、矩阵、能力图，而不是普通列表"
+        ],
+        "diagramPreference": [
+          "service_overview",
+          "domain_map",
+          "proof_chain",
+          "attack_tree_architecture",
+          "multi_lane_execution_chain",
+          "evidence_wall",
+          "evidence_cockpit",
+          "governance_control_matrix",
+          "evidence_attached_case_chain",
+          "timeline",
+          "kpi_data"
+        ],
+        "imagePreference": [
+          "源文档证据截图",
+          "模板背景与品牌资产",
+          "补充型 AI 场景图"
+        ],
+        "layoutPolicy": "先对齐历史胶片章节节奏与页型优先级，再在正文区做灵活编排，避免退化成普通 bullet 报告"
+      },
+      "advancedPageStrategy": {
+        "requiredRead": [
+          "advanced_page_patterns.md"
+        ],
+        "outlineRequiredFields": [
+          "pageIntent",
+          "proofGoal",
+          "advancedPattern",
+          "preferredTemplate"
+        ],
+        "fallbackReasonRequiredWhen": [
+          "03_content.svg",
+          "11_list.svg"
+        ],
+        "fallbackGuard": {
+          "disallowedAsDefault": [
+            "03_content.svg",
+            "11_list.svg"
+          ],
+          "rule": "命中高级正文模式时，不得把兜底页作为首选；只有主承接页型与次承接页型都无法承载时才可回退，并在 design_spec 中记录回退原因。"
+        },
+        "selectionOrder": [
+          "先判断这页要证明什么",
+          "再判断是否命中高级正文模式",
+          "优先使用主承接页型",
+          "主承接页型不适合时使用次承接页型",
+          "仅在无法承接时退到兜底页型"
+        ],
+        "patterns": {
+          "layered_system_map": {
+            "label": "分层体系图",
+            "primaryTemplates": [
+              "17_service_overview.svg"
+            ],
+            "secondaryTemplates": [
+              "08_product.svg",
+              "18_domain_capability_map.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "安服服务体系",
+              "平台支撑体系",
+              "多层能力架构",
+              "平台+服务+结果关系"
+            ],
+            "triggerSignals": [
+              "体系",
+              "架构",
+              "平台+服务+结果",
+              "平台 + 服务 + 结果",
+              "多层能力",
+              "能力域"
+            ],
+            "structureSignals": [
+              "跨层关系",
+              "中央平台 + 能力域 + 结果输出",
+              "一级域不是简单并列"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "11_list.svg"
+            ]
+          },
+          "timeline_roadmap": {
+            "label": "阶段演进/路线图",
+            "primaryTemplates": [
+              "10_timeline.svg"
+            ],
+            "secondaryTemplates": [
+              "15_section.svg",
+              "09_comparison.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "规则演进",
+              "能力建设路线",
+              "成熟度演进",
+              "年度趋势变化"
+            ],
+            "triggerSignals": [
+              "阶段",
+              "路线图",
+              "里程碑",
+              "演进",
+              "建设路径",
+              "年度变化"
+            ],
+            "structureSignals": [
+              "同一主题沿时间推进",
+              "每阶段需要状态说明"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "attack_case_chain": {
+            "label": "攻击链/案例链路图",
+            "primaryTemplates": [
+              "19_result_leading_case.svg"
+            ],
+            "secondaryTemplates": [
+              "05_case.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "入侵路径",
+              "攻击案例",
+              "横向移动链路",
+              "供应链迂回",
+              "大模型攻击链"
+            ],
+            "triggerSignals": [
+              "攻击链",
+              "入侵路径",
+              "横向移动",
+              "供应链",
+              "关键动作",
+              "最终影响"
+            ],
+            "structureSignals": [
+              "起点到结果的推进链路",
+              "节点之间有因果或突破关系"
+            ],
+            "avoidTemplates": [
+              "07_data.svg",
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "attack_tree_architecture": {
+            "label": "分层攻击树/复杂结构图",
+            "primaryTemplates": [
+              "08_product.svg"
+            ],
+            "secondaryTemplates": [
+              "17_service_overview.svg",
+              "18_domain_capability_map.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "攻击树",
+              "根因拆解",
+              "入口到目标的分层关系",
+              "复杂能力结构树"
+            ],
+            "triggerSignals": [
+              "攻击树",
+              "根因拆解",
+              "分层结构",
+              "入口到目标",
+              "树状",
+              "分支"
+            ],
+            "structureSignals": [
+              "顶层根节点向下分叉",
+              "一条主线下包含多个分支层级",
+              "侧边附着证据或结论"
+            ],
+            "avoidTemplates": [
+              "11_list.svg",
+              "07_data.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "operation_loop": {
+            "label": "闭环运营/机制图",
+            "primaryTemplates": [
+              "18_domain_capability_map.svg"
+            ],
+            "secondaryTemplates": [
+              "17_service_overview.svg",
+              "06_tactics.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "安全运营闭环",
+              "风险评估闭环",
+              "平战切换机制",
+              "持续优化体系"
+            ],
+            "triggerSignals": [
+              "闭环",
+              "循环",
+              "持续优化",
+              "平战切换",
+              "风险评估闭环"
+            ],
+            "structureSignals": [
+              "输入-识别-处置-验证-优化",
+              "不是一次性线性流程"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "swimlane_collaboration": {
+            "label": "泳道协同图",
+            "primaryTemplates": [
+              "05_case.svg"
+            ],
+            "secondaryTemplates": [
+              "10_timeline.svg",
+              "06_tactics.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "客户侧/长亭侧协同",
+              "平台侧/租户侧协同",
+              "战前战中战后联动",
+              "多角色处置协同"
+            ],
+            "triggerSignals": [
+              "客户侧",
+              "长亭侧",
+              "多角色",
+              "协同",
+              "战前战中战后"
+            ],
+            "structureSignals": [
+              "至少两类角色并行推进",
+              "协同动作需要分泳道呈现"
+            ],
+            "mustNotFallbackTo": [
+              "11_list.svg"
+            ]
+          },
+          "multi_lane_execution_chain": {
+            "label": "多泳道实施链",
+            "primaryTemplates": [
+              "09_comparison.svg"
+            ],
+            "secondaryTemplates": [
+              "05_case.svg",
+              "10_timeline.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "客户侧/长亭侧协同推进",
+              "多阶段实施链",
+              "战前战中战后执行链",
+              "跨角色交付链"
+            ],
+            "triggerSignals": [
+              "多角色协同",
+              "阶段推进",
+              "交付链",
+              "客户侧",
+              "长亭侧",
+              "实施链"
+            ],
+            "structureSignals": [
+              "至少两条主泳道",
+              "每阶段都存在角色动作",
+              "需要横向阶段与纵向分工同时成立"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "matrix_defense_map": {
+            "label": "矩阵防御/映射图",
+            "primaryTemplates": [
+              "12_grid.svg"
+            ],
+            "secondaryTemplates": [
+              "16_table.svg",
+              "09_comparison.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "风险域与控制域映射",
+              "API安全矩阵",
+              "漏洞治理矩阵",
+              "资产/风险/响应映射"
+            ],
+            "triggerSignals": [
+              "矩阵",
+              "映射",
+              "横纵维度",
+              "风险域",
+              "控制域"
+            ],
+            "structureSignals": [
+              "两个维度交叉定义模块",
+              "单元格承担不同组合关系"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "maturity_model": {
+            "label": "成熟度模型/能力评估图",
+            "primaryTemplates": [
+              "18_domain_capability_map.svg"
+            ],
+            "secondaryTemplates": [
+              "12_grid.svg",
+              "16_table.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "成熟度评估",
+              "能力等级",
+              "主防体系建设阶段",
+              "差距与提升方向"
+            ],
+            "triggerSignals": [
+              "成熟度",
+              "能力等级",
+              "当前状态",
+              "目标状态",
+              "提升路径"
+            ],
+            "structureSignals": [
+              "存在等级或阶段定义",
+              "需要同时呈现当前与目标"
+            ],
+            "mustNotFallbackTo": [
+              "11_list.svg"
+            ]
+          },
+          "evidence_cockpit": {
+            "label": "证据驾驶舱/数据证明页",
+            "primaryTemplates": [
+              "07_data.svg"
+            ],
+            "secondaryTemplates": [
+              "19_result_leading_case.svg",
+              "12_grid.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "KPI加证据图",
+              "攻击证明驾驶舱",
+              "运营指标与结论联动",
+              "高密度数据证明页"
+            ],
+            "triggerSignals": [
+              "KPI",
+              "主证据图",
+              "证明驾驶舱",
+              "指标+结论",
+              "运营指标",
+              "数据证明"
+            ],
+            "structureSignals": [
+              "顶部指标锚点 + 中部主证据图 + 侧边结论分层",
+              "主图与说明不能拆散"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "11_list.svg"
+            ]
+          },
+          "governance_control_matrix": {
+            "label": "控制矩阵/治理看板",
+            "primaryTemplates": [
+              "16_table.svg"
+            ],
+            "secondaryTemplates": [
+              "12_grid.svg",
+              "07_data.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "治理控制矩阵",
+              "域-状态-动作看板",
+              "控制点盘点",
+              "治理优先级看板"
+            ],
+            "triggerSignals": [
+              "控制矩阵",
+              "治理看板",
+              "控制点",
+              "治理优先级",
+              "域-状态-动作",
+              "风险治理"
+            ],
+            "structureSignals": [
+              "纵向盘点治理域",
+              "横向区分状态、动作、证据",
+              "右侧需要洞察收束"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "evidence_attached_case_chain": {
+            "label": "证据挂载型复杂案例链",
+            "primaryTemplates": [
+              "19_result_leading_case.svg"
+            ],
+            "secondaryTemplates": [
+              "05_case.svg",
+              "07_data.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "节点附证据的复杂案例链",
+              "突破路径与结果证明",
+              "攻击动作加旁证",
+              "重型结果案例链"
+            ],
+            "triggerSignals": [
+              "节点证据",
+              "复杂案例链",
+              "关键证据",
+              "突破路径",
+              "结果证明",
+              "旁证"
+            ],
+            "structureSignals": [
+              "主链节点旁附着证据或旁注",
+              "动作链与结果证明需要同时成立",
+              "结果区必须强于过程区"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          },
+          "evidence_wall": {
+            "label": "证据墙/背书页2.0",
+            "primaryTemplates": [
+              "12_grid.svg"
+            ],
+            "secondaryTemplates": [
+              "16_table.svg",
+              "07_data.svg"
+            ],
+            "fallbackTemplates": [
+              "03_content.svg"
+            ],
+            "fitFor": [
+              "客户版图",
+              "赛事成绩",
+              "研究成果",
+              "资质认证",
+              "人才储备"
+            ],
+            "triggerSignals": [
+              "客户版图",
+              "赛事成绩",
+              "研究成果",
+              "资质认证",
+              "人才储备",
+              "证据"
+            ],
+            "structureSignals": [
+              "分类证据而非普通列表",
+              "每组证据需要分组标题和结论"
+            ],
+            "avoidTemplates": [
+              "11_list.svg"
+            ],
+            "mustNotFallbackTo": [
+              "03_content.svg",
+              "11_list.svg"
+            ]
+          }
+        }
+      }
     }
   }
 }

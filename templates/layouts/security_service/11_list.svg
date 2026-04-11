@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="list" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="650" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">
+    {{PAGE_TITLE}}
+  </text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="stacked-list" data-content-max-bottom="646" data-content-safe-box="60,125,1160,520">
+    <rect x="60" y="125" width="1160" height="520" fill="#FFFFFF" fill-opacity="0.85" rx="8" />
+    <rect x="90" y="145" width="8" height="8" fill="#0563C1" />
+    <text x="115" y="155" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#0563C1">{{LIST_TITLE_1}}</text>
+    <text x="115" y="180" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A">{{LIST_DESC_1}}</text>
+    <line x1="90" y1="205" x2="1190" y2="205" stroke="#E7E6E6" stroke-width="1" />
+    <rect x="90" y="225" width="8" height="8" fill="#4472C4" />
+    <text x="115" y="235" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#4472C4">{{LIST_TITLE_2}}</text>
+    <text x="115" y="260" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A">{{LIST_DESC_2}}</text>
+    <line x1="90" y1="285" x2="1190" y2="285" stroke="#E7E6E6" stroke-width="1" />
+    <rect x="90" y="305" width="8" height="8" fill="#5B9BD5" />
+    <text x="115" y="315" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">{{LIST_TITLE_3}}</text>
+    <text x="115" y="340" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A">{{LIST_DESC_3}}</text>
+    <line x1="90" y1="365" x2="1190" y2="365" stroke="#E7E6E6" stroke-width="1" />
+    <rect x="90" y="385" width="8" height="8" fill="#ED7D31" />
+    <text x="115" y="395" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#ED7D31">{{LIST_TITLE_4}}</text>
+    <text x="115" y="420" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A">{{LIST_DESC_4}}</text>
+    <line x1="90" y1="445" x2="1190" y2="445" stroke="#E7E6E6" stroke-width="1" />
+    <rect x="90" y="465" width="8" height="8" fill="#70AD47" />
+    <text x="115" y="475" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#70AD47">{{LIST_TITLE_5}}</text>
+    <text x="115" y="500" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A">{{LIST_DESC_5}}</text>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,650,1280,70">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

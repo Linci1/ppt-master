@@ -1,88 +1,88 @@
-# Chongqing University (重庆大学) Template - Design Specification
+# 重庆大学模板 - 设计规格
 
-> A distinctive design blending the layered imagery of the Mountain City with modern academic elegance.
+> 适用于学术答辩、研究展示与校园学术交流。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property           | Description                                                          |
+| 属性 | 说明                                                          |
 | ------------------ | -------------------------------------------------------------------- |
-| **Template Name**  | Chongqing University (重庆大学)                                      |
-| **Use Cases**      | Academic defense, research reports, teaching presentations, scholarly exchange |
-| **Design Tone**    | Academically grounded · Mountain City charm · Modern minimalism      |
-| **Design Inspiration** | Chongqing's layered terrain + the gravitas of historic campus buildings + modern academic professionalism |
+| **模板名称** | 重庆大学（重庆大学模板） |
+| **适用场景** | 学术答辩、研究展示、校园学术交流 |
+| **设计调性** | 学术沉稳、山城气质、现代简洁 |
+| **设计灵感** | 山城层叠地貌 + 历史校园建筑的厚重感 + 现代学术专业气质 |
 
-### Design Features
+### 设计特征
 
-1. **Layered Geometry**: Diagonal color blocks simulate the terraced landscape of the Mountain City, breaking away from traditional rectangular layouts
-2. **Asymmetric Aesthetics**: Left-heavy visual balance guides reading focus
-3. **Gradient Color Bands**: Deep-to-light transitions symbolize the journey from a rich history to a bright future
-4. **Wave Patterns**: Abstract Yangtze River / Jialing River water elements
+1. **层叠几何**：通过斜切色块模拟山城台地地貌，打破传统矩形排布。
+2. **非对称美学**：通过偏左的视觉重心引导阅读焦点。
+3. **渐变色带**：由深到浅的变化象征从厚重历史走向明亮未来。
+4. **波纹图案**：抽象化表达长江 / 嘉陵江水纹意象。
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property           | Value                         |
+| 属性 | 值                         |
 | ------------------ | ----------------------------- |
-| **Format**         | Standard 16:9                 |
-| **Dimensions**     | 1280 × 720 px                |
+| **格式**         | 标准 16:9                 |
+| **尺寸**     | 1280 × 720 px                |
 | **viewBox**        | `0 0 1280 720`               |
-| **Page Margins**   | Left/right 60px, top/bottom 40px |
-| **Content Safe Area** | x: 60-1220, y: 100-660    |
+| **页面边距**   | Left/right 60px, 上下 40px |
+| **内容安全区** | x: 60-1220, y: 100-660    |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors (Extracted from Logo)
+### 主色（从 Logo 提取）
 
-| Role               | Value       | Notes                                        |
+| 角色               | 数值       | 说明                                        |
 | ------------------ | ----------- | -------------------------------------------- |
 | **CQU Blue**       | `#006BB7`   | Emblem primary color; header, titles, main elements |
-| **Deep Blue**      | `#004A82`   | Chapter page background, emphasis areas      |
+| **Deep Blue**      | `#004A82`   | Chapter 页面背景, emphasis areas      |
 | **Sky Blue**       | `#3A9BD9`   | Accent color, gradient endpoint              |
-| **Cloud Blue**     | `#E3F2FD`   | Light background, card base color            |
+| **Cloud Blue**     | `#E3F2FD`   | Light 背景, card base color            |
 | **Dawn Gold**      | `#D4A84B`   | Decorative accents, highlights (symbolizing brightness) |
 | **Background White**| `#FAFCFF`  | Subtly blue-tinted pure white                |
 
-### Text Colors
+### 文字颜色
 
-| Role               | Value       | Usage                    |
+| 角色               | 数值       | 用途                    |
 | ------------------ | ----------- | ------------------------ |
-| **Dark Ink Text**  | `#1A2E44`   | Main titles, heading text |
-| **Primary Text**   | `#333D4A`   | Body content             |
-| **Secondary Text** | `#6B7B8C`   | Captions, annotations    |
-| **White Text**     | `#FFFFFF`   | Text on dark backgrounds |
+| **Dark Ink Text**  | `#1A2E44`   | 主标题, heading text |
+| **Primary Text**   | `#333D4A`   | 正文内容             |
+| **Secondary Text** | `#6B7B8C`   | 图注、标注    |
+| **White Text**     | `#FFFFFF`   | 深色背景上的文字 |
 
-### Gradient Scheme
+### 渐变方案
 
 ```
-Primary gradient: #004A82 → #006BB7 → #3A9BD9 (deep → light, used for background diagonal cuts)
+Primary gradient: #004A82 → #006BB7 → #3A9BD9 (deep → light, used for 背景 diagonal cuts)
 Gold gradient: #C49A3D → #D4A84B → #E8C675 (decorative use)
 ```
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Font Stack**: `"Microsoft YaHei", "微软雅黑", "PingFang SC", Arial, sans-serif`
+**字体栈**： `"Microsoft YaHei", "微软雅黑", "PingFang SC", Arial, sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level | Usage              | Size | Weight  | Notes              |
+| Level | 用途              | Size | Weight  | 说明              |
 | ----- | ------------------ | ---- | ------- | ------------------ |
-| H1    | Cover main title   | 48px | Bold    | Grand and dignified |
-| H2    | Page title         | 26px | Bold    |                    |
-| H3    | Chapter title      | 44px | Bold    |                    |
-| H4    | Card title         | 22px | Bold    |                    |
-| P     | Body content       | 17px | Regular |                    |
-| High  | Emphasized data    | 32px | Bold    |                    |
-| Sub   | Notes/sources      | 13px | Regular |                    |
-| XS    | Page number/copyright | 11px | Regular |                 |
+| H1    | 封面主标题   | 48px | 粗体    | Grand and dignified |
+| H2    | 页面标题         | 26px | 粗体    |                    |
+| H3    | 章节标题      | 44px | 粗体    |                    |
+| H4    | 卡片标题         | 22px | 粗体    |                    |
+| P     | 正文内容       | 17px | 常规 |                    |
+| High  | 强调数据    | 32px | 粗体    |                    |
+| Sub   | 说明/来源      | 13px | 常规 |                    |
+| XS    | 页码/版权 | 11px | 常规 |                 |
 
 ---
 
@@ -95,10 +95,10 @@ The template's signature design uses diagonally divided color blocks to simulate
 ```
 Cover: Large deep-blue diagonal block in the lower-left corner (approx. 40% of area)
 Chapter page: Full-screen deep blue + light diagonal accent in the upper-right
-Content page: Small diagonal accent strip at the top
+内容 page: Small diagonal accent strip at the top
 ```
 
-### 2. Wave Patterns (Two Rivers Imagery)
+### 2. Wave 模式 (Two Rivers Imagery)
 
 Abstract curves symbolizing the Yangtze and Jialing Rivers:
 
@@ -117,46 +117,46 @@ Small circle elements representing the nighttime lights of the Mountain City:
 
 ---
 
-## VI. Page Types
+## 六、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
-**Layout Structure**:
+**布局 Structure**:
 - Upper-right area: Logo (using logo.png)
-- Center-left: Main title + subtitle
+- Center-left: 主标题 + subtitle
 - Lower-left corner: Large diagonal deep-blue color block (extending from lower-left to upper-right)
 - Bottom: Presenter info, date
 - Decorations: Wave patterns + gold light dots
 
 ### 2. Chapter Page (02_chapter.svg)
 
-**Layout Structure**:
-- Full-screen deep blue background
+**布局 Structure**:
+- Full-screen deep blue 背景
 - Upper-right: Diagonal light area (sky blue gradient)
 - Left: Large chapter number (semi-transparent)
-- Center-left: Chapter title (white)
+- Center-left: 章节标题 (white)
 - Bottom: Gold decorative line + Logo (white version)
 
-### 3. Content Page (03_content.svg)
+### 3. 内容 Page (03_content.svg)
 
-**Layout Structure**:
+**布局 Structure**:
 - Top: Diagonal blue accent strip (approx. 80px height, higher on left, lower on right)
-- On the accent strip: Page title + Logo
+- On the accent strip: 页面标题 + Logo
 - Body: White content area (flexible layout)
 - Left: Thin gold decorative line
 - Bottom: Clean footer + wave pattern
 
 ### 4. Ending Page (04_ending.svg)
 
-**Layout Structure**:
+**布局 Structure**:
 - Center: Large-sized Logo
 - Below logo: Thank-you message
 - Bottom diagonal blue area: Contact information
 - Decorations: Wave patterns + gold light dots
 
-### 5. Table of Contents (02_toc.svg)
+### 5. Table of 内容s (02_toc.svg)
 
-**Layout Structure**:
+**布局 Structure**:
 - Top diagonal accent strip + title
 - Left: Large numeric indices (vertically arranged, with gold accents)
 - Right: TOC item text
@@ -166,31 +166,31 @@ Small circle elements representing the nighttime lights of the Mountain City:
 
 ## VII. Logo Usage Guidelines
 
-| File | Applicable Context | Notes |
+| File | Applicable Context | 说明 |
 |------|-------------------|-------|
-| `重庆大学logo.png` | Light/white backgrounds | Blue version |
-| `重庆大学logo2.png` | Dark/blue backgrounds | White version |
+| `重庆大学logo.png` | Light/white 背景 | Blue version |
+| `重庆大学logo2.png` | Dark/blue 背景 | White version |
 
 **Recommended Logo Sizes**:
 - Cover page: Width 280-320px
-- Content page header: Width 160-200px
+- 内容 page header: Width 160-200px
 - Ending page: Width 320-400px
 
 ---
 
-## VIII. Spacing Specification
+## 八、间距规范
 
-| Element              | Value      |
+| Element              | 数值      |
 | -------------------- | ---------- |
-| Page margins         | 60px       |
-| Content block spacing | 28px      |
+| 页面边距         | 60px       |
+| 内容 block spacing | 28px      |
 | Card inner padding   | 24px       |
 | Card border radius   | 12px       |
 | Diagonal cut angle   | Approx. 8-12° |
 
 ---
 
-## IX. SVG Technical Constraints
+## 九、SVG 技术约束
 
 ### Mandatory Rules
 
@@ -205,39 +205,39 @@ Small circle elements representing the nighttime lights of the Mountain City:
 - `clipPath`, `mask`, `<style>`, `class`
 - `foreignObject`, `textPath`, `animate*`
 - `rgba()` color format
-- `<g opacity="...">` (group opacity)
+- `<g opacity="...">` (分组透明度)
 
 ---
 
-## X. Placeholder Specification
+## 十、占位符规范
 
-| Placeholder          | Description            |
+| 占位符 | 说明 |
 | -------------------- | ---------------------- |
-| `{{TITLE}}`          | Main title             |
-| `{{SUBTITLE}}`       | Subtitle               |
+| `{{TITLE}}`          | 主标题             |
+| `{{SUBTITLE}}`       | 副标题               |
 | `{{AUTHOR}}`         | Presenter name         |
 | `{{ADVISOR}}`        | Thesis advisor         |
 | `{{INSTITUTION}}`    | College/Institution    |
 | `{{DATE}}`           | Date                   |
-| `{{PAGE_TITLE}}`     | Page title             |
+| `{{PAGE_TITLE}}`     | 页面标题             |
 | `{{CHAPTER_NUM}}`    | Chapter number         |
-| `{{CHAPTER_TITLE}}`  | Chapter title          |
-| `{{CHAPTER_DESC}}`   | Chapter description    |
+| `{{CHAPTER_TITLE}}`  | 章节标题          |
+| `{{CHAPTER_DESC}}`   | 章节说明    |
 | `{{KEY_MESSAGE}}`    | Key message            |
-| `{{CONTENT_AREA}}`   | Content area           |
-| `{{PAGE_NUM}}`       | Page number            |
+| `{{CONTENT_AREA}}`   | 内容区           |
+| `{{PAGE_NUM}}`       | 页码            |
 | `{{THANK_YOU}}`      | Thank-you message      |
 | `{{CONTACT_INFO}}`   | Contact information    |
-| `{{TOC_ITEM_N_TITLE}}` | TOC item title       |
-| `{{TOC_ITEM_N_DESC}}`  | TOC item description  |
+| `{{TOC_ITEM_N_TITLE}}` | 目录项标题       |
+| `{{TOC_ITEM_N_DESC}}`  | 目录项说明  |
 
 ---
 
-## XI. Design Checklist
+## XI. 设计检查清单
 
 - [ ] viewBox = `0 0 1280 720`
 - [ ] Diagonal block angles are consistent (8-12°)
-- [ ] Logo version matches background
-- [ ] Colors conform to specification
+- [ ] Logo version matches 背景
+- [ ] 颜色符合设计规格ification
 - [ ] Wave decorations are correctly positioned
 - [ ] Text is readable (>=11px)

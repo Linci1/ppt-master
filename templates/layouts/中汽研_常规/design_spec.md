@@ -1,151 +1,151 @@
-# CATARC (中汽研) Standard Template - Design Specification
+# 中汽研常规模板 - 设计规格
 
-> Suitable for CATARC product certification, evaluation & certification, technology showcases, business visits, and similar scenarios.
+> 适用于认证、检测与评测类展示。
 
 ---
 
-## I. Template Overview
+## 一、模板总览
 
-| Property       | Description                                                |
+| 属性 | 说明                                                |
 | -------------- | ---------------------------------------------------------- |
-| **Template Name** | 中汽研_常规 (formerly zhongqiyan)                       |
-| **Use Cases**  | Product certification display, evaluation presentations, technology promotion, business visits |
-| **Design Tone** | Professional, authoritative, trustworthy, consulting style |
-| **Theme Mode** | Light theme (white background + deep blue accent)          |
+| **模板名称** | 中汽研_常规（中汽研常规模板） |
+| **适用场景** | 认证展示、检测汇报、评测场景 |
+| **设计调性** | 专业权威、可信稳重、咨询风格 |
+| **主题模式** | 浅色主题（白底 + 深蓝强调） |
 
 ---
 
-## II. Canvas Specification
+## 二、画布规格
 
-| Property       | Value                         |
+| 属性 | 值                         |
 | -------------- | ----------------------------- |
-| **Format**     | Standard 16:9                 |
-| **Dimensions** | 1280 × 720 px                |
+| **格式**     | 标准 16:9                 |
+| **尺寸** | 1280 × 720 px                |
 | **viewBox**    | `0 0 1280 720`               |
-| **Page Margins** | Left/Right 60px, Top 80px, Bottom 40px |
-| **Safe Area**  | x: 60-1220, y: 80-680        |
+| **页面边距** | 左右 60px, Top 80px, Bottom 40px |
+| **安全区**  | x: 60-1220, y: 80-680        |
 
 ---
 
-## III. Color Scheme
+## 三、配色方案
 
-### Primary Colors
+### 主色
 
-| Role           | Color Value | Notes                            |
+| 角色           | 颜色值 | 说明                            |
 | -------------- | ----------- | -------------------------------- |
-| **Primary Deep Blue** | `#004098` | Title bar, navigation bar, chapter number blocks, decorative bars |
-| **Background White** | `#FFFFFF` | Main page background            |
-| **Auxiliary Light Gray** | `#F5F5F5` | Secondary content background blocks |
-| **Border Gray** | `#E0E0E0` | Dividers, borders               |
+| **Primary Deep Blue** | `#004098` | 标题 bar, navigation bar, chapter number blocks, decorative bars |
+| **Background White** | `#FFFFFF` | Main 页面背景            |
+| **Auxiliary Light Gray** | `#F5F5F5` | Secondary content 背景 blocks |
+| **Border Gray** | `#E0E0E0` | 分隔线, borders               |
 | **Accent Red** | `#CC0000`  | Key information highlight        |
 
-### Text Colors
+### 文字颜色
 
-| Role           | Color Value | Usage                  |
+| 角色           | 颜色值 | 用途                  |
 | -------------- | ----------- | ---------------------- |
-| **Primary Text** | `#333333` | Body text, headings    |
-| **White Text** | `#FFFFFF`  | Text on dark backgrounds |
-| **Secondary Text** | `#666666` | Dimmed chapters, auxiliary descriptions |
+| **Primary Text** | `#333333` | 正文文字、标题    |
+| **White Text** | `#FFFFFF`  | 深色背景上的文字 |
+| **Secondary Text** | `#666666` | Dimmed chapters, auxiliary 描述文字 |
 | **Light Auxiliary** | `#999999` | Annotations, page numbers, hints |
 
-### Functional Colors
+### 功能色
 
-| Usage      | Color Value | Description    |
+| 用途      | 颜色值 | 说明    |
 | ---------- | ----------- | -------------- |
-| **Success** | `#4CAF50` | Pass / Certified |
-| **Warning** | `#CC0000` | Failed / Attention |
+| **正向色** | `#4CAF50` | Pass / Certified |
+| **警示色** | `#CC0000` | Failed / Attention |
 
 ---
 
-## IV. Typography System
+## 四、字体系统
 
-### Font Stack
+### 字体栈
 
-**Font Stack**: `"Microsoft YaHei", "微软雅黑", "SimHei", Arial, Calibri, sans-serif`
+**字体栈**： `"Microsoft YaHei", "微软雅黑", "SimHei", Arial, Calibri, sans-serif`
 
-### Font Size Hierarchy
+### 字号层级
 
-| Level | Usage              | Size | Weight  |
+| Level | 用途              | Size | Weight  |
 | ----- | ------------------ | ---- | ------- |
-| H1    | Cover main title   | 48px | Bold    |
-| H2    | Page heading       | 28px | Bold    |
-| H3    | Section title / Subtitle | 24px | Bold |
-| P     | Body content       | 18px | Regular |
-| High  | Emphasized data    | 36px | Bold    |
-| Sub   | Auxiliary notes    | 14px | Regular |
+| H1    | 封面主标题   | 48px | 粗体    |
+| H2    | 页面标题       | 28px | 粗体    |
+| H3    | 分节标题 / 副标题 | 24px | 粗体 |
+| P     | 正文内容       | 18px | 常规 |
+| High  | 强调数据    | 36px | 粗体    |
+| Sub   | 辅助说明    | 14px | 常规 |
 
 ---
 
-## V. Page Structure
+## 五、页面结构
 
-### Common Layout
+### 常用布局
 
-| Area       | Position/Height | Description                            |
+| Area       | Position/Height | 说明                            |
 | ---------- | --------------- | -------------------------------------- |
 | **Top**    | y=0, h=4px      | Deep blue bar spanning full width      |
-| **Title Bar** | y=30, h=50px | Chapter number block + Title text + Top-right Logo |
-| **Content** | y=100, h=560px | Main content area                     |
-| **Footer** | y=680, h=40px   | Page number (right-aligned), bottom decorative line |
+| **标题 Bar** | y=30, h=50px | Chapter number block + 标题 text + Top-right Logo |
+| **内容** | y=100, h=560px | 主要内容区                     |
+| **页脚** | y=680, h=40px   | 页码 (right-aligned), bottom decorative line |
 
-### Navigation Design
+### 导航设计
 
 - **Top Decorative Line**: Deep blue (`#004098`), height 4px, spanning full width
 - **Bottom Decorative Line**: Deep blue (`#004098`), height 4px, y=716
-- **Title Bar** (y=30):
+- **标题 Bar** (y=30):
   - Chapter number block: Deep blue square (50×50px), white number/text centered
-  - Title text: 20px from number block, 28px font size, `#333333`
+  - 标题 text: 20px from number block, 28px font size, `#333333`
   - Top-right Logo: Fixed at x=1107, size 113×50px
 
 ---
 
-## VI. Page Types
+## 六、页面类型
 
-### 1. Cover Page (01_cover.svg)
+### 1. 封面页 (01_cover.svg)
 
-- Supports background image (AI-generated / user-provided)
+- Supports 背景 image (AI-generated / user-provided)
 - Semi-transparent overlay for text readability
 - Large centered Logo
-- Main title + subtitle
-- Organization name (Chinese & English)
+- 主标题 + subtitle
+- 机构名称 (Chinese & English)
 
-### 2. Table of Contents (02_toc.svg)
+### 2. 目录页 (02_toc.svg)
 
 - Double vertical line `||` separator design
 - Supports up to 5 chapters
 - Left decorative vertical line
 - Optional statistics display area on the right
 
-### 3. Chapter Page (02_chapter.svg)
+### 3. 章节页 (02_chapter.svg)
 
-- Deep blue gradient background
+- 深蓝渐变背景
 - Large chapter number
-- Chapter title + English subtitle
+- 章节标题 + 英文副标题
 
-### 4. Content Page (03_content.svg)
+### 4. 内容页 (03_content.svg)
 
-- White background
+- 白色背景
 - Standard navigation bar
-- Flexible content area
+- 可灵活编排的内容区
 - Supports multiple layout patterns
 
-### 5. Ending Page (04_ending.svg)
+### 5. 结束页 (04_ending.svg)
 
-- Deep blue solid background
-- Centered Logo
+- Deep blue solid 背景
+- 居中的 Logo
 - Thank-you message
 - Organization information
 
 ---
 
-## VII. Layout Patterns (Recommended)
+## 七、版式模式（推荐）
 
-| Pattern              | Use Cases                      |
+| 模式 | 适用场景 |
 | -------------------- | ------------------------------ |
-| **Single Column Center** | Cover, conclusion, key points |
+| **单列居中** | 封面、结论、关键观点 |
 | **Left-Right Split (5:5)** | Comparison display          |
-| **Left-Right Split (4:6)** | Image-text mixed layout     |
-| **Top-Bottom Split** | Process description, standards list |
-| **Three-Column Cards** | Project listings             |
+| **Left-Right Split (4:6)** | 图文混排ed layout     |
+| **上下分栏** | Process description, standards list |
+| **三列卡片** | Project listings             |
 | **Matrix Grid**      | Category display               |
 | **Table**            | Data comparison, specification lists |
 
@@ -153,62 +153,62 @@
 
 ## VIII. Spacing Guidelines
 
-| Element        | Value  |
+| Element        | 数值  |
 | -------------- | ------ |
 | Card gap       | 24px   |
-| Content block gap | 32px |
+| 内容块间距 | 32px |
 | Card padding   | 24px   |
-| Card border radius | 8px |
-| Icon-to-text gap | 12px |
+| 卡片圆角 | 8px |
+| 图标与文字间距 | 12px |
 
 ---
 
-## IX. SVG Technical Constraints
+## 九、SVG 技术约束
 
 ### Mandatory Rules
 
 1. viewBox: `0 0 1280 720`
-2. Use `<rect>` elements for backgrounds
+2. 背景统一使用 `<rect>` 元素
 3. Text wrapping via `<tspan>` (no `<foreignObject>`)
 4. Opacity via `fill-opacity` / `stroke-opacity`, no `rgba()`
 5. Forbidden: `clipPath`, `mask`, `<style>`, `class`, `foreignObject`
 6. Forbidden: `textPath`, `animate*`, `script`, `marker`/`marker-end`
 7. Use `<polygon>` triangles for arrows instead of `<marker>`
 
-### PPT Compatibility Rules
+### PPT 兼容性规则
 
-- No `<g opacity="...">` (group opacity) — set opacity on each child element individually
+- No `<g opacity="...">` (分组透明度) — set opacity on each child element individually
 - Use overlay layers for image transparency
 - Inline styles only — no external CSS or `@font-face`
 
 ---
 
-## X. Placeholder Specification
+## 十、占位符规范
 
 Templates use `{{PLACEHOLDER}}` format. Common placeholders:
 
-| Placeholder          | Description        |
+| 占位符 | 说明 |
 | -------------------- | ------------------ |
-| `{{TITLE}}`          | Main title         |
-| `{{SUBTITLE}}`       | Subtitle           |
+| `{{TITLE}}`          | 主标题         |
+| `{{SUBTITLE}}`       | 副标题           |
 | `{{AUTHOR}}`         | Author / Organization (Chinese) |
-| `{{AUTHOR_EN}}`      | Author / Organization (English) |
-| `{{PAGE_TITLE}}`     | Page title         |
+| `{{AUTHOR_EN}}`      | 作者 / 机构（英文） |
+| `{{PAGE_TITLE}}`     | 页面标题         |
 | `{{CHAPTER_NUM}}`    | Chapter number     |
-| `{{PAGE_NUM}}`       | Page number        |
-| `{{TOC_ITEM_N_TITLE}}` | TOC item title   |
-| `{{TOC_ITEM_N_DESC}}`  | TOC item description |
+| `{{PAGE_NUM}}`       | 页码        |
+| `{{TOC_ITEM_N_TITLE}}` | 目录项标题   |
+| `{{TOC_ITEM_N_DESC}}`  | 目录项说明 |
 | `{{THANK_YOU}}`      | Thank-you message  |
 | `{{CONTACT_INFO}}`   | Primary contact info |
 | `{{LOGO_LARGE}}`     | Large Logo filename |
-| `{{LOGO_HEADER}}`    | Header Logo filename |
-| `{{COVER_BG_IMAGE}}` | Cover background image filename |
+| `{{LOGO_HEADER}}`    | 页眉 Logo 文件名 |
+| `{{COVER_BG_IMAGE}}` | 封面背景图片文件名 |
 
 ---
 
-## XI. Usage Notes (Recommended)
+## 十一、使用说明（推荐）
 
 1. **Template Deployment**: Copy the template to your project directory.
 2. **Asset Replacement**: Replace `大型 logo.png` (592×238) and `右上角 logo.png` (113×50) in the `images` directory.
-3. **Content Generation**: Select appropriate page templates based on content needs, and replace content using `{{}}` placeholders.
+3. **内容 Generation**: Select appropriate page templates based on content needs, and replace content using `{{}}` placeholders.
 4. **SVG Generation**: Generate final SVG files via automation scripts.

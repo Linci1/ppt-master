@@ -134,7 +134,19 @@ def get_image_dimensions(href: str, svg_dir: str) -> tuple[int | None, int | Non
     
     # Handle external files
     if not os.path.isabs(href):
-        full_path = os.path.join(svg_dir, href)
+        svg_dir_path = Path(svg_dir)
+        candidates = [
+            svg_dir_path / href,
+        ]
+        if svg_dir_path.name in {'svg_output', 'svg_final'}:
+            candidates.append(svg_dir_path.parent / href)
+        full_path = None
+        for candidate in candidates:
+            if candidate.exists():
+                full_path = str(candidate)
+                break
+        if full_path is None:
+            full_path = str(candidates[0])
     else:
         full_path = href
     

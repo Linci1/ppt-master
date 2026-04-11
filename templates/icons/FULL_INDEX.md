@@ -1,272 +1,272 @@
-# SVG Icon Full Index
+# SVG 图标完整索引
 
-This document contains a complete categorized list of **640+ icons**. For a quick usage guide, see [README.md](./README.md).
+本文档汇总了按类别整理的 **640+ 图标**。快速使用方式请参见 [README.md](./README.md)。
 
 ---
 
-## 📍 Navigation & Arrows (50+)
+## 📍 导航与箭头（50+）
 
-**Basic Arrows**
+**基础箭头**
 `arrow-up` `arrow-down` `arrow-left` `arrow-right` `arrow-up-left` `arrow-up-right` `arrow-down-left` `arrow-down-right`
 
-**Line Arrows**
+**线性箭头**
 `arrow-up-from-line` `arrow-up-to-line` `arrow-down-from-line` `arrow-down-to-line` `arrow-left-from-line` `arrow-left-to-line` `arrow-right-from-line` `arrow-right-to-line`
 
-**Turn Arrows**
+**转向箭头**
 `arrow-turn-down-left` `arrow-turn-down-right` `arrow-turn-up-left` `arrow-turn-up-right` `arrow-u-down-left` `arrow-u-up-right`
 
-**Trend Arrows**
+**趋势箭头**
 `arrow-trend-up` `arrow-trend-down` `arrow-up-wide-short` `arrow-down-wide-short`
 
-**Bidirectional Arrows**
+**双向箭头**
 `arrows-left-right` `arrows-up-down` `arrow-left-arrow-right` `arrow-up-arrow-down`
 
-**Rotating Arrows**
+**旋转箭头**
 `arrow-rotate-left` `arrow-rotate-right` `arrows-rotate-clockwise` `arrows-rotate-counter-clockwise` `arrows-repeat`
 
-**Angle Symbols**
+**角度符号**
 `angle-up` `angle-down` `angle-left` `angle-right` `angles-up` `angles-down` `angles-left` `angles-right` `caret-up` `caret-down` `caret-left` `caret-right`
 
-**Circle Arrows**
+**圆形箭头**
 `circle-arrow-up` `circle-arrow-down` `circle-arrow-left` `circle-arrow-right`
 
 ---
 
-## 👤 Users & People (10+)
+## 👤 用户与人物（10+）
 
 `user` `users` `person` `person-walking` `person-wave` `circle-user` `square-user` `group` `address-card` `head-side`
 
 ---
 
-## 📊 Data & Charts (15+)
+## 📊 数据与图表（15+）
 
 `chart-bar` `chart-line` `chart-pie` `arrow-trend-up` `arrow-trend-down` `gauge-high` `gauge-medium` `gauge-low` `table` `database` `server` `funnel` `filter` `sort` `sliders`
 
 ---
 
-## 📁 Files & Folders (15+)
+## 📁 文件与文件夹（15+）
 
 `file` `file-plus` `files` `folder` `folder-open` `folders` `floppy-disk` `archive-box` `clipboard` `copy` `image` `images` `newspaper` `receipt` `sticky-note`
 
 ---
 
-## ✅ Status & Feedback (20+)
+## ✅ 状态与反馈（20+）
 
-**Success / Confirmation**
+**成功 / 确认**
 `checkmark` `circle-checkmark` `square-checkmark` `badge-check` `shield-check` `thumbs-up`
 
-**Error / Cancel**
+**错误 / 取消**
 `x` `x-1` `circle-x` `square-x` `ban` `thumbs-down`
 
-**Warning / Info**
+**警告 / 信息**
 `circle-exclamation` `triangle-exclamation` `diamond-exclamation` `octagon-exclamation` `circle-info` `circle-question`
 
-**Add / Remove**
+**添加 / 移除**
 `plus` `minus` `circle-plus` `circle-minus` `square-plus` `square-minus`
 
 ---
 
-## 🔧 Tools & Actions (25+)
+## 🔧 工具与操作（25+）
 
-**Editing Tools**
+**编辑工具**
 `pencil` `pencil-square` `pen-nib` `brush` `paint-bucket` `paint-roller` `eyedropper` `palette` `crop` `scissors` `ruler`
 
-**System Actions**
+**系统操作**
 `cog` `sliders` `wrench` `hammer` `screwdriver` `toolbox`
 
-**View Actions**
+**视图操作**
 `magnifying-glass` `zoom-in` `zoom-out` `eye` `eye-slash` `maximize` `minimize`
 
-**Delete Actions**
+**删除操作**
 `trash` `delete`
 
 ---
 
-## 💻 Devices & Technology (30+)
+## 💻 设备与技术（30+）
 
-**Computing Devices**
+**计算设备**
 `desktop` `laptop` `mobile` `tablet` `smartwatch` `tv` `tv-retro`
 
-**Input Devices**
+**输入设备**
 `keyboard` `mouse` `joystick` `game-controller` `d-pad`
 
-**Storage & Connectivity**
+**存储与连接**
 `database` `server` `microchip` `plug` `outlet` `usb`
 
-**Network**
+**网络**
 `wifi` `wifi-low` `wifi-medium` `wifi-slash` `signal` `signal-fair` `signal-good` `signal-weak` `signal-slash` `bluetooth` `globe` `rss`
 
-**Battery**
+**电池**
 `battery-full` `battery-half` `battery-empty` `battery-charge` `battery-slash`
 
 ---
 
-## 📱 Communication & Social (15+)
+## 📱 沟通与社交（15+）
 
 `phone` `phone-slash` `envelope` `mailbox` `paper-plane` `comment` `comment-dots` `comments` `comments-slash` `bell` `bell-slash` `at` `hashtag` `share-nodes`
 
 ---
 
-## 🏢 Business & Finance (20+)
+## 🏢 商务与财务（20+）
 
-**Currency**
+**货币**
 `dollar` `euro` `british-pound` `yen` `coin` `money` `wallet` `credit-card`
 
-**Shopping**
+**购物**
 `shopping-cart` `shopping-bag` `shopping-basket` `shop` `receipt` `tag` `ticket`
 
-**Buildings**
+**建筑**
 `building` `city` `factory` `hospital` `museum` `castle` `home` `home-1`
 
 ---
 
-## 🚗 Transportation & Travel (15+)
+## 🚗 交通与出行（15+）
 
 `car` `bus` `train` `plane` `ship` `truck` `bicycle` `scooter` `rocket` `route` `map` `map-pin` `location-arrow` `location-target` `signpost` `traffic-light` `traffic-cone`
 
 ---
 
-## 🎨 Media & Entertainment (30+)
+## 🎨 媒体与娱乐（30+）
 
-**Playback Controls**
+**播放控制**
 `play` `pause` `stop` `play-pause` `fast-forward` `rewind` `skip-forward` `skip-backward` `shuffle` `arrows-repeat`
 
-**Audio**
+**音频**
 `volume-high` `volume-low` `volume-none` `volume-x` `volume-slash` `microphone` `microphone-slash` `headphones` `music` `waveform`
 
-**Video & Camera**
+**视频与相机**
 `video` `video-camera` `video-camera-slash` `camera` `camera-slash` `film` `compact-disc`
 
-**Gaming**
+**游戏**
 `game-controller` `joystick` `dice` `die-1` `die-2` `die-3` `die-4` `die-5` `die-6` `playing-card` `meeple`
 
 ---
 
-## ⚽ Sports & Fitness (15+)
+## ⚽ 运动与健身（15+）
 
 `soccer` `basketball` `baseball` `football` `tennis-ball` `hockey` `curling-stone` `trophy` `target` `target-arrow` `bow-and-arrow`
 
 ---
 
-## 🍔 Food & Drinks (15+)
+## 🍔 食物与饮品（15+）
 
 `burger` `pizza` `cake` `cake-slice` `cupcake` `ice-cream` `citrus-slice` `bowl` `utensils` `mug` `cocktail` `wine-glass` `soda` `bottle`
 
 ---
 
-## 🌤️ Weather & Nature (20+)
+## 🌤️ 天气与自然（20+）
 
-**Weather**
+**天气**
 `sun` `sun-cloud` `sun-fog` `moon` `moon-cloud` `moon-fog` `cloud` `cloud-fog` `cloud-rain` `cloud-snow` `cloud-lightning` `rainbow` `rainbow-cloud` `snow` `wind` `droplet` `umbrella`
 
-**Nature**
+**自然**
 `tree` `tree-evergreen` `leaf` `seedling` `flower` `mountains` `water` `fire`
 
 ---
 
-## ✨ Shapes & Decorations (25+)
+## ✨ 形状与装饰（25+）
 
-**Basic Shapes**
+**基础形状**
 `circle` `square` `triangle` `hexagon` `octagon` `diamond-shape` `star` `star-half` `heart` `heart-half` `heart-broken`
 
-**Special Shapes**
+**特殊形状**
 `sparkles` `bolt` `crown` `gem` `crystal-ball` `wand-with-sparkles`
 
-**Card Suit Symbols**
+**纸牌花色符号**
 `spade` `club` `diamond`
 
 ---
 
-## 🔒 Security & Permissions (10+)
+## 🔒 安全与权限（10+）
 
 `lock-closed` `lock-open` `key` `key-skeleton` `keyhole` `shield` `shield-check` `shield-half` `eye` `eye-slash` `face-id`
 
 ---
 
-## 📝 Text & Editing (20+)
+## 📝 文字与编辑（20+）
 
-**Formatting**
+**格式**
 `bold` `italic` `underline` `strikethrough` `text` `font-case`
 
-**Alignment**
+**对齐**
 `align-left` `align-right` `align-text-center` `align-text-justify` `align-text-left` `align-text-right` `indent` `outdent`
 
-**Quotes & Lists**
+**引用与列表**
 `quote-left` `quote-right` `block-quote` `list` `list-ordered`
 
-**Code**
+**代码**
 `code` `code-block` `terminal`
 
 ---
 
-## 🧭 Layout & Alignment (15+)
+## 🧭 布局与对齐（15+）
 
 `align-top` `align-bottom` `align-left` `align-right` `align-center-horizontal` `align-center-vertical` `distribute-horizontal` `distribute-vertical` `grid` `grid-masonry` `columns` `rows` `layers` `frame` `component`
 
 ---
 
-## 🔢 Numbers & Letters (46)
+## 🔢 数字与字母（46）
 
-**Letters A-Z**
+**字母 A-Z**
 `a` `b` `c` `d` `e` `f` `g` `h` `i` `j` `k` `l` `m` `n` `o` `p` `q` `r` `s` `t` `u` `v` `w` `x-1` `y` `z`
 
-**Numbers 0-9**
+**数字 0-9**
 `number-0` `number-1` `number-2` `number-3` `number-4` `number-5` `number-6` `number-7` `number-8` `number-9`
 
-**Circled Numbers**
+**圆圈数字**
 `circle-number-0` `circle-number-1` `circle-number-2` `circle-number-3` `circle-number-4` `circle-number-5` `circle-number-6` `circle-number-7` `circle-number-8` `circle-number-9`
 
 ---
 
-## ♈ Zodiac Signs (12)
+## ♈ 星座符号（12）
 
 `aries` `taurus` `gemini` `cancer` `leo` `virgo` `libra` `scorpio` `sagittarius` `capricorn` `aquarius` `pisces`
 
 ---
 
-## ♟️ Chess Pieces (6)
+## ♟️ 国际象棋棋子（6）
 
 `king` `queen` `rook` `bishop` `knight` `pawn`
 
 ---
 
-## 😀 Emoticons (10)
+## 😀 表情（10）
 
 `face-smile` `face-laugh` `face-meh` `face-sad` `face-cry` `face-angry` `face-open-mouth` `face-no-mouth` `face-melt`
 
 ---
 
-## 🐾 Animals (10+)
+## 🐾 动物（10+）
 
 `dog` `cat` `fish` `bee` `butterfly` `paw` `bone`
 
 ---
 
-## 🎲 Other Common (30+)
+## 🎲 其他常用（30+）
 
-**Time**
+**时间**
 `clock` `stopwatch` `alarm-clock` `hourglass-empty` `hourglass-half-top` `hourglass-half-bottom` `calendar` `watch`
 
-**Toggle**
+**开关**
 `power` `toggle-circle-left` `toggle-circle-right`
 
-**Books**
+**书籍**
 `book` `book-open` `books` `bookmark` `bookmark-plus`
 
-**Gifts & Celebrations**
+**礼物与庆典**
 `gift` `cake` `trophy` `crown` `sparkles`
 
-**Work**
+**工作**
 `suitcase` `briefcase` `mortarboard`
 
-**Miscellaneous**
+**杂项**
 `lightbulb` `flag` `anchor` `compass` `life-ring` `rocket` `robot` `ghost` `skull` `alien` `ufo`
 
 ---
 
-## Icon Source
+## 图标来源
 
-All icons are from [SVG Repo](https://www.svgrepo.com/), licensed under CC0 or MIT, free for commercial use.
+所有图标均来自 [SVG Repo](https://www.svgrepo.com/)，采用 CC0 或 MIT 许可，可免费用于商业场景。
 
-**Icon count**: 640+
-**Last updated**: 2025-12-06
+**图标数量**：640+
+**最后更新**：2025-12-06

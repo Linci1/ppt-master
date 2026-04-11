@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" data-template="chaitin" data-page-family="ending" data-fixed-skeleton="background,footer,brand,page-number" data-footer-protected-top="620" data-logo-safe-zone="40,625,190,70" data-brand-required="true" data-brand-assets="chaitin_logo.png">
   <defs>
     <linearGradient id="endGrad" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0%" stop-color="#05070A" stop-opacity="0.9" />
@@ -38,8 +38,10 @@
   <rect x="0" y="690" width="1280" height="30" fill="#05070A" fill-opacity="0.8"/>
   <rect x="60" y="695" width="200" height="3" rx="1.5" fill="url(#thanksLine)" />
 
-  <!-- Chaitin logo - bottom left -->
-  <image href="chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet"/>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="40,625,190,70" data-brand-asset="chaitin_logo.png" data-brand-variant="brand-green">
+    <!-- Chaitin logo - bottom left -->
+    <image href="chaitin_logo.png" x="60" y="640" width="120" height="32" preserveAspectRatio="xMidYMid meet" data-brand-asset="chaitin_logo.png"/>
+  </g>
 
   <!-- Page number -->
   <text x="1188" y="686" fill="#7A8596" font-family="DIN Alternate, Arial, sans-serif" font-size="14">{{PAGE_NUM}}</text>

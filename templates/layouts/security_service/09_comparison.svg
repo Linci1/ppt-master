@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="comparison" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="652" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">
+    {{PAGE_TITLE}}
+  </text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="multi-lane-execution,phase-grid,result-band" data-advanced-pattern="multi_lane_execution_chain" data-content-max-bottom="620" data-content-safe-box="60,125,1160,495">
+    <rect x="60" y="129" width="196" height="34" fill="#0563C1" fill-opacity="0.10" rx="17" data-slot="comparison-guide-band" />
+    <text x="158" y="151" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">多泳道实施链</text>
+
+    <g id="execution-zone" data-slot="execution-swimlane" data-structure-role="phase-swimlane-board">
+      <rect x="60" y="182" width="1160" height="348" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="86" y="216" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="18" font-weight="bold" fill="#5B9BD5">{{COMPARE_HEADLINE}}</text>
+      <line x1="86" y1="226" x2="1190" y2="226" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="210" y="242" width="190" height="28" fill="#F7FAFE" rx="14" />
+      <rect x="430" y="242" width="190" height="28" fill="#F7FAFE" rx="14" />
+      <rect x="650" y="242" width="190" height="28" fill="#F7FAFE" rx="14" />
+      <rect x="870" y="242" width="190" height="28" fill="#F7FAFE" rx="14" />
+      <text x="305" y="260" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#7FA7DB">PHASE 01</text>
+      <text x="525" y="260" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#7FA7DB">PHASE 02</text>
+      <text x="745" y="260" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#7FA7DB">PHASE 03</text>
+      <text x="965" y="260" text-anchor="middle" font-family="Arial" font-size="11" font-weight="bold" fill="#7FA7DB">PHASE 04</text>
+
+      <rect x="198" y="282" width="880" height="104" fill="#F7FAFE" fill-opacity="0.74" rx="16" data-lane-band="lane-a" />
+      <rect x="198" y="398" width="880" height="104" fill="#EAF3FE" fill-opacity="0.86" rx="16" data-lane-band="lane-b" />
+
+      <rect x="84" y="286" width="96" height="96" fill="#A5A5A5" fill-opacity="0.16" rx="14" />
+      <text x="132" y="338" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#7F7F7F">{{COMPARE_TITLE_A}}</text>
+      <rect x="84" y="402" width="96" height="96" fill="#0563C1" fill-opacity="0.10" rx="14" />
+      <text x="132" y="454" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#0563C1">{{COMPARE_TITLE_B}}</text>
+
+      <line x1="210" y1="334" x2="1060" y2="334" stroke="#D6DEE9" stroke-width="2.5" />
+      <line x1="210" y1="450" x2="1060" y2="450" stroke="#D6DEE9" stroke-width="2.5" />
+
+      <rect x="210" y="286" width="190" height="96" fill="#FFFFFF" stroke="#D6DEE9" stroke-width="1.5" rx="12" />
+      <rect x="430" y="286" width="190" height="96" fill="#FFFFFF" stroke="#D6DEE9" stroke-width="1.5" rx="12" />
+      <rect x="650" y="286" width="190" height="96" fill="#FFFFFF" stroke="#D6DEE9" stroke-width="1.5" rx="12" />
+      <rect x="870" y="286" width="190" height="96" fill="#FFFFFF" stroke="#D6DEE9" stroke-width="1.5" rx="12" />
+      <text x="230" y="338" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_A_1}}</text>
+      <text x="450" y="338" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_A_2}}</text>
+      <text x="670" y="338" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_A_3}}</text>
+      <text x="890" y="338" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_A_4}}</text>
+
+      <rect x="210" y="402" width="190" height="96" fill="#0563C1" fill-opacity="0.08" rx="12" />
+      <rect x="430" y="402" width="190" height="96" fill="#4472C4" fill-opacity="0.08" rx="12" />
+      <rect x="650" y="402" width="190" height="96" fill="#5B9BD5" fill-opacity="0.10" rx="12" />
+      <rect x="870" y="402" width="190" height="96" fill="#ED7D31" fill-opacity="0.10" rx="12" />
+      <text x="230" y="454" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_B_1}}</text>
+      <text x="450" y="454" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_B_2}}</text>
+      <text x="670" y="454" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_B_3}}</text>
+      <text x="890" y="454" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="13" fill="#44546A">{{COMPARE_CONTENT_B_4}}</text>
+
+      <line x1="305" y1="382" x2="305" y2="402" stroke="#9FB7D9" stroke-width="2" stroke-dasharray="7 6" />
+      <line x1="525" y1="382" x2="525" y2="402" stroke="#9FB7D9" stroke-width="2" stroke-dasharray="7 6" />
+      <line x1="745" y1="382" x2="745" y2="402" stroke="#9FB7D9" stroke-width="2" stroke-dasharray="7 6" />
+      <line x1="965" y1="382" x2="965" y2="402" stroke="#9FB7D9" stroke-width="2" stroke-dasharray="7 6" />
+      <circle cx="305" cy="392" r="5" fill="#0563C1" />
+      <circle cx="525" cy="392" r="5" fill="#0563C1" />
+      <circle cx="745" cy="392" r="5" fill="#0563C1" />
+      <circle cx="965" cy="392" r="5" fill="#ED7D31" />
+    </g>
+
+    <g id="result-zone" data-slot="execution-result" data-structure-role="result-band">
+      <rect x="60" y="548" width="1160" height="72" fill="#FFFFFF" fill-opacity="0.92" rx="12" />
+      <rect x="60" y="548" width="8" height="72" fill="#ED7D31" rx="8" />
+      <text x="88" y="591" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#ED7D31">{{COMPARE_RESULT}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,652,1280,68">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>

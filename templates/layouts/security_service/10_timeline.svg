@@ -1,0 +1,105 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720" data-template="security_service" data-page-family="timeline" data-fixed-skeleton="background,header,footer,page-number,brand" data-footer-protected-top="648" data-logo-safe-zone="1038,30,190,56" data-brand-required="true" data-brand-assets="images/logo_green.png,images/logo_bottom_right.png,images/logo_top_right.png">
+  <g id="template-background" data-role="background" data-fixed-skeleton="true">
+    <image href="images/layout_bg.png" x="0" y="0" width="1280" height="720" preserveAspectRatio="xMidYMid slice" />
+    <rect x="0" y="0" width="1280" height="6" fill="#0563C1" />
+    <rect x="0" y="6" width="8" height="714" fill="#0563C1" />
+  </g>
+  <g id="template-header" data-role="header" data-fixed-skeleton="true" data-header-safe-box="60,50,1160,60">
+    <rect x="60" y="50" width="6" height="44" fill="#ED7D31" />
+    <text x="84" y="82" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="28" font-weight="bold" fill="#0563C1">
+    {{PAGE_TITLE}}
+  </text>
+    <line x1="60" y1="105" x2="1220" y2="105" stroke="#E7E6E6" stroke-width="1" />
+  </g>
+  <g id="content-area" data-role="flexible-body" data-layout-modes="timeline-roadmap,phase-cards,summary-panel" data-advanced-pattern="timeline_roadmap" data-content-max-bottom="622" data-content-safe-box="60,125,1160,497">
+    <rect x="60" y="129" width="168" height="34" fill="#0563C1" fill-opacity="0.10" rx="17" data-slot="timeline-guide-band" />
+    <text x="144" y="151" text-anchor="middle" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" font-weight="bold" fill="#0563C1">阶段路线图</text>
+
+    <g id="roadmap-zone" data-slot="timeline-roadmap" data-structure-role="phase-roadmap">
+      <rect x="60" y="182" width="1160" height="332" fill="#FFFFFF" fill-opacity="0.94" rx="14" />
+      <text x="86" y="216" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#5B9BD5">阶段推进主线</text>
+      <line x1="86" y1="226" x2="1190" y2="226" stroke="#D9E2F3" stroke-width="1.5" />
+
+      <rect x="84" y="232" width="1112" height="104" fill="#F7FAFE" rx="12" />
+      <rect x="84" y="378" width="1112" height="104" fill="#FFF8F3" rx="12" />
+
+      <line x1="156" y1="356" x2="374" y2="356" stroke="#0563C1" stroke-width="4" />
+      <line x1="374" y1="356" x2="592" y2="356" stroke="#4472C4" stroke-width="4" />
+      <line x1="592" y1="356" x2="810" y2="356" stroke="#5B9BD5" stroke-width="4" />
+      <line x1="810" y1="356" x2="1028" y2="356" stroke="#ED7D31" stroke-width="4" />
+      <polygon points="1050,356 1038,349 1038,363" fill="#70AD47" />
+
+      <g id="phase-card-1" data-slot="timeline-phase-1" data-structure-role="timeline-phase-card">
+        <rect x="68" y="238" width="176" height="88" fill="#0563C1" fill-opacity="0.08" rx="12" />
+        <rect x="68" y="238" width="6" height="88" fill="#0563C1" rx="6" />
+        <text x="92" y="264" font-family="Arial" font-size="11" font-weight="bold" fill="#7FA7DB">PHASE 01</text>
+        <text x="92" y="286" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#0563C1" data-slot="time-node-1">{{TIME_NODE_1}}</text>
+        <text x="92" y="314" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A" data-slot="time-desc-1">{{TIME_DESC_1}}</text>
+      </g>
+      <line x1="156" y1="326" x2="156" y2="338" stroke="#9FB7D9" stroke-width="2.5" />
+      <circle cx="156" cy="356" r="18" fill="#0563C1" />
+      <text x="156" y="362" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">1</text>
+
+      <g id="phase-card-2" data-slot="timeline-phase-2" data-structure-role="timeline-phase-card">
+        <rect x="286" y="386" width="176" height="88" fill="#4472C4" fill-opacity="0.08" rx="12" />
+        <rect x="286" y="386" width="6" height="88" fill="#4472C4" rx="6" />
+        <text x="310" y="412" font-family="Arial" font-size="11" font-weight="bold" fill="#8FA9DB">PHASE 02</text>
+        <text x="310" y="434" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#4472C4" data-slot="time-node-2">{{TIME_NODE_2}}</text>
+        <text x="310" y="462" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A" data-slot="time-desc-2">{{TIME_DESC_2}}</text>
+      </g>
+      <line x1="374" y1="374" x2="374" y2="386" stroke="#9FB7D9" stroke-width="2.5" />
+      <circle cx="374" cy="356" r="18" fill="#4472C4" />
+      <text x="374" y="362" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">2</text>
+
+      <g id="phase-card-3" data-slot="timeline-phase-3" data-structure-role="timeline-phase-card">
+        <rect x="504" y="238" width="176" height="88" fill="#5B9BD5" fill-opacity="0.10" rx="12" />
+        <rect x="504" y="238" width="6" height="88" fill="#5B9BD5" rx="6" />
+        <text x="528" y="264" font-family="Arial" font-size="11" font-weight="bold" fill="#9ABFE8">PHASE 03</text>
+        <text x="528" y="286" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#5B9BD5" data-slot="time-node-3">{{TIME_NODE_3}}</text>
+        <text x="528" y="314" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A" data-slot="time-desc-3">{{TIME_DESC_3}}</text>
+      </g>
+      <line x1="592" y1="326" x2="592" y2="338" stroke="#9FB7D9" stroke-width="2.5" />
+      <circle cx="592" cy="356" r="18" fill="#5B9BD5" />
+      <text x="592" y="362" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">3</text>
+
+      <g id="phase-card-4" data-slot="timeline-phase-4" data-structure-role="timeline-phase-card">
+        <rect x="722" y="386" width="176" height="88" fill="#ED7D31" fill-opacity="0.10" rx="12" />
+        <rect x="722" y="386" width="6" height="88" fill="#ED7D31" rx="6" />
+        <text x="746" y="412" font-family="Arial" font-size="11" font-weight="bold" fill="#D49763">PHASE 04</text>
+        <text x="746" y="434" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#ED7D31" data-slot="time-node-4">{{TIME_NODE_4}}</text>
+        <text x="746" y="462" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A" data-slot="time-desc-4">{{TIME_DESC_4}}</text>
+      </g>
+      <line x1="810" y1="374" x2="810" y2="386" stroke="#F0B37E" stroke-width="2.5" />
+      <circle cx="810" cy="356" r="18" fill="#ED7D31" />
+      <text x="810" y="362" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">4</text>
+
+      <g id="phase-card-5" data-slot="timeline-phase-5" data-structure-role="timeline-phase-card">
+        <rect x="940" y="238" width="176" height="88" fill="#70AD47" fill-opacity="0.12" rx="12" />
+        <rect x="940" y="238" width="6" height="88" fill="#70AD47" rx="6" />
+        <text x="964" y="264" font-family="Arial" font-size="11" font-weight="bold" fill="#9BC584">PHASE 05</text>
+        <text x="964" y="286" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="15" font-weight="bold" fill="#70AD47" data-slot="time-node-5">{{TIME_NODE_5}}</text>
+        <text x="964" y="314" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="12" fill="#44546A" data-slot="time-desc-5">{{TIME_DESC_5}}</text>
+      </g>
+      <line x1="1028" y1="326" x2="1028" y2="338" stroke="#9BC584" stroke-width="2.5" />
+      <circle cx="1028" cy="356" r="18" fill="#70AD47" />
+      <text x="1028" y="362" text-anchor="middle" font-family="Arial" font-size="12" font-weight="bold" fill="#FFFFFF">5</text>
+    </g>
+
+    <g id="summary-zone" data-slot="timeline-summary-panel" data-structure-role="summary-panel">
+      <rect x="60" y="536" width="1160" height="84" fill="#FFFFFF" fill-opacity="0.92" rx="12" />
+      <rect x="60" y="536" width="8" height="84" fill="#ED7D31" rx="8" />
+      <text x="88" y="566" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="16" font-weight="bold" fill="#ED7D31" data-slot="time-summary-title">{{TIME_SUMMARY_TITLE}}</text>
+      <text x="88" y="598" font-family="Microsoft YaHei, 微软雅黑, Arial" font-size="14" fill="#44546A" data-slot="time-summary-content">{{TIME_SUMMARY_CONTENT}}</text>
+    </g>
+  </g>
+  <g id="template-brand-zone" data-role="brand-zone" data-protected-zone="logo" data-zone-box="1038,30,190,56" data-brand-asset="images/logo_green.png" data-brand-variant="brand-green-light">
+    <image href="images/logo_green.png" x="1046" y="34" width="170" height="46" preserveAspectRatio="xMidYMid meet" data-brand-asset="images/logo_green.png" />
+  </g>
+  <g id="template-page-number-zone" data-role="page-number" data-protected-zone="page-number" data-zone-box="48,668,96,28">
+    <text x="60" y="690" font-family="Arial" font-size="14" fill="#44546A">{{PAGE_NUM}}</text>
+  </g>
+  <g id="template-footer" data-role="footer" data-fixed-skeleton="true" data-footer-safe-box="0,648,1280,72">
+    <rect x="0" y="714" width="1280" height="6" fill="#ED7D31" />
+  </g>
+</svg>
