@@ -406,8 +406,17 @@ def resolve_page_execution_policy(page: dict[str, Any]) -> dict[str, Any]:
                 merged[key] = value
         policy = merged
     page_family = str(page.get("page_family") or policy.get("page_family") or "").strip()
-    if page_family == "fixed":
-        policy["preview_strategy"] = "always"
+    complex_class = str(page.get("complex_class") or policy.get("complex_class") or "").strip()
+
+    # Legacy execution_state records may still carry the older aggressive settings.
+    # Normalize them here so reruns immediately benefit from the lighter strategy.
+    if page_family == "fixed" and str(policy.get("preview_strategy") or "").strip() == "always":
+        policy["preview_strategy"] = "on_error"
+    if page_family == "complex" and complex_class == "heavy_complex":
+        if str(policy.get("preview_strategy") or "").strip() == "always":
+            policy["preview_strategy"] = "on_error"
+        if str(policy.get("soft_qa_mode") or "").strip() == "always":
+            policy["soft_qa_mode"] = "on_signal"
     page["execution_policy"] = policy
     return policy
 

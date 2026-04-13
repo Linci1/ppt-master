@@ -482,10 +482,14 @@ def execution_policy(page: dict[str, str]) -> dict[str, Any]:
                 else ("complex_bounded_lane" if bounded_complex_hit else "complex_heavy_lane")
             ),
             "qa_tier": "complex_full",
-            "preview_strategy": "always" if complex_class == "heavy_complex" else "on_error",
+            # Preview rendering is the dominant cost in full runs. Even heavy pages should
+            # render previews only when the current round already shows errors or blockers.
+            "preview_strategy": "on_error",
             "layout_locked": layout_locked,
             "default_auto_repair_rounds": 0 if stable_complex_hit else 1,
-            "soft_qa_mode": "always" if complex_class == "heavy_complex" else "on_signal",
+            # Keep heavy pages on semantic QA, but trigger it by signal instead of forcing
+            # the most expensive path on every clean first-round render.
+            "soft_qa_mode": "on_signal",
             "allow_preflight_progression_reframe": True,
             "allow_runtime_progression_reframe": False,
         }
