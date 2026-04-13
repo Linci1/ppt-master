@@ -556,7 +556,10 @@ class ProjectManager:
                 summary["skipped"].append(f"{item}: directories are not supported")
                 continue
 
-            effective_move = move or is_within_path(source_path, REPO_ROOT)
+            # `--keep-source` should really preserve external user files.
+            # Only inherit move semantics when the source is already inside the
+            # current project tree and we are normalizing it into `sources/`.
+            effective_move = move or is_within_path(source_path, project_dir)
             suffix = source_path.suffix.lower()
 
             if suffix in {".md", ".markdown"}:

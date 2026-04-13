@@ -2716,8 +2716,14 @@ class SVGQualityChecker:
         ]
         lane_rects = [
             rect for rect in rects
-            if rect['width'] >= canvas_width * 0.55
-            and 48 <= rect['height'] <= 180
+            if (
+                rect['width'] >= canvas_width * 0.55
+                and 48 <= rect['height'] <= 180
+            )
+            or (
+                48 <= rect['height'] <= 180
+                and re.search(r'(?:data-slot|data-structure-role)=["\'][^"\']*(?:lane|collaboration)', rect['raw'], re.IGNORECASE)
+            )
         ]
         hub_rects = [
             rect for rect in rects

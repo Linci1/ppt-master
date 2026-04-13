@@ -161,9 +161,7 @@
 - `notes/svg_execution_queue.md`
 - `notes/svg_generation_status.md`
 - `notes/svg_execution_state.json`
-- `notes/svg_current_task.md`
-- `notes/svg_current_prompt.md`
-- `notes/svg_current_context_pack.md`
+- `notes/svg_current_bundle.md`
 - `notes/svg_current_review.md`
 - `notes/svg_execution_log.md`
 - `notes/svg_postprocess_plan.md`

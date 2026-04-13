@@ -134,9 +134,7 @@ python3 scripts/ppt_agent.py run <project_path>
 - `notes/svg_execution_queue.md`
 - `notes/svg_generation_status.md`
 - `notes/svg_execution_state.json`
-- `notes/svg_current_task.md`
-- `notes/svg_current_prompt.md`
-- `notes/svg_current_context_pack.md`
+- `notes/svg_current_bundle.md`
 - `notes/svg_current_review.md`
 - `notes/svg_execution_log.md`
 - `notes/svg_postprocess_plan.md`
@@ -156,9 +154,7 @@ python3 scripts/ppt_agent.py svg-exec summary <project_path>
 
 其中：
 
-- `notes/svg_current_task.md`：当前页任务面板
-- `notes/svg_current_prompt.md`：当前页简版执行 prompt
-- `notes/svg_current_context_pack.md`：当前页完整上下文包
+- `notes/svg_current_bundle.md`：当前页统一执行总包
 - `notes/svg_current_review.md`：当前页硬性 + 软性 QA 审核卡
 - `notes/svg_execution_state.json`：机器可读状态源
 

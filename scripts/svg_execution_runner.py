@@ -42,6 +42,7 @@ except ImportError:
 
 
 STATE_FILENAME = "svg_execution_state.json"
+CURRENT_BUNDLE_FILENAME = "svg_current_bundle.md"
 CURRENT_TASK_FILENAME = "svg_current_task.md"
 CURRENT_PROMPT_FILENAME = "svg_current_prompt.md"
 CURRENT_CONTEXT_PACK_FILENAME = "svg_current_context_pack.md"
@@ -68,6 +69,13 @@ def read_json(path: Path) -> dict[str, Any]:
 def write_text(path: Path, content: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(content, encoding="utf-8")
+
+
+def remove_path_if_exists(path: Path) -> None:
+    try:
+        path.unlink()
+    except FileNotFoundError:
+        return
 
 
 def append_log(log_path: Path, message: str) -> None:
@@ -129,6 +137,7 @@ def state_paths(project_dir: Path) -> dict[str, Path]:
     notes_dir = project_dir / "notes"
     return {
         "state": notes_dir / STATE_FILENAME,
+        "current_bundle": notes_dir / CURRENT_BUNDLE_FILENAME,
         "current_task": notes_dir / CURRENT_TASK_FILENAME,
         "current_prompt": notes_dir / CURRENT_PROMPT_FILENAME,
         "current_context": notes_dir / CURRENT_CONTEXT_PACK_FILENAME,
@@ -250,7 +259,7 @@ def sync_state_with_files(state: dict[str, Any], project_dir: Path) -> dict[str,
             state["overall_status"] = "in_progress"
             state["current_page"] = in_progress["expected_svg"]
         else:
-            next_page = next((page for page in state["pages"] if page["status"] in {"pending", "qa_failed", "blocked", "generated"}), None)
+            next_page = next_actionable_page(state)
             state["overall_status"] = "ready" if next_page else "completed"
             state["current_page"] = next_page["expected_svg"] if next_page else ""
     state["updated_at"] = now_iso()
@@ -381,6 +390,15 @@ def template_display_name(template_id: str) -> str:
     return "通用模板"
 
 
+def strip_primary_heading(markdown: str) -> str:
+    lines = markdown.strip().splitlines()
+    if lines and lines[0].startswith("# "):
+        lines = lines[1:]
+        while lines and not lines[0].strip():
+            lines = lines[1:]
+    return "\n".join(lines).strip()
+
+
 def render_current_prompt_markdown(state: dict[str, Any], project_dir: Path) -> str:
     current = next_actionable_page(state)
     if current is None:
@@ -401,12 +419,12 @@ def render_current_prompt_markdown(state: dict[str, Any], project_dir: Path) -> 
         "## 最短执行指令",
         f"- 页面标题：{current['title']}",
         f"- 输出路径：`{project_dir / 'svg_output' / current['expected_svg']}`",
-        f"- 事实包：`{project_dir / 'notes' / 'svg_current_context_pack.md'}`",
+        f"- 执行总包：`{project_dir / 'notes' / CURRENT_BUNDLE_FILENAME}`",
         f"- QA 卡：`{project_dir / 'notes' / 'svg_current_review.md'}`",
-        f"- 当前任务卡：`{project_dir / 'notes' / 'svg_current_task.md'}`",
+        f"- 兼容上下文包：`{project_dir / 'notes' / 'svg_current_context_pack.md'}`",
         "",
         "## 执行要求",
-        "1. 以 `svg_current_context_pack.md` 为唯一内容源，prompt 不再重复展开结构化上下文。",
+        "1. 默认先读 `svg_current_bundle.md`；若需要拆分视图，再回到 `svg_current_context_pack.md`。",
         "2. 只生成当前页；完成后立即按 `svg_current_review.md` 做当页门禁。",
         "3. 若缺字段，再回退全量文档；不要默认重读整份设计文档。",
         "4. 若通过，优先用 `svg-exec complete` 自动推进下一页。",
@@ -429,6 +447,46 @@ def render_current_prompt_markdown(state: dict[str, Any], project_dir: Path) -> 
             ]
         )
     return "\n".join(lines) + "\n"
+
+
+def render_current_bundle_markdown(state: dict[str, Any], project_dir: Path) -> str:
+    current = next_actionable_page(state)
+    if current is None:
+        return "\n".join(
+            [
+                "# 当前 SVG 执行总包",
+                "",
+                FINALIZE_GATE_HINT,
+            ]
+        ) + "\n"
+
+    task_panel = strip_primary_heading(render_current_task_markdown(state, project_dir))
+    prompt_panel = strip_primary_heading(render_current_prompt_markdown(state, project_dir))
+    context_panel = strip_primary_heading(render_current_context_pack_markdown(state, project_dir))
+    lines = [
+        "# 当前 SVG 执行总包",
+        "",
+        "这份 bundle 是当前页执行主入口；默认先读这份，再按需要打开独立 QA 卡。",
+        "",
+        f"- 当前页：`{current['expected_svg']}`",
+        f"- QA 卡：`{project_dir / 'notes' / CURRENT_REVIEW_FILENAME}`",
+        f"- 兼容视图：`{project_dir / 'notes' / CURRENT_TASK_FILENAME}` / "
+        f"`{project_dir / 'notes' / CURRENT_PROMPT_FILENAME}` / "
+        f"`{project_dir / 'notes' / CURRENT_CONTEXT_PACK_FILENAME}`",
+        "",
+        "## 1. 当前任务",
+        "",
+        task_panel,
+        "",
+        "## 2. 执行 Prompt",
+        "",
+        prompt_panel,
+        "",
+        "## 3. 最小上下文包",
+        "",
+        context_panel,
+    ]
+    return "\n".join(lines).strip() + "\n"
 
 
 def render_current_context_pack_markdown(state: dict[str, Any], project_dir: Path) -> str:
@@ -730,7 +788,7 @@ def render_current_task_markdown(state: dict[str, Any], project_dir: Path) -> st
             "1. 先读本页 page brief。",
             "2. 若是复杂页，先确认复杂页建模已齐备。",
             "3. 可优先尝试 `ppt_agent.py svg-exec render <project_path> --page <当前页>` 生成 starter SVG。",
-            "4. 同时参考 `svg_current_prompt.md` 中整理好的当前页执行 prompt。",
+            "4. 默认先看 `svg_current_bundle.md` 中整理好的当前页执行总包；必要时再看独立 prompt 视图。",
             "5. 生成或修复当前页 SVG 后，再执行 `svg_execution_runner.py mark ...` 更新状态。",
             "",
             "## Page Brief",
@@ -744,10 +802,11 @@ def save_state_bundle(state: dict[str, Any], project_dir: Path, paths: dict[str,
     state["updated_at"] = now_iso()
     write_text(paths["state"], json.dumps(state, ensure_ascii=False, indent=2) + "\n")
     write_text(paths["status_md"], render_status_markdown(state))
-    write_text(paths["current_task"], render_current_task_markdown(state, project_dir))
-    write_text(paths["current_prompt"], render_current_prompt_markdown(state, project_dir))
-    write_text(paths["current_context"], render_current_context_pack_markdown(state, project_dir))
+    write_text(paths["current_bundle"], render_current_bundle_markdown(state, project_dir))
     write_text(paths["current_review"], render_current_review_markdown(state, project_dir))
+    remove_path_if_exists(paths["current_task"])
+    remove_path_if_exists(paths["current_prompt"])
+    remove_path_if_exists(paths["current_context"])
 
 
 def find_page(state: dict[str, Any], page_ref: str) -> dict[str, Any]:
@@ -795,9 +854,7 @@ def command_init(args: argparse.Namespace) -> None:
     append_log(paths["log"], "初始化 / 刷新 SVG 执行状态。")
     print(f"state: {paths['state']}")
     print(f"status_md: {paths['status_md']}")
-    print(f"current_task: {paths['current_task']}")
-    print(f"current_prompt: {paths['current_prompt']}")
-    print(f"context_pack: {paths['current_context']}")
+    print(f"current_bundle: {paths['current_bundle']}")
     print(f"current_review: {paths['current_review']}")
     print(f"log: {paths['log']}")
 
@@ -809,9 +866,7 @@ def command_sync(args: argparse.Namespace) -> None:
     save_state_bundle(state, project_dir, paths)
     append_log(paths["log"], "根据 svg_output/svg_final 同步执行状态。")
     print(f"status_md: {paths['status_md']}")
-    print(f"current_task: {paths['current_task']}")
-    print(f"current_prompt: {paths['current_prompt']}")
-    print(f"context_pack: {paths['current_context']}")
+    print(f"current_bundle: {paths['current_bundle']}")
     print(f"current_review: {paths['current_review']}")
 
 
@@ -831,9 +886,7 @@ def command_next(args: argparse.Namespace) -> None:
     save_state_bundle(state, project_dir, paths)
     append_log(paths["log"], f"推进到当前任务页：{current['expected_svg']}")
     print(f"current_page: {current['expected_svg']}")
-    print(f"current_task: {paths['current_task']}")
-    print(f"current_prompt: {paths['current_prompt']}")
-    print(f"context_pack: {paths['current_context']}")
+    print(f"current_bundle: {paths['current_bundle']}")
     print(f"current_review: {paths['current_review']}")
 
 
@@ -894,9 +947,7 @@ def command_complete(args: argparse.Namespace) -> None:
     print(f"completed: {page['expected_svg']}")
     if next_page_name:
         print(f"next_page: {next_page_name}")
-        print(f"current_task: {paths['current_task']}")
-        print(f"current_prompt: {paths['current_prompt']}")
-        print(f"context_pack: {paths['current_context']}")
+        print(f"current_bundle: {paths['current_bundle']}")
         print(f"current_review: {paths['current_review']}")
     else:
         print("all_pages_completed")
@@ -909,9 +960,7 @@ def command_summary(args: argparse.Namespace) -> None:
     state = sync_state_with_files(state, project_dir)
     save_state_bundle(state, project_dir, paths)
     print(render_status_markdown(state).strip())
-    print(f"\n- current_task: `{paths['current_task']}`")
-    print(f"- current_prompt: `{paths['current_prompt']}`")
-    print(f"- current_context: `{paths['current_context']}`")
+    print(f"\n- current_bundle: `{paths['current_bundle']}`")
     print(f"- current_review: `{paths['current_review']}`")
 
 

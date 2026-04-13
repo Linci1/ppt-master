@@ -240,6 +240,12 @@ def infer_complex_mode(entry: dict[str, str]) -> dict[str, str]:
     )
     title_lower = title_text.lower()
     lower = text.lower()
+    if "项目范围" in title_lower and "整体回顾" in title_lower:
+        return {
+            "mode": "多泳道协同页",
+            "structure": "泳道",
+            "blueprint": "05_case.svg",
+        }
     if any(keyword in title_lower for keyword in ["能力总览", "安服价值", "能力价值", "服务价值"]):
         return {
             "mode": "分层体系 / 能力地图",

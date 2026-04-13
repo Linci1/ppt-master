@@ -487,12 +487,23 @@ def run_bundle_output_paths(
         notes_dir / "executor_handoff.md",
         notes_dir / "agent_run_status.md",
         notes_dir / "svg_execution_state.json",
-        notes_dir / "svg_current_task.md",
-        notes_dir / "svg_current_prompt.md",
-        notes_dir / "svg_current_context_pack.md",
+        notes_dir / "svg_current_bundle.md",
         notes_dir / "svg_current_review.md",
         notes_dir / "svg_execution_log.md",
     ]
+
+
+def cleanup_legacy_svg_views(project_path: Path) -> None:
+    notes_dir = project_path / "notes"
+    for filename in (
+        "svg_current_task.md",
+        "svg_current_prompt.md",
+        "svg_current_context_pack.md",
+    ):
+        try:
+            (notes_dir / filename).unlink()
+        except FileNotFoundError:
+            continue
 
 
 def build_run_bundle(
@@ -519,9 +530,7 @@ def build_run_bundle(
     svg_state = sync_svg_execution_state(svg_state, project_path)
     save_svg_execution_bundle(svg_state, project_path, svg_state_paths)
     svg_execution_state_path = svg_state_paths["state"]
-    svg_current_task_path = svg_state_paths["current_task"]
-    svg_current_prompt_path = svg_state_paths["current_prompt"]
-    svg_current_context_path = svg_state_paths["current_context"]
+    svg_current_bundle_path = svg_state_paths["current_bundle"]
     svg_current_review_path = svg_state_paths["current_review"]
     svg_execution_log_path = svg_state_paths["log"]
 
@@ -550,9 +559,7 @@ def build_run_bundle(
             svg_execution_queue_machine_path,
             svg_generation_status_path,
             svg_execution_state_path,
-            svg_current_task_path,
-            svg_current_prompt_path,
-            svg_current_context_path,
+            svg_current_bundle_path,
             svg_current_review_path,
             svg_execution_log_path,
             svg_postprocess_plan_path,
@@ -570,9 +577,7 @@ def build_run_bundle(
         "svg_contracts_path": svg_contracts_path,
         "page_briefs_dir": page_briefs_dir,
         "svg_execution_state_path": svg_execution_state_path,
-        "svg_current_task_path": svg_current_task_path,
-        "svg_current_prompt_path": svg_current_prompt_path,
-        "svg_current_context_path": svg_current_context_path,
+        "svg_current_bundle_path": svg_current_bundle_path,
         "svg_current_review_path": svg_current_review_path,
         "svg_execution_log_path": svg_execution_log_path,
         "strategist_handoff_path": strategist_handoff_path,
@@ -993,9 +998,7 @@ def build_executor_handoff_text(
     auto_repair_report: Path | None,
 ) -> str:
     primary_inputs = [
-        "notes/svg_current_task.md",
-        "notes/svg_current_prompt.md",
-        "notes/svg_current_context_pack.md",
+        "notes/svg_current_bundle.md",
         "notes/svg_current_review.md",
     ]
     fallback_inputs = [
@@ -1023,7 +1026,7 @@ def build_executor_handoff_text(
             "- `references/executor-visual-review.md`",
             "",
             "## 2. 当前页执行规则",
-            "- 先读 `svg_current_context_pack.md` 锁定当前页事实，再读 brief 与 QA 卡开始出图。",
+            "- 先读 `svg_current_bundle.md` 锁定当前页任务、执行 prompt 与事实，再读 QA 卡开始出图。",
             "- 只生成当前页，不跳页；完成后立即当页自检，再决定 `generated / completed / qa_failed / blocked`。",
             "- 命中复杂页时，若当前上下文缺字段，才回退 `complex_page_models.md` 或 `design_spec.md`。",
             "- 不直接导出；全部完成后只按 `notes/svg_postprocess_plan.md` 和 export gate 放行。",
@@ -1054,9 +1057,7 @@ def build_run_status_text(
     svg_execution_queue_machine_path: Path,
     svg_generation_status_path: Path,
     svg_execution_state_path: Path,
-    svg_current_task_path: Path,
-    svg_current_prompt_path: Path,
-    svg_current_context_path: Path,
+    svg_current_bundle_path: Path,
     svg_current_review_path: Path,
     svg_execution_log_path: Path,
     svg_postprocess_plan_path: Path,
@@ -1066,9 +1067,7 @@ def build_run_status_text(
     export_gate_info: dict[str, object],
 ) -> str:
     current_page_bundle = [
-        rel_ref(project_path, svg_current_task_path),
-        rel_ref(project_path, svg_current_prompt_path),
-        rel_ref(project_path, svg_current_context_path),
+        rel_ref(project_path, svg_current_bundle_path),
         rel_ref(project_path, svg_current_review_path),
     ]
     fallback_bundle = [
@@ -1089,7 +1088,7 @@ def build_run_status_text(
         f"- Strategist 入口：`{rel_ref(project_path, strategist_handoff_path)}`",
         f"- Executor 入口：`{rel_ref(project_path, executor_handoff_path)}`",
         f"- 机器状态源：`{rel_ref(project_path, svg_execution_state_path)}`",
-        f"- 当前页执行包：`{current_page_bundle[0]}` / `{current_page_bundle[1]}` / `{current_page_bundle[2]}` / `{current_page_bundle[3]}`",
+        f"- 当前页执行主入口：`{current_page_bundle[0]}` / `{current_page_bundle[1]}`",
         f"- 日志：`{rel_ref(project_path, svg_execution_log_path)}`",
     ]
     if auto_repair_report:
@@ -1403,6 +1402,7 @@ def command_run(args: argparse.Namespace) -> None:
         "svg_execution_pack",
         input_paths=svg_pack_stage_inputs(project_path),
         output_paths=svg_pack_output_paths,
+        extra_values=["schema=svg_pack_v2"],
         force=getattr(args, "force_svg_pack", False),
     )
     stage_statuses["svg_execution_pack"] = stage_status_payload(
@@ -1413,6 +1413,7 @@ def command_run(args: argparse.Namespace) -> None:
         forced=getattr(args, "force_svg_pack", False),
     )
     if svg_pack_fresh:
+        cleanup_legacy_svg_views(project_path)
         bundle_paths = {
             "svg_execution_queue_path": Path(probe_pack["queue"]),
             "svg_execution_queue_machine_path": Path(probe_pack.get("queue_machine", project_path / "notes" / "svg_execution_queue.machine.json")),
@@ -1421,9 +1422,7 @@ def command_run(args: argparse.Namespace) -> None:
             "svg_contracts_path": Path(probe_pack["contracts"]),
             "page_briefs_dir": Path(probe_pack["page_briefs"]),
             "svg_execution_state_path": project_path / "notes" / "svg_execution_state.json",
-            "svg_current_task_path": project_path / "notes" / "svg_current_task.md",
-            "svg_current_prompt_path": project_path / "notes" / "svg_current_prompt.md",
-            "svg_current_context_path": project_path / "notes" / "svg_current_context_pack.md",
+            "svg_current_bundle_path": project_path / "notes" / "svg_current_bundle.md",
             "svg_current_review_path": project_path / "notes" / "svg_current_review.md",
             "svg_execution_log_path": project_path / "notes" / "svg_execution_log.md",
             "strategist_handoff_path": project_path / "notes" / "strategist_handoff.md",
@@ -1451,6 +1450,7 @@ def command_run(args: argparse.Namespace) -> None:
             input_hash=svg_pack_input_hash,
             output_paths=run_bundle_output_paths(project_path, actual_svg_pack),
             result={
+                "schema_version": "svg_pack_v2",
                 "queue": str(bundle_paths["svg_execution_queue_path"]),
                 "queue_machine": str(bundle_paths["svg_execution_queue_machine_path"]),
                 "status": str(bundle_paths["svg_generation_status_path"]),
@@ -1459,6 +1459,7 @@ def command_run(args: argparse.Namespace) -> None:
                 "page_briefs": str(bundle_paths["page_briefs_dir"]),
                 "page_context_min": str(bundle_paths["page_context_dir"]),
                 "state": str(bundle_paths["svg_execution_state_path"]),
+                "bundle": str(bundle_paths["svg_current_bundle_path"]),
                 "strategist_handoff": str(bundle_paths["strategist_handoff_path"]),
                 "executor_handoff": str(bundle_paths["executor_handoff_path"]),
                 "run_status": str(bundle_paths["run_status_path"]),
@@ -1476,9 +1477,7 @@ def command_run(args: argparse.Namespace) -> None:
     print(f"  - svg_execution_queue_machine: {bundle_paths['svg_execution_queue_machine_path']}")
     print(f"  - svg_generation_status: {bundle_paths['svg_generation_status_path']}")
     print(f"  - svg_execution_state: {bundle_paths['svg_execution_state_path']}")
-    print(f"  - svg_current_task: {bundle_paths['svg_current_task_path']}")
-    print(f"  - svg_current_prompt: {bundle_paths['svg_current_prompt_path']}")
-    print(f"  - svg_current_context: {bundle_paths['svg_current_context_path']}")
+    print(f"  - svg_current_bundle: {bundle_paths['svg_current_bundle_path']}")
     print(f"  - svg_current_review: {bundle_paths['svg_current_review_path']}")
     print(f"  - svg_execution_log: {bundle_paths['svg_execution_log_path']}")
     print(f"  - svg_postprocess_plan: {bundle_paths['svg_postprocess_plan_path']}")
@@ -1496,7 +1495,7 @@ def command_run(args: argparse.Namespace) -> None:
 
     print("\n下一步执行顺序:")
     print("1. Strategist 先读 `notes/strategist_handoff.md` 做最终确认")
-    print("2. 然后 Executor 读 `notes/executor_handoff.md` + `notes/svg_current_task.md` + `notes/svg_current_prompt.md` + `notes/svg_current_context_pack.md` + `notes/svg_current_review.md` 开始当前页 SVG 生成与当页审核")
+    print("2. 然后 Executor 读 `notes/executor_handoff.md` + `notes/svg_current_bundle.md` + `notes/svg_current_review.md` 开始当前页 SVG 生成与当页审核")
     print("3. 每完成一页，优先用 `svg_execution_runner.py complete` 自动推进下一页；必要时再用 mark/sync/next")
     print("4. 全部完成后按 `notes/svg_postprocess_plan.md` 继续执行 finalize/export/QA 主链路，并以 export gate 结果决定是否允许导出")
 

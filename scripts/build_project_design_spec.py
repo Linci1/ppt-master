@@ -65,6 +65,7 @@ TEMPLATE_SEMANTIC_DRIFT_TOLERANCE = 1
 SECURITY_SERVICE_TITLE_PATTERN_RULES = (
     (("关键证据总览", "证据证明"), "evidence_wall"),
     (("攻击结果归因", "结果导向案例", "典型案例摘要"), "evidence_attached_case_chain"),
+    (("项目范围", "整体回顾"), "swimlane_collaboration"),
     (("社工钓鱼路径", "钓鱼路径"), "swimlane_collaboration"),
     (("内网侧攻击路径",), "attack_case_chain"),
     (("互联网侧攻击路径",), "multi_lane_execution_chain"),
@@ -87,7 +88,7 @@ SECURITY_SERVICE_TEMPLATE_HINTS = {
         "07_data.svg": ("结果总览", "影响结果"),
     },
     "swimlane_collaboration": {
-        "05_case.svg": ("社工钓鱼路径", "客户侧", "长亭侧", "协同", "多角色"),
+        "05_case.svg": ("项目范围", "整体回顾", "范围", "时间", "对象", "社工钓鱼路径", "客户侧", "长亭侧", "协同", "多角色"),
         "10_timeline.svg": ("阶段推进", "联动"),
         "06_tactics.svg": ("战前", "战中", "战后"),
     },

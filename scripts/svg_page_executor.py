@@ -30,6 +30,17 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+
+def _missing_preview_renderer(exc: Exception):
+    def _raiser(*_args: Any, **_kwargs: Any) -> None:
+        raise RuntimeError(
+            "SVG preview renderer unavailable: "
+            f"{type(exc).__name__}: {exc}. Install PyMuPDF / fitz to enable preview snapshots."
+        )
+
+    return _raiser
+
+
 try:
     from build_svg_execution_pack import PAGE_CONTEXT_DIRNAME
     from build_svg_execution_pack import build_svg_execution_pack
@@ -40,7 +51,6 @@ try:
         validate_model_block,
     )
     from check_svg_text_fit import check_svg
-    from render_svg_pages import render_svg as render_svg_preview
     from svg_execution_runner import (
         append_log,
         detect_template_id,
@@ -65,7 +75,6 @@ except ImportError:
         validate_model_block,
     )
     from check_svg_text_fit import check_svg  # type: ignore
-    from render_svg_pages import render_svg as render_svg_preview  # type: ignore
     from svg_execution_runner import (  # type: ignore
         append_log,
         detect_template_id,
@@ -77,6 +86,11 @@ except ImportError:
         sync_state_with_files,
     )
     from svg_quality_checker import SVGQualityChecker  # type: ignore
+
+try:
+    from render_svg_pages import render_svg as render_svg_preview
+except Exception as exc:  # pragma: no cover - exercised via runtime env differences
+    render_svg_preview = _missing_preview_renderer(exc)
 
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -353,6 +367,15 @@ class RenderTuning:
             self.semantic_argument,
             self.progression_reframe,
         )
+
+
+@dataclass(frozen=True)
+class SlotBudgetRule:
+    key: str
+    max_chars: int
+    max_lines: int = 1
+    mode: str = "sentence"
+    severity: str = "warning"
 
 
 def _coerce_bool(value: Any) -> bool:
@@ -1484,11 +1507,17 @@ def shorten(text: str, limit: int) -> str:
     return candidate or text[:limit].rstrip("，、；：: ")
 
 
-def wrap_text(text: str, max_chars: int, max_lines: int = 3) -> list[str]:
+def wrap_text(
+    text: str,
+    max_chars: int,
+    max_lines: int = 3,
+    *,
+    respect_points: bool = True,
+) -> list[str]:
     content = normalize_text(text)
     if not content:
         return []
-    points = split_points(content, limit=max_lines * 2)
+    points = split_points(content, limit=max_lines * 2) if respect_points else []
     if points and all(len(point) <= max_chars for point in points[:max_lines]):
         return [shorten(point, max_chars) for point in points[:max_lines]]
 
@@ -1512,6 +1541,231 @@ def wrap_text(text: str, max_chars: int, max_lines: int = 3) -> list[str]:
     if len(lines) == max_lines and "".join(lines) != content:
         lines[-1] = shorten(lines[-1], max_chars)
     return lines
+
+
+def slot_budget_capacity(rule: SlotBudgetRule) -> int:
+    return max(rule.max_chars, rule.max_chars * max(rule.max_lines, 1))
+
+
+def slot_budget_rules(ctx: PageContext, tuning: RenderTuning) -> list[SlotBudgetRule]:
+    template_name = ctx.template_path.name
+    title_width = 18 if tuning.semantic_headline <= 1 else 15
+    if template_name == "05_case.svg":
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("CASE_BACKGROUND_TITLE", 12, 1, mode="label"),
+            SlotBudgetRule("CASE_BACKGROUND_HEADLINE", 10, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CASE_BACKGROUND", 14, 5, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CASE_FLOW_TITLE", 20, 1, mode="label"),
+            SlotBudgetRule("CASE_LANE_A_TITLE", 14, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CASE_SOLUTION", 18, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CASE_LANE_B_TITLE", 14, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CASE_PROCESS", 18, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CASE_RESULT_TITLE", 14, 1, mode="label"),
+            SlotBudgetRule("CASE_RESULT_HEADLINE", 12, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CASE_RESULTS", 16, 6, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CASE_IMAGE_TITLE", 18, 1, mode="label"),
+            SlotBudgetRule("CASE_IMAGE", 20, 2, mode="evidence"),
+            SlotBudgetRule("CASE_CLIENT_TITLE", 18, 1, mode="label"),
+            SlotBudgetRule("CASE_CLIENT", 32, 2, mode="action", severity="blocker"),
+            SlotBudgetRule("CASE_VALUE_BAND", 18, 1, mode="label", severity="blocker"),
+        ]
+    if template_name == "07_data.svg":
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("PROOF_CONTEXT", 20, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_HEADLINE", title_width, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("PROOF_SUBLINE", 18, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_CANVAS", 12, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("DATA_NOTE_1", 20, 2, mode="evidence", severity="blocker"),
+            SlotBudgetRule("DATA_NOTE_2", 20, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("DATA_NOTE_3", 20, 2, mode="action", severity="blocker"),
+            SlotBudgetRule("PROOF_RELATION_1", 12, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_RELATION_2", 12, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_SUMMARY_1", 18, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_SUMMARY_2", 18, 1, mode="sentence"),
+            SlotBudgetRule("PROOF_SUMMARY_3", 18, 1, mode="action"),
+        ]
+    if template_name == "09_comparison.svg":
+        lane_limit = 14 if tuning.compact_attack_chain == 0 else 12
+        lane_title_limit = 10 if tuning.compact_attack_chain == 0 else 8
+        result_limit = 26 if tuning.compact_attack_chain == 0 else 22
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("COMPARE_HEADLINE", 18 if tuning.compact_attack_chain == 0 else 14, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_TITLE_A", lane_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("COMPARE_TITLE_B", lane_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_A_1", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_A_2", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_A_3", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_A_4", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_B_1", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_B_2", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_B_3", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_CONTENT_B_4", lane_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("COMPARE_RESULT", result_limit, 2, mode="action", severity="blocker"),
+        ]
+    if template_name == "08_product.svg":
+        feature_limit = 10 if tuning.compact_service_map == 0 else 8
+        evidence_limit = 18 if tuning.compact_service_map == 0 else 14
+        name_limit = 14 if tuning.compact_service_map == 0 else 12
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("PRODUCT_NAME", name_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("PRODUCT_FEATURE_1", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_FEATURE_2", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_FEATURE_3", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_FEATURE_4", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_FEATURE_5", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_FEATURE_6", feature_limit, 1, mode="label"),
+            SlotBudgetRule("PRODUCT_IMAGE", evidence_limit, 2, mode="evidence", severity="blocker"),
+            SlotBudgetRule("PRODUCT_VALUE", evidence_limit, 2, mode="action", severity="blocker"),
+        ]
+    if template_name == "12_grid.svg":
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("GRID_SUMMARY", 24 if tuning.compact_matrix == 0 else 22, 2, mode="sentence"),
+        ]
+    if template_name == "16_table.svg":
+        insight_limit = 18 if tuning.compact_matrix == 0 else 14
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("TABLE_INSIGHT_1", insight_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("TABLE_INSIGHT_2", insight_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("TABLE_INSIGHT_3", insight_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("TABLE_HIGHLIGHT", insight_limit, 2, mode="action", severity="blocker"),
+            SlotBudgetRule("CLOSURE_STEP_1", 16, 1, mode="action"),
+            SlotBudgetRule("CLOSURE_STEP_2", 16, 1, mode="action"),
+            SlotBudgetRule("CLOSURE_STEP_3", 16, 1, mode="action"),
+        ]
+    if template_name == "17_service_overview.svg":
+        title_limit = 16 if tuning.compact_service_map == 0 else 12
+        lead_limit = 32 if tuning.compact_service_map == 0 else 24
+        platform_desc_limit = 16 if tuning.compact_service_map == 0 else 14
+        domain_title_limit = 14 if tuning.compact_service_map == 0 else 10
+        domain_desc_limit = 24 if tuning.compact_service_map == 0 else 18
+        value_limit = 16 if tuning.compact_service_map == 0 else 12
+        driver_limit = 28 if tuning.compact_service_map == 0 else 20
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("OVERVIEW_LEAD", lead_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("PLATFORM_NAME", title_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("PLATFORM_DESC", platform_desc_limit, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("DOMAIN_ATTACK_TITLE", domain_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("DOMAIN_ATTACK_DESC", domain_desc_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("DOMAIN_DEFENSE_TITLE", domain_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("DOMAIN_DEFENSE_DESC", domain_desc_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("DOMAIN_TRAINING_TITLE", domain_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("DOMAIN_TRAINING_DESC", domain_desc_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("VALUE_1", value_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("VALUE_2", value_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("VALUE_3", value_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("DRIVER_POINT_1", driver_limit, 1, mode="action", severity="blocker"),
+            SlotBudgetRule("DRIVER_POINT_2", driver_limit, 1, mode="action", severity="blocker"),
+        ]
+    if template_name == "18_domain_capability_map.svg":
+        capability_title_limit = 12
+        capability_desc_limit = 16
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_width, 2, mode="title", severity="blocker"),
+            SlotBudgetRule("METHOD_NOTE", 44 if tuning.compact_service_map == 0 else 32, 2, mode="action", severity="blocker"),
+            SlotBudgetRule("SCENE_POINT_1", 11, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("SCENE_POINT_2", 11, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("SCENE_POINT_3", 11, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_1_TITLE", capability_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_2_TITLE", capability_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_3_TITLE", capability_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_4_TITLE", capability_title_limit, 2, mode="label", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_1_DESC", capability_desc_limit, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_2_DESC", capability_desc_limit, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_3_DESC", capability_desc_limit, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("CAPABILITY_4_DESC", capability_desc_limit, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("OUTCOME_1", 16, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("OUTCOME_2", 16, 3, mode="sentence", severity="blocker"),
+            SlotBudgetRule("OUTCOME_3", 16, 3, mode="action", severity="blocker"),
+        ]
+    if template_name == "19_result_leading_case.svg":
+        title_limit = 16 if tuning.semantic_headline == 1 else (12 if tuning.semantic_headline > 1 else 18)
+        headline_semantic_level = max(tuning.semantic_headline, tuning.semantic_argument)
+        if tuning.compact_header_bundle > 0 or headline_semantic_level > 0:
+            headline_limit = 18 if tuning.compact_header_bundle <= 1 else 15
+        else:
+            headline_limit = 22 if tuning.compact_header_bundle == 1 else 14
+        subline_limit = 16 if tuning.compact_header_bundle == 0 else 10
+        action_limit = 7 if tuning.compact_attack_chain > 1 else 8
+        return [
+            SlotBudgetRule("PAGE_TITLE", title_limit, 1 if tuning.semantic_headline > 0 else 2, mode="title", severity="blocker"),
+            SlotBudgetRule("RESULT_HEADLINE", headline_limit, 2, mode="sentence", severity="blocker"),
+            SlotBudgetRule("HEADLINE_SUBLINE", subline_limit, 1, mode="sentence"),
+            SlotBudgetRule("CLIENT_CONTEXT", 18 if tuning.compact_header_bundle == 0 else 12, 1, mode="label"),
+            SlotBudgetRule("ACTION_1", action_limit, 2, mode="label"),
+            SlotBudgetRule("ACTION_2", action_limit, 2, mode="label"),
+            SlotBudgetRule("ACTION_3", action_limit, 2, mode="label"),
+            SlotBudgetRule("RESULT_1", 6 if tuning.compact_attack_chain > 1 else 8, 2, mode="sentence"),
+            SlotBudgetRule("RESULT_2", 24 if tuning.compact_attack_chain == 0 else 18, 2, mode="sentence"),
+            SlotBudgetRule("RESULT_3", 24 if tuning.compact_attack_chain == 0 else 18, 2, mode="action"),
+            SlotBudgetRule("CLOSURE_1", 18 if tuning.compact_attack_chain == 0 else 14, 2, mode="action"),
+            SlotBudgetRule("CLOSURE_2", 18 if tuning.compact_attack_chain == 0 else 14, 2, mode="action"),
+            SlotBudgetRule("CLOSURE_3", 18 if tuning.compact_attack_chain == 0 else 14, 2, mode="action"),
+        ]
+    return []
+
+
+def fit_slot_value(text: str, rule: SlotBudgetRule) -> str:
+    value = normalize_text(text)
+    if not value:
+        return ""
+    respect_points = True
+    capacity = slot_budget_capacity(rule)
+    if rule.mode == "label":
+        candidate = compact_security_label(value, capacity, 1)
+    elif rule.mode == "evidence":
+        candidate = compact_evidence_sentence(value, capacity, 1)
+    elif rule.mode == "action":
+        candidate = compact_action_result(value, capacity, 1)
+        respect_points = not looks_like_closure_sentence(candidate)
+    elif rule.mode == "title":
+        candidate = shorten(value, capacity)
+        respect_points = False
+    else:
+        candidate = compact_security_sentence(value, capacity, 1)
+    lines = wrap_text(candidate, rule.max_chars, rule.max_lines, respect_points=respect_points)
+    return "".join(lines) if lines else candidate
+
+
+def slot_text_overflows(text: str, rule: SlotBudgetRule) -> bool:
+    value = normalize_text(text)
+    if not value:
+        return False
+    rendered = "".join(wrap_text(value, rule.max_chars, rule.max_lines))
+    return normalize_text(rendered) != value
+
+
+def apply_slot_budget_contract(
+    ctx: PageContext,
+    values: dict[str, str],
+    tuning: RenderTuning,
+) -> tuple[dict[str, str], list[str], list[str], list[str]]:
+    updated = dict(values)
+    repairs: list[str] = []
+    blockers: list[str] = []
+    warnings: list[str] = []
+    for rule in slot_budget_rules(ctx, tuning):
+        original = normalize_text(str(updated.get(rule.key) or ""))
+        if not original:
+            continue
+        fitted = fit_slot_value(original, rule)
+        if fitted and normalize_text(fitted) != original:
+            updated[rule.key] = fitted
+            repairs.append(f"{rule.key} 压缩到 {rule.max_chars}x{rule.max_lines}")
+        final_text = normalize_text(str(updated.get(rule.key) or ""))
+        if slot_text_overflows(final_text, rule):
+            message = f"{rule.key} 仍超出槽位预算 {rule.max_chars}x{rule.max_lines}"
+            if rule.severity == "blocker":
+                blockers.append(message)
+            else:
+                warnings.append(message)
+    return updated, repairs, blockers, warnings
 
 
 def escape_xml(text: str) -> str:
@@ -2112,7 +2366,7 @@ def closure_messages(ctx: PageContext, *, limit: int = 3, repair_level: int = 0)
             anchored: list[str] = []
             for index, item in enumerate(merged[:limit]):
                 if semantic_overlap_score(item, judgment) <= 0 and index == 0:
-                    anchored.append(default_closure_message(ctx, index, allow_action_override=False))
+                    anchored.append(strip_leading_label(ctx.core_judgment))
                 else:
                     anchored.append(item)
             merged = merge_unique_texts(anchored, limit=limit)
@@ -2122,22 +2376,50 @@ def closure_messages(ctx: PageContext, *, limit: int = 3, repair_level: int = 0)
 def header_page_title(ctx: PageContext) -> str:
     title = strip_display_prefix(ctx.page_title)
     if ctx.template_id == "security_service" and is_complex_page(ctx.page):
+        if ctx.template_path.name == "05_case.svg":
+            if any(token in title for token in ("整体回顾", "项目范围")):
+                return "本轮范围、对象与周期已足以支撑后续结论"
+            if any(token in title for token in ("社工", "钓鱼")):
+                return "社工钓鱼路径与系统侧路径相互补充"
+            return semantic_headline_text(ctx, limit=28, level=1)
+        if ctx.template_path.name == "07_data.svg":
+            if any(token in title for token in ("重要成果", "关键结果")):
+                return "外网突破、内网横向和人员受骗已构成高风险结果"
+            if any(token in title for token in ("攻击链总览", "整体攻击路径分析")):
+                return "多条入口最终汇聚相似控制结果"
+            if "内网突破" in title:
+                return "后台权限、未授权访问和凭证问题叠加"
+            return semantic_headline_text(ctx, limit=28, level=1)
+        if ctx.template_path.name == "08_product.svg":
+            if "风险结构总览" in title:
+                return "四类控制薄弱域共同构成主要根因"
+            if any(token in title for token in ("互联网侧", "检测与防护")):
+                return "持续检测与及时修补不足使高危入口长期暴露"
+            return semantic_headline_text(ctx, limit=28, level=1)
+        if ctx.template_path.name == "16_table.svg":
+            if any(token in title for token in ("异常登陆", "异常登录", "审计问题")):
+                return "异常登录审计缺失与高危端口暴露放大驻留风险"
+            if any(token in title for token in ("治理矩阵", "优先级排序")):
+                return "先封堵互联网入口、凭证风险和内网放大条件"
+            return semantic_headline_text(ctx, limit=28, level=1)
+        if ctx.template_path.name == "09_comparison.svg":
+            return semantic_headline_text(ctx, limit=28, level=1)
+        if ctx.template_path.name == "17_service_overview.svg":
+            return semantic_headline_text(ctx, limit=28, level=1)
         if ctx.template_path.name == "18_domain_capability_map.svg" and "风险结构总览" in title:
             return "互联网暴露、审计不足与凭证/人员薄弱构成主要根因"
         if ctx.template_path.name == "18_domain_capability_map.svg" and "审计问题" in title:
             return "审计缺失与高危端口暴露放大内网驻留风险"
         if ctx.template_path.name == "18_domain_capability_map.svg" and "安全意识" in title:
             return "人员识别与响应薄弱持续稀释系统侧治理效果"
+        if ctx.template_path.name == "18_domain_capability_map.svg" and any(token in title for token in ("互联网侧系统安全检测与防护待加强", "检测与防护待加强")):
+            return "持续检测与及时修补不足使高危入口长期暴露"
         if ctx.template_path.name == "18_domain_capability_map.svg" and "整改复测机制" in title:
-            return "责任、动作、复测、回看缺一不可"
+            return "责任动作复测回看缺一不可"
         if ctx.template_path.name == "18_domain_capability_map.svg" and "长亭安服价值" in title:
             return "把复杂风险翻译成可验证、可排序、可闭环动作"
-        if ctx.template_path.name == "07_data.svg" and "内网突破" in title:
-            return "后台权限、未授权访问和凭证问题叠加"
         if ctx.template_path.name == "08_product.svg" and any(token in title for token in ("通用口令", "通用密码")):
             return "通用口令与权限复用放大多点扩散"
-        if ctx.template_path.name == "16_table.svg" and any(token in title for token in ("治理矩阵", "优先级排序")):
-            return "先封堵互联网入口、凭证风险和内网放大条件"
         if ctx.template_path.name == "10_timeline.svg" and any(token in title for token in ("整改路线图", "分阶段推进计划")):
             return "先压高风险入口，再补齐监测审计与制度能力"
         segments = [normalize_text(part) for part in re.split(r"[/／]", title) if normalize_text(part)]
@@ -2236,6 +2518,26 @@ def rewrite_text_node(
         return "".join(parts)
 
     return pattern.sub(repl, svg_text, count=1)
+
+
+def rewrite_semantic_header_title(
+    svg_text: str,
+    title: str,
+    *,
+    width: int = 18,
+    font_size: int = 20,
+    y_override: int = 78,
+    line_height: int = 20,
+) -> str:
+    return rewrite_text_node(
+        svg_text,
+        84,
+        82,
+        lines=wrap_text(title, width, 2, respect_points=False),
+        font_size=font_size,
+        y_override=y_override,
+        line_height=line_height,
+    )
 
 
 def text_element(
@@ -2609,7 +2911,11 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
         management_note = "应按外网入口、内网权限与人员风险三线立即整改复测。"
         return {
             "PROOF_CONTEXT": "关键结果已形成",
-            "PROOF_HEADLINE": compact_security_sentence(ctx.core_judgment, 28, compact_level),
+            "PROOF_HEADLINE": compact_security_sentence(
+                "外网突破、内网横向和人员受骗已共同构成可信的高风险结果",
+                34,
+                compact_level,
+            ),
             "PROOF_SUBLINE": "",
             "DATA_VALUE_1": critical_count.group(1) if critical_count else "3",
             "DATA_LABEL_1": "严重结果",
@@ -2620,20 +2926,20 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
             "PROOF_NODE_1": "外网突破",
             "PROOF_CANVAS": "入口突破 -> 内网扩散 -> 人员命中",
             "PROOF_NODE_3": "高风险判断",
-            "PROOF_RELATION_1": "入口已突破",
-            "PROOF_RELATION_2": "结果已闭合",
+            "PROOF_RELATION_1": "结果已真实落地",
+            "PROOF_RELATION_2": "影响已足以排序动作",
             "DATA_NOTE_1": compact_evidence_sentence(direct_note, 24, compact_level),
             "DATA_NOTE_2": compact_evidence_sentence(result_note, 24, compact_level),
             "DATA_NOTE_3": compact_security_sentence(management_note, 24, compact_level),
-            "PROOF_SUMMARY_1": "外网突破已验证",
-            "PROOF_SUMMARY_2": "内网横向已形成",
-            "PROOF_SUMMARY_3": "内网横向和人员受骗等结果已经构成可信的高风险判断",
+            "PROOF_SUMMARY_1": "外网突破已形成高风险结果",
+            "PROOF_SUMMARY_2": "内网横向与人员命中已被验证",
+            "PROOF_SUMMARY_3": "据此按结果影响优先整改复测",
         }
 
     if "攻击链总览" in page_title or "整体攻击路径分析" in page_title:
         return apply_data_page_argument_overrides(ctx, tuning, {
             "PROOF_CONTEXT": "多入口汇聚判断",
-            "PROOF_HEADLINE": "多条入口最终汇聚相似控制结果，说明风险具有结构性和可复制性",
+            "PROOF_HEADLINE": "多条入口最终汇聚相似控制结果，说明风险具备结构性和可复制性",
             "PROOF_SUBLINE": "",
             "DATA_VALUE_1": "6",
             "DATA_LABEL_1": "主入口类型",
@@ -2644,8 +2950,8 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
             "PROOF_NODE_1": "外网与人员入口",
             "PROOF_CANVAS": "外网突破 -> 内网放大 -> 结果触达",
             "PROOF_NODE_3": "控制结果",
-            "PROOF_RELATION_1": "先看入口落点",
-            "PROOF_RELATION_2": "再看结果触达",
+            "PROOF_RELATION_1": "入口并非孤立存在",
+            "PROOF_RELATION_2": "最终汇聚相似控制结果",
             "DATA_NOTE_1": compact_evidence_sentence(
                 evidence_points[0] if evidence_points else "互联网与人员侧入口同时存在",
                 24,
@@ -2657,13 +2963,13 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
                 compact_level,
             ),
             "DATA_NOTE_3": compact_security_sentence(
-                action_text or "应按主链路优先整改复测",
+                action_text or "应按主链路优先封堵入口、压降放大条件并复测",
                 24,
                 compact_level,
             ),
-            "PROOF_SUMMARY_1": "入口已形成",
-            "PROOF_SUMMARY_2": "放大条件已具备",
-            "PROOF_SUMMARY_3": "多条入口最终汇聚相似控制结果，应优先整改",
+            "PROOF_SUMMARY_1": "多条入口已汇聚相似控制结果",
+            "PROOF_SUMMARY_2": "放大条件让风险具备可复制性",
+            "PROOF_SUMMARY_3": "应按主链路优先封堵并复测",
         })
 
     if "社工" in page_title or "钓鱼" in page_title:
@@ -2744,7 +3050,11 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
         anchors = [("3", "后台权限点"), ("2", "放大条件"), ("1", "高影响结果")]
         return apply_data_page_argument_overrides(ctx, tuning, {
             "PROOF_CONTEXT": "内网突破典型案例",
-            "PROOF_HEADLINE": compact_security_sentence(ctx.core_judgment, 20, compact_level),
+            "PROOF_HEADLINE": compact_security_sentence(
+                "后台权限、未授权访问和凭证问题叠加，足以形成高影响结果",
+                34,
+                compact_level,
+            ),
             "PROOF_SUBLINE": "",
             "DATA_VALUE_1": anchors[0][0],
             "DATA_LABEL_1": anchors[0][1],
@@ -2755,14 +3065,18 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
             "PROOF_NODE_1": "后台权限",
             "PROOF_CANVAS": "链路可持续放大",
             "PROOF_NODE_3": "高影响结果",
-            "PROOF_RELATION_1": "入口进入后台",
-            "PROOF_RELATION_2": "结果已可证明",
+            "PROOF_RELATION_1": "后台与未授权构成进入点",
+            "PROOF_RELATION_2": "凭证问题继续放大结果",
             "DATA_NOTE_1": compact_evidence_sentence(evidence_points[0] if evidence_points else "后台权限已获取", 24, compact_level),
             "DATA_NOTE_2": compact_evidence_sentence(evidence_points[1] if len(evidence_points) > 1 else "横向链路已形成", 24, compact_level),
-            "DATA_NOTE_3": compact_security_sentence(action_text, 24, compact_level),
-            "PROOF_SUMMARY_1": "先收口后台权限",
-            "PROOF_SUMMARY_2": "再切断放大链路",
-            "PROOF_SUMMARY_3": "最后复测验证",
+            "DATA_NOTE_3": compact_security_sentence(
+                action_text or "先收口后台权限与未授权访问，再压降凭证放大条件",
+                24,
+                compact_level,
+            ),
+            "PROOF_SUMMARY_1": "后台权限与未授权已成进入点",
+            "PROOF_SUMMARY_2": "凭证问题继续放大高影响结果",
+            "PROOF_SUMMARY_3": "优先收口后台与凭证并复测",
         })
 
     return apply_data_page_argument_overrides(ctx, tuning, {
@@ -2787,6 +3101,98 @@ def build_data_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, s
         "PROOF_SUMMARY_2": "再看证明",
         "PROOF_SUMMARY_3": "最后看动作",
     })
+
+
+def build_case_page_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, str]:
+    compact_level = min(2, max(tuning.compact_standard, tuning.semantic_argument))
+    closure_level = max(tuning.semantic_argument, tuning.semantic_closure)
+    evidence_points = semantic_points_with_fallback(ctx, limit=6)
+    closure_points = closure_messages(ctx, limit=3, repair_level=max(1, closure_level))
+    evidence_labels = merge_unique_texts(
+        [
+            compact_evidence_sentence(item, 20, 1)
+            for item in evidence_points
+            if compact_evidence_sentence(item, 20, 1)
+        ],
+        limit=3,
+    )
+    evidence_summary = " / ".join(evidence_labels) or compact_security_sentence(
+        ctx.supporting_evidence or ctx.core_judgment,
+        32,
+        compact_level,
+    )
+    action_text = page_action_text(ctx)
+
+    background_title = "输入边界"
+    background_headline = "案例背景"
+    flow_title = "协同判断主线"
+    lane_a_title = "问题确认 / 甲方侧"
+    lane_b_title = "攻防推进 / 攻击队"
+    result_title = "管理判断"
+    result_headline = "结果可信"
+    image_title = "代表证据 / 关键样例"
+    client_title = "管理收束 / 下一步"
+    value_band = "当前结论已具备可信基础"
+    background = ctx.page_intent or ctx.proof_goal or ctx.core_judgment
+    solution = ctx.proof_goal or ctx.page_intent or ctx.core_judgment
+    process = action_text or closure_points[0]
+    results = ctx.core_judgment or ctx.proof_goal
+    case_image = evidence_summary
+    case_client = "；".join(closure_points[:2])
+
+    if any(token in ctx.page_title for token in ("整体回顾", "项目范围")):
+        background_title = "范围与代表性"
+        background_headline = "本轮基础"
+        flow_title = "范围确认与结果归集"
+        lane_a_title = "范围确认 / 甲方侧"
+        lane_b_title = "结果归集 / 攻击队"
+        result_title = "可信结果"
+        result_headline = "真实攻防基础已建立"
+        image_title = "范围代表性证据"
+        client_title = "进入成果与风险判断"
+        value_band = "范围与结果基础已建立"
+        background = "本轮演练覆盖核心对象、时间窗口与关键场景，具备代表性。"
+        solution = "确认演练对象、边界与周期，统一成果口径。"
+        process = "归并外网突破、服务器权限与敏感信息等关键结果。"
+        results = "ThinkPHP RCE、Log4j2 RCE 与 Nacos 后台权限已共同证明结论来自真实攻防。"
+        case_image = evidence_summary or "ThinkPHP / Log4j2 / Nacos 证据"
+        case_client = "本轮范围具备代表性，可直接进入关键成果与风险结构判断。"
+    elif any(token in ctx.page_title for token in ("社工", "钓鱼")):
+        background_title = "人员侧入口"
+        background_headline = "触达证据"
+        flow_title = "社工路径协同主线"
+        lane_a_title = "攻击侧协同 / 触达诱导"
+        lane_b_title = "员工侧联动 / 求证处置"
+        result_title = "结果证明"
+        result_headline = "社工命中结果已被验证"
+        image_title = "截图证据 / 命中样例"
+        client_title = "协同收口 / 复测动作"
+        value_band = "人员侧入口与协同断点已被验证"
+        background = "采招、客服与 HR 三类角色已被社工路径触达，人员侧入口真实存在。"
+        solution = "攻击侧通过在线客服、微信添加和问题材料分阶段诱导，完成触达与转化。"
+        process = "员工侧缺少身份核验、异常上报与协同联动，使社工路径可与系统侧链路叠加。"
+        results = "客服平台、采招与 HR 命中结果已证明人员侧风险会放大整体攻击成功率。"
+        case_image = "客服平台截图 / 微信添加记录 / 角色命中结果"
+        case_client = "社工路径与系统侧叠加，整体风险会被放大。"
+
+    return {
+        "CASE_BACKGROUND": shorten(background, 72),
+        "CASE_SOLUTION": shorten(solution, 78),
+        "CASE_PROCESS": shorten(process, 78),
+        "CASE_RESULTS": shorten(results, 84),
+        "CASE_IMAGE": shorten(case_image, 40),
+        "CASE_CLIENT": shorten(case_client, 80),
+        "CASE_BACKGROUND_TITLE": compact_security_label(background_title, 12, compact_level),
+        "CASE_BACKGROUND_HEADLINE": compact_security_label(background_headline, 14, compact_level),
+        "CASE_FLOW_TITLE": compact_security_label(flow_title, 20, compact_level),
+        "CASE_LANE_A_TITLE": compact_security_label(lane_a_title, 18, compact_level),
+        "CASE_LANE_B_TITLE": compact_security_label(lane_b_title, 18, compact_level),
+        "CASE_RESULT_TITLE": compact_security_label(result_title, 14, compact_level),
+        "CASE_RESULT_HEADLINE": compact_security_label(result_headline, 16, compact_level),
+        "CASE_IMAGE_TITLE": compact_security_label(image_title, 18, compact_level),
+        "CASE_CLIENT_TITLE": compact_security_label(client_title, 18, compact_level),
+        "CASE_VALUE_BAND": compact_security_label(value_band, 18, compact_level),
+    }
 
 
 def build_timeline_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, str]:
@@ -2864,7 +3270,18 @@ def apply_data_page_argument_overrides(
 
     preserve_specialized_data_page = any(
         token in ctx.page_title
-        for token in ("攻击链总览", "整体攻击路径分析", "社工", "钓鱼", "结果归因")
+        for token in (
+            "项目范围",
+            "整体回顾",
+            "重要成果",
+            "关键结果",
+            "攻击链总览",
+            "整体攻击路径分析",
+            "社工",
+            "钓鱼",
+            "结果归因",
+            "内网突破",
+        )
     )
     closure_level = max(tuning.semantic_argument, tuning.semantic_closure)
     argument_titles = derive_argument_titles(
@@ -2882,7 +3299,11 @@ def apply_data_page_argument_overrides(
         argument_titles.append(f"论点 {len(argument_titles) + 1}")
 
     if preserve_specialized_data_page:
-        values["PROOF_HEADLINE"] = compact_security_sentence(values.get("PROOF_HEADLINE", semantic_headline_text(ctx, limit=22, level=max(1, tuning.semantic_headline))), 24, min(2, tuning.semantic_argument))
+        values["PROOF_HEADLINE"] = compact_security_sentence(
+            values.get("PROOF_HEADLINE", semantic_headline_text(ctx, limit=28, level=max(1, tuning.semantic_headline))),
+            30,
+            min(2, tuning.semantic_argument),
+        )
         values["PROOF_NODE_1"] = compact_security_label(values.get("PROOF_NODE_1", argument_titles[0]), 12, tuning.semantic_argument)
         values["PROOF_CANVAS"] = compact_security_label(values.get("PROOF_CANVAS", argument_titles[1]), 18, tuning.semantic_argument)
         values["PROOF_NODE_3"] = compact_security_label(values.get("PROOF_NODE_3", argument_titles[2]), 12, tuning.semantic_argument)
@@ -3145,6 +3566,15 @@ def build_grid_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, str]:
             "影响结果",
             "复测动作",
         ]
+    elif "关键证据总览" in ctx.page_title or "证据证明" in ctx.page_title:
+        titles = [
+            "外网证据",
+            "内网证据",
+            "人员证据",
+            "控制结果",
+            "关键截图",
+            "后续动作",
+        ]
     elif "风险总览" in ctx.page_title:
         titles = [
             "互联网侧",
@@ -3164,6 +3594,8 @@ def build_grid_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, str]:
     summary_text = ctx.core_judgment or ctx.proof_goal or ctx.goal
     if "重要成果" in ctx.page_title or "关键结果" in ctx.page_title:
         summary_text = "外网突破、内网横向和人员受骗等结果已构成高风险判断，立即整改复测。"
+    elif "关键证据总览" in ctx.page_title or "证据证明" in ctx.page_title:
+        summary_text = "关键证据已足以支撑关键路径与结果判断，应直接进入问题归因与整改排序。"
     elif "风险总览" in ctx.page_title:
         summary_limit = 28 if tuning.compact_matrix == 0 else 24
         summary_text = "应按结果影响而不是按条目数量排序（优先）。"
@@ -3190,7 +3622,19 @@ def build_product_tree_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str
     product_image = compact_security_sentence("证据与根因在此归集", 12 if compact_level == 0 else 10, compact_level)
 
     if "风险结构总览" in ctx.page_title:
-        points = feature_defaults
+        feature_defaults = [
+            "互联网暴露面",
+            "内网审计不足",
+            "凭证治理薄弱",
+            "权限复用扩散",
+            "人员意识不足",
+            "整改闭环缺口",
+        ]
+        points = feature_defaults[:6]
+        product_name = compact_security_label("四类控制薄弱域共同构成主要根因", 20 if compact_level == 0 else 16, compact_level)
+        product_tagline = compact_security_label("主要根因结构树", 10 if compact_level == 0 else 8, compact_level)
+        product_value = compact_security_sentence("真正需要治理的是互联网暴露、审计不足、凭证薄弱与人员意识缺口的叠加。", 26 if compact_level == 0 else 20, compact_level)
+        product_image = compact_security_sentence("四类根因与代表证据在此归集", 16 if compact_level == 0 else 12, compact_level)
     elif "互联网侧" in ctx.page_title:
         feature_defaults = ["未授权暴露", "远程执行口", "弱口令入口", "持续检测缺失", "及时修补滞后", "高危入口持续"]
         while len(points) < 6:
@@ -3347,11 +3791,60 @@ def build_domain_capability_slots(ctx: PageContext, tuning: RenderTuning) -> dic
             "应同步补强识别培训、求证机制与抽检复测",
         ]
         method_note = "先提升人员识别与响应能力，再做求证抽检复测。"
+    elif any(token in ctx.page_title for token in ("互联网侧系统安全检测与防护待加强", "检测与防护待加强")):
+        domain_label = "互联网暴露放大机制"
+        scene_title = "入口持续存在"
+        scene_points = [
+            "未授权、远程执行与弱口令入口仍可被外部直接尝试",
+            "持续检测、暴露面梳理与修补动作未形成稳定节奏",
+            "高危入口被发现后缺少快速封堵与复测回看",
+        ]
+        capability_titles = [
+            "持续检测无法稳定发现高危入口",
+            "补丁修复与限源动作推进滞后",
+            "高危暴露面缺少闭环验证",
+            "入口问题会持续成为首层风险",
+        ]
+        capability_descs = [
+            "外部暴露面依旧存在可直接利用的未授权、远程执行与弱口令问题",
+            "发现问题后未能快速修补、限源或下线高危服务",
+            "整改后缺少复测，导致入口问题容易反复出现",
+            "因此互联网侧应始终放在首层高优先级进行治理",
+        ]
+        outcome_title = "管理判断"
+        outcome_points = [
+            "高危入口会持续提供初始进入机会",
+            "互联网侧问题应先于后续放大条件处理",
+            "先补持续检测与修补节奏，再收口暴露面并复测",
+        ]
+        method_note = "先补持续检测与补丁修复，再收口互联网暴露面并复测。"
     elif "整改复测机制" in ctx.page_title:
-        scene_title = "整改闭环场景"
-        scene_points = ["责任明确", "动作跟踪", "复测回看"]
-        outcome_points = ["高危入口先收口", "整改效果可验证", "问题不再重复暴露"]
-        method_note = "按识别、处置、复测、回看推进闭环。"
+        domain_label = "整改闭环机制"
+        scene_title = "闭环不是单次整改"
+        scene_points = [
+            "问题责任必须落到系统和责任人",
+            "整改动作要持续跟踪直到高危入口失效",
+            "复测和回看结果必须回流到优化动作",
+        ]
+        capability_titles = [
+            "责任到人",
+            "动作落地",
+            "复测验证",
+            "回看优化",
+        ]
+        capability_descs = [
+            "明确责任系统、责任人和完成标准，避免问题悬空",
+            "围绕高危入口与放大链路推进整改，不做一次性处理",
+            "以复测结果确认风险真正失效，而不是只看动作完成",
+            "把结果回流到制度、规则和持续运营，避免问题反复出现",
+        ]
+        outcome_title = "管理判断"
+        outcome_points = [
+            "责任、动作和复测要形成联动闭环",
+            "整改完成必须以复测和回看结果为准",
+            "缺任一环节风险都可能重复暴露",
+        ]
+        method_note = "把责任、动作、复测、回看持续运转，才能避免风险重复暴露。"
     elif "长亭安服价值" in ctx.page_title:
         scene_title = "安服价值落点"
         scene_points = ["问题可解释", "动作可排序", "闭环可验证"]
@@ -3417,6 +3910,7 @@ def build_comparison_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, 
             labels.append("代表路径" if len(labels) == 0 else "关键放大点")
 
     if track_type == "internet":
+        labels = [labels[0], "外网入口"]
         lane_a = [labels[0], "命令执行", "外网落点", "内网延伸"] if tuning.semantic_argument > 0 else [labels[0], "命令执行", "服务器权限", "可继续打内网"]
         lane_b = [labels[1], "远程执行", "第二落点", "持续驻留"] if tuning.semantic_argument > 0 else [labels[1], "远程执行", "形成第二落点", "老组件即入口"]
         result = "互联网侧暴露面与高危漏洞组合，已形成稳定初始进入能力；应优先收口并复测。"
@@ -3459,6 +3953,9 @@ def build_comparison_slots(ctx: PageContext, tuning: RenderTuning) -> dict[str, 
 
 def build_security_service_slot_map(ctx: PageContext, template_name: str, tuning: RenderTuning) -> dict[str, str]:
     points = semantic_points_with_fallback(ctx, limit=6)
+    if template_name == "05_case.svg":
+        return build_case_page_slots(ctx, tuning)
+
     if template_name == "07_data.svg":
         return build_data_page_slots(ctx, tuning)
 
@@ -3521,6 +4018,19 @@ def build_security_service_slot_map(ctx: PageContext, template_name: str, tuning
             "CLOSURE_STEP_2": shorten(closure_points[1] if len(closure_points) > 1 else "再压降可放大链路", 16),
             "CLOSURE_STEP_3": shorten(closure_points[2] if len(closure_points) > 2 else "最后复测验证闭环", 16),
         }
+        if any(token in ctx.page_title for token in ("异常登陆", "异常登录", "审计问题")):
+            values.update({
+                "PRIORITY_1": "P1 先补异常登录审计",
+                "PRIORITY_2": "P2 收口高危端口暴露",
+                "PRIORITY_3": "P3 复测驻留与横向失效",
+                "TABLE_INSIGHT_1": compact_security_sentence("异常登录审计缺失与高危端口暴露共同放大驻留风险", insight_limit + 2, compact_level),
+                "TABLE_INSIGHT_2": compact_security_sentence("先补登录留痕、限源和告警联动", insight_limit + 2, compact_level),
+                "TABLE_INSIGHT_3": compact_security_sentence("以驻留与横向链路失效作为完成标准", insight_limit + 2, compact_level),
+                "TABLE_HIGHLIGHT": compact_security_sentence("不是平均治理，而是优先切断驻留放大条件", 22 if compact_level == 0 else 18, compact_level),
+                "CLOSURE_STEP_1": "先补异常登录审计",
+                "CLOSURE_STEP_2": "再收口高危端口",
+                "CLOSURE_STEP_3": "最后复测驻留失效",
+            })
         if any(token in ctx.page_title for token in ("治理矩阵", "优先级排序")):
             values.update({
                 "PRIORITY_1": "P1 封堵互联网入口",
@@ -3605,7 +4115,114 @@ def postprocess_rendered_svg(
     placeholder_values: dict[str, str],
 ) -> str:
     template_name = ctx.template_path.name
-    if template_name == "19_result_leading_case.svg":
+    if template_name == "05_case.svg":
+        title_font = 20 if tuning.semantic_headline <= 1 else 18
+        title_width = 18 if tuning.semantic_headline <= 1 else 15
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=title_width,
+            font_size=title_font,
+            y_override=78,
+            line_height=20,
+        )
+        svg_text = rewrite_text_node(svg_text, 84, 218, lines=[placeholder_values.get("CASE_BACKGROUND_TITLE", "")], font_size=13, y_override=218, line_height=14)
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            244,
+            lines=wrap_text(placeholder_values.get("CASE_BACKGROUND_HEADLINE", ""), 10, 2),
+            font_size=18,
+            y_override=240,
+            line_height=18,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            286,
+            lines=wrap_text(placeholder_values.get("CASE_BACKGROUND", ""), 14, 5),
+            font_size=12,
+            y_override=282,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(svg_text, 352, 218, lines=[placeholder_values.get("CASE_FLOW_TITLE", "")], font_size=16, y_override=218, line_height=18)
+        svg_text = rewrite_text_node(
+            svg_text,
+            376,
+            278,
+            lines=wrap_text(placeholder_values.get("CASE_LANE_A_TITLE", ""), 14, 2),
+            font_size=12,
+            y_override=276,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            376,
+            316,
+            lines=wrap_text(placeholder_values.get("CASE_SOLUTION", ""), 18, 3),
+            font_size=12,
+            y_override=308,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            376,
+            418,
+            lines=wrap_text(placeholder_values.get("CASE_LANE_B_TITLE", ""), 14, 2),
+            font_size=12,
+            y_override=416,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            376,
+            456,
+            lines=wrap_text(placeholder_values.get("CASE_PROCESS", ""), 18, 3),
+            font_size=12,
+            y_override=448,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(svg_text, 906, 218, lines=[placeholder_values.get("CASE_RESULT_TITLE", "")], font_size=13, y_override=218, line_height=14)
+        svg_text = rewrite_text_node(
+            svg_text,
+            906,
+            244,
+            lines=wrap_text(placeholder_values.get("CASE_RESULT_HEADLINE", ""), 12, 2),
+            font_size=18,
+            y_override=240,
+            line_height=18,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            928,
+            306,
+            lines=wrap_text(placeholder_values.get("CASE_RESULTS", ""), 16, 6),
+            font_size=12,
+            y_override=300,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(svg_text, 84, 560, lines=[placeholder_values.get("CASE_IMAGE_TITLE", "")], font_size=13, y_override=560, line_height=14)
+        svg_text = rewrite_text_node(
+            svg_text,
+            309,
+            588,
+            lines=wrap_text(placeholder_values.get("CASE_IMAGE", ""), 20, 2),
+            font_size=13,
+            y_override=582,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(svg_text, 604, 560, lines=[placeholder_values.get("CASE_CLIENT_TITLE", "")], font_size=15, y_override=560, line_height=16)
+        svg_text = rewrite_text_node(
+            svg_text,
+            604,
+            594,
+            lines=wrap_text(placeholder_values.get("CASE_CLIENT", ""), 32, 2),
+            font_size=13,
+            y_override=588,
+            line_height=16,
+        )
+        svg_text = rewrite_text_node(svg_text, 1045, 491, lines=[placeholder_values.get("CASE_VALUE_BAND", "")], font_size=12, y_override=491, line_height=14)
+    elif template_name == "19_result_leading_case.svg":
         if tuning.semantic_headline > 0:
             title_font = 20 if tuning.semantic_headline == 1 else 18
             title_width = 16 if tuning.semantic_headline == 1 else 12
@@ -3736,6 +4353,14 @@ def postprocess_rendered_svg(
             svg_text = rewrite_text_node(svg_text, 640, 593, font_size=11)
             svg_text = rewrite_text_node(svg_text, 1028, 593, font_size=11)
     elif template_name == "12_grid.svg":
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
         headline_level = max(1, tuning.semantic_headline, tuning.semantic_argument)
         grid_headline = semantic_headline_text(ctx, limit=28, level=headline_level)
         grid_headline_lines = wrap_text(
@@ -3767,6 +4392,16 @@ def postprocess_rendered_svg(
                 y_override=577,
                 line_height=16,
             )
+        elif "关键证据总览" in ctx.page_title or "证据证明" in ctx.page_title:
+            svg_text = rewrite_text_node(
+                svg_text,
+                88,
+                577,
+                lines=["结果判断 / 下一步"],
+                font_size=15,
+                y_override=577,
+                line_height=16,
+            )
         svg_text = rewrite_text_node(
             svg_text,
             88,
@@ -3784,6 +4419,51 @@ def postprocess_rendered_svg(
                 for x in (110, 489, 868):
                     svg_text = rewrite_text_node(svg_text, x, y, font_size=11 if tuning.compact_matrix == 1 else 10)
     elif template_name == "07_data.svg":
+        header_title = placeholder_values.get("PAGE_TITLE", "")
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            header_title,
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        headline_lines = wrap_text(
+            placeholder_values.get("PROOF_HEADLINE", ""),
+            18 if tuning.semantic_headline <= 1 else 15,
+            2,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            210,
+            lines=wrap_text(placeholder_values.get("PROOF_CONTEXT", ""), 20, 1),
+            font_size=12,
+            y_override=208,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            236,
+            lines=headline_lines,
+            font_size=18 if len(headline_lines) > 1 else 20,
+            y_override=228 if len(headline_lines) > 1 else 236,
+            line_height=20,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            255,
+            lines=wrap_text(placeholder_values.get("PROOF_SUBLINE", ""), 18, 1),
+            font_size=11,
+            y_override=257,
+            line_height=13,
+        )
+        svg_text = svg_text.replace(
+            '<rect x="84" y="247" width="140" height="3" fill="#ED7D31" rx="2" />',
+            '',
+        )
         for x in (874, 1005, 1136):
             svg_text = rewrite_text_node(svg_text, x, 229, font_size=22)
         for x in (874, 1005, 1136):
@@ -3797,58 +4477,538 @@ def postprocess_rendered_svg(
             y_override=428,
             line_height=16,
         )
-        if any(token in ctx.page_title for token in ("攻击链总览", "整体攻击路径分析")):
-            svg_text = rewrite_text_node(svg_text, 152, 151, lines=["主链路结论"], font_size=14, y_override=151, line_height=16)
-            svg_text = rewrite_text_node(svg_text, 86, 319, lines=["入口-放大-结果主链"], font_size=16, y_override=319, line_height=18)
-            svg_text = rewrite_text_node(svg_text, 161, 364, lines=["入口落点"], font_size=12, y_override=364, line_height=14)
-            svg_text = rewrite_text_node(svg_text, 426, 364, lines=["链路放大"], font_size=12, y_override=364, line_height=14)
-            svg_text = rewrite_text_node(svg_text, 691, 364, lines=["结果触达"], font_size=12, y_override=364, line_height=14)
-            svg_text = rewrite_text_node(svg_text, 844, 319, lines=["结果证据 / 管理判断"], font_size=16, y_override=319, line_height=18)
+        proof_title = "当前主判断"
+        left_title = "当前入口"
+        mid_title = "放大条件"
+        right_title = "结果影响"
+        evidence_title = "结果证据 / 管理动作"
+        note_1_title = "直接证据"
+        note_2_title = "结果判断"
+        note_3_title = "优先动作"
+        if any(token in ctx.page_title for token in ("重要成果", "关键结果")):
+            proof_title = "关键结果已形成第一层证明"
+            left_title = "外网结果"
+            mid_title = "内网放大"
+            right_title = "人员 / 影响"
+            evidence_title = "结果证据 / 优先动作"
+            note_1_title = "入口结果"
+            note_2_title = "影响结果"
+            note_3_title = "整改收束"
+        elif any(token in ctx.page_title for token in ("攻击链总览", "整体攻击路径分析")):
+            proof_title = "入口-放大-结果主链"
+            left_title = "入口落点"
+            mid_title = "放大条件"
+            right_title = "控制结果"
+            evidence_title = "结果证据 / 管理动作"
+            note_1_title = "入口样例"
+            note_2_title = "放大条件"
+            note_3_title = "优先动作"
+        elif "内网突破" in ctx.page_title:
+            proof_title = "后台权限 -> 放大条件 -> 高影响结果"
+            left_title = "后台权限"
+            mid_title = "放大条件"
+            right_title = "高影响结果"
+            evidence_title = "结果证据 / 收口动作"
+            note_1_title = "后台 / 未授权"
+            note_2_title = "凭证 / 放大"
+            note_3_title = "收口 / 复测"
+        svg_text = rewrite_text_node(svg_text, 86, 319, lines=[proof_title], font_size=16, y_override=319, line_height=18)
+        svg_text = rewrite_text_node(svg_text, 161, 364, lines=[left_title], font_size=12, y_override=364, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 426, 364, lines=[mid_title], font_size=12, y_override=364, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 691, 364, lines=[right_title], font_size=12, y_override=364, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 844, 319, lines=[evidence_title], font_size=16, y_override=319, line_height=18)
+        svg_text = rewrite_text_node(svg_text, 866, 365, lines=[note_1_title], font_size=12, y_override=365, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 866, 426, lines=[note_2_title], font_size=12, y_override=426, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 866, 487, lines=[note_3_title], font_size=12, y_override=487, line_height=14)
+        note_1_lines = wrap_text(placeholder_values.get("DATA_NOTE_1", ""), 20, 2)
+        note_2_lines = wrap_text(placeholder_values.get("DATA_NOTE_2", ""), 20, 2)
+        note_3_lines = wrap_text(placeholder_values.get("DATA_NOTE_3", ""), 20, 2)
+        note_line_height = 11
+        svg_text = rewrite_text_node(
+            svg_text,
+            866,
+            384,
+            lines=note_1_lines,
+            font_size=10 if len(note_1_lines) > 1 else 11,
+            y_override=381 if len(note_1_lines) > 1 else 378,
+            line_height=note_line_height,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            866,
+            445,
+            lines=note_2_lines,
+            font_size=10 if len(note_2_lines) > 1 else 11,
+            y_override=442 if len(note_2_lines) > 1 else 439,
+            line_height=note_line_height,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            866,
+            506,
+            lines=note_3_lines,
+            font_size=10 if len(note_3_lines) > 1 else 11,
+            y_override=503 if len(note_3_lines) > 1 else 500,
+            line_height=note_line_height,
+        )
+        svg_text = rewrite_text_node(svg_text, 230, 508, lines=[shorten(placeholder_values.get("PROOF_RELATION_1", ""), 12)], font_size=10, y_override=508, line_height=12)
+        svg_text = rewrite_text_node(svg_text, 620, 508, lines=[shorten(placeholder_values.get("PROOF_RELATION_2", ""), 12)], font_size=10, y_override=508, line_height=12)
+        svg_text = rewrite_text_node(svg_text, 252, 585, lines=[shorten(placeholder_values.get("PROOF_SUMMARY_1", ""), 18)], font_size=11, y_override=585, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 640, 585, lines=[shorten(placeholder_values.get("PROOF_SUMMARY_2", ""), 18)], font_size=11, y_override=585, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 1028, 585, lines=[shorten(placeholder_values.get("PROOF_SUMMARY_3", ""), 18)], font_size=11, y_override=585, line_height=13)
     elif template_name == "09_comparison.svg":
-        svg_text = re.sub(r'(x="84"\s+y="82"[^>]*font-size=")28(")', r'\g<1>16\2', svg_text, count=1)
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        headline_lines = wrap_text(
+            placeholder_values.get("COMPARE_HEADLINE", ""),
+            18 if tuning.compact_attack_chain == 0 else 14,
+            2,
+        )
         svg_text = rewrite_text_node(
             svg_text,
             86,
             216,
-            lines=[placeholder_values.get("COMPARE_HEADLINE", "")],
-            font_size=18,
-            y_override=210,
-            line_height=20,
+            lines=headline_lines,
+            font_size=18 if tuning.compact_attack_chain == 0 else 16,
+            y_override=210 if len(headline_lines) > 1 else 216,
+            line_height=18,
         )
-        svg_text = rewrite_text_node(svg_text, 132, 338, font_size=14)
-        svg_text = rewrite_text_node(svg_text, 132, 454, font_size=14)
+        if len(headline_lines) > 1:
+            svg_text = svg_text.replace(
+                '<line x1="86" y1="226" x2="1190" y2="226" stroke="#D9E2F3" stroke-width="1.5" />',
+                '',
+            )
+        svg_text = rewrite_text_node(
+            svg_text,
+            132,
+            338,
+            lines=wrap_text(placeholder_values.get("COMPARE_TITLE_A", ""), 10 if tuning.compact_attack_chain == 0 else 8, 2),
+            font_size=14 if tuning.compact_attack_chain == 0 else 13,
+            y_override=332,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            132,
+            454,
+            lines=wrap_text(placeholder_values.get("COMPARE_TITLE_B", ""), 10 if tuning.compact_attack_chain == 0 else 8, 2),
+            font_size=14 if tuning.compact_attack_chain == 0 else 13,
+            y_override=448,
+            line_height=15,
+        )
+        for x, key in (
+            (230, "COMPARE_CONTENT_A_1"),
+            (450, "COMPARE_CONTENT_A_2"),
+            (670, "COMPARE_CONTENT_A_3"),
+            (890, "COMPARE_CONTENT_A_4"),
+        ):
+            svg_text = rewrite_text_node(
+                svg_text,
+                x,
+                338,
+                lines=wrap_text(placeholder_values.get(key, ""), 14 if tuning.compact_attack_chain == 0 else 12, 2),
+                font_size=12 if tuning.compact_attack_chain == 0 else 11,
+                y_override=324,
+                line_height=15,
+            )
+        for x, key in (
+            (230, "COMPARE_CONTENT_B_1"),
+            (450, "COMPARE_CONTENT_B_2"),
+            (670, "COMPARE_CONTENT_B_3"),
+            (890, "COMPARE_CONTENT_B_4"),
+        ):
+            svg_text = rewrite_text_node(
+                svg_text,
+                x,
+                454,
+                lines=wrap_text(placeholder_values.get(key, ""), 14 if tuning.compact_attack_chain == 0 else 12, 2),
+                font_size=12 if tuning.compact_attack_chain == 0 else 11,
+                y_override=440,
+                line_height=15,
+            )
         svg_text = rewrite_text_node(
             svg_text,
             88,
             591,
-            lines=wrap_text(placeholder_values.get("COMPARE_RESULT", ""), 26, 2),
-            font_size=14,
-            y_override=584,
+            lines=wrap_text(placeholder_values.get("COMPARE_RESULT", ""), 26 if tuning.compact_attack_chain == 0 else 22, 2),
+            font_size=14 if tuning.compact_attack_chain == 0 else 13,
+            y_override=584 if tuning.compact_attack_chain == 0 else 580,
             line_height=16,
         )
-    elif template_name == "16_table.svg" and tuning.compact_matrix > 0:
-        for y in (406, 440, 474, 508):
-            for x in (98, 182, 332, 476, 664):
-                svg_text = rewrite_text_node(svg_text, x, y, font_size=10)
-        for y in (289, 367, 445, 506, 585):
-            for x in (956, 208, 475, 742):
-                svg_text = rewrite_text_node(svg_text, x, y, font_size=11)
+    elif template_name == "16_table.svg":
+        priority_title = "整改优先级判断"
+        matrix_title = "薄弱域 -> 当前暴露 -> 处置矩阵"
+        decision_title = "整改管理收束"
+        decision_card_1 = "管理判断"
+        decision_card_2 = "关键动作"
+        decision_card_3 = "完成标准"
+        if any(token in ctx.page_title for token in ("异常登陆", "异常登录", "审计问题")):
+            priority_title = "驻留风险优先级判断"
+            matrix_title = "审计缺失 -> 暴露状态 -> 处置矩阵"
+            decision_title = "驻留风险管理收束"
+            decision_card_1 = "驻留判断"
+            decision_card_2 = "先压动作"
+            decision_card_3 = "完成标准"
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        svg_text = rewrite_text_node(svg_text, 86, 207, lines=[priority_title], font_size=12, y_override=207, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 86, 319, lines=[matrix_title], font_size=16, y_override=319, line_height=18)
+        svg_text = rewrite_text_node(svg_text, 122, 364, lines=["优先级"], font_size=11, y_override=364, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 239, 364, lines=["薄弱域"], font_size=11, y_override=364, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 386, 364, lines=["当前暴露"], font_size=11, y_override=364, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 552, 364, lines=["处置动作"], font_size=11, y_override=364, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 756, 364, lines=["复测闭环"], font_size=11, y_override=364, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 934, 216, lines=[decision_title], font_size=15, y_override=216, line_height=16)
+        svg_text = rewrite_text_node(svg_text, 956, 264, lines=[decision_card_1], font_size=12, y_override=264, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 956, 342, lines=[decision_card_2], font_size=12, y_override=342, line_height=14)
+        svg_text = rewrite_text_node(svg_text, 956, 420, lines=[decision_card_3], font_size=12, y_override=420, line_height=14)
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            289,
+            lines=wrap_text(placeholder_values.get("TABLE_INSIGHT_1", ""), 18 if tuning.compact_matrix == 0 else 14, 2),
+            font_size=11,
+            y_override=284,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            367,
+            lines=wrap_text(placeholder_values.get("TABLE_INSIGHT_2", ""), 18 if tuning.compact_matrix == 0 else 14, 2),
+            font_size=11,
+            y_override=362,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            445,
+            lines=wrap_text(placeholder_values.get("TABLE_INSIGHT_3", ""), 18 if tuning.compact_matrix == 0 else 14, 2),
+            font_size=11,
+            y_override=440,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            506,
+            lines=wrap_text(placeholder_values.get("TABLE_HIGHLIGHT", ""), 18 if tuning.compact_matrix == 0 else 14, 2),
+            font_size=11,
+            y_override=500,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(svg_text, 208, 585, lines=[shorten(placeholder_values.get("CLOSURE_STEP_1", ""), 16)], font_size=11, y_override=585, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 475, 585, lines=[shorten(placeholder_values.get("CLOSURE_STEP_2", ""), 16)], font_size=11, y_override=585, line_height=13)
+        svg_text = rewrite_text_node(svg_text, 742, 585, lines=[shorten(placeholder_values.get("CLOSURE_STEP_3", ""), 16)], font_size=11, y_override=585, line_height=13)
         for x in (205, 475, 745):
             svg_text = rewrite_text_node(svg_text, x, 238, font_size=11)
-    elif template_name == "17_service_overview.svg" and tuning.compact_service_map > 0:
-        svg_text = rewrite_text_node(svg_text, 84, 151, font_size=14)
-        svg_text = rewrite_text_node(svg_text, 84, 258, font_size=19 if tuning.compact_service_map == 1 else 18)
-        for y in (304, 609):
-            for x in (84, 116, 650):
-                svg_text = rewrite_text_node(svg_text, x, y, font_size=12 if y == 304 else 13)
-        for y in (291, 369, 447):
-            svg_text = rewrite_text_node(svg_text, 938, y, font_size=13)
-        for y in (277, 365, 453):
-            svg_text = rewrite_text_node(svg_text, 428, y, font_size=14)
-        for y in (304, 392, 480):
-            svg_text = rewrite_text_node(svg_text, 428, y, font_size=10)
+        if tuning.compact_matrix > 0:
+            for y in (406, 440, 474, 508):
+                for x in (98, 182, 332, 476, 664):
+                    svg_text = rewrite_text_node(svg_text, x, y, font_size=10)
+            for y in (289, 367, 445, 506, 585):
+                for x in (956, 208, 475, 742):
+                    svg_text = rewrite_text_node(svg_text, x, y, font_size=11)
+    elif template_name == "17_service_overview.svg":
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        lead_lines = wrap_text(
+            placeholder_values.get("OVERVIEW_LEAD", ""),
+            32 if tuning.compact_service_map == 0 else 24,
+            2,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            151,
+            lines=lead_lines,
+            font_size=12 if tuning.compact_service_map == 0 else 11,
+            y_override=143 if len(lead_lines) > 1 else 149,
+            line_height=13,
+        )
+        platform_name_lines = wrap_text(
+            placeholder_values.get("PLATFORM_NAME", ""),
+            16 if tuning.compact_service_map == 0 else 12,
+            2,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            258,
+            lines=platform_name_lines,
+            font_size=19 if tuning.compact_service_map == 0 else 18,
+            y_override=250 if len(platform_name_lines) > 1 else 258,
+            line_height=18,
+        )
+        platform_desc_lines = wrap_text(
+            placeholder_values.get("PLATFORM_DESC", ""),
+            16 if tuning.compact_service_map == 0 else 14,
+            3,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            84,
+            304,
+            lines=platform_desc_lines,
+            font_size=11 if tuning.compact_service_map == 0 else 10,
+            y_override=292 if len(platform_desc_lines) > 1 else 300,
+            line_height=13,
+        )
+        for y, title_key, desc_key in (
+            (277, "DOMAIN_ATTACK_TITLE", "DOMAIN_ATTACK_DESC"),
+            (365, "DOMAIN_DEFENSE_TITLE", "DOMAIN_DEFENSE_DESC"),
+            (453, "DOMAIN_TRAINING_TITLE", "DOMAIN_TRAINING_DESC"),
+        ):
+            svg_text = rewrite_text_node(
+                svg_text,
+                428,
+                y,
+                lines=wrap_text(placeholder_values.get(title_key, ""), 14 if tuning.compact_service_map == 0 else 10, 2),
+                font_size=14 if tuning.compact_service_map == 0 else 13,
+                y_override=y - 2,
+                line_height=15,
+            )
+            svg_text = rewrite_text_node(
+                svg_text,
+                428,
+                y + 27,
+                lines=wrap_text(placeholder_values.get(desc_key, ""), 24 if tuning.compact_service_map == 0 else 18, 2),
+                font_size=10,
+                y_override=y + 22,
+                line_height=12,
+            )
+        for y, key in (
+            (291, "VALUE_1"),
+            (369, "VALUE_2"),
+            (447, "VALUE_3"),
+        ):
+            svg_text = rewrite_text_node(
+                svg_text,
+                938,
+                y,
+                lines=wrap_text(placeholder_values.get(key, ""), 16 if tuning.compact_service_map == 0 else 12, 2),
+                font_size=13 if tuning.compact_service_map == 0 else 12,
+                y_override=y - 5,
+                line_height=14,
+            )
+        svg_text = rewrite_text_node(svg_text, 84, 578, font_size=15 if tuning.compact_service_map == 0 else 14)
+        svg_text = rewrite_text_node(
+            svg_text,
+            116,
+            609,
+            lines=[shorten(placeholder_values.get("DRIVER_POINT_1", ""), 28 if tuning.compact_service_map == 0 else 20)],
+            font_size=13 if tuning.compact_service_map == 0 else 12,
+            y_override=609,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            650,
+            609,
+            lines=[shorten(placeholder_values.get("DRIVER_POINT_2", ""), 28 if tuning.compact_service_map == 0 else 20)],
+            font_size=13 if tuning.compact_service_map == 0 else 12,
+            y_override=609,
+            line_height=14,
+        )
+    elif template_name == "18_domain_capability_map.svg":
+        scene_zone_title = "关键输入 / 直接约束"
+        capability_zone_title = "核心动作 / 闭环能力"
+        method_label = "推进方法"
+        if any(token in ctx.page_title for token in ("互联网侧系统安全检测与防护待加强", "检测与防护待加强")):
+            scene_zone_title = "互联网暴露 / 直接证据"
+            capability_zone_title = "持续检测与修补缺口"
+            method_label = "优先动作"
+        elif "整改复测机制" in ctx.page_title:
+            scene_zone_title = "闭环输入 / 责任前提"
+            capability_zone_title = "责任-动作-复测-回看闭环"
+            method_label = "闭环要求"
+        elif "长亭安服价值" in ctx.page_title:
+            scene_zone_title = "价值输入 / 管理问题"
+            capability_zone_title = "能力输出 / 执行抓手"
+            method_label = "交付价值"
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        svg_text = rewrite_text_node(svg_text, 84, 220, lines=[scene_zone_title], font_size=15, y_override=220, line_height=16)
+        svg_text = rewrite_text_node(svg_text, 356, 220, lines=[capability_zone_title], font_size=15, y_override=220, line_height=16)
+        svg_text = rewrite_text_node(svg_text, 132, 614, lines=[method_label], font_size=11, y_override=614, line_height=13)
+        svg_text = rewrite_text_node(
+            svg_text,
+            206,
+            617,
+            lines=wrap_text(
+                placeholder_values.get("METHOD_NOTE", ""),
+                44 if tuning.compact_service_map == 0 else 32,
+                2,
+                respect_points=False,
+            ),
+            font_size=13 if tuning.compact_service_map == 0 else 12,
+            y_override=611,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            116,
+            328,
+            lines=wrap_text(placeholder_values.get("SCENE_POINT_1", ""), 11, 3),
+            font_size=11,
+            y_override=316,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            116,
+            398,
+            lines=wrap_text(placeholder_values.get("SCENE_POINT_2", ""), 11, 3),
+            font_size=11,
+            y_override=386,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            116,
+            468,
+            lines=wrap_text(placeholder_values.get("SCENE_POINT_3", ""), 11, 3),
+            font_size=11,
+            y_override=456,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            380,
+            278,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_1_TITLE", ""), 12, 2),
+            font_size=13,
+            y_override=272,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            660,
+            278,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_2_TITLE", ""), 12, 2),
+            font_size=13,
+            y_override=272,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            380,
+            424,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_3_TITLE", ""), 12, 2),
+            font_size=13,
+            y_override=418,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            660,
+            424,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_4_TITLE", ""), 12, 2),
+            font_size=13,
+            y_override=418,
+            line_height=15,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            380,
+            315,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_1_DESC", ""), 16, 3),
+            font_size=11,
+            y_override=309,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            660,
+            315,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_2_DESC", ""), 16, 3),
+            font_size=11,
+            y_override=309,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            380,
+            461,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_3_DESC", ""), 16, 3),
+            font_size=11,
+            y_override=455,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            660,
+            461,
+            lines=wrap_text(placeholder_values.get("CAPABILITY_4_DESC", ""), 16, 3),
+            font_size=11,
+            y_override=455,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            294,
+            lines=wrap_text(placeholder_values.get("OUTCOME_1", ""), 16, 3),
+            font_size=12,
+            y_override=286,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            384,
+            lines=wrap_text(placeholder_values.get("OUTCOME_2", ""), 16, 3),
+            font_size=12,
+            y_override=376,
+            line_height=14,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            956,
+            474,
+            lines=wrap_text(placeholder_values.get("OUTCOME_3", ""), 16, 3),
+            font_size=12,
+            y_override=466,
+            line_height=14,
+        )
     elif template_name == "08_product.svg":
-        if "互联网侧" in ctx.page_title:
+        svg_text = rewrite_semantic_header_title(
+            svg_text,
+            placeholder_values.get("PAGE_TITLE", ""),
+            width=18 if tuning.semantic_headline <= 1 else 15,
+            font_size=20 if tuning.semantic_headline <= 1 else 18,
+            y_override=78,
+            line_height=20,
+        )
+        if "风险结构总览" in ctx.page_title:
+            tree_title = "四类控制薄弱域如何共同放大结果"
+            evidence_title = "根因证据 / 管理收束"
+        elif "互联网侧" in ctx.page_title:
             tree_title = "检测缺失使高危入口持续存在"
             evidence_title = "外网证据 / 整改收束"
         elif "审计" in ctx.page_title:
@@ -3874,12 +5034,30 @@ def postprocess_rendered_svg(
         )
         svg_text = rewrite_text_node(
             svg_text,
+            410,
+            280,
+            lines=wrap_text(placeholder_values.get("PRODUCT_NAME", ""), 14 if tuning.compact_service_map == 0 else 12, 2),
+            font_size=16,
+            y_override=272,
+            line_height=16,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
             814,
             216,
             lines=[evidence_title],
             font_size=16,
             y_override=216,
             line_height=18,
+        )
+        svg_text = rewrite_text_node(
+            svg_text,
+            1005,
+            347,
+            lines=wrap_text(placeholder_values.get("PRODUCT_IMAGE", ""), 18 if tuning.compact_service_map == 0 else 14, 2),
+            font_size=13 if tuning.compact_service_map == 0 else 12,
+            y_override=341,
+            line_height=15,
         )
         svg_text = rewrite_text_node(
             svg_text,
@@ -3992,7 +5170,20 @@ def common_placeholder_map(ctx: PageContext, tuning: RenderTuning) -> dict[str, 
     cover_limit = 40 if tuning.compact_cover == 0 else 28
     chapter_title = strip_display_prefix(ctx.page_title)
     page_title = header_page_title(ctx)
-    page_title_limit = 16 if tuning.semantic_headline > 0 and is_complex_page(ctx.page) else (24 if is_complex_page(ctx.page) else 28)
+    semantic_header_templates = {
+        "05_case.svg",
+        "07_data.svg",
+        "09_comparison.svg",
+        "08_product.svg",
+        "16_table.svg",
+        "17_service_overview.svg",
+        "18_domain_capability_map.svg",
+        "19_result_leading_case.svg",
+    }
+    if ctx.template_path.name in semantic_header_templates and is_complex_page(ctx.page):
+        page_title_limit = 32
+    else:
+        page_title_limit = 16 if tuning.semantic_headline > 0 and is_complex_page(ctx.page) else (24 if is_complex_page(ctx.page) else 28)
     chapter_num = derive_section_index(ctx.section_name, ctx.storyline_sections, ctx.page_title)
     chapter_desc_source = derive_section_desc(
         ctx.section_name,
@@ -4413,6 +5604,140 @@ def apply_pre_slot_soft_qa(
     return applied
 
 
+def slot_budget_repaired_keys(repairs: list[str]) -> set[str]:
+    keys: set[str] = set()
+    for item in repairs:
+        key = str(item.split(" 压缩到", 1)[0]).strip()
+        if key:
+            keys.add(key)
+    return keys
+
+
+def apply_slot_budget_pre_tuning(
+    ctx: PageContext,
+    tuning: RenderTuning,
+    repaired_keys: set[str],
+) -> list[str]:
+    template_name = ctx.template_path.name
+    applied: list[str] = []
+    if template_name == "07_data.svg":
+        pressure_keys = {"PROOF_HEADLINE", "PROOF_CANVAS", "DATA_NOTE_1", "DATA_NOTE_2", "DATA_NOTE_3"}
+        if repaired_keys & pressure_keys and tuning.compact_standard == 0:
+            tuning.compact_standard = 1
+            applied.append("首轮按槽位预算收紧摘要证明页证据堆栈")
+    elif template_name == "05_case.svg":
+        pressure_keys = {"CASE_BACKGROUND", "CASE_SOLUTION", "CASE_PROCESS", "CASE_RESULTS", "CASE_CLIENT"}
+        if repaired_keys & pressure_keys and tuning.compact_standard == 0:
+            tuning.compact_standard = 1
+            applied.append("首轮按槽位预算收紧案例页正文与收束区")
+    elif template_name == "09_comparison.svg":
+        pressure_keys = {
+            "COMPARE_HEADLINE",
+            "COMPARE_TITLE_A",
+            "COMPARE_TITLE_B",
+            "COMPARE_CONTENT_A_1",
+            "COMPARE_CONTENT_A_2",
+            "COMPARE_CONTENT_A_3",
+            "COMPARE_CONTENT_A_4",
+            "COMPARE_CONTENT_B_1",
+            "COMPARE_CONTENT_B_2",
+            "COMPARE_CONTENT_B_3",
+            "COMPARE_CONTENT_B_4",
+            "COMPARE_RESULT",
+        }
+        if repaired_keys & pressure_keys and tuning.compact_attack_chain == 0:
+            tuning.compact_attack_chain = 1
+            applied.append("首轮按槽位预算收紧对比链页泳道与结果区")
+    elif template_name == "08_product.svg":
+        pressure_keys = {"PRODUCT_NAME", "PRODUCT_IMAGE", "PRODUCT_VALUE"}
+        if repaired_keys & pressure_keys and tuning.compact_service_map == 0:
+            tuning.compact_service_map = 1
+            applied.append("首轮按槽位预算收紧根因树页标题与证据区")
+    elif template_name == "16_table.svg":
+        pressure_keys = {"TABLE_INSIGHT_1", "TABLE_INSIGHT_2", "TABLE_INSIGHT_3", "TABLE_HIGHLIGHT", "CLOSURE_STEP_1", "CLOSURE_STEP_2", "CLOSURE_STEP_3"}
+        if repaired_keys & pressure_keys and tuning.compact_matrix == 0:
+            tuning.compact_matrix = 1
+            applied.append("首轮按槽位预算收紧治理矩阵页右侧判断区")
+    elif template_name == "17_service_overview.svg":
+        pressure_keys = {
+            "OVERVIEW_LEAD",
+            "PLATFORM_NAME",
+            "PLATFORM_DESC",
+            "DOMAIN_ATTACK_TITLE",
+            "DOMAIN_ATTACK_DESC",
+            "DOMAIN_DEFENSE_TITLE",
+            "DOMAIN_DEFENSE_DESC",
+            "DOMAIN_TRAINING_TITLE",
+            "DOMAIN_TRAINING_DESC",
+            "VALUE_1",
+            "VALUE_2",
+            "VALUE_3",
+            "DRIVER_POINT_1",
+            "DRIVER_POINT_2",
+        }
+        if repaired_keys & pressure_keys and tuning.compact_service_map == 0:
+            tuning.compact_service_map = 1
+            applied.append("首轮按槽位预算收紧服务总览页头部与域卡片")
+    elif template_name == "18_domain_capability_map.svg":
+        pressure_keys = {
+            "METHOD_NOTE",
+            "SCENE_POINT_1",
+            "SCENE_POINT_2",
+            "SCENE_POINT_3",
+            "CAPABILITY_1_TITLE",
+            "CAPABILITY_2_TITLE",
+            "CAPABILITY_3_TITLE",
+            "CAPABILITY_4_TITLE",
+            "CAPABILITY_1_DESC",
+            "CAPABILITY_2_DESC",
+            "CAPABILITY_3_DESC",
+            "CAPABILITY_4_DESC",
+            "OUTCOME_1",
+            "OUTCOME_2",
+            "OUTCOME_3",
+        }
+        if repaired_keys & pressure_keys and tuning.compact_service_map == 0:
+            tuning.compact_service_map = 1
+            applied.append("首轮按槽位预算收紧能力地图页说明区")
+    elif template_name == "19_result_leading_case.svg":
+        header_keys = {"PAGE_TITLE", "RESULT_HEADLINE", "HEADLINE_SUBLINE", "CLIENT_CONTEXT"}
+        body_keys = {"ACTION_1", "ACTION_2", "ACTION_3", "RESULT_1", "RESULT_2", "RESULT_3", "CLOSURE_1", "CLOSURE_2", "CLOSURE_3"}
+        if repaired_keys & header_keys and tuning.compact_header_bundle == 0:
+            tuning.compact_header_bundle = 1
+            applied.append("首轮按槽位预算收紧案例链页头部")
+        if repaired_keys & body_keys and tuning.compact_attack_chain == 0:
+            tuning.compact_attack_chain = 1
+            applied.append("首轮按槽位预算收紧案例链节点与收束区")
+    return applied
+
+
+def preflight_slot_budget_contract(
+    ctx: PageContext,
+    tuning: RenderTuning,
+) -> tuple[list[str], list[str], list[str]]:
+    normalized_repairs: list[str] = []
+    blockers: list[str] = []
+    warnings: list[str] = []
+    seen_repairs: set[str] = set()
+    for _ in range(3):
+        values, _ = build_placeholder_values(ctx, tuning)
+        _, repairs, blockers, warnings = apply_slot_budget_contract(ctx, values, tuning)
+        for item in repairs[:10]:
+            line = f"按槽位预算预压缩：{item}"
+            if line not in seen_repairs:
+                normalized_repairs.append(line)
+                seen_repairs.add(line)
+        tuning_repairs = apply_slot_budget_pre_tuning(ctx, tuning, slot_budget_repaired_keys(repairs))
+        if not tuning_repairs:
+            break
+        for item in tuning_repairs:
+            line = f"按槽位预算预收紧：{item}"
+            if line not in seen_repairs:
+                normalized_repairs.append(line)
+                seen_repairs.add(line)
+    return normalized_repairs[:10], blockers[:8], warnings[:8]
+
+
 def collect_soft_qa_signals(
     ctx: PageContext,
     page_policy: dict[str, Any],
@@ -4562,8 +5887,23 @@ def render_preview_snapshot(
 
 def render_page(ctx: PageContext, tuning: RenderTuning) -> tuple[str, str]:
     placeholder_values, renderer = build_placeholder_values(ctx, tuning)
+    placeholder_values, slot_repairs, slot_blockers, slot_warnings = apply_slot_budget_contract(
+        ctx,
+        placeholder_values,
+        tuning,
+    )
+    if slot_repairs or slot_blockers or slot_warnings:
+        append_execution_event(
+            ctx,
+            "slot_budget_compaction",
+            repairs=list(slot_repairs[:12]),
+            blockers=list(slot_blockers[:8]),
+            warnings=list(slot_warnings[:8]),
+            target=ctx.page.get("expected_svg", ctx.page_title),
+        )
     svg_text = replace_placeholders(ctx.template_text, placeholder_values)
     if ctx.template_path.name in {
+        "05_case.svg",
         "07_data.svg",
         "09_comparison.svg",
         "08_product.svg",
@@ -4723,7 +6063,10 @@ def evaluate_render_outcome(
 ) -> tuple[str, int, bool]:
     blocking_count = int(quality.get("blocking_issue_count", 0) or 0)
     if preview_error:
-        return "blocked", max(1, blocking_count), False
+        if "SVG preview renderer unavailable" in preview_error:
+            preview_error = ""
+        else:
+            return "blocked", max(1, blocking_count), False
     passed = not fit_issues and blocking_count == 0 and bool(quality.get("passed", False))
     return ("generated" if passed else "qa_failed"), blocking_count, passed
 
@@ -4761,6 +6104,10 @@ def summarize_execution_events(events: list[dict[str, Any]]) -> list[str]:
             lines.append(f"- semantic_headline_rewrite：命中 `{event.get('issue_code')}`，已强化主判断 headline")
         elif event_type == "semantic_closure_rewrite":
             lines.append(f"- semantic_closure_rewrite：命中 `{event.get('issue_code')}`，已改写页尾收束语")
+        elif event_type == "slot_budget_compaction":
+            lines.append(
+                f"- slot_budget_compaction：首轮出图前已按槽位预算压缩字段；动作：{'；'.join(event.get('repairs') or []) or '无'}"
+            )
         elif event_type == "pre_slot_soft_qa":
             lines.append(
                 f"- pre_slot_soft_qa：首轮出图前已前移软性语义修正；动作：{'；'.join(event.get('actions') or []) or '无'}"
@@ -5126,14 +6473,21 @@ def command_render(args: argparse.Namespace) -> None:
             soft_qa_enabled = should_enable_soft_qa(page_policy, soft_qa_signals)
 
     pre_slot_repairs = apply_pre_slot_soft_qa(ctx, tuning, page_policy, soft_qa_signals)
+    slot_budget_repairs, slot_budget_blockers, slot_budget_warnings = preflight_slot_budget_contract(ctx, tuning)
+    if slot_budget_repairs:
+        pre_slot_repairs.extend(slot_budget_repairs)
     seen_signatures.add(tuning.signature())
 
     preflight_blockers = list(page_policy.get("preflight_blockers") or [])
     preflight_warnings = list(page_policy.get("preflight_warnings") or [])
+    preflight_blockers.extend(slot_budget_blockers)
+    preflight_warnings.extend(slot_budget_warnings)
     if ctx.template_asset_blockers:
         preflight_blockers.extend(ctx.template_asset_blockers)
     if ctx.template_asset_warnings:
         preflight_warnings.extend(ctx.template_asset_warnings)
+    page_policy["preflight_blockers"] = preflight_blockers
+    page_policy["preflight_warnings"] = preflight_warnings
     if preflight_blockers:
         blocking_count = len(preflight_blockers)
         status = "blocked"
