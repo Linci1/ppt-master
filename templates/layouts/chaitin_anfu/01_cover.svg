@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- Background: dark tech image + overlay for readability -->
+  <image href="bg_dark_tech.jpeg" x="-12" y="-2" width="1293" height="727" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="0" y="0" width="1280" height="720" fill="#000000" fill-opacity="0.45"/>
+
+  <!-- Title group: vertically centered -->
+  <text x="640" y="280" fill="#FFFFFF" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="700" font-size="54" text-anchor="middle">{{TITLE}}</text>
+  <text x="640" y="340" fill="#FFFFFF" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-weight="700" font-size="32" text-anchor="middle">{{SUBTITLE}}</text>
+
+  <!-- Slogan -->
+  <text x="640" y="400" fill="#7BBD4A" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="22" text-anchor="middle">{{SLOGAN}}</text>
+
+  <!-- Logo: bottom right (matches original pos ~1067,605 in SVG px) -->
+  <image href="chaitin_logo_light.png" x="1067" y="605" width="147" height="41" preserveAspectRatio="xMidYMid meet"/>
+</svg>

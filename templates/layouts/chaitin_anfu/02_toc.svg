@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- White background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#FFFFFF"/>
+
+  <!-- Top green accent line -->
+  <rect x="0" y="0" width="1280" height="4" fill="#7BBD4A"/>
+
+  <!-- TOC items: centered vertical list -->
+  <!-- Item 01 -->
+  <text x="448" y="193" fill="#65C133" font-family="Arial, DIN Alternate, sans-serif" font-size="32" font-weight="700">{{ITEM_01_NUM}}</text>
+  <text x="520" y="193" fill="#65C133" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="32" font-weight="700">{{ITEM_01_TITLE}}</text>
+
+  <!-- Item 02 -->
+  <text x="448" y="305" fill="#65C133" font-family="Arial, DIN Alternate, sans-serif" font-size="32" font-weight="700">{{ITEM_02_NUM}}</text>
+  <text x="520" y="305" fill="#65C133" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="32" font-weight="700">{{ITEM_02_TITLE}}</text>
+
+  <!-- Item 03 -->
+  <text x="448" y="418" fill="#65C133" font-family="Arial, DIN Alternate, sans-serif" font-size="32" font-weight="700">{{ITEM_03_NUM}}</text>
+  <text x="520" y="418" fill="#65C133" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="32" font-weight="700">{{ITEM_03_TITLE}}</text>
+
+  <!-- Optional Item 04 (hidden by default, fill to show) -->
+  {{ITEM_04_SECTION}}
+
+  <!-- Bottom green accent line -->
+  <rect x="0" y="716" width="1280" height="4" fill="#7BBD4A"/>
+</svg>

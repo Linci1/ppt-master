@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <!-- Background: dark tech image + overlay -->
+  <image href="bg_dark_tech.jpeg" x="-12" y="-3" width="1293" height="727" preserveAspectRatio="xMidYMid slice"/>
+  <rect x="0" y="0" width="1280" height="720" fill="#000000" fill-opacity="0.45"/>
+
+  <!-- "Thanks" text: centered -->
+  <text x="640" y="310" fill="#FFFFFF" font-family="Arial, DIN Alternate, sans-serif" font-weight="700" font-size="96" text-anchor="middle">{{THANK_YOU}}</text>
+
+  <!-- Slogan -->
+  <text x="640" y="400" fill="#7BBD4A" font-family="PingFang SC, Microsoft YaHei, Arial, sans-serif" font-size="24" text-anchor="middle">{{SLOGAN}}</text>
+
+  <!-- Green accent line -->
+  <rect x="540" y="430" width="200" height="4" rx="2" fill="#7BBD4A"/>
+
+  <!-- Logo: top-right (matches original pos) -->
+  <image href="chaitin_logo_light.png" x="1089" y="36" width="144" height="41" preserveAspectRatio="xMidYMid meet"/>
+</svg>
