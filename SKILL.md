@@ -154,9 +154,7 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2
 
 将提取结果保存到 `<project_path>/source_ppt_analysis.md`，后续固定页生成时必须参照此文件，不能凭假设设计。
 
-**源文档图片提取（强制 — 安服PPT图片密度核心保障）**：
-
-> ⚠️ 真实安服PPT 95%正文页含图片，图片缺失是当前管线最大短板。此步骤不可跳过。
+**源文档图片提取（强制）**：
 
 如果用户提供了源 PPTX 或 DOCX 文件，必须提取其中的图片素材到项目 `images/` 目录：
 
@@ -200,6 +198,66 @@ rm -rf /tmp/pptx_media_extract
 
 提取完成后，在 `design_spec.md` 的 Image Resource List 中列出所有可用图片文件名，供 Executor 生成 SVG 时引用。
 
+**源文档图片语义验证（强制 — MD5 哈希反查）**：
+
+> ⚠️ **铁律**：源 PPTX 提取的 `image1.png` / `image2.jpeg` 等文件名无任何语义信息，不能凭序号猜测内容。必须通过 MD5 哈希反查源 PPTX 幻灯片，确认图片真实内容后才能在生成中使用。
+
+```python
+# 使用 python-pptx 反查每张图片属于哪个幻灯片，获取幻灯片标题和图片上下文
+from pptx import Presentation
+import hashlib, os, json
+
+source_pptx = '<source_pptx_path>'
+images_dir = '<project_path>/images'
+prs = Presentation(source_pptx)
+
+# 1. 建立图片哈希→幻灯片映射
+image_map = {}  # {md5_hash: [{slide_index, slide_title, shape_name, alt_text}]}
+for i, slide in enumerate(prs.slides):
+    slide_title = ""
+    for s in slide.shapes:
+        if s.has_text_frame and s.shape_type == 14:  # Title
+            slide_title = s.text_frame.text[:60]
+            break
+    for s in slide.shapes:
+        if s.shape_type == 13:  # Picture
+            blob = s.image.blob
+            h = hashlib.md5(blob).hexdigest()
+            if h not in image_map:
+                image_map[h] = []
+            image_map[h].append({
+                "slide_index": i + 1,
+                "slide_title": slide_title or f"(无标题-第{i+1}页)",
+                "shape_name": s.name,
+                "width_px": round(s.width / 914400, 1),  # EMU→inch近似
+                "height_px": round(s.height / 914400, 1)
+            })
+
+# 2. 对 images/ 中每个文件，反查其语义
+result = []
+for fname in os.listdir(images_dir):
+    fpath = os.path.join(images_dir, fname)
+    if not os.path.isfile(fpath): continue
+    h = hashlib.md5(open(fpath, 'rb').read()).hexdigest()
+    slides = image_map.get(h, [])
+    result.append({
+        "filename": fname,
+        "md5": h[:8],
+        "found_in_slides": slides,
+        "semantic_hint": slides[0]["slide_title"] if slides else "❌ 未在源PPT中找到"
+    })
+
+# 3. 输出到 images/manifest.json
+with open(os.path.join(images_dir, 'manifest.json'), 'w') as f:
+    json.dump(result, f, ensure_ascii=False, indent=2)
+print(json.dumps(result, ensure_ascii=False, indent=2))
+```
+
+验证完成后：
+1. 将 `images/manifest.json` 的结果写入 `design_spec.md` 的 Image Resource List，每张图片附上语义标注
+2. **禁止使用 `semantic_hint` 为 `❌ 未在源PPT中找到` 的图片**（可能是模板装饰图，无内容价值）
+3. **禁止凭文件序号猜测图片内容**（如 `image1.png` 不等于"第一张有意义的图"）
+
 > ⚠️ 如果 `unzip` 被权限阻止，改用 python-pptx 提取：
 > ```python
 > from pptx import Presentation
@@ -237,7 +295,8 @@ rm -rf /tmp/pptx_media_extract
 > - SKILL.md 写了 4 条 cp 命令，但容易只执行前 2 条（SVG + design_spec.md），漏掉后 2 条的图片复制。
 > - 如果漏掉，`images/` 为空，封面/章节页背景图和所有页面 Logo 全部空白。
 > - 另外，手写 SVG 时 `href` 引用图片必须用 `../images/` 前缀（SVG 在 `svg_output/`，图片在 `images/`），不能用裸文件名。
-> - **新增陷阱：源文档图片提取**：如果用户提供了源 PPTX/DOCX，必须执行图片提取步骤。不提取图片 → Executor 无素材可用 → 正文页纯文字 → 与真实安服PPT风格严重不符。
+> - **新增陷阱：源文档图片提取**：如果用户提供了源 PPTX/DOCX，必须执行图片提取步骤。不提取图片 → Executor 无素材可用。
+> - **新增陷阱：源图片语义验证**：提取后必须执行 MD5 哈希反查验证，确认图片真实内容。`image1.png` 不等于"第一张有意义的图"——可能只是模板装饰图或Logo。未经验证的图片禁止在生成中使用。
 
 ---
 
@@ -395,8 +454,12 @@ python3 ${SKILL_DIR}/scripts/pptx_native_executor.py <project_path> \
 | 数据表格 | `build_data_table_page` | 漏洞清单、统计表等 |
 | 双栏对比 | `build_two_column_page` | 红蓝对比、攻防对比 |
 | 文本段落 | `build_text_section_page` | 术语说明、政策解读 |
+| 攻击链 | `build_attack_chain_page` | Kill Chain 攻击路径还原 |
+| KPI仪表盘 | `build_kpi_dashboard_page` | 安全态势总览、指标概览 |
+| 漏洞矩阵 | `build_vuln_matrix_page` | 漏洞清单+严重度色标 |
+| 红蓝对抗 | `build_red_blue_page` | 攻防双栏对比分析 |
 
-> 💡 如果 layout_index.json 已由 `reference_analyzer.py` 正确识别页型，`pptx_native_executor.py` 会自动为每页选择最接近的组件函数。
+> 💡 如果 layout_index.json 已由 `reference_analyzer.py` 正确识别页型，`pptx_native_executor.py` 会自动为每页选择最接近的组件函数。对于安服模板，`variant_router.py` 会根据页面标题关键词自动路由到安全专用页型。
 
 **步骤 B-4：质量检查**
 
@@ -437,6 +500,7 @@ Read references/executor-consultant-top.md
 - 生成后的文案结构：至少明确标题层、主体层、证据层、收束层
 - 对 hybrid brand-locked 模板，必须额外满足 `references/hybrid-page-protocol.md`：每个 `body_page` 在落 SVG 前都要先明确 `page_type`、`template_family`、`frame_policy`、`safe_region`、`native_structure`、`split_strategy` 与 `message_contract`，不得直接从未分型正文文本跳到 `{{CONTENT_AREA}}` 填充
 - **安服/安全类模板（chaitin_anfu 等）正文页布局指引（强制）**：当使用 `chaitin_anfu` 模板时，必须先读取 `references/layout-patterns-security.md`，为每个 body page 指定布局类型（9种：standard / lr_split_balanced / lr_split_imagetext / lr_split_dense / lr_split_righttitle / lr_split_lefttitle / tb_split / card_grid / data_table）并遵循其空间坐标和组件推荐，避免千篇一律的 CONTENT_AREA 填充
+- **安服套路匹配（强制）**：当使用 `chaitin_anfu` 模板时，每页正文页必须先执行 `executor-security.md` §4 的"套路匹配决策树"——按关键词+内容结构匹配5种范式（攻击链/漏洞矩阵/红蓝对抗/资产风险/合规概览），匹配成功则按范式执行纪律生成，无匹配才回退到 layout_type 通用布局。**禁止跳过决策树直接使用 CONTENT_AREA 或 lr_split_imagetext 一刀切**
 
 > ⚠️ **主代理专属规则**：SVG 生成只能由当前主代理完成。
 > ⚠️ **连续生成规则**：页面必须在同一上下文中一页一页连续生成，禁止分批切割。
@@ -754,17 +818,43 @@ cp /tmp/docx_images/word/media/* <project_path>/images/
 - 不要完全忽略文档自带的图片，全部用纯SVG重绘
 - 图片必须服务于内容表达，不是装饰
 
-### 陷阱 12：从提取变体到实际使用的缺失链路（extracted_variants 未被 Executor 使用）
+### 陷阱 12：从提取变体到实际使用的缺失链路（extracted_variants 未被 Executor 使用）— ✅ 已修复
 
 **发现背景**：从 HW总结 PPT 源码（`extracted_variants/hw_H2_S12.svg` 等）提取了 6 个正文页布局变体，但 Executor 生成美的报告时，依然使用 `03_content.svg` 通用模板，**提取变体从未被使用**。
 
 **根本原因**：当前 Executor 工作流没有"变体路由"逻辑——它不知道 `extracted_variants/` 里的 SVG 应该对应哪类页面，也不会把提取变体当作模板来填充内容。
 
-**缺失的三个环节**：
+**修复方案**（已实现 `scripts/variant_router.py`）：
 
-1. **变体路由（Variant Router）**：根据内容类型（网格型/L-R分屏/卡片列表/时间线等）为每页选择最匹配的提取变体 SVG
-2. **变体模板化**：把提取的 SVG 里的实占文字（`${长亭红队介绍}` 等）替换为语义化占位符（`${card_title_1}`、`${body_text}`），形成真正的模板
-3. **变体内容填充**：用实际报告内容替换占位符，同时保持原 SVG 的坐标/颜色/圆角等视觉结构
+1. **变体分析**：`variant_router.py` 扫描 `extracted_variants/`，解析每个 SVG 的矩形数/列数/行数，自动推断 `layout_hint`
+2. **关键词路由**：`recommend_layout(title, subtitle)` 根据页面标题关键词推荐 `layout_type → pptx_page_type`
+3. **自动集成**：`pptx_native_executor.py` 的 `CodeGenerator._route_page_type()` 在 func_name 未指定时自动调用 variant_router，按优先级路由：
+   - `content.page_type` 显式指定 → 直接使用
+   - 标题关键词匹配（攻击链/态势/漏洞/红蓝等）→ 关键词路由
+   - 兜底 → 安服主导布局 `two_column`
+
+**路由映射表**（关键词→layout_type→pptx页型）：
+
+| 关键词 | layout_type | pptx_page_type |
+|--------|-------------|----------------|
+| 攻击链/kill chain/攻击路径 | attack_chain | attack_chain |
+| 红蓝/攻防/对抗 | red_blue | red_blue |
+| 态势/总览/KPI/仪表盘 | kpi_dashboard | kpi_dashboard |
+| 漏洞清单/漏洞矩阵 | vuln_matrix | vuln_matrix |
+| 表格/清单/对比表 | table_page | data_table |
+| 时间线/时间轴/进展 | timeline | timeline |
+| 网格/卡片/能力/模块 | grid | card_grid |
+| （默认/其他） | lr_split_imagetext | two_column |
+
+**使用方式**：
+
+```bash
+# 1. 生成变体索引（模板目录下）
+python3 scripts/variant_router.py templates/layouts/chaitin_anfu --list
+
+# 2. Executor 自动加载 variant_index.json 并路由
+# （无需手动操作，CodeGenerator 自动查找并使用）
+```
 
 **已验证的 HW→安服 颜色映射**（深色变体→亮色模板）：
 
@@ -774,21 +864,14 @@ cp /tmp/docx_images/word/media/* <project_path>/images/
 | 卡片底色 | `#3C7471` | `#3C7471` | 沿用（沉稳青） |
 | 强调色 | `#4DCD82` | `#7BBD4A` | 亮绿→品牌绿 |
 
-**变体 SVG 质量参考**（`extracted_variants/`）：
+**变体 SVG 质量参考**（`extracted_variants/`，已自动分析36个变体）：
 
 | 变体 | 页型 | 质量 | 适合场景 |
 |------|------|------|---------|
-| `hw_H2_S12` | 6行卡片网格 | ⭐⭐⭐ 38实色块 | 网格/数据页 |
-| `hw_H6_S56` | 均匀分布 | ⭐⭐ 19块 | 内容丰富页 |
-| `hw_H4_S50` | 顶5+下2 | ⭐⭐ 19块 | 标准正文页 |
-| `hw_H1_S8` | 顶部集中 | ⭐ 20块 | L-R split类型 |
-
-**如果要让提取变体真正被使用**，在 Step 3 模板选择后、Step 6 Executor 生成前，需要增加一个"变体映射"子步骤：
-1. 读取 `extracted_variants/` 下的所有变体 SVG，分析每个变体的结构特征（行数、列数、y分布）
-2. 在 `design_spec.md` 中为每个 body page 指定使用的变体文件名
-3. Executor 生成时，把通用 `03_content.svg` 替换为对应变体 SVG，然后做占位符替换
-
-**验证方法**：检查 `svg_output/` 中生成的 SVG 是否包含提取变体的特征色块（而非 `03_content.svg` 的通用矩形）。也可以直接解压 PPTX 检查 slide XML 中 `<p:grpSp>` 内的 shape 数量——使用提取变体时内容区 shape 数量会明显更多（10+ 个色块）。
+| `hw_H2_S12` | 6行卡片网格 | ⭐⭐⭐ 29矩形 | 网格/数据页 |
+| `hw_H6_S56` | 均匀分布 | ⭐⭐ 11矩形 | 内容丰富页 |
+| `hw_H4_S50` | 顶5+下2 | ⭐⭐ 7矩形 | 标准正文页 |
+| `hw_H1_S8` | 顶部集中 | ⭐ 8矩形 | L-R split类型 |
 
 ### 陷阱 13：SVG→PPTX 正文页转换层存在本质性信息丢失（正文页禁用 SVG 路径）
 

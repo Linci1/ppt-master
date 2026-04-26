@@ -43,6 +43,8 @@ class Theme:
     FS_SMALL   = 12   # 页码/注释
     FS_TABLE_H = 14   # 表头
     FS_TABLE_C = 12   # 表格内容
+    FS_KPI     = 48   # KPI大数字
+    FS_BADGE   = 14   # 徽章/标签
 
     # 边距
     MARGIN_LEFT   = 0.42   # 内容区左边界 (in)
@@ -52,13 +54,32 @@ class Theme:
 
     # 配色盘（子类覆盖）
     PRIMARY   = RGBColor(0x7B, 0xBD, 0x4A)   # 品牌绿
+    PRIMARY_B = RGBColor(0x43, 0x82, 0x7F)   # 青绿（HW总结风格）
     BG        = RGBColor(0xFF, 0xFF, 0xFF)   # 页面背景
     TEXT_HERO = RGBColor(0x1A, 0x1A, 0x1A)   # 深色主文字
+    TEXT_BODY = RGBColor(0x40, 0x40, 0x40)   # 正文灰色
     TEXT_SEC  = RGBColor(0x66, 0x66, 0x66)   # 灰色副文字
     TEXT_LITE = RGBColor(0xA6, 0xA6, 0xA6)   # 浅灰（页码）
     DIVIDER   = RGBColor(0xE0, 0xE0, 0xE0)   # 分隔线
     WHITE      = RGBColor(0xFF, 0xFF, 0xFF)
     CARD_DEEP  = RGBColor(0x3C, 0x74, 0x71)  # 深青色（默认深卡背景）
+
+    # 安服严重度色标
+    SEV_CRITICAL = RGBColor(0xC0, 0x00, 0x00)  # 严重
+    SEV_HIGH     = RGBColor(0xFF, 0x00, 0x00)  # 高危
+    SEV_MEDIUM   = RGBColor(0xED, 0x7D, 0x31)  # 中危
+    SEV_LOW      = RGBColor(0xA5, 0xA5, 0xA5)  # 低危
+    SEV_WARN     = RGBColor(0xF0, 0xA0, 0x20)  # 风险/警告
+
+    # 安全专用色
+    SEC_RED   = RGBColor(0xC0, 0x00, 0x00)   # 攻击方红
+    SEC_BLUE  = RGBColor(0x15, 0x65, 0xC0)   # 防守方蓝
+    SEC_GREEN = RGBColor(0x7B, 0xBD, 0x4A)   # 安全/正常绿
+
+    # 图表辅助色
+    CHART_AUX1 = RGBColor(0x5B, 0x9B, 0xD5)  # 辅助蓝
+    CHART_AUX2 = RGBColor(0xED, 0x7D, 0x31)  # 辅助橙
+    CHART_AUX3 = RGBColor(0xA5, 0xA5, 0xA5)  # 辅助灰
 
     @classmethod
     def card_dark(cls):
@@ -131,6 +152,27 @@ def add_textbox(slide, x, y, w, h,
         p.space_before = Pt(0)
         p.space_after = Pt(2)
         add_text_run(p, text, size_pt, color_rgb, bold)
+
+
+def add_image(slide, x, y, w, h, image_path: str) -> None:
+    """
+    添加图片到 slide。
+
+    参数均为 EMU 整数（与其他组件一致，调用前先 Inches() 转换）。
+    image_path: 图片绝对路径或相对路径。
+    """
+    if not image_path or not Path(image_path).exists():
+        # 图片不存在时画灰色占位框
+        add_rect(slide, int(x), int(y), int(w), int(h),
+                 RGBColor(0xE8, 0xE8, 0xE8))
+        tb = slide.shapes.add_textbox(int(x), int(y), int(w), int(h))
+        tf = tb.text_frame
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        add_text_run(p, '(图片缺失)', C.FS_SMALL, C.TEXT_LITE, bold=False)
+        return
+    slide.shapes.add_picture(str(image_path), int(x), int(y), int(w), int(h))
 
 
 def add_card(slide,
@@ -716,8 +758,520 @@ def build_text_section_page(prs: Presentation,
 
 
 # ─────────────────────────────────────────────────────────────────
-# 快捷入口：从 JSON 描述生成（供 executor 调用）
+# 安服专用页型
 # ─────────────────────────────────────────────────────────────────
+
+def add_severity_badge(slide, x, y, label: str, count: int,
+                       color: RGBColor) -> None:
+    """严重度徽章：色块 + 数字 + 标签"""
+    badge_w = Inches(1.60)
+    badge_h = Inches(1.20)
+    # 色块
+    add_rect(slide, int(Inches(x)), int(Inches(y)),
+             int(badge_w), int(badge_h), color)
+    # 数字
+    tb_num = slide.shapes.add_textbox(
+        int(Inches(x + 0.08)), int(Inches(y + 0.08)),
+        int(badge_w - Inches(0.16)), int(Inches(0.65))
+    )
+    p = tb_num.text_frame.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.space_before = Pt(0); p.space_after = Pt(0)
+    add_text_run(p, str(count), C.FS_KPI, C.WHITE, bold=True)
+    # 标签
+    tb_lbl = slide.shapes.add_textbox(
+        int(Inches(x + 0.08)), int(Inches(y + 0.72)),
+        int(badge_w - Inches(0.16)), int(Inches(0.35))
+    )
+    p = tb_lbl.text_frame.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.space_before = Pt(0); p.space_after = Pt(0)
+    add_text_run(p, label, C.FS_BADGE, C.WHITE, bold=False)
+
+
+def build_attack_chain_page(prs: Presentation,
+                            title: str,
+                            subtitle: str = '',
+                            stages: List[Dict] = None,
+                            page_num: str = '4',
+                            logo_path: str = None) -> None:
+    """
+    攻击链页面（Kill Chain）。
+
+    stages: [
+        {'name': '侦察', 'desc': '端口扫描/信息收集', 'severity': 'high'},
+        {'name': '武器化', 'desc': '漏洞利用载荷', 'severity': 'critical'},
+        ...
+    ]
+    severity: critical / high / medium / low
+    """
+    stages = stages or []
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    add_brand_header(slide, title, page_num, logo_path)
+
+    if subtitle:
+        tb_sub = slide.shapes.add_textbox(
+            int(Inches(0.34)), int(Inches(0.82)),
+            int(Inches(8)), int(Inches(0.25))
+        )
+        p = tb_sub.text_frame.paragraphs[0]
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, subtitle, C.FS_SUB, C.TEXT_SEC, bold=False)
+
+    sev_colors = {
+        'critical': C.SEV_CRITICAL,
+        'high': C.SEV_HIGH,
+        'medium': C.SEV_MEDIUM,
+        'low': C.SEV_LOW,
+    }
+
+    # 布局：水平排列阶段卡片
+    n = len(stages)
+    if n == 0:
+        add_brand_footer(slide)
+        return
+
+    gap = 0.18
+    start_x = 0.42
+    start_y = 1.40
+    card_w = min(2.20, (12.50 - gap * (n - 1)) / max(n, 1))
+    card_h = 3.80
+
+    for i, stage in enumerate(stages):
+        x = start_x + i * (card_w + gap)
+        sev = stage.get('severity', 'medium')
+        accent = sev_colors.get(sev, C.PRIMARY)
+
+        # 卡片背景
+        add_rect(slide, int(Inches(x)), int(Inches(start_y)),
+                 int(Inches(card_w)), int(Inches(card_h)),
+                 RGBColor(0xF5, 0xF7, 0xFA))
+
+        # 顶部色条
+        add_rect(slide, int(Inches(x)), int(Inches(start_y)),
+                 int(Inches(card_w)), int(Inches(0.08)), accent)
+
+        # 序号圆点
+        dot = slide.shapes.add_shape(
+            1,
+            int(Inches(x + card_w / 2 - 0.18)),
+            int(Inches(start_y + 0.28)),
+            int(Inches(0.36)), int(Inches(0.36))
+        )
+        dot.fill.solid()
+        dot.fill.fore_color.rgb = accent
+        dot.line.fill.background()
+
+        # 序号
+        tb_idx = slide.shapes.add_textbox(
+            int(Inches(x + card_w / 2 - 0.18)),
+            int(Inches(start_y + 0.30)),
+            int(Inches(0.36)), int(Inches(0.30))
+        )
+        p = tb_idx.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, str(i + 1), C.FS_SMALL, C.WHITE, bold=True)
+
+        # 阶段名称
+        tb_name = slide.shapes.add_textbox(
+            int(Inches(x + 0.12)),
+            int(Inches(start_y + 0.80)),
+            int(Inches(card_w - 0.24)),
+            int(Inches(0.40))
+        )
+        p = tb_name.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, stage.get('name', ''), C.FS_CARD_T, C.TEXT_HERO, bold=True)
+
+        # 描述
+        tb_desc = slide.shapes.add_textbox(
+            int(Inches(x + 0.12)),
+            int(Inches(start_y + 1.30)),
+            int(Inches(card_w - 0.24)),
+            int(Inches(2.20))
+        )
+        tf = tb_desc.text_frame
+        tf.word_wrap = True
+        p = tf.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, stage.get('desc', ''), C.FS_SMALL, C.TEXT_BODY, bold=False)
+
+        # 箭头连接（非最后一个）
+        if i < n - 1:
+            arrow_x = x + card_w + 0.01
+            arrow_y = start_y + card_h / 2
+            # 简单三角箭头
+            add_text_run(
+                slide.shapes.add_textbox(
+                    int(Inches(arrow_x)), int(Inches(arrow_y - 0.15)),
+                    int(Inches(gap - 0.02)), int(Inches(0.30))
+                ).text_frame.paragraphs[0],
+                '▶', C.FS_SMALL, C.DIVIDER, bold=False
+            )
+
+    add_brand_footer(slide)
+
+
+def build_kpi_dashboard_page(prs: Presentation,
+                             title: str,
+                             subtitle: str = '',
+                             kpis: List[Dict] = None,
+                             page_num: str = '4',
+                             logo_path: str = None) -> None:
+    """
+    KPI 仪表盘页面。
+
+    kpis: [
+        {'label': '严重', 'value': 3, 'color': 'critical'},
+        {'label': '高危', 'value': 7, 'color': 'high'},
+        {'label': '中危', 'value': 12, 'color': 'medium'},
+        {'label': '低危', 'value': 5, 'color': 'low'},
+        {'label': '发现资产', 'value': 156, 'color': 'primary'},
+        {'label': '已修复', 'value': 89, 'color': 'safe'},
+    ]
+    color: critical/high/medium/low/primary/safe/warn
+    """
+    kpis = kpis or []
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    add_brand_header(slide, title, page_num, logo_path)
+
+    if subtitle:
+        tb_sub = slide.shapes.add_textbox(
+            int(Inches(0.34)), int(Inches(0.82)),
+            int(Inches(8)), int(Inches(0.25))
+        )
+        p = tb_sub.text_frame.paragraphs[0]
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, subtitle, C.FS_SUB, C.TEXT_SEC, bold=False)
+
+    color_map = {
+        'critical': C.SEV_CRITICAL,
+        'high': C.SEV_HIGH,
+        'medium': C.SEV_MEDIUM,
+        'low': C.SEV_LOW,
+        'primary': C.PRIMARY,
+        'safe': C.SEC_GREEN,
+        'warn': C.SEV_WARN,
+    }
+
+    # 网格布局：2-3行，每行最多4个
+    n = len(kpis)
+    cols = min(n, 4)
+    rows = (n + cols - 1) // cols
+
+    badge_w = 2.60
+    badge_h = 2.00
+    gap_x = 0.40
+    gap_y = 0.40
+    start_x = 0.42
+    start_y = 1.30
+
+    for i, kpi in enumerate(kpis):
+        ri = i // cols
+        ci = i % cols
+        # 居中：最后一行如果不满，往右偏移
+        items_in_row = min(cols, n - ri * cols)
+        offset_x = (12.50 - items_in_row * badge_w - (items_in_row - 1) * gap_x) / 2
+
+        x = offset_x + ci * (badge_w + gap_x)
+        y = start_y + ri * (badge_h + gap_y)
+
+        color = color_map.get(kpi.get('color', 'primary'), C.PRIMARY)
+
+        # 色块
+        add_rect(slide, int(Inches(x)), int(Inches(y)),
+                 int(Inches(badge_w)), int(Inches(badge_h)), color)
+
+        # 数字
+        tb_val = slide.shapes.add_textbox(
+            int(Inches(x + 0.10)), int(Inches(y + 0.20)),
+            int(Inches(badge_w - 0.20)), int(Inches(0.85))
+        )
+        p = tb_val.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, str(kpi.get('value', 0)), C.FS_KPI, C.WHITE, bold=True)
+
+        # 标签
+        tb_lbl = slide.shapes.add_textbox(
+            int(Inches(x + 0.10)), int(Inches(y + 1.20)),
+            int(Inches(badge_w - 0.20)), int(Inches(0.50))
+        )
+        p = tb_lbl.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.CENTER
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, kpi.get('label', ''), C.FS_BADGE, C.WHITE, bold=False)
+
+    add_brand_footer(slide)
+
+
+def build_vuln_matrix_page(prs: Presentation,
+                           title: str,
+                           subtitle: str = '',
+                           vulns: List[Dict] = None,
+                           page_num: str = '4',
+                           logo_path: str = None) -> None:
+    """
+    漏洞矩阵页面（严重度色标表格）。
+
+    vulns: [
+        {'name': 'CVE-2024-001', 'severity': '严重', 'component': 'Apache Log4j2',
+         'status': '未修复', 'recommendation': '升级至2.17.0'},
+        ...
+    ]
+    """
+    vulns = vulns or []
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    add_brand_header(slide, title, page_num, logo_path)
+
+    if subtitle:
+        tb_sub = slide.shapes.add_textbox(
+            int(Inches(0.34)), int(Inches(0.82)),
+            int(Inches(8)), int(Inches(0.25))
+        )
+        p = tb_sub.text_frame.paragraphs[0]
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, subtitle, C.FS_SUB, C.TEXT_SEC, bold=False)
+
+    headers = ['漏洞名称', '严重程度', '影响组件', '状态', '修复建议']
+    col_widths = [2.50, 1.50, 2.80, 1.50, 3.70]
+
+    tbl_x = 0.42
+    tbl_y = 1.30
+    tbl_w = 12.50
+    header_h = 0.48
+    row_h = 0.45
+
+    # 表头背景
+    add_rect(slide, int(Inches(tbl_x)), int(Inches(tbl_y)),
+             int(Inches(tbl_w)), int(Inches(header_h)), C.PRIMARY)
+
+    # 表头文字
+    cx = tbl_x
+    for hi, (hdr, cw) in enumerate(zip(headers, col_widths)):
+        tb = slide.shapes.add_textbox(
+            int(Inches(cx + 0.10)), int(Inches(tbl_y + 0.10)),
+            int(Inches(cw - 0.20)), int(Inches(header_h - 0.10))
+        )
+        p = tb.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, hdr, C.FS_TABLE_H, C.WHITE, bold=True)
+        if hi > 0:
+            add_rect(slide, int(Inches(cx)), int(Inches(tbl_y)),
+                     int(Pt(0.5)), int(Inches(header_h)),
+                     RGBColor(0x5A, 0x9E, 0x3A))
+        cx += cw
+
+    # 严重度色标映射
+    sev_color = {
+        '严重': C.SEV_CRITICAL, '高危': C.SEV_HIGH,
+        '中危': C.SEV_MEDIUM, '低危': C.SEV_LOW,
+    }
+    status_color = {
+        '未修复': C.SEV_HIGH, '修复中': C.SEV_WARN,
+        '已修复': C.SEC_GREEN,
+    }
+
+    # 数据行
+    max_rows = min(len(vulns), 12)
+    for ri in range(max_rows):
+        vuln = vulns[ri]
+        ry = tbl_y + header_h + row_h * ri
+        bg = C.WHITE if ri % 2 == 0 else RGBColor(0xF5, 0xF7, 0xFA)
+        add_rect(slide, int(Inches(tbl_x)), int(Inches(ry)),
+                 int(Inches(tbl_w)), int(Inches(row_h)), bg)
+
+        row_data = [
+            vuln.get('name', ''),
+            vuln.get('severity', ''),
+            vuln.get('component', ''),
+            vuln.get('status', ''),
+            vuln.get('recommendation', ''),
+        ]
+
+        cx = tbl_x
+        for ci, (cell, cw) in enumerate(zip(row_data, col_widths)):
+            # 严重程度列用色标背景
+            if ci == 1:
+                sc = sev_color.get(cell, C.TEXT_HERO)
+                # 小色块
+                add_rect(slide, int(Inches(cx + 0.08)),
+                         int(Inches(ry + 0.08)),
+                         int(Inches(0.12)), int(Inches(row_h - 0.16)),
+                         sc)
+                tb = slide.shapes.add_textbox(
+                    int(Inches(cx + 0.28)), int(Inches(ry + 0.08)),
+                    int(Inches(cw - 0.38)), int(Inches(row_h - 0.08))
+                )
+                p = tb.text_frame.paragraphs[0]
+                p.space_before = Pt(0); p.space_after = Pt(0)
+                add_text_run(p, cell, C.FS_TABLE_C, sc, bold=True)
+            elif ci == 3:
+                # 状态列用状态色
+                stc = status_color.get(cell, C.TEXT_HERO)
+                tb = slide.shapes.add_textbox(
+                    int(Inches(cx + 0.10)), int(Inches(ry + 0.08)),
+                    int(Inches(cw - 0.20)), int(Inches(row_h - 0.08))
+                )
+                p = tb.text_frame.paragraphs[0]
+                p.space_before = Pt(0); p.space_after = Pt(0)
+                add_text_run(p, cell, C.FS_TABLE_C, stc, bold=False)
+            else:
+                tb = slide.shapes.add_textbox(
+                    int(Inches(cx + 0.10)), int(Inches(ry + 0.08)),
+                    int(Inches(cw - 0.20)), int(Inches(row_h - 0.08))
+                )
+                tf = tb.text_frame
+                tf.word_wrap = True
+                p = tf.paragraphs[0]
+                p.space_before = Pt(0); p.space_after = Pt(0)
+                add_text_run(p, str(cell), C.FS_TABLE_C, C.TEXT_HERO, bold=False)
+
+            # 单元格竖线
+            if ci > 0:
+                add_rect(slide, int(Inches(cx)), int(Inches(ry)),
+                         int(Pt(0.5)), int(Inches(row_h)), C.DIVIDER)
+            cx += cw
+
+        # 行横线
+        add_rect(slide, int(Inches(tbl_x)),
+                 int(Inches(ry + row_h)) - int(Pt(0.5)),
+                 int(Inches(tbl_w)), int(Pt(0.5)), C.DIVIDER)
+
+    add_brand_footer(slide)
+
+
+def build_red_blue_page(prs: Presentation,
+                        title: str,
+                        subtitle: str = '',
+                        red_items: List[Dict] = None,
+                        blue_items: List[Dict] = None,
+                        page_num: str = '4',
+                        logo_path: str = None) -> None:
+    """
+    红蓝对抗对比页面。
+
+    red_items:  [{'title': '边界突破', 'detail': 'ThinkPHP RCE'}, ...]
+    blue_items: [{'title': '边界加固', 'detail': 'WAF规则更新'}, ...]
+    """
+    red_items = red_items or []
+    blue_items = blue_items or []
+    slide = prs.slides.add_slide(prs.slide_layouts[6])
+
+    add_brand_header(slide, title, page_num, logo_path)
+
+    if subtitle:
+        tb_sub = slide.shapes.add_textbox(
+            int(Inches(0.34)), int(Inches(0.82)),
+            int(Inches(8)), int(Inches(0.25))
+        )
+        p = tb_sub.text_frame.paragraphs[0]
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, subtitle, C.FS_SUB, C.TEXT_SEC, bold=False)
+
+    col_w = 5.79
+    col_h = 4.80
+    start_y = 1.25
+    gap = 0.50
+
+    for ci, (items, label, accent, bg_c) in enumerate([
+        (red_items, '攻击方 (Red)', C.SEC_RED,
+         RGBColor(0xFD, 0xF0, 0xF0)),
+        (blue_items, '防守方 (Blue)', C.SEC_BLUE,
+         RGBColor(0xF0, 0xF4, 0xFD)),
+    ]):
+        x = 0.42 + ci * (col_w + gap)
+
+        # 栏背景
+        add_rect(slide, int(Inches(x)), int(Inches(start_y)),
+                 int(Inches(col_w)), int(Inches(col_h)), bg_c)
+
+        # 顶部色条
+        add_rect(slide, int(Inches(x)), int(Inches(start_y)),
+                 int(Inches(col_w)), int(Inches(0.50)), accent)
+
+        # 栏目标题
+        tb_h = slide.shapes.add_textbox(
+            int(Inches(x + 0.18)), int(Inches(start_y + 0.08)),
+            int(Inches(col_w - 0.36)), int(Inches(0.40))
+        )
+        p = tb_h.text_frame.paragraphs[0]
+        p.alignment = PP_ALIGN.LEFT
+        p.space_before = Pt(0); p.space_after = Pt(0)
+        add_text_run(p, label, C.FS_CARD_T, C.WHITE, bold=True)
+
+        # 条目列表
+        item_y = start_y + 0.65
+        for item in items:
+            # 圆点
+            dot = slide.shapes.add_shape(
+                1,
+                int(Inches(x + 0.18)),
+                int(Inches(item_y + 0.12)),
+                int(Inches(0.12)), int(Inches(0.12))
+            )
+            dot.fill.solid()
+            dot.fill.fore_color.rgb = accent
+            dot.line.fill.background()
+
+            # 标题
+            tb_t = slide.shapes.add_textbox(
+                int(Inches(x + 0.40)),
+                int(Inches(item_y)),
+                int(Inches(col_w - 0.60)),
+                int(Inches(0.30))
+            )
+            p = tb_t.text_frame.paragraphs[0]
+            p.space_before = Pt(0); p.space_after = Pt(0)
+            add_text_run(p, item.get('title', ''), C.FS_BODY,
+                         C.TEXT_HERO, bold=True)
+
+            # 详情
+            if item.get('detail'):
+                tb_d = slide.shapes.add_textbox(
+                    int(Inches(x + 0.40)),
+                    int(Inches(item_y + 0.30)),
+                    int(Inches(col_w - 0.60)),
+                    int(Inches(0.30))
+                )
+                tf = tb_d.text_frame
+                tf.word_wrap = True
+                p = tf.paragraphs[0]
+                p.space_before = Pt(0); p.space_after = Pt(0)
+                add_text_run(p, item['detail'], C.FS_SMALL,
+                             C.TEXT_BODY, bold=False)
+                item_y += 0.70
+            else:
+                item_y += 0.45
+
+    # 中间 VS 分隔
+    vs_x = 0.42 + col_w + gap / 2 - 0.22
+    vs_y = start_y + col_h / 2 - 0.22
+    vs_bg = slide.shapes.add_shape(
+        1, int(Inches(vs_x)), int(Inches(vs_y)),
+        int(Inches(0.44)), int(Inches(0.44))
+    )
+    vs_bg.fill.solid()
+    vs_bg.fill.fore_color.rgb = C.PRIMARY
+    vs_bg.line.fill.background()
+
+    tb_vs = slide.shapes.add_textbox(
+        int(Inches(vs_x)), int(Inches(vs_y + 0.05)),
+        int(Inches(0.44)), int(Inches(0.34))
+    )
+    p = tb_vs.text_frame.paragraphs[0]
+    p.alignment = PP_ALIGN.CENTER
+    p.space_before = Pt(0); p.space_after = Pt(0)
+    add_text_run(p, 'VS', C.FS_SMALL, C.WHITE, bold=True)
+
+    add_brand_footer(slide)
 
 def page_type_from_string(type_str: str):
     """把字符串页型名映射到函数"""
@@ -727,6 +1281,10 @@ def page_type_from_string(type_str: str):
         'data_table':    build_data_table_page,
         'two_column':     build_two_column_page,
         'text_section':   build_text_section_page,
+        'attack_chain':   build_attack_chain_page,
+        'kpi_dashboard':  build_kpi_dashboard_page,
+        'vuln_matrix':    build_vuln_matrix_page,
+        'red_blue':       build_red_blue_page,
     }
     return MAP.get(type_str, build_card_grid_page)
 
@@ -802,6 +1360,73 @@ if __name__ == '__main__':
 
     out = '/tmp/pptx_components_demo.pptx'
     prs.save(out)
-    print(f'✓ 5种页型演示: {out}')
+    print(f'✓ 9种页型演示: {out}')
     print(f'  Slide 1: card_grid | Slide 2: timeline | Slide 3: data_table')
     print(f'  Slide 4: two_column | Slide 5: text_section')
+    print(f'  Slide 6: attack_chain | Slide 7: kpi_dashboard')
+    print(f'  Slide 8: vuln_matrix | Slide 9: red_blue')
+
+    # 6. 攻击链页
+    build_attack_chain_page(prs,
+        title='攻击路径还原',
+        subtitle='Kill Chain Reconstruction',
+        stages=[
+            {'name': '侦察', 'desc': 'Nmap端口扫描\nShodan信息收集', 'severity': 'medium'},
+            {'name': '武器化', 'desc': 'ThinkPHP RCE载荷\nLog4j2 JNDI利用', 'severity': 'critical'},
+            {'name': '投递', 'desc': '钓鱼邮件投递\n简历木马触发', 'severity': 'high'},
+            {'name': '利用', 'desc': '边界突破\nWebShell上传', 'severity': 'critical'},
+            {'name': '横移', 'desc': 'Pass-the-Hash\nSSH横向跳板', 'severity': 'high'},
+            {'name': '目标', 'desc': '域控沦陷\n数据库拖库', 'severity': 'critical'},
+        ],
+        page_num='6')
+
+    # 7. KPI 仪表盘页
+    build_kpi_dashboard_page(prs,
+        title='安全态势总览',
+        subtitle='Security Posture Dashboard',
+        kpis=[
+            {'label': '严重漏洞', 'value': 3, 'color': 'critical'},
+            {'label': '高危漏洞', 'value': 7, 'color': 'high'},
+            {'label': '中危漏洞', 'value': 12, 'color': 'medium'},
+            {'label': '低危漏洞', 'value': 5, 'color': 'low'},
+            {'label': '发现资产', 'value': 156, 'color': 'primary'},
+            {'label': '已修复', 'value': 89, 'color': 'safe'},
+        ],
+        page_num='7')
+
+    # 8. 漏洞矩阵页
+    build_vuln_matrix_page(prs,
+        title='漏洞清单',
+        subtitle='Vulnerability Matrix',
+        vulns=[
+            {'name': 'CVE-2024-001', 'severity': '严重', 'component': 'Apache Log4j2', 'status': '未修复', 'recommendation': '升级至2.17.0'},
+            {'name': 'CVE-2024-002', 'severity': '高危', 'component': 'ThinkPHP 5.x', 'status': '修复中', 'recommendation': '升级至5.1.41+'},
+            {'name': 'CVE-2024-003', 'severity': '中危', 'component': 'SSH服务', 'status': '已修复', 'recommendation': '禁用弱口令策略'},
+            {'name': 'CVE-2024-004', 'severity': '高危', 'component': 'Nginx 1.18', 'status': '未修复', 'recommendation': '升级至1.25+'},
+            {'name': 'CVE-2024-005', 'severity': '低危', 'component': 'Redis 6.x', 'status': '已修复', 'recommendation': '配置密码认证'},
+        ],
+        page_num='8')
+
+    # 9. 红蓝对抗页
+    build_red_blue_page(prs,
+        title='攻防对抗分析',
+        subtitle='Red Team vs Blue Team',
+        red_items=[
+            {'title': '边界突破', 'detail': 'ThinkPHP RCE远程代码执行'},
+            {'title': '社工钓鱼', 'detail': '伪装简历投递木马'},
+            {'title': '内网横移', 'detail': 'Pass-the-Hash横向扩展'},
+            {'title': '权限维持', 'detail': '计划任务持久化后门'},
+            {'title': '目标达成', 'detail': '域控完全沦陷'},
+        ],
+        blue_items=[
+            {'title': '边界加固', 'detail': 'WAF规则更新、VPN双因素'},
+            {'title': '安全意识', 'detail': '全员钓鱼演练培训'},
+            {'title': '微隔离', 'detail': '内网分区访问控制'},
+            {'title': 'EDR部署', 'detail': '终端检测响应覆盖'},
+            {'title': '应急响应', 'detail': '15分钟内阻断横向'},
+        ],
+        page_num='9')
+
+    out = '/tmp/pptx_components_demo.pptx'
+    prs.save(out)
+    print(f'✓ 9种页型演示: {out}')

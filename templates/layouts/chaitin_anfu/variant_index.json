@@ -1,0 +1,686 @@
+{
+  "template": "chaitin_anfu",
+  "total_variants": 36,
+  "variants": [
+    {
+      "file": "clean_A_S8.svg",
+      "rects": 3,
+      "texts": 4,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 2,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "lr_split_balanced"
+    },
+    {
+      "file": "clean_B_S6.svg",
+      "rects": 1,
+      "texts": 16,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "clean_C_S4.svg",
+      "rects": 1,
+      "texts": 11,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "clean_D_S13.svg",
+      "rects": 5,
+      "texts": 13,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 4,
+      "has_timeline": true,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "timeline"
+    },
+    {
+      "file": "clean_E_S14.svg",
+      "rects": 3,
+      "texts": 33,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 3,
+      "has_timeline": true,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "timeline"
+    },
+    {
+      "file": "clean_F_S17.svg",
+      "rects": 7,
+      "texts": 18,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 6,
+      "has_timeline": true,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "timeline"
+    },
+    {
+      "file": "clean_G_S11.svg",
+      "rects": 10,
+      "texts": 33,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "hw_H1_S8.svg",
+      "rects": 8,
+      "texts": 25,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 4,
+      "has_timeline": true,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "timeline"
+    },
+    {
+      "file": "hw_H2_S12.svg",
+      "rects": 29,
+      "texts": 37,
+      "images": 0,
+      "x_clusters": 5,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "hw_H3_S30.svg",
+      "rects": 8,
+      "texts": 20,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "grid"
+    },
+    {
+      "file": "hw_H4_S50.svg",
+      "rects": 7,
+      "texts": 29,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "grid"
+    },
+    {
+      "file": "hw_H5_S104.svg",
+      "rects": 9,
+      "texts": 22,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 5,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "hw_H6_S56.svg",
+      "rects": 11,
+      "texts": 40,
+      "images": 0,
+      "x_clusters": 7,
+      "y_clusters": 5,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_01_lr_split.svg",
+      "rects": 10,
+      "texts": 7,
+      "images": 0,
+      "x_clusters": 3,
+      "y_clusters": 5,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_02_3col.svg",
+      "rects": 13,
+      "texts": 11,
+      "images": 0,
+      "x_clusters": 6,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_03_grid_2x3.svg",
+      "rects": 15,
+      "texts": 13,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_04_standard.svg",
+      "rects": 13,
+      "texts": 11,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 6,
+      "has_timeline": true,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "timeline"
+    },
+    {
+      "file": "variant_A_S8.svg",
+      "rects": 12,
+      "texts": 20,
+      "images": 0,
+      "x_clusters": 5,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_A_lr_split_S8.svg",
+      "rects": 2,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 2,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_A_slide8.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_B_3col_S6.svg",
+      "rects": 7,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 5,
+      "y_clusters": 4,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "grid"
+    },
+    {
+      "file": "variant_B_S6.svg",
+      "rects": 19,
+      "texts": 26,
+      "images": 0,
+      "x_clusters": 6,
+      "y_clusters": 4,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_B_slide6.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_C_S4.svg",
+      "rects": 16,
+      "texts": 44,
+      "images": 0,
+      "x_clusters": 7,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_C_lr_cards_S4.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_C_slide4.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_D_S13.svg",
+      "rects": 21,
+      "texts": 64,
+      "images": 0,
+      "x_clusters": 6,
+      "y_clusters": 7,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_D_lr_split_S13.svg",
+      "rects": 3,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "card_list"
+    },
+    {
+      "file": "variant_D_slide13.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_E_S14.svg",
+      "rects": 27,
+      "texts": 96,
+      "images": 0,
+      "x_clusters": 5,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_E_grid_S14.svg",
+      "rects": 11,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 2,
+      "y_clusters": 3,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "lr_split_dense"
+    },
+    {
+      "file": "variant_E_slide14.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_F_S17.svg",
+      "rects": 22,
+      "texts": 42,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_F_slide17.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    },
+    {
+      "file": "variant_G_S11.svg",
+      "rects": 11,
+      "texts": 43,
+      "images": 0,
+      "x_clusters": 4,
+      "y_clusters": 6,
+      "has_timeline": false,
+      "has_table": true,
+      "aspect_ratio": "wide",
+      "layout_hint": "table_page"
+    },
+    {
+      "file": "variant_G_slide11.svg",
+      "rects": 1,
+      "texts": 0,
+      "images": 0,
+      "x_clusters": 1,
+      "y_clusters": 1,
+      "has_timeline": false,
+      "has_table": false,
+      "aspect_ratio": "wide",
+      "layout_hint": "standard"
+    }
+  ],
+  "layout_mapping": {
+    "lr_split_balanced": [
+      {
+        "file": "clean_A_S8.svg",
+        "rects": 3,
+        "x_clusters": 2,
+        "y_clusters": 2
+      }
+    ],
+    "standard": [
+      {
+        "file": "variant_A_lr_split_S8.svg",
+        "rects": 2,
+        "x_clusters": 1,
+        "y_clusters": 2
+      },
+      {
+        "file": "clean_B_S6.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "clean_C_S4.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_A_slide8.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_B_slide6.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_C_lr_cards_S4.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_C_slide4.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_D_slide13.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_E_slide14.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_F_slide17.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      },
+      {
+        "file": "variant_G_slide11.svg",
+        "rects": 1,
+        "x_clusters": 1,
+        "y_clusters": 1
+      }
+    ],
+    "timeline": [
+      {
+        "file": "variant_04_standard.svg",
+        "rects": 13,
+        "x_clusters": 2,
+        "y_clusters": 6
+      },
+      {
+        "file": "hw_H1_S8.svg",
+        "rects": 8,
+        "x_clusters": 2,
+        "y_clusters": 4
+      },
+      {
+        "file": "clean_F_S17.svg",
+        "rects": 7,
+        "x_clusters": 2,
+        "y_clusters": 6
+      },
+      {
+        "file": "clean_D_S13.svg",
+        "rects": 5,
+        "x_clusters": 2,
+        "y_clusters": 4
+      },
+      {
+        "file": "clean_E_S14.svg",
+        "rects": 3,
+        "x_clusters": 2,
+        "y_clusters": 3
+      }
+    ],
+    "table_page": [
+      {
+        "file": "hw_H2_S12.svg",
+        "rects": 29,
+        "x_clusters": 5,
+        "y_clusters": 6
+      },
+      {
+        "file": "variant_E_S14.svg",
+        "rects": 27,
+        "x_clusters": 5,
+        "y_clusters": 6
+      },
+      {
+        "file": "variant_F_S17.svg",
+        "rects": 22,
+        "x_clusters": 4,
+        "y_clusters": 6
+      },
+      {
+        "file": "variant_D_S13.svg",
+        "rects": 21,
+        "x_clusters": 6,
+        "y_clusters": 7
+      },
+      {
+        "file": "variant_B_S6.svg",
+        "rects": 19,
+        "x_clusters": 6,
+        "y_clusters": 4
+      },
+      {
+        "file": "variant_C_S4.svg",
+        "rects": 16,
+        "x_clusters": 7,
+        "y_clusters": 6
+      },
+      {
+        "file": "variant_03_grid_2x3.svg",
+        "rects": 15,
+        "x_clusters": 4,
+        "y_clusters": 3
+      },
+      {
+        "file": "variant_02_3col.svg",
+        "rects": 13,
+        "x_clusters": 6,
+        "y_clusters": 3
+      },
+      {
+        "file": "variant_A_S8.svg",
+        "rects": 12,
+        "x_clusters": 5,
+        "y_clusters": 6
+      },
+      {
+        "file": "hw_H6_S56.svg",
+        "rects": 11,
+        "x_clusters": 7,
+        "y_clusters": 5
+      },
+      {
+        "file": "variant_G_S11.svg",
+        "rects": 11,
+        "x_clusters": 4,
+        "y_clusters": 6
+      },
+      {
+        "file": "clean_G_S11.svg",
+        "rects": 10,
+        "x_clusters": 4,
+        "y_clusters": 3
+      },
+      {
+        "file": "variant_01_lr_split.svg",
+        "rects": 10,
+        "x_clusters": 3,
+        "y_clusters": 5
+      },
+      {
+        "file": "hw_H5_S104.svg",
+        "rects": 9,
+        "x_clusters": 4,
+        "y_clusters": 5
+      }
+    ],
+    "grid": [
+      {
+        "file": "hw_H3_S30.svg",
+        "rects": 8,
+        "x_clusters": 4,
+        "y_clusters": 6
+      },
+      {
+        "file": "hw_H4_S50.svg",
+        "rects": 7,
+        "x_clusters": 4,
+        "y_clusters": 3
+      },
+      {
+        "file": "variant_B_3col_S6.svg",
+        "rects": 7,
+        "x_clusters": 5,
+        "y_clusters": 4
+      }
+    ],
+    "card_list": [
+      {
+        "file": "variant_D_lr_split_S13.svg",
+        "rects": 3,
+        "x_clusters": 1,
+        "y_clusters": 3
+      }
+    ],
+    "lr_split_dense": [
+      {
+        "file": "variant_E_grid_S14.svg",
+        "rects": 11,
+        "x_clusters": 2,
+        "y_clusters": 3
+      }
+    ]
+  },
+  "pptx_page_type_map": {
+    "lr_split_imagetext": "two_column",
+    "lr_split_balanced": "two_column",
+    "lr_split_dense": "two_column",
+    "lr_split_righttitle": "two_column",
+    "lr_split_lefttitle": "two_column",
+    "standard": "text_section",
+    "card_list": "card_grid",
+    "grid": "card_grid",
+    "table_page": "data_table",
+    "timeline": "timeline",
+    "kpi_dashboard": "kpi_dashboard",
+    "attack_chain": "attack_chain",
+    "red_blue": "red_blue",
+    "vuln_matrix": "vuln_matrix"
+  }
+}

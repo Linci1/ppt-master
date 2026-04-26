@@ -45,11 +45,13 @@ class CodeGenerator:
     """
 
     def __init__(self, layout_index: Dict, design_spec: Dict,
-                 content_pages: List[Dict]):
+                 content_pages: List[Dict],
+                 variant_index_path: str = None):
         self.layout_index  = layout_index
         self.design_spec   = design_spec
         self.content_pages = content_pages  # [{page_num, title, body, page_type}, ...]
         self.theme         = self._build_theme()
+        self.variant_index = self._load_variant_index(variant_index_path)
 
     def _build_theme(self) -> Dict:
         """从 design_spec 或 layout_index 推断主题色"""
@@ -78,6 +80,25 @@ class CodeGenerator:
             'canvas_h':  meta.get('canvas_h_in', 7.5),
         }
 
+    def _load_variant_index(self, path: str = None) -> Optional[Dict]:
+        """加载 variant_index.json（如果存在）"""
+        if not path:
+            # 自动查找：模板目录下
+            for candidate in [
+                SKILL_DIR / 'templates' / 'layouts' / 'chaitin_anfu' / 'variant_index.json',
+                SKILL_DIR / 'templates' / 'layouts' / 'chaitin' / 'variant_index.json',
+            ]:
+                if candidate.exists():
+                    path = str(candidate)
+                    break
+        if not path or not Path(path).exists():
+            return None
+        try:
+            with open(path, encoding='utf-8') as f:
+                return json.load(f)
+        except (json.JSONDecodeError, OSError):
+            return None
+
     def generate(self) -> str:
         """生成完整的 Python 代码字符串"""
         pages = self.layout_index.get('pages', [])
@@ -101,6 +122,10 @@ class CodeGenerator:
             '    build_data_table_page,',
             '    build_two_column_page,',
             '    build_text_section_page,',
+            '    build_attack_chain_page,',
+            '    build_kpi_dashboard_page,',
+            '    build_vuln_matrix_page,',
+            '    build_red_blue_page,',
             ')',
             '',
             '# ── 主题配置 ──',
@@ -131,11 +156,15 @@ class CodeGenerator:
         hint_map = {h['page']: h for h in hints}
 
         for page_idx, hint in page_iter:
-            func_name = hint.get('func', 'build_card_grid_page') if hint else 'build_card_grid_page'
+            func_name = hint.get('func', '') if hint else ''
             page_num  = str(page_idx + 3)  # 假设封面等固定页占前3页
 
             # 找对应的内容（从 content_pages）
             content = self._find_content(page_idx)
+
+            # 变体路由：如果 func_name 未指定，用标题关键词自动路由
+            if not func_name:
+                func_name = self._route_page_type(content)
 
             lines.append(f'# ── 第 {page_idx} 页: {func_name} ──')
             lines.append(self._generate_page_code(func_name, page_num, content, {}))
@@ -153,6 +182,34 @@ class CodeGenerator:
             if cp.get('page_num') == page_index:
                 return cp
         return None
+
+    def _route_page_type(self, content: Optional[Dict]) -> str:
+        """
+        用 variant_router 推荐页型，返回 build_*_page 函数名。
+        优先级：content.page_type > 关键词路由 > 默认 two_column
+        """
+        # 如果 content 已指定 page_type，直接映射
+        if content and content.get('page_type'):
+            pt = content['page_type']
+            # 兼容两种写法：'card_grid' 和 'build_card_grid_page'
+            if pt.startswith('build_') and pt.endswith('_page'):
+                return pt
+            return f'build_{pt}_page' if not pt.startswith('build_') else pt
+
+        # 用 variant_router 关键词路由
+        title = (content or {}).get('title', '')
+        subtitle = (content or {}).get('subtitle', '')
+        try:
+            from variant_router import recommend_layout
+            rec = recommend_layout(title, subtitle,
+                                   variant_index=self.variant_index)
+            pptx_type = rec['pptx_page_type']
+            return f'build_{pptx_type}_page'
+        except Exception:
+            pass
+
+        # 默认：安服主导布局 lr_split → two_column
+        return 'build_two_column_page'
 
     def _generate_page_code(self, func_name: str, page_num: str,
                              content: Optional[Dict],
@@ -184,6 +241,18 @@ class CodeGenerator:
         elif func_name in ('build_text_section', 'build_text_section_page'):
             return self._gen_text_section(title_str, subtitle_str, page_num,
                                            content, logo_str)
+        elif func_name in ('build_attack_chain', 'build_attack_chain_page'):
+            return self._gen_attack_chain(title_str, subtitle_str, page_num,
+                                          content, logo_str)
+        elif func_name in ('build_kpi_dashboard', 'build_kpi_dashboard_page'):
+            return self._gen_kpi_dashboard(title_str, subtitle_str, page_num,
+                                           content, logo_str)
+        elif func_name in ('build_vuln_matrix', 'build_vuln_matrix_page'):
+            return self._gen_vuln_matrix(title_str, subtitle_str, page_num,
+                                         content, logo_str)
+        elif func_name in ('build_red_blue', 'build_red_blue_page'):
+            return self._gen_red_blue(title_str, subtitle_str, page_num,
+                                      content, logo_str)
         else:
             return self._gen_card_grid(title_str, subtitle_str, page_num,
                                          content, logo_str)
@@ -314,6 +383,123 @@ class CodeGenerator:
             f'    logo_path={logo},',
             f'    sections=[',
         ]) + '\n' + secs_block + '\n' + '\n'.join([
+            '    ],',
+            ')',
+        ])
+
+    def _gen_attack_chain(self, title, subtitle, page_num, content, logo) -> str:
+        stages = (content or {}).get('stages', [])
+        if not stages:
+            stages = [{'name': '待填充', 'desc': '请补充攻击阶段', 'severity': 'medium'}]
+
+        stages_repr = []
+        for s in stages:
+            stages_repr.append(
+                f"    {{'name': '{s.get('name', '').replace('\"', '\\\\\"')}', "
+                f"'desc': '{s.get('desc', '').replace('\"', '\\\\\"')}', "
+                f"'severity': '{s.get('severity', 'medium')}'}}"
+            )
+        stages_block = ',\n'.join(stages_repr)
+
+        return '\n'.join([
+            'build_attack_chain_page(',
+            f'    prs,',
+            f'    title="{title}",',
+            f'    subtitle="{subtitle}",',
+            f'    page_num="{page_num}",',
+            f'    logo_path={logo},',
+            f'    stages=[',
+        ]) + '\n' + stages_block + '\n' + '\n'.join([
+            '    ],',
+            ')',
+        ])
+
+    def _gen_kpi_dashboard(self, title, subtitle, page_num, content, logo) -> str:
+        kpis = (content or {}).get('kpis', [])
+        if not kpis:
+            kpis = [{'label': '待填充', 'value': 0, 'color': 'primary'}]
+
+        kpis_repr = []
+        for k in kpis:
+            kpis_repr.append(
+                f"    {{'label': '{k.get('label', '').replace('\"', '\\\\\"')}', "
+                f"'value': {k.get('value', 0)}, "
+                f"'color': '{k.get('color', 'primary')}'}}"
+            )
+        kpis_block = ',\n'.join(kpis_repr)
+
+        return '\n'.join([
+            'build_kpi_dashboard_page(',
+            f'    prs,',
+            f'    title="{title}",',
+            f'    subtitle="{subtitle}",',
+            f'    page_num="{page_num}",',
+            f'    logo_path={logo},',
+            f'    kpis=[',
+        ]) + '\n' + kpis_block + '\n' + '\n'.join([
+            '    ],',
+            ')',
+        ])
+
+    def _gen_vuln_matrix(self, title, subtitle, page_num, content, logo) -> str:
+        vulns = (content or {}).get('vulns', [])
+        if not vulns:
+            vulns = [{'name': '待填充', 'severity': '中危', 'component': '',
+                       'status': '未修复', 'recommendation': '请补充'}]
+
+        vulns_repr = []
+        for v in vulns:
+            vulns_repr.append(
+                f"    {{'name': '{v.get('name', '').replace('\"', '\\\\\"')}', "
+                f"'severity': '{v.get('severity', '中危')}', "
+                f"'component': '{v.get('component', '').replace('\"', '\\\\\"')}', "
+                f"'status': '{v.get('status', '未修复')}', "
+                f"'recommendation': '{v.get('recommendation', '').replace('\"', '\\\\\"')}'}}"
+            )
+        vulns_block = ',\n'.join(vulns_repr)
+
+        return '\n'.join([
+            'build_vuln_matrix_page(',
+            f'    prs,',
+            f'    title="{title}",',
+            f'    subtitle="{subtitle}",',
+            f'    page_num="{page_num}",',
+            f'    logo_path={logo},',
+            f'    vulns=[',
+        ]) + '\n' + vulns_block + '\n' + '\n'.join([
+            '    ],',
+            ')',
+        ])
+
+    def _gen_red_blue(self, title, subtitle, page_num, content, logo) -> str:
+        red_items = (content or {}).get('red_items', [])
+        blue_items = (content or {}).get('blue_items', [])
+        if not red_items:
+            red_items = [{'title': '待填充', 'detail': '请补充攻击行为'}]
+        if not blue_items:
+            blue_items = [{'title': '待填充', 'detail': '请补充防守措施'}]
+
+        def items_block(items):
+            reprs = []
+            for it in items:
+                reprs.append(
+                    f"    {{'title': '{it.get('title', '').replace('\"', '\\\\\"')}', "
+                    f"'detail': '{it.get('detail', '').replace('\"', '\\\\\"')}'}}"
+                )
+            return ',\n'.join(reprs)
+
+        return '\n'.join([
+            'build_red_blue_page(',
+            f'    prs,',
+            f'    title="{title}",',
+            f'    subtitle="{subtitle}",',
+            f'    page_num="{page_num}",',
+            f'    logo_path={logo},',
+            f'    red_items=[',
+        ]) + '\n' + items_block(red_items) + '\n' + '\n'.join([
+            '    ],',
+            f'    blue_items=[',
+        ]) + '\n' + items_block(blue_items) + '\n' + '\n'.join([
             '    ],',
             ')',
         ])
@@ -472,7 +658,7 @@ def run_executor(project_path: str,
     import subprocess
     try:
         result = subprocess.run(
-            ['/usr/local/bin/python3', str(gen_code_path)],
+            [sys.executable, str(gen_code_path)],
             cwd=str(project_path),
             capture_output=True, text=True, timeout=60
         )
