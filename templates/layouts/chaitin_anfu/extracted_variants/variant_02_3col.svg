@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <!-- ===== 3-COLUMN VARIANT: 左内容 | 中卡片组 | 右内容 ===== -->
+  <!-- 背景: #1A1A2E | 强调色: #7BBD4A -->
+
+  <rect width="1280" height="720" fill="#1A1A2E"/>
+
+  <!-- 标题栏 -->
+  <rect x="34" y="32" width="1094" height="73" fill="#222244"/>
+  <text x="50" y="73" fill="#FFFFFF" font-size="22" font-weight="bold" font-family="Microsoft YaHei">${title}</text>
+
+  <!-- Logo -->
+  <rect x="1128" y="29" width="113" height="31" fill="#333355" rx="4"/>
+
+  <!-- 副标题区 -->
+  <rect x="34" y="123" width="1209" height="140" fill="#1A1A30"/>
+
+  <!-- 左列: 深色内容区 -->
+  <rect x="34" y="239" width="252" height="436" fill="#162020" rx="6"/>
+  <text x="50" y="280" fill="#7BBD4A" font-size="13" font-weight="bold" font-family="Microsoft YaHei">${left_column_title}</text>
+  <text x="50" y="310" fill="#AAAAAA" font-size="11" font-family="Microsoft YaHei">${left column description text...}</text>
+
+  <!-- 中列: 卡片组 -->
+  <rect x="297" y="251" width="684" height="428" fill="#0D1F1F" rx="6"/>
+  <!-- 中间3卡片 -->
+  <rect x="310" y="265" width="200" height="130" fill="#1E3535" rx="6"/>
+  <rect x="310" y="265" width="200" height="4" fill="#7BBD4A" rx="2"/>
+  <text x="325" y="295" fill="#7BBD4A" font-size="12" font-weight="bold" font-family="Microsoft YaHei">${center_card_1}</text>
+  <text x="325" y="318" fill="#BBBBBB" font-size="10" font-family="Microsoft YaHei">[内容描述]</text>
+
+  <rect x="530" y="265" width="200" height="130" fill="#1E3535" rx="6"/>
+  <rect x="530" y="265" width="200" height="4" fill="#4E94D1" rx="2"/>
+  <text x="545" y="295" fill="#4E94D1" font-size="12" font-weight="bold" font-family="Microsoft YaHei">${center_card_2}</text>
+  <text x="545" y="318" fill="#BBBBBB" font-size="10" font-family="Microsoft YaHei">[内容描述]</text>
+
+  <rect x="750" y="265" width="200" height="130" fill="#1E3535" rx="6"/>
+  <rect x="750" y="265" width="200" height="4" fill="#54B38C" rx="2"/>
+  <text x="765" y="295" fill="#54B38C" font-size="12" font-weight="bold" font-family="Microsoft YaHei">${center_card_3}</text>
+  <text x="765" y="318" fill="#BBBBBB" font-size="10" font-family="Microsoft YaHei">[内容描述]</text>
+
+  <!-- 右列: 深色内容区 -->
+  <rect x="992" y="239" width="251" height="436" fill="#162020" rx="6"/>
+  <text x="1008" y="280" fill="#7BBD4A" font-size="13" font-weight="bold" font-family="Microsoft YaHei">${right_column_title}</text>
+  <text x="1008" y="310" fill="#AAAAAA" font-size="11" font-family="Microsoft YaHei">${right column description...}</text>
+</svg>

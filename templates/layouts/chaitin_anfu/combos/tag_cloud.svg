@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="52.5" width="168.0" height="47.2" rx="225000" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="10.5" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">勒索软件攻击</text>
+  <rect x="183.7" y="52.5" width="157.5" height="47.2" rx="225000" fill="#4AB680" stroke="none" stroke-width="0.0"/>
+  <text x="194.2" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">供应链攻击</text>
+  <rect x="357.0" y="52.5" width="126.0" height="47.2" rx="225000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="367.5" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">社交工程</text>
+  <rect x="498.7" y="52.5" width="126.0" height="47.2" rx="225000" fill="#A7D18E" stroke="none" stroke-width="0.0"/>
+  <text x="509.2" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">APT威胁</text>
+  <rect x="640.4" y="52.5" width="147.0" height="47.2" rx="225000" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="650.9" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">DDoS攻击</text>
+  <rect x="803.1" y="52.5" width="136.5" height="47.2" rx="225000" fill="#4DCC82" stroke="none" stroke-width="0.0"/>
+  <text x="813.6" y="71.5" fill="#FFFFFF" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">0Day漏洞</text>
+</svg>

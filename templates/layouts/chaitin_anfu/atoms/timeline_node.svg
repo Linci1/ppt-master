@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <line x1="0.0" y1="0.0" x2="0.1" y2="0.0" stroke="#7BBD4A" stroke-width="2.1"/>
+  <circle cx="21.0" cy="37.8" r="12.6" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="-10.5" y="47.0" fill="#1A1A1A" font-size="48" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2023</text>
+  <circle cx="67.2" cy="37.8" r="12.6" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="35.7" y="47.0" fill="#1A1A1A" font-size="48" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2024</text>
+  <circle cx="113.4" cy="37.8" r="12.6" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="81.9" y="47.0" fill="#1A1A1A" font-size="48" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2025</text>
+</svg>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- L-R split (left 2cards + right area) | bg=#FFFFFF | 8 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect id="R1" x="538.48" y="88.00" width="698.62" height="575.53" fill="#FFFFFF" rx="8"/>
+  <rect id="R2" x="34.33" y="96.80" width="279.41" height="53.20" fill="#A7D18E" rx="8"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T1_1" x="33.93" y="56.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_1}</text>
+  <text id="T1_2" x="33.93" y="69.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_2}</text>
+  <text id="T2_0" x="77.60" y="101.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+</svg>

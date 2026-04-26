@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    安全风险气泡图
+    用途: 多维度风险可视化，气泡大小=风险评分，颜色=风险等级
+    适用场景: 风险评估报告、安全态势分析、漏洞优先级排序
+    X轴: 发生概率 (低→高)
+    Y轴: 影响程度 (低→高)
+    -->
+
+    <defs>
+        <filter id="bubbleShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="4"/>
+            <feOffset dx="0" dy="2"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.2"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+
+        <radialGradient id="gradHigh" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#FF4444" stop-opacity="0.85"/>
+            <stop offset="100%" stop-color="#C00000" stop-opacity="0.85"/>
+        </radialGradient>
+        <radialGradient id="gradMedium" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#FF9900" stop-opacity="0.8"/>
+            <stop offset="100%" stop-color="#ED7D31" stop-opacity="0.8"/>
+        </radialGradient>
+        <radialGradient id="gradLow" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#66BB6A" stop-opacity="0.75"/>
+            <stop offset="100%" stop-color="#388E3C" stop-opacity="0.75"/>
+        </radialGradient>
+        <radialGradient id="gradInfo" cx="35%" cy="35%">
+            <stop offset="0%" stop-color="#42A5F5" stop-opacity="0.7"/>
+            <stop offset="100%" stop-color="#1565C0" stop-opacity="0.7"/>
+        </radialGradient>
+    </defs>
+
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <!-- 标题 -->
+    <text x="60" y="50" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="26" font-weight="bold" fill="#1A1C1E">安全风险气泡图</text>
+    <text x="60" y="80" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="15" fill="#7F8C8D">气泡大小 = 风险评分 | X轴 = 发生概率 | Y轴 = 影响程度 | 颜色 = 风险等级</text>
+
+    <!-- ========== 图表区域 (x=80~1150, y=120~600) ========== -->
+    <g id="chartArea">
+        <!-- 背景面板 -->
+        <rect x="80" y="120" width="1070" height="480" rx="12" fill="#FAFAFA" stroke="#E0E0E0" stroke-width="1"/>
+
+        <!-- 象限分割线 -->
+        <line x1="615" y1="120" x2="615" y2="600" stroke="#E8E8E8" stroke-width="1.5" stroke-dasharray="8,4"/>
+        <line x1="80" y1="360" x2="1150" y2="360" stroke="#E8E8E8" stroke-width="1.5" stroke-dasharray="8,4"/>
+
+        <!-- 象限标签 -->
+        <text x="300" y="250" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#BDBDBD" text-anchor="middle">低概率·高影响</text>
+        <text x="920" y="250" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#BDBDBD" text-anchor="middle">高概率·高影响</text>
+        <text x="300" y="580" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#BDBDBD" text-anchor="middle">低概率·低影响</text>
+        <text x="920" y="580" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#BDBDBD" text-anchor="middle">高概率·低影响</text>
+
+        <!-- 坐标轴 -->
+        <line x1="100" y1="580" x2="1130" y2="580" stroke="#BDBDBD" stroke-width="1.5"/>
+        <polygon points="1130,577 1140,580 1130,583" fill="#BDBDBD"/>
+        <line x1="100" y1="580" x2="100" y2="140" stroke="#BDBDBD" stroke-width="1.5"/>
+        <polygon points="97,140 100,130 103,140" fill="#BDBDBD"/>
+
+        <!-- X轴标签 -->
+        <text x="615" y="608" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">发生概率 →</text>
+        <text x="180" y="608" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#7F8C8D" text-anchor="middle">低</text>
+        <text x="1050" y="608" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#7F8C8D" text-anchor="middle">高</text>
+
+        <!-- Y轴标签 (旋转) -->
+        <text x="35" y="370" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle" transform="rotate(-90, 35, 370)">影响程度 →</text>
+        <text x="65" y="555" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#7F8C8D" text-anchor="end">低</text>
+        <text x="65" y="165" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#7F8C8D" text-anchor="end">高</text>
+
+        <!-- ========== 风险气泡 ========== -->
+        <!-- 高危区域 (右上) -->
+        <circle cx="980" cy="220" r="48" fill="url(#gradHigh)" stroke="#C00000" stroke-width="2" filter="url(#bubbleShadow)" opacity="0.9"/>
+        <text x="980" y="218" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">SQL注入</text>
+        <text x="980" y="234" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.9">CR 10</text>
+
+        <circle cx="850" cy="200" r="42" fill="url(#gradHigh)" stroke="#C00000" stroke-width="2" filter="url(#bubbleShadow)" opacity="0.85"/>
+        <text x="850" y="198" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">RCE漏洞</text>
+        <text x="850" y="214" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" fill="#FFFFFF" text-anchor="middle" opacity="0.9">CR 9.8</text>
+
+        <circle cx="1050" cy="300" r="38" fill="url(#gradHigh)" stroke="#C00000" stroke-width="1.5" filter="url(#bubbleShadow)" opacity="0.8"/>
+        <text x="1050" y="298" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">权限提升</text>
+        <text x="1050" y="314" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle" opacity="0.9">CR 9.0</text>
+
+        <!-- 中危区域 -->
+        <circle cx="750" cy="320" r="36" fill="url(#gradMedium)" stroke="#ED7D31" stroke-width="1.5" filter="url(#bubbleShadow)" opacity="0.8"/>
+        <text x="750" y="318" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">XSS跨站</text>
+        <text x="750" y="334" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle" opacity="0.9">MR 6.5</text>
+
+        <circle cx="650" cy="250" r="32" fill="url(#gradMedium)" stroke="#ED7D31" stroke-width="1.5" filter="url(#bubbleShadow)" opacity="0.75"/>
+        <text x="650" y="248" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="10" font-weight="bold" fill="#FFFFFF" text-anchor="middle">CSRF</text>
+        <text x="650" y="264" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle" opacity="0.9">MR 5.8</text>
+
+        <circle cx="550" cy="350" r="30" fill="url(#gradMedium)" stroke="#ED7D31" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.7"/>
+        <text x="550" y="348" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">弱密码</text>
+        <text x="550" y="363" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle" opacity="0.9">MR 4.5</text>
+
+        <circle cx="900" cy="400" r="28" fill="url(#gradMedium)" stroke="#ED7D31" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.7"/>
+        <text x="900" y="398" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">信息泄露</text>
+        <text x="900" y="413" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" fill="#FFFFFF" text-anchor="middle" opacity="0.9">MR 5.0</text>
+
+        <!-- 低危区域 -->
+        <circle cx="300" cy="420" r="24" fill="url(#gradLow)" stroke="#388E3C" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.65"/>
+        <text x="300" y="418" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">Cookie安全</text>
+        <text x="300" y="433" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle" opacity="0.9">LR 3.2</text>
+
+        <circle cx="450" cy="460" r="22" fill="url(#gradLow)" stroke="#388E3C" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.6"/>
+        <text x="450" y="458" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="9" font-weight="bold" fill="#FFFFFF" text-anchor="middle">端口开放</text>
+        <text x="450" y="473" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle" opacity="0.9">LR 2.8</text>
+
+        <circle cx="200" cy="350" r="20" fill="url(#gradLow)" stroke="#388E3C" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.55"/>
+        <text x="200" y="348" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="bold" fill="#FFFFFF" text-anchor="middle">错误页</text>
+        <text x="200" y="362" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle" opacity="0.9">LR 2.0</text>
+
+        <!-- 信息类 -->
+        <circle cx="600" cy="470" r="18" fill="url(#gradInfo)" stroke="#1565C0" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.55"/>
+        <text x="600" y="468" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="bold" fill="#FFFFFF" text-anchor="middle">TLS版本</text>
+        <text x="600" y="482" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle" opacity="0.9">Info</text>
+
+        <circle cx="800" cy="500" r="16" fill="url(#gradInfo)" stroke="#1565C0" stroke-width="1" filter="url(#bubbleShadow)" opacity="0.5"/>
+        <text x="800" y="498" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" font-weight="bold" fill="#FFFFFF" text-anchor="middle">HSTS</text>
+        <text x="800" y="512" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="8" fill="#FFFFFF" text-anchor="middle" opacity="0.9">Info</text>
+    </g>
+
+    <!-- ========== 图例（右上） ========== -->
+    <g id="legend" transform="translate(985, 520)">
+        <rect x="0" y="0" width="180" height="145" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="90" y="24" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="600" fill="#2C3E50" text-anchor="middle">风险等级</text>
+
+        <circle cx="25" cy="50" r="10" fill="#C00000" opacity="0.85"/>
+        <text x="45" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#404040">严重 Critical</text>
+
+        <circle cx="25" cy="78" r="9" fill="#ED7D31" opacity="0.8"/>
+        <text x="45" y="83" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#404040">高危 High</text>
+
+        <circle cx="25" cy="106" r="8" fill="#388E3C" opacity="0.65"/>
+        <text x="45" y="111" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#404040">低危 Low</text>
+
+        <circle cx="25" cy="134" r="7" fill="#1565C0" opacity="0.55"/>
+        <text x="45" y="139" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#404040">信息 Info</text>
+    </g>
+
+    <!-- 数据来源 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#95A5A6">数据来源：OWASP TOP 10 风险矩阵 / CVSS 3.1 评分 / 渗透测试结果</text>
+</svg>

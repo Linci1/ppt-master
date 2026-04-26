@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- L-R (left title + right 3cards) | bg=#FFFFFF | 8 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T2_0" x="33.93" y="97.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+  <text id="T2_1" x="33.93" y="110.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_1}</text>
+  <text id="T2_2" x="33.93" y="123.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_2}</text>
+  <text id="T3_0" x="881.36" y="97.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_0}</text>
+  <text id="T3_1" x="881.36" y="110.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_1}</text>
+  <text id="T3_2" x="881.36" y="123.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_2}</text>
+  <text id="T4_0" x="858.43" y="144.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_0}</text>
+  <text id="T4_1" x="858.43" y="157.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_1}</text>
+  <text id="T4_2" x="858.43" y="170.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_2}</text>
+  <text id="T4_3" x="858.43" y="183.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_3}</text>
+</svg>

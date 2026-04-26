@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="399.0" height="63.0" rx="160000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="10.5" y="23.6" fill="#FFFFFF" font-size="72" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">维度A</text>
+  <rect x="419.9" y="0.0" width="399.0" height="63.0" rx="160000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="430.4" y="23.6" fill="#FFFFFF" font-size="72" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">维度B</text>
+  <rect x="839.9" y="0.0" width="399.0" height="63.0" rx="160000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="850.4" y="23.6" fill="#FFFFFF" font-size="72" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">维度C</text>
+  <rect x="0.4" y="63.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="10.5" y="145.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元1</text>
+  <rect x="420.4" y="63.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="430.4" y="145.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元2</text>
+  <rect x="840.3" y="63.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="850.4" y="145.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元3</text>
+  <rect x="0.4" y="280.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="10.5" y="362.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元4</text>
+  <rect x="420.4" y="280.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="430.4" y="362.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元5</text>
+  <rect x="840.3" y="280.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="850.4" y="362.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元6</text>
+  <rect x="0.4" y="497.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="10.5" y="579.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元7</text>
+  <rect x="420.4" y="497.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="430.4" y="579.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元8</text>
+  <rect x="840.3" y="497.4" width="398.1" height="216.6" rx="160000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.8"/>
+  <text x="850.4" y="579.2" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">单元9</text>
+</svg>

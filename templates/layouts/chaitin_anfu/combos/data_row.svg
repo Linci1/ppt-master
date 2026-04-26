@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="10.5" y="0.0" width="378.0" height="755.9" rx="200000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
+  <text x="21.0" y="136.5" fill="#7BBD4A" font-size="240" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">80+</text>
+  <text x="21.0" y="344.4" fill="#666666" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">客户数</text>
+  <rect x="430.4" y="0.0" width="378.0" height="755.9" rx="200000" fill="#FFFFFF" stroke="#43827F" stroke-width="1.7"/>
+  <text x="440.9" y="136.5" fill="#43827F" font-size="240" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">70+</text>
+  <text x="440.9" y="344.4" fill="#666666" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">客户数</text>
+  <rect x="850.4" y="0.0" width="378.0" height="755.9" rx="200000" fill="#FFFFFF" stroke="#A7D18E" stroke-width="1.7"/>
+  <text x="860.9" y="136.5" fill="#A7D18E" font-size="240" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">30+</text>
+  <text x="860.9" y="344.4" fill="#666666" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">客户数</text>
+</svg>

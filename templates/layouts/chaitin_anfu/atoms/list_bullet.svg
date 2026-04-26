@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <circle cx="4.2" cy="8.4" r="5.9" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="10.5" y="8.4" fill="#1A1A1A" font-size="72" font-weight="bold" font-family="Microsoft YaHei" text-anchor="start" dominant-baseline="middle">主要条目内容</text>
+  <circle cx="14.7" cy="29.4" r="4.6" fill="#A7D18E" stroke="none" stroke-width="0.0"/>
+  <text x="21.0" y="29.4" fill="#333333" font-size="60" font-family="Microsoft YaHei" text-anchor="start" dominant-baseline="middle">子条目一</text>
+  <circle cx="14.7" cy="47.2" r="4.6" fill="#A7D18E" stroke="none" stroke-width="0.0"/>
+  <text x="21.0" y="47.2" fill="#333333" font-size="60" font-family="Microsoft YaHei" text-anchor="start" dominant-baseline="middle">子条目二</text>
+</svg>

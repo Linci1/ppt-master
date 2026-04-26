@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <circle cx="16.8" cy="294.0" r="50.4" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="6.3" y="281.4" fill="#FFFFFF" font-size="140" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">1</text>
+  <text x="0.0" y="350.7" fill="#1A1A1A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">信息收集</text>
+  <path d="M 350000 2800000 L 550000 2800000 L 550000 2400000 L 750000 2800000 L 550000 3200000 L 550000 2800000 Z" fill="#4AB680" stroke="#000" stroke-width="0.0"/>
+  <circle cx="281.4" cy="294.0" r="50.4" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="270.9" y="281.4" fill="#FFFFFF" font-size="140" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2</text>
+  <text x="264.6" y="350.7" fill="#1A1A1A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">边界突破</text>
+  <path d="M 2870000 2800000 L 3070000 2800000 L 3070000 2400000 L 3270000 2800000 L 3070000 3200000 L 3070000 2800000 Z" fill="#4AB680" stroke="#000" stroke-width="0.0"/>
+  <circle cx="545.9" cy="294.0" r="50.4" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="535.4" y="281.4" fill="#FFFFFF" font-size="140" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">3</text>
+  <text x="529.1" y="350.7" fill="#1A1A1A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">权限提升</text>
+  <path d="M 5390000 2800000 L 5590000 2800000 L 5590000 2400000 L 5790000 2800000 L 5590000 3200000 L 5590000 2800000 Z" fill="#4AB680" stroke="#000" stroke-width="0.0"/>
+  <circle cx="810.5" cy="294.0" r="50.4" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="800.0" y="281.4" fill="#FFFFFF" font-size="140" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">4</text>
+  <text x="793.7" y="350.7" fill="#1A1A1A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">横向移动</text>
+  <path d="M 7910000 2800000 L 8110000 2800000 L 8110000 2400000 L 8310000 2800000 L 8110000 3200000 L 8110000 2800000 Z" fill="#4AB680" stroke="#000" stroke-width="0.0"/>
+  <circle cx="1075.1" cy="294.0" r="50.4" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="1064.6" y="281.4" fill="#FFFFFF" font-size="140" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">5</text>
+  <text x="1058.3" y="350.7" fill="#1A1A1A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">目标达成</text>
+</svg>

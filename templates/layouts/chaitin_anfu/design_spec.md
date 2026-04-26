@@ -19,6 +19,10 @@
 
 ### 配色方案
 
+> ⚠️ **主色由模板色系决定，不硬编码单值**。chaitin_anfu 支持 2 套色系，Strategist 在 Step 4 根据源材料风格选择。
+
+**色系 A：品牌绿（默认 — 安服主打胶片风格）**
+
 | 角色 | HEX | 用途 |
 |------|-----|------|
 | **Primary (品牌绿)** | `#7BBD4A` | 页面标题、装饰条、强调 |
@@ -31,6 +35,34 @@
 | **Text Tertiary** | `#A6A6A6` | 页码、注释、标签 |
 | **Border/Divider** | `#E0E0E0` | 分隔线、边框 |
 | **Card BG (内容页)** | `#F5F7FA` | 卡片背景（浅灰） |
+| **Alert Red** | `#FF0000` | 高危/告警/攻击标记 |
+| **Alert Dark Red** | `#C00000` | 严重等级标记 |
+| **Warning Yellow** | `#FFFF00` | 中危/关注标记 |
+
+**色系 B：青绿（HW总结风格）**
+
+| 角色 | HEX | 用途 |
+|------|-----|------|
+| **Primary (青绿)** | `#43827F` | 页面标题、装饰条、强调 |
+| **Accent (翠绿)** | `#4AB680` | 正面指标、成功标记 |
+| **Secondary** | `#44887F` | 副标题、二级标题 |
+| **Background (白)** | `#FFFFFF` | 内容页主背景 |
+| **Dark BG** | `#000000` | 封面/章节/结尾页遮罩 |
+| **Text Primary** | `#1A1C1E` | 内容页主文字 |
+| **Text Light** | `#FFFFFF` | 深色页主文字 |
+| **Text Secondary** | `#404040` | 正文文字 |
+| **Text Tertiary** | `#A6A6A6` | 页码、注释、标签 |
+| **Border/Divider** | `#E0E0E0` | 分隔线、边框 |
+| **Card BG (内容页)** | `#F5F7FA` | 卡片背景（浅灰） |
+| **Alert Red** | `#FF0000` | 高危/告警/攻击标记 |
+| **Alert Dark Red** | `#C00000` | 严重等级标记 |
+| **Warning Yellow** | `#FFFF00` | 中危/关注标记 |
+
+**色系选择规则**：
+- 默认使用色系 A（品牌绿）
+- 如果源材料是 HW总结/攻防演练报告类，使用色系 B（青绿）
+- Strategist 在 Step 4 八项确认时明确当前色系
+- 两套色系**共享**：白底背景、红色告警、深色文字、浅灰卡片
 
 ### 字体方案
 
@@ -45,20 +77,21 @@
 
 | 用途 | 字号 | Weight |
 |------|------|--------|
-| 封面主标题 | 54px | Bold |
-| 封面副标题 | 32px | Bold |
-| 封面 Slogan | 22px | Regular |
-| 章节编号 | 126px | Bold |
-| 章节标题 | 48px | Bold |
-| 章节副标题 | 20px | Regular |
-| 目录条目 | 32px | Bold |
-| 内容页标题 | 28px | Bold |
-| 内容页正文 | 18-20px | Regular |
-| 卡片标题 | 22-24px | SemiBold |
-| 注释/标签 | 14-16px | Regular |
-| 页码 | 12px | Regular |
-| 结尾致谢 | 96px | Bold |
-| 结尾 Slogan | 24px | Regular |
+|| 封面主标题 | 54px | Bold |
+|| 封面副标题 | 32px | Bold |
+|| 封面 Slogan | 22px | Regular |
+|| 章节编号 | 126px | Bold |
+|| 章节标题 | 48px | Bold |
+|| 章节副标题 | 20px | Regular |
+|| 目录条目 | 32px | Bold |
+|| 内容页标题 | 28px | Bold |
+|| 内容页正文 | **16px (≈12pt)** | Regular |
+|| 辅助正文 | 18px (≈14pt) | Regular |
+|| 卡片标题 | 22-24px | SemiBold |
+|| 注释/标签 | 13px (≈10pt) | Regular |
+|| 页码 | 12px | Regular |
+|| 结尾致谢 | 96px | Bold |
+|| 结尾 Slogan | 24px | Regular |
 
 ---
 

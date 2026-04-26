@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="134.4" height="755.9" rx="0" fill="#FAFAFA" stroke="none" stroke-width="0.0"/>
+  <rect x="0.0" y="0.0" width="134.4" height="63.0" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="42.0" y="24.6" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">服务成效统计</text>
+  <rect x="0.0" y="73.5" width="335.1" height="52.5" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="10.5" y="93.4" fill="#FFFFFF" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">客户类型</text>
+  <rect x="336.0" y="73.5" width="251.1" height="52.5" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="346.5" y="93.4" fill="#FFFFFF" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">部署规模</text>
+  <rect x="587.9" y="73.5" width="251.1" height="52.5" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="598.4" y="93.4" fill="#FFFFFF" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">触发溯源</text>
+  <rect x="839.9" y="73.5" width="440.1" height="52.5" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="850.4" y="93.4" fill="#FFFFFF" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">主要发现</text>
+  <rect x="0.0" y="126.0" width="335.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="10.5" y="169.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">某银行A</text>
+  <rect x="336.0" y="126.0" width="251.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="346.5" y="169.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">80+客户/100+台</text>
+  <rect x="587.9" y="126.0" width="251.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="598.4" y="169.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">触发溯源</text>
+  <rect x="839.9" y="126.0" width="440.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="850.4" y="169.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">弱口令排查</text>
+  <rect x="0.0" y="241.5" width="335.1" height="105.0" rx="0" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="10.5" y="284.5" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">某银行B</text>
+  <rect x="336.0" y="241.5" width="251.1" height="105.0" rx="0" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="346.5" y="284.5" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">70+客户/100+台</text>
+  <rect x="587.9" y="241.5" width="251.1" height="105.0" rx="0" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="598.4" y="284.5" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">触发浏览器溯源</text>
+  <rect x="839.9" y="241.5" width="440.1" height="105.0" rx="0" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="850.4" y="284.5" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">脆弱性问题</text>
+  <rect x="0.0" y="357.0" width="335.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="10.5" y="400.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">大型城商行</text>
+  <rect x="336.0" y="357.0" width="251.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="346.5" y="400.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">30+客户/40+台</text>
+  <rect x="587.9" y="357.0" width="251.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="598.4" y="400.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">未知攻击检测</text>
+  <rect x="839.9" y="357.0" width="440.1" height="105.0" rx="0" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="0.4"/>
+  <text x="850.4" y="400.0" fill="#1A1A1A" font-size="56" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">未知资产发现</text>
+</svg>

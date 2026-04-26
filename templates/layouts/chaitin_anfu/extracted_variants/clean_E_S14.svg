@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- Grid (运营保障 multi-cards) | bg=#FFFFFF | 33 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect id="R1" x="99.54" y="152.53" width="716.28" height="60.20" fill="#7BBD4A" rx="8"/>
+  <rect id="R2" x="98.67" y="438.40" width="716.28" height="86.00" fill="#7BBD4A" rx="8"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T1_1" x="33.93" y="56.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_1}</text>
+  <text id="T1_2" x="33.93" y="69.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_2}</text>
+  <text id="T2_0" x="99.54" y="163.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+  <text id="T2_1" x="99.54" y="176.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_1}</text>
+  <text id="T2_2" x="99.54" y="189.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_2}</text>
+  <text id="T2_3" x="99.54" y="202.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_3}</text>
+  <text id="T3_0" x="39.47" y="169.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_0}</text>
+  <text id="T4_0" x="866.22" y="180.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_0}</text>
+  <text id="T5_0" x="137.67" y="220.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_0}</text>
+  <text id="T6_0" x="326.67" y="221.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T6_0}</text>
+  <text id="T7_0" x="435.54" y="273.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_0}</text>
+  <text id="T7_1" x="435.54" y="286.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_1}</text>
+  <text id="T7_2" x="435.54" y="299.5"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_2}</text>
+  <text id="T8_0" x="515.95" y="275.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T8_0}</text>
+  <text id="T9_0" x="589.61" y="275.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T9_0}</text>
+  <text id="T10_0" x="662.35" y="275.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T10_0}</text>
+  <text id="T11_0" x="735.42" y="275.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T11_0}</text>
+  <text id="T12_0" x="435.54" y="334.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T12_0}</text>
+  <text id="T12_1" x="435.54" y="347.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T12_1}</text>
+  <text id="T12_2" x="435.54" y="360.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T12_2}</text>
+  <text id="T13_0" x="610.15" y="335.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T13_0}</text>
+  <text id="T14_0" x="515.95" y="336.0"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T14_0}</text>
+  <text id="T15_0" x="435.54" y="398.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T15_0}</text>
+  <text id="T15_1" x="435.54" y="411.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T15_1}</text>
+  <text id="T15_2" x="435.54" y="424.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T15_2}</text>
+  <text id="T16_0" x="515.95" y="400.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T16_0}</text>
+  <text id="T17_0" x="610.15" y="400.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T17_0}</text>
+  <text id="T18_0" x="98.67" y="449.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T18_0}</text>
+  <text id="T18_1" x="98.67" y="462.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T18_1}</text>
+  <text id="T18_2" x="98.67" y="475.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T18_2}</text>
+  <text id="T18_3" x="98.67" y="488.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T18_3}</text>
+  <text id="T19_0" x="39.47" y="475.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T19_0}</text>
+</svg>

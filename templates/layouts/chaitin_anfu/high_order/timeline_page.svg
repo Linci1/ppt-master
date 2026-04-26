@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="134.4" height="755.9" rx="0" fill="#FAFAFA" stroke="none" stroke-width="0.0"/>
+  <rect x="0.0" y="0.0" width="134.4" height="63.0" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="42.0" y="24.6" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">国家级攻防演习发展历程</text>
+  <line x1="42.0" y1="399.0" x2="1238.8" y2="399.0" stroke="#7BBD4A" stroke-width="25.2"/>
+  <circle cx="42.0" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="0.0" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2012</text>
+  <text x="-10.5" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">仅3家事业单位</text>
+  <text x="-21.0" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">仅公安部、民航局、国家电网</text>
+  <circle cx="247.8" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="205.8" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2015</text>
+  <text x="195.3" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">50家单位加入</text>
+  <text x="184.8" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">国有企事业单位、大型银行加入</text>
+  <circle cx="453.5" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="411.5" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2018</text>
+  <text x="401.0" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">0Day常态化</text>
+  <text x="390.6" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">传统攻击行为、0Day武器化</text>
+  <circle cx="659.3" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="617.3" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2020</text>
+  <text x="606.8" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">攻防加剧</text>
+  <text x="596.3" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">攻击手段升级、0Day武器化</text>
+  <circle cx="865.1" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="823.1" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2023</text>
+  <text x="812.6" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">全面展开</text>
+  <text x="802.1" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">关键信息基础设施全面参与</text>
+  <circle cx="1070.9" cy="399.0" r="42.0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="1028.9" y="295.0" fill="#1A1A1A" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">2025</text>
+  <text x="1018.4" y="470.3" fill="#7BBD4A" font-size="52" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">5周长周期</text>
+  <text x="1007.9" y="569.0" fill="#666666" font-size="42" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">攻防演习5周+专项演练</text>
+</svg>

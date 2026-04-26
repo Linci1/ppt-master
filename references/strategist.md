@@ -65,6 +65,7 @@ Confirm target audience, usage occasion, and core message; provide initial asses
 | **A) General Versatile** | Visual impact first | Public / clients / trainees | "Catch the eye at a glance" |
 | **B) General Consulting** | Data clarity first | Teams / management | "Let data speak" |
 | **C) Top Consulting** | Logical persuasion first | Executives / board | "Lead with conclusions" |
+| **D) 安服安全类 (Security)** | Risk visualization first | Security teams / clients / regulators | "用攻击链和风险色标讲述安全故事" |
 
 **Style selection decision tree**:
 
@@ -72,12 +73,19 @@ Confirm target audience, usage occasion, and core message; provide initial asses
 Content characteristics?
   ├── Heavy imagery / promotional ──→ A) General Versatile
   ├── Data analysis / progress report ──→ B) General Consulting
-  └── Strategic decisions / persuading executives ──→ C) Top Consulting
+  ├── Strategic decisions / persuading executives ──→ C) Top Consulting
+  ├── Vulnerability / attack / risk assessment ──→ D) 安服安全类
+  └── ...
 
 Audience?
   ├── Public / clients / trainees ────→ A) General Versatile
   ├── Teams / management ────────────→ B) General Consulting
-  └── Executives / board / investors → C) Top Consulting
+  ├── Executives / board / investors → C) Top Consulting
+  └── Security teams / regulators / clients (安全报告) → D) 安服安全类
+
+Template match?
+  ├── 模板为 chaitin_anfu → D) 安服安全类（自动锁定）
+  └── 其他模板 → 按内容特征+受众选择
 ```
 
 ### e. Color Scheme Recommendation
@@ -92,8 +100,42 @@ Proactively provide a color scheme (HEX values) based on content characteristics
 | Technology / Internet | `#1565C0` Bright Blue | Innovative, energetic |
 | Healthcare / Health | `#00796B` Teal Green | Professional, reassuring |
 | Government / Public Sector | `#C41E3A` Red | Authoritative, dignified |
+| **网络安全 / 安服** | `#7BBD4A` 品牌绿 或 `#43827F` 青绿 | 技术专业 + 风险传达，必须搭配告警红 `#FF0000` |
 
 **Color rules**: 60-30-10 rule (primary 60%, secondary 30%, accent 10%); text contrast ratio >= 4.5:1; no more than 4 colors per page.
+
+**安服双色系速查**（当选择风格 D 时强制执行）：
+
+安服模板有两套色系，由 Strategist 根据内容调性选择其一：
+
+| 色系 | 主色 | HEX | 适用信号 |
+|------|------|-----|---------|
+| **色系A：品牌绿** | #7BBD4A | `#7BBD4A` | 产品介绍、服务方案、能力展示 |
+| **色系B：青绿** | #43827F | `#43827F` | 攻防总结、复盘报告、实战复盘 |
+
+**告警色（两套色系共用，固定不变）**：
+
+| 色值 | HEX | 用途 |
+|------|-----|------|
+| 告警红（高危） | `#FF0000` | 高危节点/告警标记 |
+| 严重红 | `#C00000` | 严重等级/致命风险 |
+| 警告黄（中危） | `#FFFF00` | 中危/关注项（必须加暗色边框保证白底可读） |
+
+**正文/背景色（固定）**：
+
+| 角色 | HEX | 用途 |
+|------|-----|------|
+| 正文主标题 | `#1A1C1E` | 页面主标题（仅品牌色可例外） |
+| 正文 | `#404040` | 段落文本 |
+| 背景白 | `#FFFFFF` | **正文页背景** — 不可用暗色 |
+| 背景暗 | `#1A1A2E` | **仅限**封面/章节/结尾固定页 |
+| 分割灰 | `#A6A6A6` / `#E0E0E0` | 分割线/边框 |
+
+**安服颜色纪律**：
+1. **正文页背景必须白色**，品牌色仅用在标题/强调/色标
+2. **固定页背景必须暗色**，logo 用亮色版本
+3. 告警红 `#FF0000` 不得用于装饰——只在真正传达"危险/告警"语义时使用
+4. 品牌绿/青绿在正文页上用于标题强调、色标、图标，不用于大面积背景
 
 ### f. Icon Usage Confirmation
 
@@ -151,6 +193,10 @@ Selection principle: Font size is based on **content density**, not design style
 | **C** | AI-generated | Custom illustrations, backgrounds needed |
 | **D** | Placeholders | Images to be added later |
 
+**🔴 安服安全类强制规则**（当风格选择 D 时）：图片选择必须设为基础 = **B**（源文档提取素材），不可选择 A（无图片）或 D（占位符）。正文页图片密度必须 ≥ 95%——即 N 页正文页中至多可空缺 1 页无图。源文案提取素材位于 `images/` 目录，不得以 SVG 重绘替代已提取的源素材图片。
+
+> 📐 **图片→页面自动映射**：详见 `references/image-page-mapping.md`。该参考涵盖尺寸分类（微型/小型/中型/大型）、套路→图片匹配表、自动分配算法、以及 images_manifest.json 生成脚本。在 Step4 图片分配阶段必须读取该参考。
+
 **When selection includes B**, you must run `python3 scripts/analyze_images.py <project_path>/images` before outputting the spec, and integrate scan results into the image resource list.
 
 **When B/C/D is selected**, add an image resource list to the spec:
@@ -194,7 +240,7 @@ Core logic: The layout container's aspect ratio must closely match the image's o
 
 When content outline pages involve **data visualization** (comparisons, trends, proportions, KPIs, flows, strategic frameworks, etc.), consult the chart template library to select appropriate chart types.
 
-Built-in library contains 33 chart templates; see `templates/charts/charts_index.json`.
+Built-in library contains 36 chart templates; see `templates/charts/charts_index.json`.
 
 > **Selection workflow**:
 > 1. Identify pages that need data visualization during content planning
@@ -259,6 +305,47 @@ Built-in library contains 33 chart templates; see `templates/charts/charts_index
 **Typical scenarios**: Strategic decision reports, deep analysis reports, consulting deliverables (MBB level)
 
 **Avoid**: Isolated data, subjective statements, decorative elements
+
+### D) 安服安全类 — Executor_Security
+
+**独特能力**：
+
+| 能力 | 说明 |
+|------|------|
+| 安全语义配色 | 品牌色系 + 告警红 `#FF0000`/严重红 `#C00000`/警告黄 `#FFFF00`，颜色承载安全语义 |
+| 攻击链可视化 | 水平/垂直时间轴，节点徽章按严重度着色，连接线+箭头表达攻击流向 |
+| 漏洞严重度编码 | 卡片网格+色标竖条+修复状态标签，严重度颜色映射固定不变 |
+| 图片强制嵌入 | 每页 ≥ 1 张图片，img_right 优先，源素材 > SVG 自绘 > 图表 |
+| 白底正文强制 | body 页背景 `#FFFFFF`，暗色 `#1A1A2E` 仅限固定页 |
+| 套路驱动生成 | L3 套路提示词优先于坐标规范，8 种套路覆盖典型安服页面 |
+| 技术叙事讲稿 | 讲稿结构 = 开篇定调 + 技术发现 + 业务影响翻译 + 过渡引导 |
+
+**10 种安服布局选择**（详见 `layout-patterns-security.md`）：
+
+| 布局 | 适用场景 | img_right 兼容 |
+|------|---------|---------------|
+| `lr_split_imagetext` | 左文右图（默认首选） | ✅ 原生 |
+| `lr_split_balanced` | 均衡双栏（红蓝对比等） | 🔶 通过嵌入小图 |
+| `lr_split_righttitle` | 右侧标题 | 🔶 嵌入图标 |
+| `lr_split_lefttitle` | 左侧标题 | 🔶 嵌入图标 |
+| `lr_split_dense` | 双栏密集（漏洞矩阵） | 🔶 卡片内嵌 |
+| `tb_split` | 上下分栏（流程+说明） | 🔶 下方或上方嵌入 |
+| `standard` | 单栏核心观点 | 🔶 嵌入小图标 |
+| `table_page` | 纯表格 | 🔶 行内图标 |
+| `chart_page` | 图表页 | ✅ 图表即图 |
+| `custom` | 自由布局 | 🔶 必须自绘示意图 |
+
+> ✅ = 自然满足图片要求 | 🔶 = 需要显式嵌入小图/图标/截图
+
+**Strategist 布局分配规则**：
+1. 连续 3 页不得使用同一 layout
+2. 同一章内至少 2 种不同布局
+3. `lr_split_imagetext` 占比 ≥ 50%
+4. 每页正文必须标注图片来源（源素材/自绘/图表）
+
+**典型场景**：渗透测试报告、安全评估报告、攻防演练总结、合规检查报告、安全运营月报
+
+**避免**：纯文字页、暗色背景正文页、无图片页、无风险色标页
 
 ---
 

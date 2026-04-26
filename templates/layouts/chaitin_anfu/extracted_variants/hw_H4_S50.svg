@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" style="background:#0A1219">
+<!-- HW-S50-tealLR-split | bg=#0A1219 | 37 shapes -->
+  <rect width="1280" height="720" fill="#0A1219"/>
+  <rect id="R1" x="1171.02" y="25.40" width="244.62" height="88.40" fill="#FF0000" rx="8"/>
+  <rect id="R2" x="47.52" y="96.87" width="799.71" height="597.82" fill="#67D194" rx="8"/>
+  <rect id="R3" x="860.87" y="96.87" width="799.71" height="597.82" fill="#67D194" rx="8"/>
+  <rect x="45.07" y="28.53" width="775.47" height="61.27" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="378.30" y="531.60" width="194.04" height="124.93" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="386.84" y="546.60" width="178.49" height="107.33" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <text x="1171.02" y="36.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${内部使用}</text>
+  <text x="45.07" y="39.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${二线支持}</text>
+  <text x="44.71" y="119.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${二线团队情况}</text>
+  <text x="886.96" y="119.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${二线支持成果}</text>
+  <text x="267.01" y="185.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${漏洞情报}</text>
+  <text x="383.46" y="205.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${Nday}</text>
+  <text x="383.46" y="218.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="383.46" y="231.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${0day}</text>
+  <text x="267.72" y="270.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${攻击情报}</text>
+  <text x="384.17" y="299.0"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${IP}</text>
+  <text x="384.17" y="312.0"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${威胁情报维护威胁情报获取与同步等}</text>
+  <text x="384.17" y="325.0"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="891.22" y="369.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${攻防演习期间累计接收前场需求}</text>
+  <text x="891.22" y="382.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${19}</text>
+  <text x="891.22" y="395.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${次}</text>
+  <text x="907.85" y="393.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${转接}</text>
+  <text x="538.04" y="454.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${前场}</text>
+  <text x="323.39" y="456.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${技术需求工单}</text>
+  <text x="758.66" y="456.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${结果}</text>
+  <text x="758.66" y="469.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${返回}</text>
+  <text x="666.66" y="524.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${专家团队}</text>
+  <text x="413.59" y="525.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${运营团队}</text>
+  <text x="386.84" y="557.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${运营人员}</text>
+  <text x="386.84" y="570.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${8}</text>
+  <text x="386.84" y="583.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${人}</text>
+  <text x="641.15" y="558.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${运营人员}</text>
+  <text x="641.15" y="571.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${8}</text>
+  <text x="641.15" y="584.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${人}</text>
+  <text x="556.70" y="591.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${转接}</text>
+</svg>

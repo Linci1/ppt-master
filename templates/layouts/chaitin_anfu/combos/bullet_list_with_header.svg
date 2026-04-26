@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="134.4" height="42.0" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="31.5" y="16.6" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">列表标题</text>
+  <circle cx="31.5" cy="73.5" r="16.8" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="52.5" y="74.5" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">针对大模型应用的全量关键组件进行全面的安全测试</text>
+  <circle cx="31.5" cy="157.5" r="16.8" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="52.5" y="158.5" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">通过安全测试，识别并报告大模型应用中存在的核心问题</text>
+  <circle cx="31.5" cy="241.5" r="16.8" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="52.5" y="242.5" fill="#1A1A1A" font-size="64" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">针对发现的安全问题，提供专业的修复建议和加固手段</text>
+</svg>

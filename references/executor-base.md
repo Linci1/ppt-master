@@ -68,6 +68,8 @@ Minimum review items:
 - Whether information density is suitable for a presentation page
 - Whether the page should be trimmed or relaid out instead of keeping all drafted content
 - Whether the page still matches the same-family structure already established elsewhere in the deck
+- **[Security/安服] Whether the body page contains at least 1 image or SVG diagram — text-only pages are unacceptable**
+- **[Security/安服] Whether the page background is white (#FFFFFF) — dark backgrounds are forbidden on body pages**
 
 **Important**:
 
@@ -152,6 +154,32 @@ Handle images based on their status in the Design Specification's "Image Resourc
 **Reference**: `<image href="../images/xxx.png" ... preserveAspectRatio="xMidYMid slice"/>`
 
 **Placeholder**: Dashed border `<rect stroke-dasharray="8,4" .../>` + description text
+
+### 6.1 Body Page Image Requirement (Security/安服 Presentations)
+
+> ⚠️ Based on real-case distillation: **95% of body pages in professional security PPTs contain images**. Pages with only text are unacceptable.
+
+**Mandatory rules for security service (安服) body pages**:
+
+1. **Every body page must contain at least 1 image** — either:
+   - A referenced bitmap from `../images/` (product screenshot, architecture diagram, etc.)
+   - An SVG-drawn diagram (flowchart, architecture, data chart, timeline)
+   - An icon grid (4-6 `data-icon` or `<use>` icons at 48-60px each)
+
+2. **Image placement priority**: img_right (text left, image right) is the dominant pattern (>50% of pages). Default to placing images on the right side.
+
+3. **Image sizing**: Prefer small-to-medium images (200-400px wide, 120-250px tall). 91% of images in real security PPTs occupy <10% of page area. Do not chase full-width hero images.
+
+4. **When no bitmap assets exist**: Executor MUST draw an SVG diagram instead of leaving text-only. Acceptable SVG diagrams:
+   - Flowcharts: rect nodes + polygon arrows (for attack paths, response processes)
+   - Architecture diagrams: layered blocks with labels
+   - Data charts: bar charts, pie charts, line charts using brand colors
+   - Timeline/sequence diagrams: horizontal or vertical step indicators
+   - Icon matrices: 2x3 or 3x2 grid of `data-icon` items with labels
+
+5. **Image href convention**: Always use `../images/xxx.png` prefix, never bare filename or `images/xxx.png`.
+
+6. **Fallback for missing images**: If a referenced image does not exist, draw an SVG placeholder diagram with `[示意图]` label — never leave a blank text-only page.
 
 ---
 

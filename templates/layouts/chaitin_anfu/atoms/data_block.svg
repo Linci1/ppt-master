@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="168.0" height="56.7" rx="30000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
+  <rect x="0.0" y="0.0" width="168.0" height="10.5" rx="30000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="10.5" y="3.7" fill="#FFFFFF" font-size="60" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">指标名称</text>
+  <text x="10.5" y="25.8" fill="#1A1A1A" font-size="160" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">1,234</text>
+  <text x="10.5" y="49.1" fill="#666666" font-size="48" font-weight="no" font-family="Microsoft YaHei" text-anchor="middle">描述文字</text>
+</svg>

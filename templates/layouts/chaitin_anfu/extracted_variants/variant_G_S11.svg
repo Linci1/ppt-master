@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- Complex (多列卡片+文本) | bg=#FFFFFF | 34 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="33.93" y="32.33" width="1094.23" height="73.07" fill="#000000" rx="6"/>
+  <rect x="33.93" y="96.40" width="326.07" height="566.07" fill="#FFFFFF" rx="6"/>
+  <rect x="35.13" y="112.87" width="338.61" height="138.80" fill="#000000" rx="6"/>
+  <rect x="378.14" y="136.87" width="278.94" height="303.60" fill="#000000" rx="6"/>
+  <rect x="954.69" y="155.80" width="271.41" height="282.60" fill="#FF0000" rx="6"/>
+  <rect x="53.47" y="277.67" width="287.61" height="95.00" fill="#A7D18E" rx="6"/>
+  <rect x="53.47" y="409.67" width="287.61" height="94.93" fill="#A7D18E" rx="6"/>
+  <rect x="377.34" y="476.47" width="867.09" height="186.00" fill="#FFFFFF" rx="6"/>
+  <rect x="634.42" y="483.87" width="395.14" height="178.60" fill="#FFFFFF" rx="6"/>
+  <rect x="53.47" y="541.60" width="287.61" height="94.93" fill="#A7D18E" rx="6"/>
+  <text x="33.93" y="43.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${案例}</text>
+  <text x="33.93" y="57.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${2}</text>
+  <text x="33.93" y="71.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${国家部委}</text>
+  <text x="33.93" y="85.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${BAIGC}</text>
+  <text x="52.27" y="89.2"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${需求背景}</text>
+  <text x="377.34" y="92.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${前期准备}</text>
+  <text x="663.35" y="92.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${评估测试}</text>
+  <text x="949.42" y="92.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${总结报告}</text>
+  <text x="866.89" y="122.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${工具测试}</text>
+  <text x="35.13" y="123.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${客户首次探索大模型应用场景}</text>
+  <text x="35.13" y="137.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="35.13" y="151.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${对于现有大模型应用场景的安全风险了解不足}</text>
+  <text x="35.13" y="165.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="734.15" y="142.0"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${采用具备安全模型能力的自动化测试工具针对}</text>
+  <text x="378.14" y="147.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${客户环境调研}</text>
+  <text x="378.14" y="161.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${了解大模型应用架构主要功能数据流等信息明}</text>
+  <text x="378.14" y="175.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="378.14" y="189.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${工具及数据集准备}</text>
+  <text x="954.69" y="166.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${经测试}</text>
+  <text x="954.69" y="180.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="954.69" y="194.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${行业底座模型符合合规要求}</text>
+  <text x="954.69" y="208.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="848.89" y="223.4"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${深度对抗测试}</text>
+  <text x="734.15" y="246.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${通过长上下文诱导模型输出敏感信息内容}</text>
+  <text x="734.15" y="260.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="734.15" y="274.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${通过提示词注入方式诱导模型越狱输出违规内}</text>
+  <text x="52.27" y="253.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${01}</text>
+  <text x="53.47" y="288.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${针对大模型应用的全量关键组件进行全面的安}</text>
+  <text x="866.89" y="362.8"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${渗透测试}</text>
+  <text x="734.02" y="381.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${对工作流编排门户知识库系统进行手动}</text>
+  <text x="734.02" y="395.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="734.02" y="409.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${工具的渗透测试}</text>
+  <text x="53.47" y="383.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${02}</text>
+  <text x="53.47" y="420.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${通过安全测试识别并报告大模型应用场景中存}</text>
+  <text x="402.48" y="469.2"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${服务成效}</text>
+  <text x="634.42" y="494.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${成效价值}</text>
+  <text x="634.42" y="508.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${测试成果}</text>
+  <text x="634.42" y="522.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${安全加固}</text>
+  <text x="53.47" y="518.4"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${03}</text>
+  <text x="388.61" y="521.7"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${完成行业大模型内安全测试发现模型应用场景}</text>
+  <text x="1039.43" y="542.2"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${提供专业的修复建议和加固手段帮助客户进行}</text>
+  <text x="1039.43" y="556.2"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="53.47" y="552.6"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${针对发现的安全问题提供专业的修复建议和加}</text>
+</svg>

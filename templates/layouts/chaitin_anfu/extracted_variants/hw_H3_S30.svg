@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" style="background:#0A1219">
+<!-- HW-S30-brightGreen-cards | bg=#0A1219 | 25 shapes -->
+  <rect width="1280" height="720" fill="#0A1219"/>
+  <rect id="R1" x="-34.32" y="109.94" width="1775.30" height="189.03" fill="#FFFFFF" rx="8"/>
+  <rect id="R2" x="-31.79" y="325.38" width="1775.30" height="189.03" fill="#FFFFFF" rx="8"/>
+  <rect id="R3" x="810.59" y="502.54" width="90.54" height="67.90" fill="#4D8685" rx="8"/>
+  <rect id="R4" x="329.65" y="549.10" width="1055.55" height="105.59" fill="#FFFFFF" rx="8"/>
+  <rect x="-14.27" y="225.24" width="262.37" height="277.30" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="45.07" y="28.53" width="1257.24" height="71.60" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="625.66" y="578.59" width="455.35" height="91.49" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <text x="45.07" y="39.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${攻击技战法}</text>
+  <text x="45.07" y="52.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${14}</text>
+  <text x="45.07" y="65.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="1220.79" y="120.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${对立响应}</text>
+  <text x="1220.79" y="133.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${攻击者}</text>
+  <text x="1220.79" y="146.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${向模型提出一个}</text>
+  <text x="45.07" y="120.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全对齐伪造}</text>
+  <text x="45.07" y="133.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="45.07" y="146.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${失效}</text>
+  <text x="625.23" y="143.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${大模型}</text>
+  <text x="626.31" y="193.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${典型攻击手法}</text>
+  <text x="110.83" y="332.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${情景模拟}</text>
+  <text x="110.83" y="345.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${通过}</text>
+  <text x="110.83" y="358.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${构建虚构脱离现实的情景如角色扮演文字游戏}</text>
+  <text x="1048.98" y="336.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${通用幻觉}</text>
+  <text x="1048.98" y="349.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${利用模型会产生}</text>
+  <text x="1048.98" y="362.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="625.66" y="589.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${交互调用}</text>
+  <text x="625.66" y="602.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${直接将用户输入传递给大模型并通过}</text>
+  <text x="625.66" y="615.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${MCP}</text>
+</svg>

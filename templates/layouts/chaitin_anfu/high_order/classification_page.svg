@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="134.4" height="755.9" rx="0" fill="#FAFAFA" stroke="none" stroke-width="0.0"/>
+  <rect x="0.0" y="0.0" width="134.4" height="63.0" rx="0" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="42.0" y="24.6" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">新形势下攻防对抗</text>
+  <rect x="0.0" y="73.5" width="619.4" height="577.4" rx="240000" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="21.0" y="117.1" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">攻击类型</text>
+  <text x="21.0" y="208.1" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 勒索软件攻击</text>
+  <text x="21.0" y="273.2" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 供应链攻击</text>
+  <text x="21.0" y="338.3" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 社交工程和网络钓鱼</text>
+  <text x="21.0" y="403.4" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 高级持续性威胁（APT）</text>
+  <text x="21.0" y="468.5" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 分布式拒绝服务攻击（DDoS）</text>
+  <rect x="703.4" y="73.5" width="587.9" height="577.4" rx="240000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="724.4" y="117.1" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">攻击目标</text>
+  <text x="724.4" y="214.7" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 关键信息基础设施</text>
+  <text x="724.4" y="298.7" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 金融、能源、交通等重保单位</text>
+  <text x="724.4" y="382.7" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 国有企业与央企</text>
+  <text x="724.4" y="466.7" fill="#FFFFFF" font-size="58" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">• 中小型企业</text>
+</svg>

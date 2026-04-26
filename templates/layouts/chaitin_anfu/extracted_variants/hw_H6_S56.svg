@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" style="background:#0A1219">
+<!-- HW-S56-very-rich-teal | bg=#0A1219 | 73 shapes -->
+  <rect width="1280" height="720" fill="#0A1219"/>
+  <rect id="R1" x="876.58" y="133.37" width="781.98" height="240.05" fill="#ECF8F1" rx="8"/>
+  <rect id="R2" x="434.28" y="135.32" width="433.77" height="238.64" fill="#ECF8F1" rx="8"/>
+  <rect id="R3" x="734.85" y="381.08" width="468.87" height="99.57" fill="#ECF8F1" rx="8"/>
+  <rect id="R4" x="1231.30" y="382.50" width="426.71" height="95.96" fill="#ECF8F1" rx="8"/>
+  <rect id="R5" x="434.28" y="382.99" width="272.99" height="99.63" fill="#ECF8F1" rx="8"/>
+  <rect id="R6" x="273.74" y="459.27" width="161.88" height="68.65" fill="#4CC482" rx="8"/>
+  <rect id="R7" x="434.97" y="486.51" width="662.97" height="182.52" fill="#ECF8F1" rx="8"/>
+  <rect id="R8" x="1118.76" y="486.91" width="539.80" height="181.72" fill="#ECF8F1" rx="8"/>
+  <rect id="R9" x="97.09" y="533.07" width="181.51" height="122.79" fill="#ECF8F1" rx="8"/>
+  <rect x="45.07" y="28.53" width="1443.73" height="61.27" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <text x="45.07" y="39.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防守技战法}</text>
+  <text x="45.07" y="52.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${1}</text>
+  <text x="45.07" y="65.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防御建设标准}</text>
+  <text x="1153.04" y="146.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防 御 加 固 能 力}</text>
+  <text x="1153.04" y="159.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C}</text>
+  <text x="1153.04" y="172.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="574.43" y="152.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${攻击预防能力}</text>
+  <text x="574.43" y="165.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A}</text>
+  <text x="574.43" y="178.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="882.43" y="162.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${资产管理}</text>
+  <text x="1011.99" y="162.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全功能管理}</text>
+  <text x="1140.35" y="163.8"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全配置管理}</text>
+  <text x="895.98" y="186.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C15}</text>
+  <text x="895.98" y="199.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${固资管理能力}</text>
+  <text x="1150.73" y="188.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C2}</text>
+  <text x="1150.73" y="201.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全配置管理能力}</text>
+  <text x="1027.29" y="189.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C3}</text>
+  <text x="1027.29" y="202.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${隔离技术}</text>
+  <text x="732.24" y="192.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A3}</text>
+  <text x="732.24" y="205.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${漏洞修复能力}</text>
+  <text x="590.94" y="193.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A1}</text>
+  <text x="590.94" y="206.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${漏洞预警能力}</text>
+  <text x="1027.96" y="218.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C4}</text>
+  <text x="1027.96" y="231.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${加密与签名管理能力}</text>
+  <text x="896.42" y="219.0"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C16}</text>
+  <text x="896.42" y="232.0"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${应用系统管理能力}</text>
+  <text x="1150.73" y="228.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C12}</text>
+  <text x="1150.73" y="241.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${基线配置管理能力}</text>
+  <text x="449.20" y="228.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A7}</text>
+  <text x="449.20" y="241.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全需求能力}</text>
+  <text x="664.11" y="233.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A2}</text>
+  <text x="664.11" y="246.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${漏洞评估能力}</text>
+  <text x="895.41" y="251.8"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C17}</text>
+  <text x="895.41" y="264.8"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${数据与信息管理能力}</text>
+  <text x="1027.96" y="257.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C6}</text>
+  <text x="1027.96" y="270.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${功能简化能力}</text>
+  <text x="450.24" y="262.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${A8}</text>
+  <text x="450.24" y="275.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${安全设计能力}</text>
+  <text x="897.14" y="285.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${C18}</text>
+  <text x="897.14" y="298.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${业务管理能力}</text>
+</svg>

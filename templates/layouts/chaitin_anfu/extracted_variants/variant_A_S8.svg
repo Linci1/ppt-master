@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- L-R split (left section+2cards + right area) | bg=#FFFFFF | 20 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect x="33.93" y="32.33" width="1094.23" height="73.07" fill="#000000" rx="6"/>
+  <rect x="538.48" y="88.00" width="698.62" height="575.53" fill="#FFFFFF" rx="6"/>
+  <rect x="488.48" y="96.13" width="782.62" height="555.67" fill="#000000" rx="6"/>
+  <rect x="34.33" y="96.80" width="279.41" height="53.20" fill="#A7D18E" rx="6"/>
+  <rect x="34.33" y="123.33" width="1208.83" height="139.93" fill="#FFFFFF" rx="6"/>
+  <rect x="96.14" y="217.13" width="383.14" height="141.40" fill="#C00000" rx="6"/>
+  <rect x="93.14" y="430.73" width="387.21" height="184.33" fill="#FFFFFF" rx="6"/>
+  <rect x="97.20" y="433.93" width="383.14" height="175.27" fill="#C00000" rx="6"/>
+  <rect x="714.02" y="503.07" width="326.67" height="113.00" fill="#000000" rx="6"/>
+  <rect x="1000.76" y="615.07" width="195.74" height="36.67" fill="#5B9BD5" rx="6"/>
+  <rect x="782.75" y="616.07" width="195.74" height="36.67" fill="#5B9BD5" rx="6"/>
+  <text x="33.93" y="43.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${攻}</text>
+  <text x="33.93" y="57.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="33.93" y="71.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${自动化攻防体系}</text>
+  <text x="77.60" y="101.4"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${重点需求场景}</text>
+  <text x="488.48" y="107.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${攻防知识库}</text>
+  <text x="488.48" y="121.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${数据沉淀}</text>
+  <text x="488.48" y="135.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${无锋自动化平台}</text>
+  <text x="488.48" y="149.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${渗透测试}</text>
+  <text x="96.14" y="228.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${企业组建攻击队伍已成趋势}</text>
+  <text x="96.14" y="242.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="96.14" y="256.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${以攻击方角色参与对外攻防演练}</text>
+  <text x="96.14" y="270.1"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${例如国护}</text>
+  <text x="42.27" y="246.5"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${实战攻防}</text>
+  <text x="97.20" y="444.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${企业进行}</text>
+  <text x="97.20" y="458.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${蓝军}</text>
+  <text x="97.20" y="472.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="97.20" y="486.9"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${红队}</text>
+  <text x="42.27" y="482.4"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${蓝军建设}</text>
+  <text x="1027.23" y="629.3"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${X-ray社区提交}</text>
+  <text x="813.35" y="630.5"  fill="#888888" font-size="11" font-family="Microsoft YaHei">${蓝军实战反馈}</text>
+</svg>

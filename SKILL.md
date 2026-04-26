@@ -1,12 +1,12 @@
 ---
-name: chaitin-ppt-master
+name: ppt-master
 description: >
   面向公司内部 PPT 生产的 AI 工作流技能。把 PDF/DOCX/URL/Markdown 等源材料
-  转成高质量 SVG 页面，并导出为 PPTX。默认优先使用长亭黑绿模板
-  black_green_official_2025，除非用户明确要求其他自定义模板或自由设计。
-  Use when 用户提出“生成PPT”、“做PPT”、“制作演示文稿”、
-  “make presentation”、“create PPT”，或明确提到“长亭模板”、
-  “黑绿模板”、“客户运营分析报告”、“启动会PPT”等公司内常见场景。
+  转成高质量 SVG 页面，并导出为 PPTX。默认优先使用长亭安服模板
+  chaitin_anfu，除非用户明确要求其他自定义模板或自由设计。
+  Use when 用户提出"生成PPT"、"做PPT"、"制作演示文稿"、
+  "make presentation"、"create PPT"，或明确提到"长亭模板"、
+  "安服模板"、"客户运营分析报告"、"启动会PPT"等公司内常见场景。
 ---
 
 # 长亭 PPT Master 技能
@@ -134,14 +134,14 @@ python3 ${SKILL_DIR}/scripts/project_manager.py init <project_name> --format <fo
 
 **推荐模板时必须做的事**：
 - 读取 `${SKILL_DIR}/templates/layouts/layouts_index.json`
-- 默认优先推荐 **长亭黑绿模板** `black_green_official_2025`
+- 默认优先推荐 **长亭安服模板** `chaitin_anfu`
 - 除非用户已经明确要求其他模板或自由设计，否则模板选择时要用下面这类话术：
 
-> 💡 **默认模板**：本次默认使用 **长亭黑绿模板** `black_green_official_2025`，它也是当前公司内最稳定、最推荐的默认模板。
+> 💡 **默认模板**：本次默认使用 **长亭安服模板** `chaitin_anfu`，它也是当前公司内最稳定、最推荐的默认模板。
 >
 > 如果你不需要调整，我就按这个模板继续；如果需要，我也可以改成 **其他自定义模板**，或者按你的要求 **不使用模板 / 自由设计**。
 
-如果用户确认继续使用默认黑绿模板，或指定使用其他模板，则复制对应模板文件到项目目录：
+如果用户确认继续使用默认安服模板，或指定使用其他模板，则复制对应模板文件到项目目录：
 
 ```bash
 cp ${SKILL_DIR}/templates/layouts/<template_name>/*.svg <project_path>/templates/
@@ -154,6 +154,74 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2
 
 将提取结果保存到 `<project_path>/source_ppt_analysis.md`，后续固定页生成时必须参照此文件，不能凭假设设计。
 
+**源文档图片提取（强制 — 安服PPT图片密度核心保障）**：
+
+> ⚠️ 真实安服PPT 95%正文页含图片，图片缺失是当前管线最大短板。此步骤不可跳过。
+
+如果用户提供了源 PPTX 或 DOCX 文件，必须提取其中的图片素材到项目 `images/` 目录：
+
+```bash
+# 1. 创建临时提取目录
+mkdir -p /tmp/pptx_media_extract
+
+# 2. 解压 PPTX/DOCX 提取媒体文件（PPTX/DOCX 本质是 ZIP）
+#    对于 PPTX:
+unzip -o "<source_pptx_path>" "ppt/media/*" -d /tmp/pptx_media_extract/
+#    对于 DOCX:
+unzip -o "<source_docx_path>" "word/media/*" -d /tmp/pptx_media_extract/
+
+# 3. 筛选高质量图片（排除极小图标和重复文件）
+#    用 python 脚本筛选：面积 > 10000px²，非重复
+python3 -c "
+import os, hashlib, shutil
+src = '/tmp/pptx_media_extract'
+dst = '<project_path>/images'
+os.makedirs(dst, exist_ok=True)
+seen_hashes = set()
+for root, dirs, files in os.walk(src):
+    for f in files:
+        path = os.path.join(root, f)
+        if not f.lower().endswith(('.png','.jpg','.jpeg','.gif','.bmp','.tiff','.emf','.wmf')):
+            continue
+        # Hash-based dedup
+        h = hashlib.md5(open(path,'rb').read()).hexdigest()
+        if h in seen_hashes:
+            continue
+        seen_hashes.add(h)
+        # Copy all media (size filtering can be done manually later)
+        shutil.copy2(path, os.path.join(dst, f))
+        print(f'Copied: {f}')
+print(f'Total unique images: {len(seen_hashes)}')
+"
+
+# 4. 清理临时目录
+rm -rf /tmp/pptx_media_extract
+```
+
+提取完成后，在 `design_spec.md` 的 Image Resource List 中列出所有可用图片文件名，供 Executor 生成 SVG 时引用。
+
+> ⚠️ 如果 `unzip` 被权限阻止，改用 python-pptx 提取：
+> ```python
+> from pptx import Presentation
+> from pptx.util import Emu
+> import os, hashlib
+> prs = Presentation('<source_pptx_path>')
+> dst = '<project_path>/images'
+> os.makedirs(dst, exist_ok=True)
+> seen = set()
+> for i, slide in enumerate(prs.slides):
+>     for s in slide.shapes:
+>         if s.shape_type == 13:  # Picture
+>             blob = s.image.blob
+>             h = hashlib.md5(blob).hexdigest()
+>             if h in seen: continue
+>             seen.add(h)
+>             ext = s.image.content_type.split('/')[-1]
+>             fname = f'slide{i+1}_{s.name}.{ext}'
+>             with open(os.path.join(dst, fname), 'wb') as f:
+>                 f.write(blob)
+> ```
+
 > ⚠️ **模板保真规则（强制）**：
 > - 模板 SVG 是权威骨架，不要随意重画 cover / chapter / toc / content / ending 的框架。
 > - 如果模板带了背景图或 logo，必须一并复制到 `<project_path>/images/`，并保持原文件名不变。
@@ -163,7 +231,13 @@ cp ${SKILL_DIR}/templates/layouts/<template_name>/*.jpg <project_path>/images/ 2
 
 如需创建全局模板，读取：`workflows/create-template.md`
 
-**✅ 检查点**：模板选择已确认，模板文件已复制（如适用），进入 Step 4。
+**✅ 检查点**：模板选择已确认，模板文件已复制（如适用），源文档图片已提取到 `images/`（如提供了源文件），进入 Step 4。
+
+> ⚠️ **陷阱：Step 3 必须完整复制图片**：
+> - SKILL.md 写了 4 条 cp 命令，但容易只执行前 2 条（SVG + design_spec.md），漏掉后 2 条的图片复制。
+> - 如果漏掉，`images/` 为空，封面/章节页背景图和所有页面 Logo 全部空白。
+> - 另外，手写 SVG 时 `href` 引用图片必须用 `../images/` 前缀（SVG 在 `svg_output/`，图片在 `images/`），不能用裸文件名。
+> - **新增陷阱：源文档图片提取**：如果用户提供了源 PPTX/DOCX，必须执行图片提取步骤。不提取图片 → Executor 无素材可用 → 正文页纯文字 → 与真实安服PPT风格严重不符。
 
 ---
 
@@ -260,6 +334,85 @@ python3 ${SKILL_DIR}/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_s
 
 🚧 **GATE**：Step 4 完成；如果触发生图，则 Step 5 也必须完成。
 
+---
+
+#### Step 6 执行路径选择
+
+Step 6 有两条生成路径。**路径A（SVG）** 适用于模板驱动、需要 AI 创意发挥的场景；**路径B（python-pptx 原生）** 适用于参考稿驱动、需要高保真还原的场景。根据内容性质选择：
+
+| 场景 | 推荐路径 |
+|------|---------|
+| 有参考稿，需精确还原布局/配色 | **路径B** |
+| 无参考稿，全新内容，模板风格 | **路径A** |
+| 固定页（封面/目录/章节）使用模板还原 | **路径A（SVG 固定页）+ 路径B（正文页）** |
+| 正式交付需字号/间距 100% 精确 | **路径B** |
+
+---
+
+#### 路径B：python-pptx 原生引擎（参考稿驱动）
+
+> 适用：用户提供了参考 PPTX、希望高保真还原、或对文字精度有强制要求（字号/行距不损失）。
+
+**步骤 B-1：分析参考稿（如尚未生成 layout_index.json）**
+
+```bash
+python3 ${SKILL_DIR}/scripts/reference_analyzer.py <参考PPT.pptx> \
+    -o <project_path>/layout_index.json
+```
+
+`reference_analyzer.py` 会输出每页的布局类型（card_grid / timeline / data_table / two_column / text_section），供后续页型匹配使用。
+
+**步骤 B-2：准备内容**
+
+将每页内容整理为 `content.md` 或 `content_pages.json`（格式参考 `references/content-pages-format.md`），至少包含每页的：
+
+```json
+[
+  {"page_num": 1, "title": "攻击路径总览", "subtitle": "...",
+   "cards": [{"title": "边界突破", "lines": ["ThinkPHP RCE", "..."]}]}
+]
+```
+
+**步骤 B-3：执行生成**
+
+```bash
+python3 ${SKILL_DIR}/scripts/pptx_native_executor.py <project_path> \
+    [--ref-pptx <参考PPT.pptx>] \
+    [--content <content_pages.json>] \
+    -o generated.pptx
+```
+
+执行后输出：
+- `<project_path>/generated_pages.py` — 生成的 Python 代码（可审计、可复用）
+- `<project_path>/generated.pptx` — 最终 PPTX
+
+**页型函数说明**（由 `pptx_components.py` 提供）：
+
+| 页型 | 函数名 | 适用场景 |
+|------|--------|---------|
+| 卡片网格 | `build_card_grid_page` | 2×2 / 1×4 等网格布局 |
+| 时间线 | `build_timeline_page` | 横向/纵向时间节点展示 |
+| 数据表格 | `build_data_table_page` | 漏洞清单、统计表等 |
+| 双栏对比 | `build_two_column_page` | 红蓝对比、攻防对比 |
+| 文本段落 | `build_text_section_page` | 术语说明、政策解读 |
+
+> 💡 如果 layout_index.json 已由 `reference_analyzer.py` 正确识别页型，`pptx_native_executor.py` 会自动为每页选择最接近的组件函数。
+
+**步骤 B-4：质量检查**
+
+python-pptx 直接生成的 PPTX 不经过 SVG 转换层，**字号/行距/段落间距全部完整保留**。但仍需确认：
+
+```bash
+# 检查文字属性（验证字号非 0.1pt）
+python3 ${SKILL_DIR}/scripts/check_pptx_fonts.py <project_path>/generated.pptx
+```
+
+---
+
+#### 路径A：SVG 引擎（模板驱动，原始流程）
+
+> 以下为原有的 SVG 生成流程，适用于无参考稿、需要 AI 创意设计的场景。
+
 根据风格读取对应角色定义：
 
 ```text
@@ -283,6 +436,7 @@ Read references/executor-consultant-top.md
 - 当前模板的 frame/slot 约束：明确哪些是品牌固定框架，哪些 slot 允许填充、伸缩、删减或换序
 - 生成后的文案结构：至少明确标题层、主体层、证据层、收束层
 - 对 hybrid brand-locked 模板，必须额外满足 `references/hybrid-page-protocol.md`：每个 `body_page` 在落 SVG 前都要先明确 `page_type`、`template_family`、`frame_policy`、`safe_region`、`native_structure`、`split_strategy` 与 `message_contract`，不得直接从未分型正文文本跳到 `{{CONTENT_AREA}}` 填充
+- **安服/安全类模板（chaitin_anfu 等）正文页布局指引（强制）**：当使用 `chaitin_anfu` 模板时，必须先读取 `references/layout-patterns-security.md`，为每个 body page 指定布局类型（9种：standard / lr_split_balanced / lr_split_imagetext / lr_split_dense / lr_split_righttitle / lr_split_lefttitle / tb_split / card_grid / data_table）并遵循其空间坐标和组件推荐，避免千篇一律的 CONTENT_AREA 填充
 
 > ⚠️ **主代理专属规则**：SVG 生成只能由当前主代理完成。
 > ⚠️ **连续生成规则**：页面必须在同一上下文中一页一页连续生成，禁止分批切割。
@@ -599,6 +753,131 @@ cp /tmp/docx_images/word/media/* <project_path>/images/
 - 不要在无关页面以低 opacity 硬塞原图（如 opacity=0.5 的封面图放首页背景）
 - 不要完全忽略文档自带的图片，全部用纯SVG重绘
 - 图片必须服务于内容表达，不是装饰
+
+### 陷阱 12：从提取变体到实际使用的缺失链路（extracted_variants 未被 Executor 使用）
+
+**发现背景**：从 HW总结 PPT 源码（`extracted_variants/hw_H2_S12.svg` 等）提取了 6 个正文页布局变体，但 Executor 生成美的报告时，依然使用 `03_content.svg` 通用模板，**提取变体从未被使用**。
+
+**根本原因**：当前 Executor 工作流没有"变体路由"逻辑——它不知道 `extracted_variants/` 里的 SVG 应该对应哪类页面，也不会把提取变体当作模板来填充内容。
+
+**缺失的三个环节**：
+
+1. **变体路由（Variant Router）**：根据内容类型（网格型/L-R分屏/卡片列表/时间线等）为每页选择最匹配的提取变体 SVG
+2. **变体模板化**：把提取的 SVG 里的实占文字（`${长亭红队介绍}` 等）替换为语义化占位符（`${card_title_1}`、`${body_text}`），形成真正的模板
+3. **变体内容填充**：用实际报告内容替换占位符，同时保持原 SVG 的坐标/颜色/圆角等视觉结构
+
+**已验证的 HW→安服 颜色映射**（深色变体→亮色模板）：
+
+| 角色 | HW深色值 | 安服亮色值 | 备注 |
+|------|---------|-----------|------|
+| 背景 | `#0A1219` | `#FFFFFF` | 深→白 |
+| 卡片底色 | `#3C7471` | `#3C7471` | 沿用（沉稳青） |
+| 强调色 | `#4DCD82` | `#7BBD4A` | 亮绿→品牌绿 |
+
+**变体 SVG 质量参考**（`extracted_variants/`）：
+
+| 变体 | 页型 | 质量 | 适合场景 |
+|------|------|------|---------|
+| `hw_H2_S12` | 6行卡片网格 | ⭐⭐⭐ 38实色块 | 网格/数据页 |
+| `hw_H6_S56` | 均匀分布 | ⭐⭐ 19块 | 内容丰富页 |
+| `hw_H4_S50` | 顶5+下2 | ⭐⭐ 19块 | 标准正文页 |
+| `hw_H1_S8` | 顶部集中 | ⭐ 20块 | L-R split类型 |
+
+**如果要让提取变体真正被使用**，在 Step 3 模板选择后、Step 6 Executor 生成前，需要增加一个"变体映射"子步骤：
+1. 读取 `extracted_variants/` 下的所有变体 SVG，分析每个变体的结构特征（行数、列数、y分布）
+2. 在 `design_spec.md` 中为每个 body page 指定使用的变体文件名
+3. Executor 生成时，把通用 `03_content.svg` 替换为对应变体 SVG，然后做占位符替换
+
+**验证方法**：检查 `svg_output/` 中生成的 SVG 是否包含提取变体的特征色块（而非 `03_content.svg` 的通用矩形）。也可以直接解压 PPTX 检查 slide XML 中 `<p:grpSp>` 内的 shape 数量——使用提取变体时内容区 shape 数量会明显更多（10+ 个色块）。
+
+### 陷阱 13：SVG→PPTX 正文页转换层存在本质性信息丢失（正文页禁用 SVG 路径）
+
+**发现背景**：在美的红队报告项目中，SVG 生成的正文页经 `svg_to_pptx.py` 导出后，用 python-pptx 读取发现：
+- 所有字号返回 `0.1pt`（实际 SVG 里写了 `font-size="28"`）
+- TextBox 宽度随文字内容自适应（实际应撑满整个卡片 5.79"）
+- 段落间距完全丢失（SVG 里 `<tspan dy="...">` 不等于 PPTX `<a:pPr spaceBefore/After>`）
+
+**根本原因**：SVG `<text>` 元素的 `font-size` 是装饰属性，不是形状属性。`svg_to_pptx` 转换层把 SVG 文字转成 PPTX `<a:rPr>` 时，**完全不注入 `fontSize` 值**，因为 SVG 规范里 `font-size` 不控制形状几何。PPTX 文字格式（字号/段间距/字重继承）是在 `<a:txBody><a:pPr>` 里定义的，SVG 没有任何等价属性可以映射过去。
+
+**决策结论**：正文页（body pages）**不要走 SVG→PPTX 路径**，应该用 python-pptx 原生 API 直接生成。固定页（cover/toc/chapter/ending）因为版型固定、结构简单，SVG 壳+手动填文字可以接受。
+
+**正确的正文页生成方式**：使用 `scripts/pptx_components.py` 的 python-pptx 组件库，示例：
+
+```python
+from pptx import Presentation
+from pptx_components import (
+    CANVAS_W, CANVAS_H,  # 尺寸常量
+    add_brand_header, add_brand_footer,
+    add_card, build_card_grid_page,
+    rgb, C  # 配色
+)
+
+prs = Presentation()
+prs.slide_width = CANVAS_W
+prs.slide_height = CANVAS_H
+
+build_card_grid_page(prs,
+    title='攻击路径总览',
+    subtitle='Attack Path Overview',
+    cards=[
+        {'title': '边界突破', 'lines': ['ThinkPHP RCE', 'Log4j2 JNDI']},
+        {'title': '内网横移', 'lines': ['社工钓鱼获取终端', '横向扩大权限']},
+        {'title': '社工钓鱼', 'lines': ['微信钓鱼针对采招', '投递简历触发木马']},
+        {'title': '核心资产', 'lines': ['海外AWS机器控制权', '域控/Nacos/MySQL']},
+    ],
+    page_num='5',
+    card_style='dark')
+
+prs.save('output.pptx')
+```
+
+**关键 API 设计原则**（来自踩坑验证）：
+- `build_card_grid_page(prs, ...)` 接收 `Presentation` 对象 in-place 修改（避免 python-pptx 无法跨 prs 复制 slides 的坑）
+- 字号直接用 `Pt(28)` / `Pt(16)` / `Pt(13)` 传数值，不是字符串
+- 颜色用 `RGBColor(int, int, int)` 而非 hex 字符串
+- 段落间距用 `paragraph.space_before = Pt(0)` / `paragraph.space_after = Pt(6)`
+
+### 陷阱 14：chaitin_anfu 模板的外部图片资源缺失会导致封面/章节页/正文页 Logo 空白
+
+chaitin_anfu 模板的 SVG 引用了 3 个外部图片，如果这些图片不在项目的 `images/` 目录中，导出后对应位置会显示为空白：
+
+| 图片文件 | 使用位置 | 用途 |
+|---------|---------|------|
+| `bg_dark_tech.jpeg` | 封面、章节页、结束页 | 深色科技风背景图 |
+| `chaitin_logo_light.png` | 封面、结束页 | 深色背景上的亮色 Logo |
+| `chaitin_logo_dark.png` | 所有正文页 header | 白色背景上的深色 Logo |
+
+**前置检查（Step 3 模板复制后强制执行）**：
+
+```bash
+# 检查模板所需图片是否存在
+for img in bg_dark_tech.jpeg chaitin_logo_light.png chaitin_logo_dark.png; do
+  if [ ! -f "<project_path>/images/$img" ]; then
+    echo "MISSING: $img — 将导致导出后图片位置为空白"
+  fi
+done
+```
+
+**缺失处理**：
+- 如果源模板目录（`${SKILL_DIR}/templates/layouts/chaitin_anfu/`）有这些文件，从那里复制
+- 如果源模板目录也没有，在生成 SVG 时不引用外部图片，改用纯 SVG 矩形/文字替代（如封面背景改用纯深色矩形 `fill="#0A1628"`）
+- **绝对不能**在 SVG 中引用不存在的图片文件——`svg_to_pptx.py` 会跳过该元素且不报错
+
+### 陷阱 15：快速验证路径 — 直接从 svg_output/ 导出 PPTX
+
+完整后处理流水线（`total_md_split.py` → `finalize_svg.py` → `svg_quality_checker.py` → `svg_to_pptx.py -s final`）需要串行 4 步。但如果只是想**快速验证布局效果**，可以直接从 `svg_output/` 导出：
+
+```bash
+# 快速验证导出（跳过 finalize，直接从 svg_output/ 导出）
+python3 ${SKILL_DIR}/scripts/svg_to_pptx.py <project_path> -s svg_output -f ppt169 \
+    -o <project_path>/output/quick_preview.pptx
+```
+
+**注意事项**：
+- 此路径**不会**嵌入外部图片（因为没有 `finalize_svg.py` 的 embed-images 步骤）
+- 此路径**不会**生成 `svg_final/` 目录
+- 仅用于快速验证布局和文字内容，**正式交付必须走完整流水线**
+- 如果 SVG 中引用了 `../images/` 的图片，快速导出会输出 "External image not found" 警告但不会报错中断
 
 ---
 

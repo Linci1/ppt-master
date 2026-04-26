@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="60.9" height="75.6" rx="26000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
+  <rect x="0.0" y="0.0" width="60.9" height="14.7" rx="26000" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
+  <text x="4.2" y="5.8" fill="#FFFFFF" font-size="80" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">方案A</text>
+  <text x="4.2" y="36.5" fill="#1A1A1A" font-size="72" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">方案A的内容描述</text>
+  <rect x="73.5" y="0.0" width="60.9" height="75.6" rx="26000" fill="#FFFFFF" stroke="#43827F" stroke-width="1.7"/>
+  <rect x="73.5" y="0.0" width="60.9" height="14.7" rx="26000" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="77.7" y="5.8" fill="#FFFFFF" font-size="80" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">方案B</text>
+  <text x="77.7" y="36.5" fill="#1A1A1A" font-size="72" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">方案B的内容描述</text>
+</svg>

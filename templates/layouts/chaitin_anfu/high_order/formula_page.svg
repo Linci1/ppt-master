@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <rect x="0.0" y="0.0" width="134.4" height="755.9" rx="0" fill="#FAFAFA" stroke="none" stroke-width="0.0"/>
+  <rect x="0.0" y="0.0" width="134.4" height="63.0" rx="0" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="42.0" y="24.6" fill="#FFFFFF" font-size="88" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">攻击特征模型</text>
+  <rect x="21.0" y="94.5" width="923.9" height="315.0" rx="240000" fill="#43827F" stroke="none" stroke-width="0.0"/>
+  <text x="42.0" y="214.2" fill="#FFFFFF" font-size="120" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">APT级别攻击</text>
+  <rect x="21.0" y="419.9" width="923.9" height="84.0" rx="200000" fill="#FFFFFF" stroke="#43827F" stroke-width="1.3"/>
+  <text x="42.0" y="451.9" fill="#43827F" font-size="64" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">军火商级别</text>
+  <text x="378.0" y="451.9" fill="#1A1A1A" font-size="60" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">使用大量0Day攻击</text>
+  <rect x="21.0" y="524.9" width="923.9" height="84.0" rx="200000" fill="#FFFFFF" stroke="#43827F" stroke-width="1.3"/>
+  <text x="42.0" y="556.9" fill="#43827F" font-size="64" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">APT级别</text>
+  <text x="378.0" y="556.9" fill="#1A1A1A" font-size="60" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">利用漏洞渗透，埋伏，移动，获得权限</text>
+  <rect x="21.0" y="629.9" width="923.9" height="84.0" rx="200000" fill="#FFFFFF" stroke="#43827F" stroke-width="1.3"/>
+  <text x="42.0" y="661.8" fill="#43827F" font-size="64" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">非正常防守</text>
+  <text x="378.0" y="661.8" fill="#1A1A1A" font-size="60" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">目标系统被控、边界被突破</text>
+</svg>

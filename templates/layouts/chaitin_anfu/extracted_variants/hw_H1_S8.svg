@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" style="background:#0A1219">
+<!-- HW-S8-richCards-teal | bg=#0A1219 | 40 shapes -->
+  <rect width="1280" height="720" fill="#0A1219"/>
+  <rect id="R1" x="-0.18" y="113.76" width="1711.91" height="86.60" fill="#67D294" rx="8"/>
+  <rect id="R2" x="44.28" y="186.49" width="1620.26" height="290.55" fill="#43827F" rx="8"/>
+  <rect id="R3" x="1190.56" y="493.87" width="472.21" height="170.86" fill="#43827F" rx="8"/>
+  <rect id="R4" x="44.28" y="494.66" width="1127.96" height="170.60" fill="#43827F" rx="8"/>
+  <rect x="47.65" y="128.88" width="1613.33" height="43.86" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="45.07" y="28.53" width="734.45" height="61.39" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <rect x="59.38" y="487.67" width="1112.80" height="179.20" fill="none" stroke="#555555" stroke-width="1" stroke-dasharray="4"/>
+  <text x="45.07" y="39.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防守方计分规则重点分析}</text>
+  <text x="47.65" y="139.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${2025}</text>
+  <text x="47.65" y="152.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${年}</text>
+  <text x="47.65" y="165.9"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防守规则更关注防守单位的韧性重点考验安全}</text>
+  <text x="59.35" y="239.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防守方得分}</text>
+  <text x="59.35" y="252.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="404.24" y="239.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="580.12" y="239.8"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="1104.92" y="246.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${优秀技战法}</text>
+  <text x="1331.06" y="246.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${非正常防守}</text>
+  <text x="1251.07" y="249.2"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${-}</text>
+  <text x="830.09" y="249.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="1049.11" y="249.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="465.50" y="284.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${监测发现}</text>
+  <text x="502.34" y="298.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="1330.82" y="306.4"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${违规操作}</text>
+  <text x="1101.15" y="307.5"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${最佳实践}</text>
+  <text x="618.24" y="348.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${精准性}</text>
+  <text x="618.24" y="361.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="618.24" y="374.7"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${效率}</text>
+  <text x="580.12" y="357.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="400.21" y="358.6"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${}</text>
+  <text x="890.91" y="398.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${韧性评估总结报告}</text>
+  <text x="1089.71" y="398.1"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${防守技战法}</text>
+  <text x="1304.86" y="412.3"  fill="#CCCCCC" font-size="11" font-family="Microsoft YaHei">${非正常防守}</text>
+</svg>

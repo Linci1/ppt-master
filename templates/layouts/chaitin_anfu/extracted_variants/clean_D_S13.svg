@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- L-R (攻防 left panel + right content) | bg=#FFFFFF | 12 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect id="R1" x="33.93" y="90.20" width="263.47" height="53.20" fill="#A7D18E" rx="8"/>
+  <rect id="R2" x="445.88" y="90.20" width="791.22" height="599.73" fill="#FFFFFF" rx="8"/>
+  <rect id="R3" x="58.80" y="243.47" width="326.14" height="184.47" fill="#FFFFFF" rx="8"/>
+  <rect id="R4" x="58.80" y="457.40" width="326.14" height="184.53" fill="#FFFFFF" rx="8"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T1_1" x="33.93" y="56.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_1}</text>
+  <text id="T1_2" x="33.93" y="69.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_2}</text>
+  <text id="T2_0" x="70.40" y="93.0"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+  <text id="T3_0" x="107.20" y="196.1"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_0}</text>
+  <text id="T4_0" x="58.80" y="270.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_0}</text>
+  <text id="T4_1" x="58.80" y="283.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_1}</text>
+  <text id="T4_2" x="58.80" y="296.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_2}</text>
+  <text id="T4_3" x="58.80" y="309.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_3}</text>
+  <text id="T5_0" x="58.80" y="471.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_0}</text>
+  <text id="T5_1" x="58.80" y="484.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_1}</text>
+  <text id="T5_2" x="58.80" y="497.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_2}</text>
+  <text id="T5_3" x="58.80" y="510.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_3}</text>
+</svg>

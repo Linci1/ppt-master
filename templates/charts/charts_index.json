@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total": 33,
+    "total": 36,
     "defaultViewBox": "0 0 1280 720",
     "formats": ["ppt169"],
     "filePattern": "{key}.svg",
@@ -25,11 +25,11 @@
     },
     "analysis": {
       "label": "Analysis",
-      "charts": ["radar_chart", "scatter_chart", "funnel_chart", "matrix_2x2", "bubble_chart", "heatmap_chart", "pareto_chart", "box_plot_chart"]
+      "charts": [\"radar_chart\", \"scatter_chart\", \"funnel_chart\", \"matrix_2x2\", \"bubble_chart\", \"heatmap_chart\", \"pareto_chart\", \"box_plot_chart\", \"risk_bubble\", \"compliance_radar\"]
     },
     "process": {
       "label": "Project Management / Relationships",
-      "charts": ["gantt_chart", "timeline", "process_flow", "org_chart", "sankey_chart"]
+      "charts": [\"gantt_chart\", \"timeline\", \"process_flow\", \"org_chart\", \"sankey_chart\", \"attack_chain\"]
     },
     "strategy": {
       "label": "Strategic Frameworks",
@@ -45,10 +45,12 @@
     "conversion": ["funnel_chart", "sankey_chart", "waterfall_chart"],
     "distribution": ["box_plot_chart", "heatmap_chart", "scatter_chart", "bubble_chart"],
     "correlation": ["scatter_chart", "bubble_chart", "radar_chart"],
-    "roadmap": ["gantt_chart", "timeline", "process_flow"],
+    "roadmap": ["gantt_chart", "timeline", "process_flow", "attack_chain"],
     "relationship": ["org_chart", "sankey_chart", "matrix_2x2"],
     "flow": ["process_flow", "sankey_chart", "waterfall_chart"],
-    "strategy": ["swot_analysis", "porter_five_forces", "matrix_2x2"]
+    "strategy": ["swot_analysis", "porter_five_forces", "matrix_2x2"],
+    "risk": ["risk_bubble", "heatmap_chart", "bubble_chart"],
+    "compliance": ["compliance_radar", "radar_chart", "kpi_cards"]
   },
   "charts": {
     "area_chart": {
@@ -281,6 +283,27 @@
       "bestFor": ["Start-to-end change decomposition", "Showing positive and negative contributions"],
       "avoidFor": ["Time trend line analysis", "Pure proportion composition pages"],
       "keywords": ["waterfall chart", "change breakdown", "contribution", "bridge analysis"]
+    },
+    "attack_chain": {
+      "label": "Attack Chain",
+      "summary": "网络安全攻击链可视化 — 从初始侦察到痕迹清除的完整生命周期",
+      "bestFor": ["渗透测试复盘", "攻防演练总结", "应急响应过程还原", "安全事件调查报告"],
+      "avoidFor": ["非安全类流程展示", "需要精确时间轴的甘特图场景"],
+      "keywords": ["attack chain", "cyber kill chain", "渗透测试", "攻击路径", "事件复盘", "security"]
+    },
+    "risk_bubble": {
+      "label": "Risk Bubble Chart",
+      "summary": "安全风险气泡图 — 概率×影响矩阵 + 风险评分大小 + 等级着色",
+      "bestFor": ["风险评估报告", "安全态势分析", "漏洞优先级排序", "OWASP风险矩阵可视化"],
+      "avoidFor": ["精确数值对比（用散点图）", "超过20个数据点的密集展示"],
+      "keywords": ["risk bubble", "风险矩阵", "likelihood", "impact", "CVSS", "威胁评估", "security"]
+    },
+    "compliance_radar": {
+      "label": "Compliance Radar",
+      "summary": "合规达标雷达图 — 多维度合规评估 + 目标基线 + 差距高亮",
+      "bestFor": ["等保评估", "合规差距分析", "ISO 27001审计", "安全成熟度评估"],
+      "avoidFor": ["纯数值排名（用柱状图）", "维度少于4个或多于10个"],
+      "keywords": ["compliance radar", "合规评估", "等保", "差距分析", "审计", "maturity", "security"]
     }
   }
 }

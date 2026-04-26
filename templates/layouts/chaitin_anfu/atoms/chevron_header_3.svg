@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="944.4 76.8 305.0 47.2">
+  <defs>
+    <linearGradient id="cg3" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#77BD5D"/>
+      <stop offset="100%" stop-color="#54B38C"/>
+    </linearGradient>
+  </defs>
+  <path d="M 949.4 119.0 L 993.65 81.8 L 1082.15 102.26 L 1111.65 102.26 L 1200.15 81.8 L 1244.4 119.0 Z" fill="url(#cg3)"/>
+  <text x="1096.9" y="100.4" fill="#FFFFFF" font-size="9" font-family="Microsoft YaHei" text-anchor="middle" dominant-baseline="middle">总结报告</text>
+</svg>

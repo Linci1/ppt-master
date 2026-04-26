@@ -1,6 +1,6 @@
 {
   "meta": {
-    "total": 640,
+    "total": 670,
     "viewBox": "0 0 16 16",
     "style": "solid",
     "updated": "2026-03-22"
@@ -150,8 +150,20 @@
       ]
     },
     "security": {
-      "label": "Security & Permissions",
-      "icons": ["lock-closed", "lock-open", "key", "key-skeleton", "keyhole", "shield", "shield-check", "shield-half", "eye", "eye-slash", "face-id"]
+      "label": "Security & Threat Intelligence",
+      "search_alias": ["security", "threat", "protection", "safe"],
+      "icons": [
+        "lock-closed", "lock-open", "key", "key-skeleton", "keyhole",
+        "shield", "shield-check", "shield-half",
+        "eye", "eye-slash", "face-id",
+        "firewall", "malware", "phishing", "vulnerability", "ransomware",
+        "ddos", "exploit", "backdoor", "exfiltration", "scan",
+        "skull", "crosshair", "target",
+        "fingerprint", "user-secret", "anonymous",
+        "encrypt", "decrypt", "certificate", "file-signature",
+        "network-wired", "globe-lock", "server", "hard-drive",
+        "incident", "forensic", "patch", "terminal-hack", "binary", "clipboard-audit"
+      ]
     },
     "text": {
       "label": "Text & Editing",
@@ -251,7 +263,7 @@
     "time": ["clock", "calendar", "stopwatch"],
     "document": ["file", "folder", "clipboard", "copy"],
     "communication": ["envelope", "phone", "comment", "bell"],
-    "security": ["shield", "lock-closed", "key", "shield-check"],
-    "target": ["target", "flag", "crosshairs"]
+    "security": ["shield", "lock-closed", "key", "shield-check", "firewall", "malware", "vulnerability", "fingerprint"],
+    "target": ["target", "flag", "crosshair"]
   }
 }

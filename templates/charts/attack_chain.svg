@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+    <!--
+    攻击链可视化图表
+    用途: 展示攻击路径的完整生命周期
+    适用场景: 渗透测试复盘、攻防演练总结、应急响应过程还原
+    特点: 水平时间轴 + 严重度着色节点 + 连接箭头 + 详情卡片
+    -->
+
+    <defs>
+        <filter id="chainShadow">
+            <feGaussianBlur in="SourceAlpha" stdDeviation="3"/>
+            <feOffset dx="0" dy="2"/>
+            <feComponentTransfer><feFuncA type="linear" slope="0.15"/></feComponentTransfer>
+            <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <marker id="arrowRed" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#C00000"/>
+        </marker>
+        <marker id="arrowGray" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#A6A6A6"/>
+        </marker>
+        <marker id="arrowGreen" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#7BBD4A"/>
+        </marker>
+    </defs>
+
+    <!-- 背景 -->
+    <rect width="1280" height="720" fill="#FFFFFF"/>
+
+    <!-- 标题 -->
+    <text x="60" y="55" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="28" font-weight="bold" fill="#1A1C1E">攻击链可视化</text>
+    <text x="60" y="85" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" fill="#7F8C8D">从初始侦察到痕迹清除的完整攻击路径还原</text>
+
+    <!-- ========== 水平时间轴（y=180, x=60~1220） ========== -->
+    <g id="timeline">
+        <line x1="80" y1="180" x2="1200" y2="180" stroke="#E0E0E0" stroke-width="3"/>
+
+        <!-- 节点1: 初始侦察 (中危, 橙色) -->
+        <circle cx="140" cy="180" r="24" fill="#ED7D31" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="140" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">1</text>
+        <text x="140" y="228" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">初始侦察</text>
+        <text x="140" y="248" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 1 09:30</text>
+
+        <!-- 箭头 1→2 -->
+        <line x1="164" y1="180" x2="286" y2="180" stroke="#A6A6A6" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+        <!-- 节点2: 漏洞利用 (高危, 红色) -->
+        <circle cx="320" cy="180" r="26" fill="#FF0000" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="320" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">2</text>
+        <text x="320" y="230" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">漏洞利用</text>
+        <text x="320" y="250" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 1 10:15</text>
+
+        <!-- 箭头 2→3 (红色, 高危) -->
+        <line x1="346" y1="180" x2="476" y2="180" stroke="#C00000" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+
+        <!-- 节点3: 权限提升 (严重, 深红) -->
+        <circle cx="510" cy="180" r="28" fill="#C00000" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="510" y="186" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">3</text>
+        <text x="510" y="232" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">权限提升</text>
+        <text x="510" y="252" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 1 11:40</text>
+
+        <!-- 红色告警标记 -->
+        <text x="510" y="166" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#C00000" font-weight="bold" text-anchor="middle">⚠ 高危</text>
+
+        <!-- 箭头 3→4 (红色) -->
+        <line x1="538" y1="180" x2="676" y2="180" stroke="#C00000" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+
+        <!-- 节点4: 横向移动 (高危, 红色) -->
+        <circle cx="710" cy="180" r="26" fill="#FF0000" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="710" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" font-weight="bold" fill="#FFFFFF" text-anchor="middle">4</text>
+        <text x="710" y="230" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">横向移动</text>
+        <text x="710" y="250" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 2 03:20</text>
+
+        <!-- 箭头 4→5 (红色) -->
+        <line x1="736" y1="180" x2="874" y2="180" stroke="#C00000" stroke-width="2.5" marker-end="url(#arrowRed)"/>
+
+        <!-- 节点5: 数据窃取 (严重, 深红) -->
+        <circle cx="910" cy="180" r="28" fill="#C00000" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="910" y="186" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#FFFFFF" text-anchor="middle">5</text>
+        <text x="910" y="232" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">数据窃取</text>
+        <text x="910" y="252" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 2 05:45</text>
+
+        <text x="910" y="166" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" fill="#C00000" font-weight="bold" text-anchor="middle">⚠ 严重</text>
+
+        <!-- 箭头 5→6 (灰色) -->
+        <line x1="938" y1="180" x2="1076" y2="180" stroke="#A6A6A6" stroke-width="2" marker-end="url(#arrowGray)"/>
+
+        <!-- 节点6: 痕迹清除 (中危, 橙色) -->
+        <circle cx="1110" cy="180" r="24" fill="#ED7D31" stroke="#FFFFFF" stroke-width="3" filter="url(#chainShadow)"/>
+        <text x="1110" y="185" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="12" font-weight="bold" fill="#FFFFFF" text-anchor="middle">6</text>
+        <text x="1110" y="228" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="bold" fill="#1A1C1E" text-anchor="middle">痕迹清除</text>
+        <text x="1110" y="248" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" fill="#999" text-anchor="middle">Day 2 07:10</text>
+    </g>
+
+    <!-- ========== 关键节点详情卡片（y=290~650） ========== -->
+    <g id="detailCards">
+        <!-- 卡片2: 漏洞利用 -->
+        <rect x="60" y="290" width="370" height="180" rx="8" fill="#FFF5F5" stroke="#FFCDD2" stroke-width="1" filter="url(#chainShadow)"/>
+        <rect x="60" y="290" width="6" height="180" rx="3" fill="#FF0000"/>
+        <text x="80" y="318" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="bold" fill="#C00000">节点2：漏洞利用详情</text>
+        <text x="80" y="348" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="80" dy="0">• CVE-2022-22965 (Spring4Shell)</tspan>
+        </text>
+        <text x="80" y="372" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="80" dy="0">• 攻击路径：HTTP请求 → /api/endpoint</tspan>
+        </text>
+        <text x="80" y="396" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="80" dy="0">• 获取WebShell，建立持久化连接</tspan>
+        </text>
+        <text x="80" y="420" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="80" dy="0">• 影响系统：web-app-01 (10.0.1.23)</tspan>
+        </text>
+        <rect x="345" y="435" width="70" height="24" rx="4" fill="#FF0000"/>
+        <text x="380" y="452" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">高危</text>
+
+        <!-- 卡片3: 权限提升 -->
+        <rect x="455" y="290" width="370" height="180" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1" filter="url(#chainShadow)"/>
+        <rect x="455" y="290" width="6" height="180" rx="3" fill="#C00000"/>
+        <text x="475" y="318" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="bold" fill="#C00000">节点3：权限提升详情</text>
+        <text x="475" y="348" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="475" dy="0">• 利用SUID错误配置 (/usr/bin/find)</tspan>
+        </text>
+        <text x="475" y="372" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="475" dy="0">• www-data → root 提权成功</tspan>
+        </text>
+        <text x="475" y="396" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="475" dy="0">• 获取 /etc/shadow 访问权限</tspan>
+        </text>
+        <text x="475" y="420" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="475" dy="0">• 创建后门账户: sys_maint</tspan>
+        </text>
+        <rect x="740" y="435" width="70" height="24" rx="4" fill="#C00000"/>
+        <text x="775" y="452" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">严重</text>
+
+        <!-- 卡片5: 数据窃取 -->
+        <rect x="850" y="290" width="370" height="180" rx="8" fill="#FFEBEE" stroke="#EF9A9A" stroke-width="1" filter="url(#chainShadow)"/>
+        <rect x="850" y="290" width="6" height="180" rx="3" fill="#C00000"/>
+        <text x="870" y="318" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="16" font-weight="bold" fill="#C00000">节点5：数据窃取详情</text>
+        <text x="870" y="348" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="870" dy="0">• 目标：客户数据库 (MySQL)</tspan>
+        </text>
+        <text x="870" y="372" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="870" dy="0">• mysqldump 导出 2.3GB 用户数据</tspan>
+        </text>
+        <text x="870" y="396" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="870" dy="0">• 通过DNS隧道外传 (dns2tcp)</tspan>
+        </text>
+        <text x="870" y="420" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">
+            <tspan x="870" dy="0">• 涉及数据：姓名+身份证+银行卡信息</tspan>
+        </text>
+        <rect x="1135" y="435" width="70" height="24" rx="4" fill="#C00000"/>
+        <text x="1170" y="452" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="bold" fill="#FFFFFF" text-anchor="middle">严重</text>
+    </g>
+
+    <!-- ========== 图例（右下） ========== -->
+    <g id="legend" transform="translate(950, 510)">
+        <rect x="0" y="0" width="270" height="130" rx="8" fill="#F8F9FA" stroke="#E0E0E0" stroke-width="1"/>
+        <text x="135" y="28" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="14" font-weight="600" fill="#2C3E50" text-anchor="middle">严重度图例</text>
+
+        <circle cx="30" cy="55" r="10" fill="#C00000"/>
+        <text x="50" y="60" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">严重 (Critical)</text>
+
+        <circle cx="30" cy="82" r="9" fill="#FF0000"/>
+        <text x="50" y="87" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">高危 (High)</text>
+
+        <circle cx="30" cy="109" r="8" fill="#ED7D31"/>
+        <text x="50" y="114" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#404040">中危 (Medium)</text>
+    </g>
+
+    <!-- 攻击链总时长 -->
+    <rect x="60" y="495" width="200" height="60" rx="8" fill="#F5F7FA" stroke="#E0E0E0" stroke-width="1"/>
+    <text x="80" y="520" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#7F8C8D">总攻击时长</text>
+    <text x="80" y="545" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="22" font-weight="bold" fill="#C00000">21h 40min</text>
+
+    <!-- 数据来源 -->
+    <text x="60" y="695" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="13" fill="#95A5A6">数据来源：渗透测试报告 / SOC告警日志 / EDR回溯分析</text>
+</svg>

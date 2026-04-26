@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- S11-complex-multiColCards | bg=#FFFFFF | 25 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <rect id="R1" x="33.93" y="32.33" width="1094.23" height="73.07" fill="#000000" rx="8"/>
+  <rect id="R2" x="377.34" y="81.80" width="295.01" height="37.20" fill="#FFFFFF" rx="8"/>
+  <rect id="R3" x="663.35" y="81.80" width="295.01" height="37.20" fill="#FFFFFF" rx="8"/>
+  <rect id="R4" x="949.42" y="81.80" width="295.01" height="37.20" fill="#FFFFFF" rx="8"/>
+  <rect id="R5" x="33.93" y="96.40" width="326.07" height="566.07" fill="#FFFFFF" rx="8"/>
+  <rect id="R6" x="35.13" y="112.87" width="338.61" height="138.80" fill="#000000" rx="8"/>
+  <rect id="R7" x="378.14" y="136.87" width="278.94" height="303.60" fill="#000000" rx="8"/>
+  <rect id="R8" x="954.69" y="155.80" width="271.41" height="282.60" fill="#FF0000" rx="8"/>
+  <rect id="R9" x="377.34" y="476.47" width="867.09" height="186.00" fill="#FFFFFF" rx="8"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T1_1" x="33.93" y="56.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_1}</text>
+  <text id="T1_2" x="33.93" y="69.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_2}</text>
+  <text id="T1_3" x="33.93" y="82.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_3}</text>
+  <text id="T2_0" x="52.27" y="89.2"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+  <text id="T3_0" x="377.34" y="92.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_0}</text>
+  <text id="T4_0" x="663.35" y="92.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_0}</text>
+  <text id="T5_0" x="949.42" y="92.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_0}</text>
+  <text id="T6_0" x="866.89" y="122.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T6_0}</text>
+  <text id="T7_0" x="35.13" y="123.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_0}</text>
+  <text id="T7_1" x="35.13" y="136.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_1}</text>
+  <text id="T7_2" x="35.13" y="149.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_2}</text>
+  <text id="T7_3" x="35.13" y="162.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_3}</text>
+  <text id="T8_0" x="378.14" y="147.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T8_0}</text>
+  <text id="T8_1" x="378.14" y="160.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T8_1}</text>
+  <text id="T8_2" x="378.14" y="173.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T8_2}</text>
+  <text id="T8_3" x="378.14" y="186.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T8_3}</text>
+  <text id="T9_0" x="954.69" y="166.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T9_0}</text>
+  <text id="T9_1" x="954.69" y="179.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T9_1}</text>
+  <text id="T9_2" x="954.69" y="192.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T9_2}</text>
+  <text id="T9_3" x="954.69" y="205.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T9_3}</text>
+  <text id="T10_0" x="848.89" y="223.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T10_0}</text>
+  <text id="T11_0" x="52.27" y="253.1"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T11_0}</text>
+  <text id="T12_0" x="53.47" y="288.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T12_0}</text>
+  <text id="T13_0" x="866.89" y="362.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T13_0}</text>
+  <text id="T14_0" x="53.47" y="383.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T14_0}</text>
+  <text id="T15_0" x="53.47" y="420.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T15_0}</text>
+  <text id="T16_0" x="402.48" y="469.2"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T16_0}</text>
+  <text id="T17_0" x="53.47" y="518.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T17_0}</text>
+  <text id="T18_0" x="388.61" y="521.7"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T18_0}</text>
+  <text id="T19_0" x="1039.43" y="542.2"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T19_0}</text>
+  <text id="T19_1" x="1039.43" y="555.2"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T19_1}</text>
+  <text id="T20_0" x="53.47" y="552.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T20_0}</text>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+<!-- 3-col (left text + center cards + right) | bg=#FFFFFF | 11 shapes -->
+  <rect width="1280" height="720" fill="#FFFFFF"/>
+  <text id="T1_0" x="33.93" y="43.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T1_0}</text>
+  <text id="T2_0" x="61.33" y="78.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_0}</text>
+  <text id="T2_1" x="61.33" y="91.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_1}</text>
+  <text id="T2_2" x="61.33" y="104.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_2}</text>
+  <text id="T2_3" x="61.33" y="117.8"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T2_3}</text>
+  <text id="T3_0" x="41.27" y="252.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_0}</text>
+  <text id="T3_1" x="41.27" y="265.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_1}</text>
+  <text id="T3_2" x="41.27" y="278.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_2}</text>
+  <text id="T3_3" x="41.27" y="291.9"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T3_3}</text>
+  <text id="T4_0" x="996.76" y="253.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_0}</text>
+  <text id="T4_1" x="996.76" y="266.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_1}</text>
+  <text id="T4_2" x="996.76" y="279.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_2}</text>
+  <text id="T4_3" x="996.76" y="292.3"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T4_3}</text>
+  <text id="T5_0" x="575.45" y="261.2"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T5_0}</text>
+  <text id="T6_0" x="867.11" y="413.4"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T6_0}</text>
+  <text id="T7_0" x="282.66" y="413.6"  fill="#666666" font-size="11" font-family="Microsoft YaHei">${T7_0}</text>
+</svg>
