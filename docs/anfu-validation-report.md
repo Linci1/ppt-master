@@ -13,7 +13,7 @@
 | 正文页模板存在 | ✅ | `03_content.svg` (1280×720, 单一内容大框) |
 | Logo 资源 | ✅ | `chaitin_logo_dark.png` (暗底) + `chaitin_logo_light.png` (亮底) |
 | 背景图资源 | ✅ | `bg_dark_tech.jpeg` |
-| design_spec.md | ✅ | 安服双色系 (#7BBD4A / #43827F) + 告警色 #FF0000/#C00000/#FFFF00 |
+| design_spec.md | ✅ | 品牌绿 #7BBD4A + 告警色 #FF0000/#C00000/#ED7D31/#F0A020 |
 | Atom 组件库 | ✅ | `atoms/` 目录 48 个原子组件 |
 | Combo 组件库 | ✅ | `combos/` 目录 13 个组合组件 |
 

@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect x="0.0" y="0.0" width="161.7" height="59.8" rx="26000" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="1.0"/>
-  <rect x="0.0" y="0.0" width="4.2" height="59.8" rx="0" fill="#7BBD4A" stroke="none" stroke-width="0.0"/>
-  <text x="16.8" y="24.1" fill="#1A1A1A" font-size="80" font-weight="yes" font-family="Microsoft YaHei" text-anchor="start">强调内容</text>
-  <text x="16.8" y="46.4" fill="#666666" font-size="52" font-weight="no" font-family="Microsoft YaHei" text-anchor="start">详细说明文字</text>
-</svg>

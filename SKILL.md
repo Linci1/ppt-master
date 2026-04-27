@@ -395,86 +395,9 @@ python3 ${SKILL_DIR}/scripts/image_gen.py "prompt" --aspect_ratio 16:9 --image_s
 
 ---
 
-#### Step 6 执行路径选择
+#### Step 6 执行：SVG 引擎生成
 
-Step 6 有两条生成路径。**路径A（SVG）** 适用于模板驱动、需要 AI 创意发挥的场景；**路径B（python-pptx 原生）** 适用于参考稿驱动、需要高保真还原的场景。根据内容性质选择：
-
-| 场景 | 推荐路径 |
-|------|---------|
-| 有参考稿，需精确还原布局/配色 | **路径B** |
-| 无参考稿，全新内容，模板风格 | **路径A** |
-| 固定页（封面/目录/章节）使用模板还原 | **路径A（SVG 固定页）+ 路径B（正文页）** |
-| 正式交付需字号/间距 100% 精确 | **路径B** |
-
----
-
-#### 路径B：python-pptx 原生引擎（参考稿驱动）
-
-> 适用：用户提供了参考 PPTX、希望高保真还原、或对文字精度有强制要求（字号/行距不损失）。
-
-**步骤 B-1：分析参考稿（如尚未生成 layout_index.json）**
-
-```bash
-python3 ${SKILL_DIR}/scripts/reference_analyzer.py <参考PPT.pptx> \
-    -o <project_path>/layout_index.json
-```
-
-`reference_analyzer.py` 会输出每页的布局类型（card_grid / timeline / data_table / two_column / text_section），供后续页型匹配使用。
-
-**步骤 B-2：准备内容**
-
-将每页内容整理为 `content.md` 或 `content_pages.json`（格式参考 `references/content-pages-format.md`），至少包含每页的：
-
-```json
-[
-  {"page_num": 1, "title": "攻击路径总览", "subtitle": "...",
-   "cards": [{"title": "边界突破", "lines": ["ThinkPHP RCE", "..."]}]}
-]
-```
-
-**步骤 B-3：执行生成**
-
-```bash
-python3 ${SKILL_DIR}/scripts/pptx_native_executor.py <project_path> \
-    [--ref-pptx <参考PPT.pptx>] \
-    [--content <content_pages.json>] \
-    -o generated.pptx
-```
-
-执行后输出：
-- `<project_path>/generated_pages.py` — 生成的 Python 代码（可审计、可复用）
-- `<project_path>/generated.pptx` — 最终 PPTX
-
-**页型函数说明**（由 `pptx_components.py` 提供）：
-
-| 页型 | 函数名 | 适用场景 |
-|------|--------|---------|
-| 卡片网格 | `build_card_grid_page` | 2×2 / 1×4 等网格布局 |
-| 时间线 | `build_timeline_page` | 横向/纵向时间节点展示 |
-| 数据表格 | `build_data_table_page` | 漏洞清单、统计表等 |
-| 双栏对比 | `build_two_column_page` | 红蓝对比、攻防对比 |
-| 文本段落 | `build_text_section_page` | 术语说明、政策解读 |
-| 攻击链 | `build_attack_chain_page` | Kill Chain 攻击路径还原 |
-| KPI仪表盘 | `build_kpi_dashboard_page` | 安全态势总览、指标概览 |
-| 漏洞矩阵 | `build_vuln_matrix_page` | 漏洞清单+严重度色标 |
-| 红蓝对抗 | `build_red_blue_page` | 攻防双栏对比分析 |
-
-> 💡 如果 layout_index.json 已由 `reference_analyzer.py` 正确识别页型，`pptx_native_executor.py` 会自动为每页选择最接近的组件函数。对于安服模板，`variant_router.py` 会根据页面标题关键词自动路由到安全专用页型。
-
-**步骤 B-4：质量检查**
-
-python-pptx 直接生成的 PPTX 不经过 SVG 转换层，**字号/行距/段落间距全部完整保留**。但仍需确认：
-
-```bash
-# 检查文字属性（验证字号非 0.1pt）
-python3 ${SKILL_DIR}/scripts/check_pptx_fonts.py <project_path>/generated.pptx
-```
-
----
-
-#### 路径A：SVG 引擎（模板驱动，原始流程）
-
-> 以下为原有的 SVG 生成流程，适用于无参考稿、需要 AI 创意设计的场景。
+> 采用 SVG 引擎生成所有页面（固定页 + 正文页），经后处理流水线导出 PPTX。此路径已在多个项目中验证完整可用。
 
 根据风格读取对应角色定义：
 
@@ -651,6 +574,9 @@ python3 ${SKILL_DIR}/scripts/write_qa_manifest.py <project_path>
 | 画布格式说明 | `references/canvas-formats.md` |
 | 图片布局说明 | `references/image-layout-spec.md` |
 | SVG 图片嵌入规则 | `references/svg-image-embedding.md` |
+| Brand-Locked Flex-Body 生成 | `references/ppt-master-brand-locked-flex-body.md` |
+| Body 页布局变化诊断 | `references/ppt-master-body-layout-variation.md` |
+| 模板产品化流程 | `references/ppt-template-productization.md` |
 
 ---
 
@@ -818,43 +744,13 @@ cp /tmp/docx_images/word/media/* <project_path>/images/
 - 不要完全忽略文档自带的图片，全部用纯SVG重绘
 - 图片必须服务于内容表达，不是装饰
 
-### 陷阱 12：从提取变体到实际使用的缺失链路（extracted_variants 未被 Executor 使用）— ✅ 已修复
+### 陷阱 12：从提取变体到实际使用的缺失链路（extracted_variants 未被 Executor 使用）— ✅ 已通过安服套路匹配解决
 
 **发现背景**：从 HW总结 PPT 源码（`extracted_variants/hw_H2_S12.svg` 等）提取了 6 个正文页布局变体，但 Executor 生成美的报告时，依然使用 `03_content.svg` 通用模板，**提取变体从未被使用**。
 
-**根本原因**：当前 Executor 工作流没有"变体路由"逻辑——它不知道 `extracted_variants/` 里的 SVG 应该对应哪类页面，也不会把提取变体当作模板来填充内容。
+**根本原因**：早期工作流没有"布局路由"逻辑——Executor 不知道 `extracted_variants/` 里的 SVG 应该对应哪类页面，也不会把提取变体当作模板来填充内容。
 
-**修复方案**（已实现 `scripts/variant_router.py`）：
-
-1. **变体分析**：`variant_router.py` 扫描 `extracted_variants/`，解析每个 SVG 的矩形数/列数/行数，自动推断 `layout_hint`
-2. **关键词路由**：`recommend_layout(title, subtitle)` 根据页面标题关键词推荐 `layout_type → pptx_page_type`
-3. **自动集成**：`pptx_native_executor.py` 的 `CodeGenerator._route_page_type()` 在 func_name 未指定时自动调用 variant_router，按优先级路由：
-   - `content.page_type` 显式指定 → 直接使用
-   - 标题关键词匹配（攻击链/态势/漏洞/红蓝等）→ 关键词路由
-   - 兜底 → 安服主导布局 `two_column`
-
-**路由映射表**（关键词→layout_type→pptx页型）：
-
-| 关键词 | layout_type | pptx_page_type |
-|--------|-------------|----------------|
-| 攻击链/kill chain/攻击路径 | attack_chain | attack_chain |
-| 红蓝/攻防/对抗 | red_blue | red_blue |
-| 态势/总览/KPI/仪表盘 | kpi_dashboard | kpi_dashboard |
-| 漏洞清单/漏洞矩阵 | vuln_matrix | vuln_matrix |
-| 表格/清单/对比表 | table_page | data_table |
-| 时间线/时间轴/进展 | timeline | timeline |
-| 网格/卡片/能力/模块 | grid | card_grid |
-| （默认/其他） | lr_split_imagetext | two_column |
-
-**使用方式**：
-
-```bash
-# 1. 生成变体索引（模板目录下）
-python3 scripts/variant_router.py templates/layouts/chaitin_anfu --list
-
-# 2. Executor 自动加载 variant_index.json 并路由
-# （无需手动操作，CodeGenerator 自动查找并使用）
-```
+**当前解决方案**：通过 `executor-security.md` §4 的"套路匹配决策树"实现布局路由——按关键词+内容结构匹配5种范式（攻击链/漏洞矩阵/红蓝对抗/资产风险/合规概览），匹配成功则按范式执行纪律生成 SVG，无匹配才回退到 layout_type 通用布局。此方案直接在 SVG 生成流程中工作，无需额外脚本。
 
 **已验证的 HW→安服 颜色映射**（深色变体→亮色模板）：
 
@@ -864,16 +760,7 @@ python3 scripts/variant_router.py templates/layouts/chaitin_anfu --list
 | 卡片底色 | `#3C7471` | `#3C7471` | 沿用（沉稳青） |
 | 强调色 | `#4DCD82` | `#7BBD4A` | 亮绿→品牌绿 |
 
-**变体 SVG 质量参考**（`extracted_variants/`，已自动分析36个变体）：
-
-| 变体 | 页型 | 质量 | 适合场景 |
-|------|------|------|---------|
-| `hw_H2_S12` | 6行卡片网格 | ⭐⭐⭐ 29矩形 | 网格/数据页 |
-| `hw_H6_S56` | 均匀分布 | ⭐⭐ 11矩形 | 内容丰富页 |
-| `hw_H4_S50` | 顶5+下2 | ⭐⭐ 7矩形 | 标准正文页 |
-| `hw_H1_S8` | 顶部集中 | ⭐ 8矩形 | L-R split类型 |
-
-### 陷阱 13：SVG→PPTX 正文页转换层存在本质性信息丢失（正文页禁用 SVG 路径）
+### 陷阱 13：SVG→PPTX 转换层的字号信息丢失
 
 **发现背景**：在美的红队报告项目中，SVG 生成的正文页经 `svg_to_pptx.py` 导出后，用 python-pptx 读取发现：
 - 所有字号返回 `0.1pt`（实际 SVG 里写了 `font-size="28"`）
@@ -882,43 +769,7 @@ python3 scripts/variant_router.py templates/layouts/chaitin_anfu --list
 
 **根本原因**：SVG `<text>` 元素的 `font-size` 是装饰属性，不是形状属性。`svg_to_pptx` 转换层把 SVG 文字转成 PPTX `<a:rPr>` 时，**完全不注入 `fontSize` 值**，因为 SVG 规范里 `font-size` 不控制形状几何。PPTX 文字格式（字号/段间距/字重继承）是在 `<a:txBody><a:pPr>` 里定义的，SVG 没有任何等价属性可以映射过去。
 
-**决策结论**：正文页（body pages）**不要走 SVG→PPTX 路径**，应该用 python-pptx 原生 API 直接生成。固定页（cover/toc/chapter/ending）因为版型固定、结构简单，SVG 壳+手动填文字可以接受。
-
-**正确的正文页生成方式**：使用 `scripts/pptx_components.py` 的 python-pptx 组件库，示例：
-
-```python
-from pptx import Presentation
-from pptx_components import (
-    CANVAS_W, CANVAS_H,  # 尺寸常量
-    add_brand_header, add_brand_footer,
-    add_card, build_card_grid_page,
-    rgb, C  # 配色
-)
-
-prs = Presentation()
-prs.slide_width = CANVAS_W
-prs.slide_height = CANVAS_H
-
-build_card_grid_page(prs,
-    title='攻击路径总览',
-    subtitle='Attack Path Overview',
-    cards=[
-        {'title': '边界突破', 'lines': ['ThinkPHP RCE', 'Log4j2 JNDI']},
-        {'title': '内网横移', 'lines': ['社工钓鱼获取终端', '横向扩大权限']},
-        {'title': '社工钓鱼', 'lines': ['微信钓鱼针对采招', '投递简历触发木马']},
-        {'title': '核心资产', 'lines': ['海外AWS机器控制权', '域控/Nacos/MySQL']},
-    ],
-    page_num='5',
-    card_style='dark')
-
-prs.save('output.pptx')
-```
-
-**关键 API 设计原则**（来自踩坑验证）：
-- `build_card_grid_page(prs, ...)` 接收 `Presentation` 对象 in-place 修改（避免 python-pptx 无法跨 prs 复制 slides 的坑）
-- 字号直接用 `Pt(28)` / `Pt(16)` / `Pt(13)` 传数值，不是字符串
-- 颜色用 `RGBColor(int, int, int)` 而非 hex 字符串
-- 段落间距用 `paragraph.space_before = Pt(0)` / `paragraph.space_after = Pt(6)`
+**当前方案**：统一使用 SVG 引擎生成所有页面（含正文页），字号丢失问题通过 `finalize_svg.py` 后处理步骤部分修复。在美的项目实际交付中，SVG→PPTX 路径已完整跑通26页生成，字号虽在 PPTX 内部属性层面丢失，但视觉呈现正确（svg_to_pptx 保留了 SVG 渲染结果作为图片回退）。如需100%精确字号控制，需在 finalize 流程中增加字号注入逻辑（P1增量项）。
 
 ### 陷阱 14：chaitin_anfu 模板的外部图片资源缺失会导致封面/章节页/正文页 Logo 空白
 

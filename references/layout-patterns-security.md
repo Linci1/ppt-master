@@ -35,19 +35,19 @@
 
 > ⚠️ 基于2个真实案例蒸馏（HW总结119页 + 安服主打胶片33页）：**正文页统一白底**，暗色仅用于封面/章节/结尾页。
 
-| 角色 | 色系A（品牌绿·默认） | 色系B（青绿·HW总结） | 说明 |
-|------|----------------------|----------------------|------|
-| 页面背景 | `#FFFFFF` | `#FFFFFF` | **正文页白底** |
-| 主色/标题强调 | `#7BBD4A` | `#43827F` | 标题装饰条/强调 |
-| 卡片背景 | `#F5F7FA` | `#F5F7FA` | 浅灰卡片底 |
-| 正文深色 | `#1A1A1A` | `#1A1C1E` | 主文字 |
-| 正文灰色 | `#404040` | `#404040` | 副文字 |
-| 正文浅灰 | `#666666` | `#666666` | 辅助说明 |
-| 标注/页码 | `#A6A6A6` | `#A6A6A6` | 最浅文字 |
-| 分隔线/边框 | `#E0E0E0` | `#E0E0E0` | 分隔 |
-| 告警红 | `#FF0000` | `#FF0000` | 高危/攻击标记 |
-| 严重红 | `#C00000` | `#C00000` | 严重等级 |
-| 警告黄 | `#FFFF00` | `#FFFF00` | 中危/关注 |
+|| 角色 | 品牌绿（统一） | 说明 |
+|------|----------------------|------|
+| 页面背景 | `#FFFFFF` | **正文页白底** |
+| 主色/标题强调 | `#7BBD4A` | 标题装饰条/强调 |
+| 卡片背景 | `#F5F7FA` | 浅灰卡片底 |
+| 正文深色 | `#1A1A1A` | 主文字 |
+| 正文灰色 | `#404040` | 副文字 |
+| 正文浅灰 | `#666666` | 辅助说明 |
+| 标注/页码 | `#A6A6A6` | 最浅文字 |
+| 分隔线/边框 | `#E0E0E0` | 分隔 |
+| 告警红 | `#FF0000` | 高危/攻击标记 |
+| 严重红 | `#C00000` | 严重等级 |
+| 警告黄 | `#FFFF00` | 中危/关注 |
 
 > ⚠️ **禁止正文页使用暗色背景**：`#1A1A2E`/`#222244` 等深色仅限封面/章节/结尾页。
 > 白底+品牌色是真实安服PPT的标准风格，与用户预期一致。
@@ -562,88 +562,6 @@ Executor 生成每页 SVG 时，根据 Strategist 指定的 `layout_type` 查阅
 6. **图片策略按文档类型执行**：营销胶片正文页必须嵌入至少1张图片；技术报告仅在有真实配图或有语义的SVG示意图时使用图片，纯文字叙述页保持干净
 7. **图片优先放在右栏**（img_right 是绝对主导布局模式）——但此规则仅适用于有图片的页面
 8. **🔴 正文页背景必须是白色 `#FFFFFF`**，不得使用暗色背景
-
----
-
-## 可用组件清单（Executor 优先复用，不要从零画）
-
-> 路径：`templates/layouts/chaitin_anfu/` 下的 atoms/、combos/、high_order/
-> Executor 生成 SVG 时，优先 `<use href="..."/>` 或参照这些组件的尺寸/风格，保持视觉一致性。
-
-### Atoms（48个原子组件）
-
-| 组件名 | 用途 | 推荐布局类型 |
-|--------|------|-------------|
-| `section_label_green` | 绿色章节标签 | balanced, standard, dense |
-| `section_label_green2` | 绿色章节标签变体 | balanced, dense |
-| `section_label` | 通用章节标签 | 所有 |
-| `subtitle_tag_green` | 绿色副标题标签 | balanced, dense |
-| `subtitle_tag_bluegreen` | 蓝绿副标题标签 | imagetext |
-| `subtitle_tag_light` | 浅色副标题标签 | standard |
-| `title_bar` | 标题横条 | balanced, standard, tb_split |
-| `content_card` | 内容卡片（白底+边框） | balanced, dense, righttitle |
-| `content_card_green` | 绿色强调卡片 | balanced, standard |
-| `content_card_accent` | 强调色卡片 | standard |
-| `grid_card` | 网格卡片 | dense, table_page |
-| `number_circle_large` | 大号数字圆 | dense |
-| `number_circle_filled` | 填充数字圆 | dense |
-| `number_badge_01/02/03` | 数字徽章 | dense |
-| `number_box` | 数字方框 | dense |
-| `tag_pill` | 标签药丸 | balanced, dense |
-| `chevron_header/2/3` | 箭头标题 | process flows, tb_split |
-| `bullet_item` | 项目符号条目 | balanced, standard |
-| `list_bullet` | 列表项目符号 | balanced, dense |
-| `icon_box` | 图标方框 | balanced, imagetext |
-| `data_block` | 数据块 | chart_page, standard |
-| `data_highlight` | 数据高亮 | chart_page |
-| `data_highlight_red` | 红色数据高亮 | chart_page |
-| `red_highlight_data` | 红色高亮数据 | chart_page |
-| `gradient_bar` | 渐变条 | chart_page |
-| `flow_arrow_right` | 右向流程箭头 | imagetext, tb_split |
-| `flow_arrow_down` | 下向流程箭头 | imagetext, tb_split |
-| `flow_line_vertical` | 垂直流程线 | tb_split |
-| `process_flow` | 流程组件 | tb_split |
-| `step_indicator` | 步骤指示器 | tb_split |
-| `timeline_node` | 时间线节点 | tb_split |
-| `divider_h` | 水平分隔线 | 所有 |
-| `divider_v` | 垂直分隔线 | 所有 lr_split |
-| `comparison_frame` | 对比框 | balanced |
-| `callout` | 标注/提示框 | standard, imagetext |
-| `left_panel_white` | 左侧白色面板 | lefttitle |
-| `right_panel_bg` | 右侧背景面板 | righttitle |
-| `body_text_mixed` | 混合正文块 | balanced, dense |
-| `vertical_label_right` | 右侧竖向标签 | righttitle |
-| `footer_page` | 页脚 | 所有（已由模板锁定） |
-| `sub_label_green_1/2/3` | 绿色子标签 | balanced, dense |
-
-### Combos（13个组合组件）
-
-| 组件名 | 用途 | 推荐布局类型 |
-|--------|------|-------------|
-| `bullet_list_with_header` | 带标题的列表 | balanced, standard |
-| `card_with_number` | 编号卡片 | dense |
-| `combo_left_steps` | 左侧步骤组 | lefttitle, tb_split |
-| `combo_three_phase` | 三阶段组合 | tb_split, standard |
-| `combo_three_phase_header` | 三阶段标题组合 | tb_split |
-| `comparison_2col` | 双列对比 | balanced |
-| `data_row` | 数据行 | table_page, dense |
-| `matrix_3x3` | 3×3矩阵 | dense, table_page |
-| `numbered_step_row` | 编号步骤行 | tb_split, dense |
-| `tag_cloud` | 标签云 | balanced, dense |
-| `three_column_cards` | 三列卡片 | dense, standard |
-| `timeline_horizontal` | 水平时间线 | tb_split |
-| `vertical_label_with_content` | 竖向标签+内容 | lefttitle, righttitle |
-
-### High Order（6个高阶页面模板）
-
-| 组件名 | 用途 | 推荐布局类型 |
-|--------|------|-------------|
-| `classification_page` | 分类页 | dense |
-| `formula_page` | 公式页 | standard |
-| `process_page` | 流程页 | tb_split |
-| `summary_stats_page` | 统计汇总页 | chart_page, standard |
-| `table_page` | 表格页 | table_page |
-| `timeline_page` | 时间线页 | tb_split |
 
 ---
 

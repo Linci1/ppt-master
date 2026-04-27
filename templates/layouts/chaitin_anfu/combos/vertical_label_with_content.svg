@@ -1,9 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
-  <rect x="0.0" y="0.0" width="94.5" height="75.6" rx="0" fill="#FAFAFA" stroke="none" stroke-width="0.0"/>
-  <rect x="102.9" y="84.0" width="23.1" height="65.1" rx="24000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
-  <text x="105.0" y="109.3" fill="#1A1A1A" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">分级培养</text>
-  <rect x="102.9" y="178.5" width="23.1" height="65.1" rx="24000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
-  <text x="105.0" y="203.8" fill="#1A1A1A" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">培养形式</text>
-  <rect x="102.9" y="273.0" width="23.1" height="65.1" rx="24000" fill="#FFFFFF" stroke="#7BBD4A" stroke-width="1.7"/>
-  <text x="105.0" y="298.3" fill="#1A1A1A" font-size="56" font-weight="yes" font-family="Microsoft YaHei" text-anchor="middle">能力验证</text>
-</svg>

@@ -40,3 +40,10 @@ tmp/
 temp/
 *.tmp
 projects/
+
+# Test output PPTX files
+*_output*.pptx
+anfu_*.pptx
+
+# Pending-delete path B scripts
+references/pptx-body-components.md

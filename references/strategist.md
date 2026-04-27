@@ -100,20 +100,19 @@ Proactively provide a color scheme (HEX values) based on content characteristics
 | Technology / Internet | `#1565C0` Bright Blue | Innovative, energetic |
 | Healthcare / Health | `#00796B` Teal Green | Professional, reassuring |
 | Government / Public Sector | `#C41E3A` Red | Authoritative, dignified |
-| **网络安全 / 安服** | `#7BBD4A` 品牌绿 或 `#43827F` 青绿 | 技术专业 + 风险传达，必须搭配告警红 `#FF0000` |
+| **网络安全 / 安服** | `#7BBD4A` 品牌绿 | 技术专业 + 风险传达，必须搭配告警红 `#FF0000` |
 
 **Color rules**: 60-30-10 rule (primary 60%, secondary 30%, accent 10%); text contrast ratio >= 4.5:1; no more than 4 colors per page.
 
-**安服双色系速查**（当选择风格 D 时强制执行）：
+**安服色系速查**（当选择风格 D 时强制执行）：
 
-安服模板有两套色系，由 Strategist 根据内容调性选择其一：
+安服模板统一使用品牌绿色系：
 
-| 色系 | 主色 | HEX | 适用信号 |
-|------|------|-----|---------|
-| **色系A：品牌绿** | #7BBD4A | `#7BBD4A` | 产品介绍、服务方案、能力展示 |
-| **色系B：青绿** | #43827F | `#43827F` | 攻防总结、复盘报告、实战复盘 |
+| 角色 | HEX | 用途 |
+|------|-----|------|
+| **主色：品牌绿** | `#7BBD4A` | 标题强调、色标、图标、装饰 |
 
-**告警色（两套色系共用，固定不变）**：
+**告警色（固定不变）**：
 
 | 色值 | HEX | 用途 |
 |------|-----|------|
@@ -135,7 +134,24 @@ Proactively provide a color scheme (HEX values) based on content characteristics
 1. **正文页背景必须白色**，品牌色仅用在标题/强调/色标
 2. **固定页背景必须暗色**，logo 用亮色版本
 3. 告警红 `#FF0000` 不得用于装饰——只在真正传达"危险/告警"语义时使用
-4. 品牌绿/青绿在正文页上用于标题强调、色标、图标，不用于大面积背景
+4. 品牌绿在正文页上用于标题强调、色标、图标，不用于大面积背景
+
+**安服套路匹配**（当选择风格 D 时，在 Content Outline 中为每页正文页指定 `routine_id`）：
+
+Strategist 在写 Content Outline 时，必须根据页面内容语义匹配安服套路提示词。套路优先级高于 layout_type。
+
+| 套路ID | 名称 | 触发条件 | 首选布局 |
+|--------|------|----------|---------|
+| `sec-attack-chain` | 攻击链复盘页 | 含攻击步骤/路径描述 | lr_split_imagetext |
+| `sec-vuln-matrix` | 漏洞矩阵页 | 含3+漏洞/CVE条目 | lr_split_dense |
+| `sec-redblue-compare` | 红蓝对比页 | 含攻防/对比/对立双视角 | lr_split_balanced |
+| `sec-asset-risk` | 资产风险页 | 含资产清单+风险评估 | lr_split_imagetext |
+| `sec-compliance-overview` | 合规概览页 | 含合规检查项/等保条款 | chart_page |
+| `sec-timeline` | 安全事件时间线 | 含时间序列事件(5+节点) | lr_split_imagetext |
+| `sec-kpi-dashboard` | 安全运营KPI | 含量化指标/统计数据 | chart_page |
+| `sec-architecture` | 安全架构展示 | 含分层架构/体系描述 | lr_split_imagetext |
+
+详细套路规范见 `references/layout-patterns-security.md` L3层。无匹配套路时回退到布局决策树选择 layout_type。
 
 ### f. Icon Usage Confirmation
 
@@ -193,7 +209,19 @@ Selection principle: Font size is based on **content density**, not design style
 | **C** | AI-generated | Custom illustrations, backgrounds needed |
 | **D** | Placeholders | Images to be added later |
 
-**🔴 安服安全类强制规则**（当风格选择 D 时）：图片选择必须设为基础 = **B**（源文档提取素材），不可选择 A（无图片）或 D（占位符）。正文页图片密度必须 ≥ 95%——即 N 页正文页中至多可空缺 1 页无图。源文案提取素材位于 `images/` 目录，不得以 SVG 重绘替代已提取的源素材图片。
+**🔴 安服安全类强制规则**（当风格选择 D 时）：
+
+1. **图片策略按文档类型分级**（必须在 design_spec 中标注文档类型）：
+
+| 文档类型 | 图片密度要求 | 典型例子 |
+|----------|-------------|---------|
+| **营销胶片** | 95%正文页含图，img_right主导 | 产品白皮书、服务能力展示 |
+| **技术报告** | 有真实配图则用，无则空白，**禁止凑数** | 攻防演练报告、渗透测试、等保评估 |
+| **混合型** | 按章节分别套用营销/技术规则 | 安全建设规划 |
+
+2. 图片来源必须设为基础 = **B**（源文档提取素材），不可选择 A（无图片）或 D（占位符）
+3. 源文案提取素材位于 `images/` 目录，不得以 SVG 重绘替代已提取的源素材图片
+4. ⚠️ 铁律：无关素材图不如不放，空白更专业
 
 > 📐 **图片→页面自动映射**：详见 `references/image-page-mapping.md`。该参考涵盖尺寸分类（微型/小型/中型/大型）、套路→图片匹配表、自动分配算法、以及 images_manifest.json 生成脚本。在 Step4 图片分配阶段必须读取该参考。
 
