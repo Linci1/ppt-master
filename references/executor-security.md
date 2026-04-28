@@ -304,11 +304,19 @@ Step 4: 无匹配 → 回退到 layout_type 通用布局
 - 正文页(body): 所有内容页 — 白色背景 `#FFFFFF`，深色 logo
 
 ### 套路分配
-| 页面 | layout_type | routine_id (如有) | 图片来源 |
-|------|------------|-------------------|---------|
-| P08 | lr_split_imagetext | sec-attack-chain | images/attack_path.png |
-| P12 | lr_split_dense | sec-vuln-matrix | SVG自绘色标卡片 |
-| ... | ... | ... | ... |
+| 页面 | layout_type | routine_id (如有) | 图片来源 | user_emphasis |
+|------|------------|-------------------|---------|---------------|
+| P08 | lr_split_imagetext | sec-attack-chain | images/attack_path.png | focus="ThinkPHP RCE突破点" visual="该节点r=26 fill=#FF0000" |
+| P12 | lr_split_dense | sec-vuln-matrix | SVG自绘色标卡片 | — |
+| ... | ... | ... | ... | ... |
+
+> 无侧重的页面填"—"，有侧重的页面填 focus + visual（+ 可选 script）。
+
+### 用户侧重铁律
+1. **侧重只增强指定元素，不自行扩展**：用户说"突出这个节点"，不等于"弱化其他节点"
+2. **侧重不改整体风格**：用户侧重是页面级的微调信号，不是全局风格变更依据
+3. **侧重指令必须来自design_spec的user_emphasis字段**：禁止Executor自行从源文档推断侧重
+4. **无user_emphasis的页面不受影响**：不能因为有侧重页就修改相邻页的风格
 
 ### 图片预算
 - 总 body 页数: N
@@ -366,4 +374,5 @@ Step 4: 无匹配 → 回退到 layout_type 通用布局
 □ 本页图片来源确定了吗？（源素材 > 自绘 > 图表）
 □ 颜色是否只用了定义的色系？没有引入新色值？
 □ 如果是固定页：是否锁定了模板结构（cover/chapter/ending 不自由发挥）？
+□ 本页有 user_emphasis 吗？→ 有则严格按 visual/script 指令增强，不放大不扩展
 ```

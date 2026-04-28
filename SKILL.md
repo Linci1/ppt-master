@@ -22,7 +22,7 @@ description: >
 >
 > 1. **严格串行**：必须按步骤顺序执行。上一步输出就是下一步输入。
 > 2. **BLOCKING 必须停下**：标记为 ⛔ 的步骤必须等待用户明确回复，不能替用户做决定。
-> 3. **禁止跨阶段打包执行**：不能把多个阶段揉成一步做。尤其是 Step 4 的八项确认，必须整包给建议并等待用户确认。
+> 3. **禁止跨阶段打包执行**：不能把多个阶段揉成一步做。尤其是 Step 4 的九项确认，必须整包给建议并等待用户确认。
 > 4. **先过 Gate 再进入**：每一步开始前，必须先满足该步骤的 🚧 GATE 前置条件。
 > 5. **禁止超前准备**：不能在 Strategist 阶段提前写 SVG，也不能跨阶段偷跑。
 > 6. **SVG 生成只能由主代理完成**：Step 6 生成页面 SVG 时，禁止交给子代理。
@@ -310,9 +310,9 @@ print(json.dumps(result, ensure_ascii=False, indent=2))
 Read references/strategist.md
 ```
 
-⛔ **BLOCKING**：必须完成并展示“八项确认”，等待用户确认或修改后，才能继续输出 `design_spec.md`。
+⛔ **BLOCKING**：必须完成并展示"九项确认"，等待用户确认或修改后，才能继续输出 `design_spec.md`。
 
-八项确认如下：
+九项确认如下：
 
 1. 画布格式
 2. 页数范围
@@ -322,6 +322,7 @@ Read references/strategist.md
 6. 图标策略
 7. 字体方案
 8. 图片策略
+9. 用户侧重（可选 — LLM预生成候选+用户勾选确认，不提供则跳过）
 
 如果用户提供了图片，必须先运行：
 
@@ -350,7 +351,7 @@ cp /tmp/docx_images/word/media/* <project_path>/images/
 
 ```markdown
 ## ✅ Strategist 阶段完成
-- [x] 八项确认已完成（用户已确认）
+- [x] 九项确认已完成（用户已确认）
 - [x] 设计规格与内容大纲已生成
 - [ ] 下一步：自动进入 [Image_Generator / Executor]
 ```

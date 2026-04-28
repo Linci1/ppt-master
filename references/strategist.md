@@ -8,7 +8,7 @@ As a top-tier AI presentation strategist, receive source documents, perform cont
 
 | Previous Step | Current | Next Step |
 |--------------|---------|-----------|
-| Project creation + Template option confirmed | **Strategist**: Eight Confirmations + Design Spec | Image_Generator or Executor |
+| Project creation + Template option confirmed | **Strategist**: Nine Confirmations + Design Spec | Image_Generator or Executor |
 
 ---
 
@@ -40,9 +40,9 @@ As a top-tier AI presentation strategist, receive source documents, perform cont
 
 ---
 
-## 1. Eight Confirmations Process
+## 1. Nine Confirmations Process
 
-⛔ **BLOCKING**: Before starting analysis, reference `templates/design_spec_reference.md` and provide professional recommendations for the following eight items, then **present them as a bundled package to the user and wait for explicit confirmation or modifications**.
+⛔ **BLOCKING**: Before starting analysis, reference `templates/design_spec_reference.md` and provide professional recommendations for the following nine items, then **present them as a bundled package to the user and wait for explicit confirmation or modifications**.
 
 > **Execution discipline**: This is the last BLOCKING checkpoint in the pipeline (besides template selection). Once the user confirms, the AI must automatically complete the Design Specification & Content Outline and seamlessly proceed to subsequent image generation (if applicable), SVG generation, and post-processing — no additional questions or pauses in between.
 
@@ -290,6 +290,77 @@ Built-in library contains 36 chart templates; see `templates/charts/charts_index
 - Fill in the Design Spec: total presentation duration, notes style (formal / conversational / interactive), presentation purpose (inform / persuade / inspire / instruct / report)
 - Split note files must NOT contain `#` heading lines (`notes/total.md` master document MUST use `#` heading lines)
 
+### i. 用户侧重确认（可选 — LLM预生成 + 用户勾选确认）
+
+> **执行纪律**：本项为可选，但必须执行预生成步骤并展示给用户。用户全跳过则等于不提供侧重，不影响后续流程。
+
+#### 预生成规则（Strategist自动执行）
+
+完成前8项分析后，基于源文档内容和已规划的Content Outline，自动提炼以下4类候选：
+
+| 类别 | 提炼来源 | 输出格式 | 数量上限 |
+|------|---------|---------|---------|
+| 核心结论 | 文档中最关键的安全发现/判断 | ≤20字陈述句 | 2~3条候选，用户选1 |
+| 重点页 | Content Outline中信息密度最高/风险最敏感的内页 | 页码+一句话说明 | 3~5页候选，用户选1~3页 |
+| 汇报场景 | 文档性质+受众推断 | 单选标签 | 1项默认推荐，用户确认或改 |
+| 甲方关切 | 文档中涉及客户利益/风险暴露的问题 | ≤20字问题句 | 2~3条候选，用户选0~2条 |
+
+**提炼纪律**：
+- 候选必须从源文档内容中提炼，禁止凭空编造
+- 核心结论与甲方关切不得重复（同一条不能同时出现在两类）
+- 重点页必须是Content Outline中已规划的正文页(body page)，不能指固定页
+- 汇报场景默认推荐"混合"除非文档有明确倾向
+
+#### 用户确认格式
+
+向用户展示以下结构化勾选表（不是开放式问答）：
+
+```
+9. 用户侧重（LLM预生成候选，请勾选确认）
+
+📌 核心结论（选1项）：
+  □ A. [预生成结论1]
+  □ B. [预生成结论2]
+  □ C. [预生成结论3]
+  ☐ 其他（请简述，≤20字）：________
+
+📌 重点页（选1~3页）：
+  □ P07 [页标题] — [一句话说明为什么重点]
+  □ P09 [页标题] — [一句话说明]
+  □ ...
+
+📌 汇报场景（选1项）：
+  □ A. 技术评审（看细节和证据）
+  □ B. 高管汇报（看结论和建议）
+  ☑ C. 混合（默认推荐）
+
+📌 甲方关切（选0~2项）：
+  □ A. [预生成关切1]
+  □ B. [预生成关切2]
+  ☐ 其他（请简述，≤20字）：________
+```
+
+**选择约束**：
+- 核心结论必选1条（或不选=跳过整项）
+- 重点页上限3页（全选等于没有重点）
+- 甲方关切上限2条
+- "其他"栏≤20字，超出截断
+- 用户可全部跳过（不勾选任何项），等于不提供侧重
+
+#### 三层过滤（用户确认后、写入design_spec前）
+
+用户选定的侧重不直接透传，必须过三道过滤：
+
+| 层 | 作用 | 规则 | 不通过时 |
+|---|------|------|---------|
+| 可映射性 | 侧重必须能落在已有套路/布局体系内 | "突出攻击链突破点"→可映射范式A；"做一个3D效果"→无法映射 | 忽略该项，记录原因，不阻断 |
+| 合规性 | 不能覆盖安服规范 | "漏洞页不用卡片"→违反范式B强制；"用蓝色主题"→违反品牌色锁定 | 强制修正为合规版本，记录修正 |
+| 可执行性 | 不能突破画布物理限制 | "这页放20条漏洞"→超出lr_split_dense容量；"标题48px"→超出字号上限 | 降级到可执行版本，记录降级 |
+
+过滤结果写入design_spec的`user_emphasis`字段，同时记录被过滤/降级项及原因。
+
+**任何过滤和降级都不阻断流程。最坏情况等于没提供侧重。**
+
 ---
 
 ## 2. Executor Style Details (Reference for Confirmation Item #4)
@@ -458,7 +529,7 @@ The Strategist should make professional judgments on the template basis generate
 | VI. Icon Usage Spec | Source description, placeholder syntax, recommended icon list |
 | VII. Chart Reference List | Chart type, reference template path, used-in pages, purpose |
 | VIII. Image Resource List | Filename, dimensions, ratio, purpose, status, generation description |
-| IX. Content Outline | Grouped by chapter; each page includes layout, title, content points, chart type (if applicable) |
+| IX. Content Outline | Grouped by chapter; each page includes layout, title, content points, chart type (if applicable). When user emphasis (§1.i) is confirmed, pages with emphasis must include `user_emphasis` field with: focus (≤20字), visual (SVG drawing instruction), script (optional, speaker notes enhancement). Pages without emphasis omit this field. |
 | X. Speaker Notes Requirements | File naming rules, content structure description |
 | XI. Technical Constraints Reminder | SVG generation rules, PPT compatibility rules |
 | XII. Design Checklist | Pre-generation / post-generation check items |
